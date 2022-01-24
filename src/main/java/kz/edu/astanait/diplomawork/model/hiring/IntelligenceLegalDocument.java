@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Intelligence_legal_documents")
 @Data
-public class Intelligence_legal_documents {
+public class IntelligenceLegalDocument {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
