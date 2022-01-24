@@ -1,5 +1,7 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
+import kz.edu.astanait.diplomawork.dto.responseDto.UserDtoResponse;
+import kz.edu.astanait.diplomawork.dto.responseDto.catalog.StatusDtoResponse;
 import kz.edu.astanait.diplomawork.model.User;
 import kz.edu.astanait.diplomawork.model.catalog.Status;
 import lombok.Data;
@@ -11,9 +13,9 @@ public class RequestDtoResponse {
 
     private Long id;
 
-    private User user;
+    private UserDtoResponse user;
 
-    private Status status;
+    private StatusDtoResponse status;
 
     private String background;
 

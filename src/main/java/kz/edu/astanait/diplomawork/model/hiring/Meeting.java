@@ -32,5 +32,5 @@ public class Meeting {
             joinColumns = @JoinColumn(name = "meeting_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<User> userList = new ArrayList<>();
+    private List<User> userList;
 }
