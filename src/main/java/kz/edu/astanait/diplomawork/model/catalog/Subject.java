@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name = "subject")
 @Data
 public class Subject {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,4 +36,8 @@ public class Subject {
 
     @Column(name = "volume_credits")
     private Integer volumeCredits;
+
+    @ManyToOne
+    @JoinColumn(name = "academic_degree_id")
+    private AcademicDegree academicDegree;
 }

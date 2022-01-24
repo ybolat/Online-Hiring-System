@@ -5,14 +5,16 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "status")
+@Table(name = "project_type")
 @Data
-public class Status {
+public class ProjectType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "status name")
-    private String statusName;
+    @Column(name = "title")
+    private String title;
+
+
 }

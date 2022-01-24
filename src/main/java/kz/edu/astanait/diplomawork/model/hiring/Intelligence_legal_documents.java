@@ -1,16 +1,14 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
 import kz.edu.astanait.diplomawork.model.User;
-import kz.edu.astanait.diplomawork.model.catalog.Status;
-import kz.edu.astanait.diplomawork.model.catalog.Subject;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "syllabus")
+@Table(name = "Intelligence_legal_documents")
 @Data
-public class Syllabus {
+public class Intelligence_legal_documents {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +18,6 @@ public class Syllabus {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
+    @Column(name = "document")
+    private String document;
 }

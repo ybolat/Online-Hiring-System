@@ -1,26 +1,32 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
 import kz.edu.astanait.diplomawork.model.User;
-import kz.edu.astanait.diplomawork.model.catalog.Status;
-import kz.edu.astanait.diplomawork.model.catalog.Subject;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "syllabus")
+@Table(name = "article")
 @Data
-public class Syllabus {
+public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "apa")
+    private String apa;
+
+    @Column(name = "doi")
+    private String doi;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
+    @Column(name = "article_type")
+    private String articleType;
+
+    @Column(name = "link")
+    private String link;
 }

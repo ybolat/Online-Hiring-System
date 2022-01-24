@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "request")
 @Data
 public class Request {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,17 +24,14 @@ public class Request {
     @JoinColumn(name = "status_id")
     private Status status;
 
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
     @Column(name = "background")
     private String background;
 
-    @Column(name = "experience")
-    private String experience;
-
     @Column(name = "additional")
     private String additional;
-
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
 
     @PrePersist
     protected void onCreate() {
