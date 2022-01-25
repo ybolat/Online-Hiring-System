@@ -2,11 +2,8 @@ package kz.edu.astanait.diplomawork.dto.responseDto;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.security.RoleDtoResponse;
-import kz.edu.astanait.diplomawork.model.catalog.AcademicDegree;
-import kz.edu.astanait.diplomawork.model.security.Role;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data

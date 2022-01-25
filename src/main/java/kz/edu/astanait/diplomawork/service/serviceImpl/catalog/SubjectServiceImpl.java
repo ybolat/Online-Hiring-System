@@ -2,7 +2,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.SubjectDtoResponse;
 import kz.edu.astanait.diplomawork.model.catalog.Subject;
-import kz.edu.astanait.diplomawork.mapper.catalog.SubjectsMapper;
+import kz.edu.astanait.diplomawork.mapper.catalog.SubjectMapper;
 import kz.edu.astanait.diplomawork.repository.catalog.SubjectRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,6 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<SubjectDtoResponse> getAllSubjectDto() {
-        return getAllSubject().stream().map(SubjectsMapper::subjectToDto).collect(Collectors.toList());
+        return getAllSubject().stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList());
     }
 }

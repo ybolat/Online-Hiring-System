@@ -22,4 +22,6 @@ public class SubjectDtoResponse {
     private String code;
 
     private Integer volumeCredits;
+
+    private AcademicDegreeDtoResponse academicDegree;
 }

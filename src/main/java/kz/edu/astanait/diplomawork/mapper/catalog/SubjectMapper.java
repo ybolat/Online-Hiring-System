@@ -6,7 +6,7 @@ import org.apache.logging.log4j.util.Strings;
 
 import java.util.Objects;
 
-public class SubjectsMapper {
+public class SubjectMapper {
 
      public static SubjectDtoResponse subjectToDto(Subject subject) {
         SubjectDtoResponse subjectDtoResponse = new SubjectDtoResponse();
@@ -19,6 +19,7 @@ public class SubjectsMapper {
         if (Strings.isNotBlank(subject.getDescriptionKz())) subjectDtoResponse.setDescriptionKz(subject.getDescriptionKz());
         if (Strings.isNotBlank(subject.getCode())) subjectDtoResponse.setCode(subject.getCode());
         if (Objects.nonNull(subject.getVolumeCredits())) subjectDtoResponse.setVolumeCredits(subject.getVolumeCredits());
+        if(Objects.nonNull(subject.getAcademicDegree())) subjectDtoResponse.setAcademicDegree(AcademicDegreeMapper.academicDegreeToDto(subject.getAcademicDegree()));
         return subjectDtoResponse;
     }
 }
