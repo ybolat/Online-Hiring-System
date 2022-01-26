@@ -59,6 +59,7 @@ create table subject(
     description_en text,
     description_ru text,
     description_kz text,
+    code varchar(255) not null,
     volume_credits int not null,
     academic_degree_id bigint not null,
     constraint fk_academic_degree_id foreign key (academic_degree_id) references academic_degree (id)

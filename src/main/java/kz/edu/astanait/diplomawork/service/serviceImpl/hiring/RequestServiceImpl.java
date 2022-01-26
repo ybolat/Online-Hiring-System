@@ -26,9 +26,4 @@ public class RequestServiceImpl implements RequestService {
         return requestRepository.findAll();
     }
 
-    @Override
-    public List<RequestDtoResponse> getAllRequestDto() {
-        return getAllRequest().stream().map(RequestMapper::requestToDto).collect(Collectors.toList());
-    }
-
 }

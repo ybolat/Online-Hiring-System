@@ -8,6 +8,4 @@ import java.util.List;
 public interface RequestService {
 
     List<Request> getAllRequest();
-
-    List<RequestDtoResponse> getAllRequestDto();
 }

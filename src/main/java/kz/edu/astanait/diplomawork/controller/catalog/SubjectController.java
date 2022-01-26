@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.SubjectDtoResponse;
+import kz.edu.astanait.diplomawork.mapper.catalog.SubjectMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.SubjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/subject")
+@RequestMapping("/api/v1/catalog/subject")
 public class SubjectController {
 
     private final SubjectService subjectService;
@@ -20,8 +22,10 @@ public class SubjectController {
         this.subjectService = subjectService;
     }
 
-    @GetMapping("/get-all-subject")
+    @GetMapping
     public ResponseEntity<List<SubjectDtoResponse>> getAllSubject() {
-        return new ResponseEntity<>(subjectService.getAllSubjectDto(), HttpStatus.OK);
+        List<SubjectDtoResponse> subjectDtoResponseList = subjectService.getAll()
+                .stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(subjectDtoResponseList, HttpStatus.OK);
     }
 }

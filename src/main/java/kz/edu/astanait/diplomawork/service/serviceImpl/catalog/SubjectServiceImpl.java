@@ -22,12 +22,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public List<Subject> getAllSubject() {
+    public List<Subject> getAll() {
         return subjectRepository.findAll();
-    }
-
-    @Override
-    public List<SubjectDtoResponse> getAllSubjectDto() {
-        return getAllSubject().stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList());
     }
 }
