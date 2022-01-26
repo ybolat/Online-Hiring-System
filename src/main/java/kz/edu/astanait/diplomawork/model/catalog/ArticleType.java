@@ -1,18 +1,16 @@
 package kz.edu.astanait.diplomawork.model.catalog;
-
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "status")
+@Table(name = "article_type")
 @Data
-public class Status {
+public class ArticleType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")
-    private String statusName;
+    private String title;
 }

@@ -19,7 +19,6 @@ public class ProjectMapper {
         if(Objects.nonNull(project.getFinishedDate())) projectDtoResponse.setFinishedDate(project.getFinishedDate());
         if(Objects.nonNull(project.getSum())) projectDtoResponse.setSum(project.getSum());
         if(Strings.isNotBlank(project.getFund())) projectDtoResponse.setFund(project.getFund());
-        if(Strings.isNotBlank(project.getType())) projectDtoResponse.setType(project.getType());
         if(Objects.nonNull(project.getProjectType())) projectDtoResponse.setProjectType(ProjectTypeMapper.projectTypeToDto(project.getProjectType()));
         return projectDtoResponse;
     }

@@ -12,5 +12,5 @@ public class DevelopmentDtoResponse {
 
     private String name;
 
-    private String developmentDescription;
+    private String description;
 }

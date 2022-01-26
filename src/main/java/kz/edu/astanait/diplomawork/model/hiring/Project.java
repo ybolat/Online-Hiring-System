@@ -32,10 +32,7 @@ public class Project {
     @Column(name = "fund")
     private String fund;
 
-    @Column(name = "type")
-    private String type;
-
     @ManyToOne
-    @JoinColumn(name = "project_type")
+    @JoinColumn(name = "project_type_id")
     private ProjectType projectType;
 }

@@ -20,7 +20,5 @@ public class ProjectDtoResponse {
 
     private String fund;
 
-    private String type;
-
     private ProjectTypeDtoResponse projectType;
 }

@@ -21,6 +21,6 @@ public class Development {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "development_description")
-    private String developmentDescription;
+    @Column(name = "description")
+    private String description;
 }

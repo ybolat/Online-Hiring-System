@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
 import kz.edu.astanait.diplomawork.model.User;
+import kz.edu.astanait.diplomawork.model.catalog.ArticleType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,8 +25,9 @@ public class Article {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "article_type")
-    private String articleType;
+    @ManyToOne
+    @JoinColumn(name = "article_type_id")
+    private ArticleType articleType;
 
     @Column(name = "link")
     private String link;

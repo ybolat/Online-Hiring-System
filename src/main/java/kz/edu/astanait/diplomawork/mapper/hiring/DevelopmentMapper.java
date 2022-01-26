@@ -15,7 +15,7 @@ public class DevelopmentMapper {
         developmentDtoResponse.setId(development.getId());
         if(Objects.nonNull(development.getUser())) developmentDtoResponse.setUser(UserMapper.userToDto(development.getUser()));
         if(Strings.isNotBlank(development.getName())) developmentDtoResponse.setName(development.getName());
-        if(Strings.isNotBlank(development.getDevelopmentDescription())) developmentDtoResponse.setDevelopmentDescription(development.getDevelopmentDescription());
+        if(Strings.isNotBlank(development.getDescription())) developmentDtoResponse.setDescription(development.getDescription());
         return developmentDtoResponse;
     }
 }

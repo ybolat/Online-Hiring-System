@@ -1,6 +1,9 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
+import kz.edu.astanait.diplomawork.dto.responseDto.CommissionDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.UserDtoResponse;
+import kz.edu.astanait.diplomawork.model.Commission;
+import kz.edu.astanait.diplomawork.model.hiring.Request;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,5 +19,7 @@ public class MeetingDtoResponse {
 
     private LocalDateTime dateTime;
 
-    private List<UserDtoResponse> userList;
+    private RequestDtoResponse request;
+
+    private List<CommissionDtoResponse> commissionList;
 }

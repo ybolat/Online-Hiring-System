@@ -1,6 +1,6 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
-import kz.edu.astanait.diplomawork.model.User;
+import kz.edu.astanait.diplomawork.model.Commission;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,11 +26,15 @@ public class Meeting {
     @Column(name = "date_time")
     private LocalDateTime dateTime;
 
+    @ManyToOne
+    @JoinColumn(name = "request_id")
+    private Request request;
+
     @ManyToMany
     @JoinTable(
-            name = "user_meeting",
+            name = "commission_meeting",
             joinColumns = @JoinColumn(name = "meeting_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            inverseJoinColumns = @JoinColumn(name = "commission_id")
     )
-    private List<User> userList;
+    private List<Commission> commissionList;
 }

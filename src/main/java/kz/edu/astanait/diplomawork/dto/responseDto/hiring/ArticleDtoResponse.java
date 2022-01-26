@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.UserDtoResponse;
+import kz.edu.astanait.diplomawork.dto.responseDto.catalog.ArticleTypeDtoResponse;
 import lombok.Data;
 
 @Data
@@ -14,7 +15,7 @@ public class ArticleDtoResponse {
 
     private UserDtoResponse user;
 
-    private String articleType;
+    private ArticleTypeDtoResponse articleType;
 
     private String link;
 }

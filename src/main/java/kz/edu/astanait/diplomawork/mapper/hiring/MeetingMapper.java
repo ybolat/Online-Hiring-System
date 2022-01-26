@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.mapper.hiring;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.MeetingDtoResponse;
+import kz.edu.astanait.diplomawork.mapper.CommissionMapper;
 import kz.edu.astanait.diplomawork.mapper.UserMapper;
 import kz.edu.astanait.diplomawork.model.hiring.Meeting;
 import org.apache.logging.log4j.util.Strings;
@@ -17,9 +18,9 @@ public class MeetingMapper {
         if(Strings.isNotBlank(meeting.getName())) meetingDtoResponse.setName(meeting.getName());
         if(Strings.isNotBlank(meeting.getLink())) meetingDtoResponse.setLink(meeting.getLink());
         if(Objects.nonNull(meeting.getDateTime())) meetingDtoResponse.setDateTime(meeting.getDateTime());
-        if(Objects.nonNull(meeting.getUserList())) meetingDtoResponse.setUserList(meeting.getUserList()
-                .stream().map(UserMapper::userToDto).collect(Collectors.toList()));
+        if(Objects.nonNull(meeting.getRequest())) meetingDtoResponse.setRequest(RequestMapper.requestToDto(meeting.getRequest()));
+        if(Objects.nonNull(meeting.getCommissionList())) meetingDtoResponse.setCommissionList(meeting.getCommissionList()
+                .stream().map(CommissionMapper::commissionToDto).collect(Collectors.toList()));
         return meetingDtoResponse;
-
     }
 }
