@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/request")
+@RequestMapping("/api/v1/hiring/request")
 public class RequestController {
 
     private final RequestService requestService;
@@ -22,7 +22,7 @@ public class RequestController {
         this.requestService = requestService;
     }
 
-    @GetMapping("/get-all-request")
+    @GetMapping
     public ResponseEntity<List<RequestDtoResponse>> getAllRequest() {
         List<RequestDtoResponse> requestDtoResponseList = requestService.getAllRequest()
                 .stream().map(RequestMapper::requestToDto).collect(Collectors.toList());
