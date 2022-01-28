@@ -40,4 +40,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return this.getByEmail(email).orElseThrow(
                 () -> new UsernameNotFoundException(String.format(UsernameNotFoundException, email)));
     }
+
 }

@@ -6,4 +6,6 @@ import kz.edu.astanait.diplomawork.model.hiring.Article;
 import java.util.List;
 
 public interface ArticleService {
+
+    List<Article> getAllByUserId(Long id);
 }

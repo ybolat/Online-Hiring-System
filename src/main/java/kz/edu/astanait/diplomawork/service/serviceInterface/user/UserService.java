@@ -9,6 +9,4 @@ public interface UserService {
     Optional<User> getByEmail(String email);
 
     User getByEmailThrowException(String email);
-
-
 }
