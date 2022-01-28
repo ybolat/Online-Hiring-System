@@ -12,8 +12,6 @@ public class UserDtoResponse {
 
     private String email;
 
-    private String password;
-
     private RoleDtoResponse role;
 
     private String name;

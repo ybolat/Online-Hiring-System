@@ -7,4 +7,5 @@ import java.util.List;
 
 @Repository
 public interface MeetingRepository extends JpaRepository<Meeting, Long> {
+    List<Meeting> findAllByCommissionList(Long id);
 }

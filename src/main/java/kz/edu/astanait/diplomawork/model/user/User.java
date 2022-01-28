@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.model.user;
 
-import kz.edu.astanait.diplomawork.model.catalog.AcademicDegree;
 import kz.edu.astanait.diplomawork.model.security.Role;
 import lombok.Data;
 

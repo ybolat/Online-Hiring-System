@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class AssessmentMapper {
 
-    public static AssessmentDtoResponse articleToDto(Assessment assessment) {
+    public static AssessmentDtoResponse assessmentDtoResponse(Assessment assessment) {
 
         AssessmentDtoResponse assessmentDtoResponse = new AssessmentDtoResponse();
         assessmentDtoResponse.setId(assessment.getId());
