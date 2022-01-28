@@ -1,10 +1,10 @@
-package kz.edu.astanait.diplomawork.service.serviceImpl;
+package kz.edu.astanait.diplomawork.service.serviceImpl.user;
 
 import static kz.edu.astanait.diplomawork.exception.ExceptionDescription.*;
-import kz.edu.astanait.diplomawork.model.User;
-import kz.edu.astanait.diplomawork.repository.UserRepository;
+import kz.edu.astanait.diplomawork.model.user.User;
+import kz.edu.astanait.diplomawork.repository.user.UserRepository;
 import kz.edu.astanait.diplomawork.security.UserPrincipal;
-import kz.edu.astanait.diplomawork.service.serviceInterface.UserService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

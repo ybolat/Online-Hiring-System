@@ -1,7 +1,7 @@
 package kz.edu.astanait.diplomawork.mapper.hiring;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.AssessmentDtoResponse;
-import kz.edu.astanait.diplomawork.mapper.CommissionMapper;
+import kz.edu.astanait.diplomawork.mapper.user.CommissionMapper;
 import kz.edu.astanait.diplomawork.model.hiring.Assessment;
 
 import java.util.Objects;

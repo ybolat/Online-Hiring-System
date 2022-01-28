@@ -1,7 +1,7 @@
 package kz.edu.astanait.diplomawork.mapper.hiring;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.RequestDtoResponse;
-import kz.edu.astanait.diplomawork.mapper.UserMapper;
+import kz.edu.astanait.diplomawork.mapper.user.UserMapper;
 import kz.edu.astanait.diplomawork.mapper.catalog.StatusMapper;
 import kz.edu.astanait.diplomawork.model.hiring.Request;
 import org.apache.logging.log4j.util.Strings;

@@ -1,6 +1,6 @@
-package kz.edu.astanait.diplomawork.repository;
+package kz.edu.astanait.diplomawork.repository.user;
 
-import kz.edu.astanait.diplomawork.model.Commission;
+import kz.edu.astanait.diplomawork.model.user.Commission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package kz.edu.astanait.diplomawork.security;
 
-import kz.edu.astanait.diplomawork.service.serviceImpl.UserServiceImpl;
+import kz.edu.astanait.diplomawork.service.serviceImpl.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

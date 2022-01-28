@@ -1,8 +1,8 @@
-package kz.edu.astanait.diplomawork.mapper;
+package kz.edu.astanait.diplomawork.mapper.user;
 
-import kz.edu.astanait.diplomawork.dto.responseDto.CommissionDtoResponse;
+import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.security.RoleMapper;
-import kz.edu.astanait.diplomawork.model.Commission;
+import kz.edu.astanait.diplomawork.model.user.Commission;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.Objects;

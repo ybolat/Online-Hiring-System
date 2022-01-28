@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.dto.responseDto;
+package kz.edu.astanait.diplomawork.dto.responseDto.user;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.security.RoleDtoResponse;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
-import kz.edu.astanait.diplomawork.model.User;
+import kz.edu.astanait.diplomawork.model.user.User;
 import lombok.Data;
 
 import javax.persistence.*;

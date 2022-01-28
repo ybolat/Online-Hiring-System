@@ -10,15 +10,23 @@ create table academic_degree(
 
 create table users(
     id serial primary key,
-    role_id bigint not null,
     email varchar(255) not null unique,
+    password varchar(500) not null,
+    role_id bigint not null,
     name varchar(255) not null,
     lastname varchar(255) not null,
     patronymic varchar(255),
-    password varchar(500) not null,
-    position varchar(255),
     phone varchar(20) not null,
+    position varchar(255),
+    is_active boolean default false,
+    is_locked boolean default false,
     created_date timestamp not null,
+    constraint fk_role_id foreign key (role_id) references role (id)
+);
+
+create table user_professional_info(
+    id serial primary key,
+    user_id bigint not null,
     academic_degree_id bigint not null,
     academic_title varchar(255),
     scopus_id varchar(500),
@@ -28,9 +36,7 @@ create table users(
     experience varchar(255),
     scientific_interests varchar(255),
     education varchar(255),
-    is_active boolean default false,
-    is_locked boolean default false,
-    constraint fk_role_id foreign key (role_id) references role (id),
+    constraint fk_user_id foreign key (user_id) references users (id),
     constraint fk_academic_degree_id foreign key (academic_degree_id) references academic_degree (id)
 );
 

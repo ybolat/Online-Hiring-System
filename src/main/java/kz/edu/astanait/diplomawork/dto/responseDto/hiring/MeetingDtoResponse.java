@@ -1,9 +1,6 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
-import kz.edu.astanait.diplomawork.dto.responseDto.CommissionDtoResponse;
-import kz.edu.astanait.diplomawork.dto.responseDto.UserDtoResponse;
-import kz.edu.astanait.diplomawork.model.Commission;
-import kz.edu.astanait.diplomawork.model.hiring.Request;
+import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;

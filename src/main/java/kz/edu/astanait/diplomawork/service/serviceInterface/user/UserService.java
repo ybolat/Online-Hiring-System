@@ -1,6 +1,6 @@
-package kz.edu.astanait.diplomawork.service.serviceInterface;
+package kz.edu.astanait.diplomawork.service.serviceInterface.user;
 
-import kz.edu.astanait.diplomawork.model.User;
+import kz.edu.astanait.diplomawork.model.user.User;
 
 import java.util.Optional;
 

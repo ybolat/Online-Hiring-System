@@ -14,6 +14,4 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleServiceImpl(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
-
-
 }

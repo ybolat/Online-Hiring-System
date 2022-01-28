@@ -1,31 +1,14 @@
-package kz.edu.astanait.diplomawork.dto.responseDto;
+package kz.edu.astanait.diplomawork.dto.responseDto.user;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResponse;
-import kz.edu.astanait.diplomawork.dto.responseDto.security.RoleDtoResponse;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
-public class UserDtoResponse {
+public class UserProfessionalInfoDtoResponse {
 
     private Long id;
 
-    private RoleDtoResponse role;
-
-    private String email;
-
-    private String name;
-
-    private String lastname;
-
-    private String patronymic;
-
-    private String position;
-
-    private String phone;
-
-    private LocalDateTime createdDate;
+    private UserDtoResponse user;
 
     private AcademicDegreeDtoResponse academicDegree;
 
@@ -44,5 +27,4 @@ public class UserDtoResponse {
     private String scientificInterests;
 
     private String education;
-
 }

@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.model;
+package kz.edu.astanait.diplomawork.model.user;
 
 import kz.edu.astanait.diplomawork.model.catalog.AcademicDegree;
 import kz.edu.astanait.diplomawork.model.security.Role;
@@ -16,12 +16,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "name")
     private String name;
@@ -32,45 +35,14 @@ public class User {
     @Column(name = "patronymic")
     private String patronymic;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "position")
     private String position;
 
-    @Column(name = "phone")
-    private String phone;
-
     @Column(name = "created_date")
     private LocalDateTime createdDate;
-
-    @ManyToOne
-    @JoinColumn(name = "academic_degree_id")
-    private AcademicDegree academicDegree;
-
-    @Column(name = "academic_title")
-    private String academicTitle;
-
-    @Column(name = "scopus_id")
-    private String scopus;
-
-    @Column(name = "research_id")
-    private String research;
-
-    @Column(name = "google_scholar")
-    private String googleScholar;
-
-    @Column(name = "orcid")
-    private String orcid;
-
-    @Column(name = "experience")
-    private String experience;
-
-    @Column(name = "scientific_interests")
-    private String scientificInterests;
-
-    @Column(name = "education")
-    private String education;
 
     @Column(name = "is_active")
     private boolean isActive;

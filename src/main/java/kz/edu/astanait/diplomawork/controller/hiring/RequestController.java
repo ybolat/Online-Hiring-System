@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.controller.hiring;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.RequestDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.hiring.RequestMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class RequestController {
 
     private final RequestService requestService;
 
+    @Autowired
     public RequestController(RequestService requestService) {
         this.requestService = requestService;
     }
