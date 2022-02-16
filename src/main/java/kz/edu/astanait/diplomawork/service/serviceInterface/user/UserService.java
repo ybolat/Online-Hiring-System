@@ -9,4 +9,8 @@ public interface UserService {
     Optional<User> getByEmail(String email);
 
     User getByEmailThrowException(String email);
+
+    Optional<User> getByID(Long id);
+
+    User getByIdThrowException(Long id);
 }

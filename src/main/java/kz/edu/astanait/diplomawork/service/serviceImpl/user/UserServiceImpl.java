@@ -1,6 +1,8 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.user;
 
 import static kz.edu.astanait.diplomawork.exception.ExceptionDescription.*;
+
+import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.user.UserRepository;
 import kz.edu.astanait.diplomawork.security.UserPrincipal;
@@ -39,6 +41,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User getByEmailThrowException(String email) {
         return this.getByEmail(email).orElseThrow(
                 () -> new UsernameNotFoundException(String.format(UsernameNotFoundException, email)));
+    }
+
+    @Override
+    public Optional<User> getByID(Long id) {
+        return this.userRepository.findById(id);
+    }
+
+    @Override
+    public User getByIdThrowException(Long id) {
+        return this.getByID(id)
+                .orElseThrow(() -> new CustomNotFoundException
+                        (String.format(CustomNotFoundException, "User", "id", id)));
     }
 
 }

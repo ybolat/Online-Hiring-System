@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Syllabus;
 
 import java.util.List;
@@ -11,5 +12,11 @@ public interface SyllabusService {
 
     Optional<Syllabus> getById(Long id);
 
-    Syllabus getByIdWithException(Long id);
+    Syllabus getByIdThrowException(Long id);
+
+    void create(SyllabusDtoRequest syllabusDtoRequest);
+
+//    void update(SyllabusDtoRequest syllabusDtoRequest, Long id);
+
+    void delete(Long id);
 }

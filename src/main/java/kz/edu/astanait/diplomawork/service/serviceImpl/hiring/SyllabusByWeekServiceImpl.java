@@ -38,7 +38,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
     }
 
     @Override
-    public SyllabusByWeek getByIdWithException(Long id) {
+    public SyllabusByWeek getByIdThrowException(Long id) {
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Syllabus by week", "id", id)));
@@ -48,7 +48,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
     public void create(SyllabusByWeekDtoRequest syllabusByWeekDtoRequest) {
         SyllabusByWeek syllabusByWeek = new SyllabusByWeek();
 
-        syllabusByWeek.setSyllabus(this.syllabusService.getByIdWithException(syllabusByWeekDtoRequest.getSyllabusId()));
+        syllabusByWeek.setSyllabus(this.syllabusService.getByIdThrowException(syllabusByWeekDtoRequest.getSyllabusId()));
         syllabusByWeek.setWeekNumber(syllabusByWeekDtoRequest.getWeekNumber());
         syllabusByWeek.setTitle(syllabusByWeekDtoRequest.getTitle());
         syllabusByWeek.setDescription(syllabusByWeekDtoRequest.getDescription());
@@ -63,7 +63,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
 
     @Override
     public void update(SyllabusByWeekDtoRequest syllabusByWeekDtoRequest, Long id) {
-        SyllabusByWeek syllabusByWeek = this.getByIdWithException(id);
+        SyllabusByWeek syllabusByWeek = this.getByIdThrowException(id);
 
         if (Strings.isNotBlank(syllabusByWeekDtoRequest.getTitle())) syllabusByWeek.setTitle(syllabusByWeekDtoRequest.getTitle());
         if (Strings.isNotBlank(syllabusByWeekDtoRequest.getDescription())) syllabusByWeek.setDescription(syllabusByWeekDtoRequest.getDescription());
@@ -78,7 +78,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
 
     @Override
     public void delete(Long id) {
-        SyllabusByWeek syllabusByWeek = this.getByIdWithException(id);
+        SyllabusByWeek syllabusByWeek = this.getByIdThrowException(id);
 
         try{
             this.syllabusByWeekRepository.delete(syllabusByWeek);

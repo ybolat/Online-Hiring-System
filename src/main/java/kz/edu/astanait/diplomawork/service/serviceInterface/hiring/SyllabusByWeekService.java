@@ -11,7 +11,7 @@ public interface SyllabusByWeekService {
 
     Optional<SyllabusByWeek> getById(Long id);
 
-    SyllabusByWeek getByIdWithException(Long id);
+    SyllabusByWeek getByIdThrowException(Long id);
 
     void create(SyllabusByWeekDtoRequest syllabusByWeekDtoRequest);
 
