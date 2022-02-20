@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.exception;
 
+import kz.edu.astanait.diplomawork.exception.domain.CustomException;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import org.slf4j.Logger;
@@ -35,6 +36,12 @@ public class ExceptionHandling {
     public ResponseEntity<HttpResponseException> CustomNotFoundException(CustomNotFoundException exception) {
         LOGGER.error(exception.getMessage());
         return createHttpResponse(BAD_REQUEST, exception.getMessage());
+    }
+
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<HttpResponseException> CustomException(CustomException exception) {
+        LOGGER.error(exception.getMessage());
+        return createHttpResponse(CONFLICT, exception.getMessage());
     }
 
     @ExceptionHandler(AccessDeniedException.class)

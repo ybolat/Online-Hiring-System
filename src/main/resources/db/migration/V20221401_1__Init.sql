@@ -24,6 +24,12 @@ create table users(
     constraint fk_role_id foreign key (role_id) references role (id)
 );
 
+create table registration_pin_code(
+    id serial primary key,
+    user_id bigint not null unique,
+    pin_code int not null
+);
+
 create table user_professional_info(
     id serial primary key,
     user_id bigint not null,
@@ -173,3 +179,5 @@ create table syllabus_by_week(
     description text,
     constraint fk_syllabus_id foreign key (syllabus_id) references syllabus (id)
 )
+
+
