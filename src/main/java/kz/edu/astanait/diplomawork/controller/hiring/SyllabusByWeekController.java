@@ -27,27 +27,27 @@ public class SyllabusByWeekController {
     @GetMapping("/get/syllabus/id/{id}")
     public ResponseEntity<List<SyllabusByWeekDtoResponse>> getAllBySyllabusId(@PathVariable(name = "id") Long id) {
         List<SyllabusByWeekDtoResponse> syllabusByWeekDtoResponseList
-                = syllabusByWeekService.getAllBySyllabusId(id).stream().map(SyllabusByWeekMapper::syllabusByWeekToDto)
+                = this.syllabusByWeekService.getAllBySyllabusId(id).stream().map(SyllabusByWeekMapper::syllabusByWeekToDto)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(syllabusByWeekDtoResponseList, HttpStatus.OK);
     }
 
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody SyllabusByWeekDtoRequest syllabusByWeekDtoRequest) {
-        syllabusByWeekService.create(syllabusByWeekDtoRequest);
+        this.syllabusByWeekService.create(syllabusByWeekDtoRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/update/id/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody SyllabusByWeekDtoRequest syllabusByWeekDtoRequest,
                                              @PathVariable(name = "id") Long id) {
-        syllabusByWeekService.update(syllabusByWeekDtoRequest, id);
+        this.syllabusByWeekService.update(syllabusByWeekDtoRequest, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/id/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
-        syllabusByWeekService.delete(id);
+        this.syllabusByWeekService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
