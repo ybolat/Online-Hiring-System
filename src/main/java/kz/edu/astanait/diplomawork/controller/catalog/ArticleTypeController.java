@@ -24,7 +24,7 @@ public class ArticleTypeController {
     }
 
     public ResponseEntity<List<ArticleTypeDtoResponse>> getAll() {
-        List<ArticleTypeDtoResponse> articleTypeDtoResponseList = articleTypeService.getAll()
+        List<ArticleTypeDtoResponse> articleTypeDtoResponseList = this.articleTypeService.getAll()
                 .stream().map(ArticleTypeMapper::articleTypeToDto).collect(Collectors.toList());
         return new ResponseEntity<>(articleTypeDtoResponseList, HttpStatus.OK);
     }

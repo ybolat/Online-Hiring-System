@@ -24,7 +24,7 @@ public class SubjectController {
 
     @GetMapping
     public ResponseEntity<List<SubjectDtoResponse>> getAllSubject() {
-        List<SubjectDtoResponse> subjectDtoResponseList = subjectService.getAll()
+        List<SubjectDtoResponse> subjectDtoResponseList = this.subjectService.getAll()
                 .stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList());
         return new ResponseEntity<>(subjectDtoResponseList, HttpStatus.OK);
     }
