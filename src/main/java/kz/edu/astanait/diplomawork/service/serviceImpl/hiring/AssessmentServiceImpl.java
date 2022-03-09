@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -66,7 +67,7 @@ public class AssessmentServiceImpl implements AssessmentService {
     public void update(AssessmentDtoRequest assessmentDtoRequest, Long id) {
         Assessment assessment = this.getByIdThrowException(id);
 
-        assessment.setRate(assessmentDtoRequest.getRate());
+        if(Objects.nonNull(assessmentDtoRequest.getRate())) assessment.setRate(assessmentDtoRequest.getRate());
 
         try {
             this.assessmentRepository.save(assessment);
