@@ -37,14 +37,14 @@ public class ArticleController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/update/id/{id}")
+    @PutMapping("/update/id/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody ArticleDtoRequest articleDtoRequest,
                                                  @PathVariable(name = "id") Long id) {
         this.articleService.update(articleDtoRequest, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/delete/id/{id}")
+    @DeleteMapping("/delete/id/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
         this.articleService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
