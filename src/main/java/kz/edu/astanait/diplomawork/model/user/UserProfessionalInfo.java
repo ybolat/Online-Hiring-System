@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.model.user;
 
 import kz.edu.astanait.diplomawork.model.catalog.AcademicDegree;
+import kz.edu.astanait.diplomawork.model.catalog.Position;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class UserProfessionalInfo {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
+    
     @ManyToOne
     @JoinColumn(name = "academic_degree_id")
     private AcademicDegree academicDegree;

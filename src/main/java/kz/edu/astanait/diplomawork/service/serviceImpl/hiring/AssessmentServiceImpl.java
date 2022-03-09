@@ -52,9 +52,9 @@ public class AssessmentServiceImpl implements AssessmentService {
     public void create(AssessmentDtoRequest assessmentDtoRequest) {
         Assessment assessment = new Assessment();
 
-        assessment.setCommission(this.commissionService.getByIdThrowException(assessmentDtoRequest.getCommissionId()));
+//        assessment.setCommission(this.commissionService.getByIdThrowException(assessmentDtoRequest.getCommissionId()));
         assessment.setRequest(this.requestService.getByIdThrowException(assessmentDtoRequest.getRequestId()));
-        assessment.setRate(assessmentDtoRequest.getRate());
+        assessment.setVote(assessmentDtoRequest.getVote());
 
         try{
             this.assessmentRepository.save(assessment);
@@ -63,27 +63,27 @@ public class AssessmentServiceImpl implements AssessmentService {
         }
     }
 
-    @Override
-    public void update(AssessmentDtoRequest assessmentDtoRequest, Long id) {
-        Assessment assessment = this.getByIdThrowException(id);
+//    @Override
+//    public void update(AssessmentDtoRequest assessmentDtoRequest, Long id) {
+//        Assessment assessment = this.getByIdThrowException(id);
+//
+//        if(Objects.nonNull(assessmentDtoRequest.getVote())) assessment.setVote(assessmentDtoRequest.getVote());
+//
+//        try {
+//            this.assessmentRepository.save(assessment);
+//        }catch (Exception e){
+//            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "assessment"));
+//        }
+//    }
 
-        if(Objects.nonNull(assessmentDtoRequest.getRate())) assessment.setRate(assessmentDtoRequest.getRate());
-
-        try {
-            this.assessmentRepository.save(assessment);
-        }catch (Exception e){
-            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "assessment"));
-        }
-    }
-
-    @Override
-    public void delete(Long id) {
-        Assessment assessment = this.getByIdThrowException(id);
-
-        try {
-            this.assessmentRepository.delete(assessment);
-        }catch (Exception e){
-            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "assessment"));
-        }
-    }
+//    @Override
+//    public void delete(Long id) {
+//        Assessment assessment = this.getByIdThrowException(id);
+//
+//        try {
+//            this.assessmentRepository.delete(assessment);
+//        }catch (Exception e){
+//            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "assessment"));
+//        }
+//    }
 }

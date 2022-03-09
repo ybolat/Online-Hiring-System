@@ -16,7 +16,7 @@ public interface AssessmentService {
 
     void create(AssessmentDtoRequest assessmentDtoRequest);
 
-    void update(AssessmentDtoRequest assessmentDtoRequest, Long id);
-
-    void delete(Long id);
+//    void update(AssessmentDtoRequest assessmentDtoRequest, Long id);
+//
+//    void delete(Long id);
 }

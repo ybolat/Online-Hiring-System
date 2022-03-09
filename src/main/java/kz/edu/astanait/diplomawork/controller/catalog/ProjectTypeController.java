@@ -1,7 +1,6 @@
 package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.ProjectTypeDtoResponse;
-import kz.edu.astanait.diplomawork.dto.responseDto.hiring.ProjectDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.catalog.ProjectTypeMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ProjectTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class ProjectTypeController {
 
     @GetMapping
     public ResponseEntity<List<ProjectTypeDtoResponse>> getAll() {
-        List<ProjectTypeDtoResponse> projectDtoResponseList = projectTypeService.getAll()
+        List<ProjectTypeDtoResponse> projectDtoResponseList = this.projectTypeService.getAll()
                 .stream().map(ProjectTypeMapper::projectTypeToDto).collect(Collectors.toList());
         return new ResponseEntity<>(projectDtoResponseList, HttpStatus.OK);
     }

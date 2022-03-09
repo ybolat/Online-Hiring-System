@@ -26,6 +26,9 @@ public class Project {
     @Column(name = "finished_date")
     private LocalDate finishedDate;
 
+    @Column(name = "role")
+    private String role;
+
     @Column(name = "sum")
     private Float sum;
 

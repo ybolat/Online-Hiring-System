@@ -9,12 +9,12 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AssessmentDtoRequest {
 
-    @NotNull(message = "Комиссия не была указана.")
-    private Long commissionId;
+//    @NotNull(message = "Комиссия не была указана.")
+//    private Long commissionId;
 
     @NotNull(message = "Запрос не был указан.")
     private Long requestId;
 
-    @NotNull(message = "Оценка не была указана.")
-    private Float rate;
+    @NotNull(message = "Голос не был указан.")
+    private Boolean vote;
 }

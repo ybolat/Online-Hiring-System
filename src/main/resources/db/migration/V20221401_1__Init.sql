@@ -30,9 +30,33 @@ create table registration_pin_code(
     pin_code int not null
 );
 
+create table department(
+    id serial primary key,
+    department_name varchar(255) not null
+);
+
+create table position(
+    id serial primary key,
+    position_name varchar(255) not null
+
+);
+
+create table vacancy(
+    id serial primary key,
+    department_id bigint not null,
+    position_id bigint not null,
+    link_directory varchar(500) not null,
+    start_date timestamp not null,
+    finish_date timestamp not null,
+    number bigint not null,
+    constraint fk_department_id foreign key (department_id) references department (id),
+    constraint fk_position_id foreign key (position_id) references position (id)
+);
+
 create table user_professional_info(
     id serial primary key,
     user_id bigint not null,
+    vacancy_id  bigint not null,
     academic_degree_id bigint not null,
     academic_title varchar(255),
     scopus_id varchar(500),
