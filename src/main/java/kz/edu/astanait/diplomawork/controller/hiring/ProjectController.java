@@ -28,7 +28,7 @@ public class ProjectController {
     @GetMapping
     public ResponseEntity<List<ProjectDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
         List<ProjectDtoResponse> projectDtoResponseList =
-                projectService.getAllByUserId(id).stream().map(ProjectMapper::projectToDto).collect(Collectors.toList());
+                this.projectService.getAllByUserId(id).stream().map(ProjectMapper::projectToDto).collect(Collectors.toList());
         return new ResponseEntity<>(projectDtoResponseList, HttpStatus.OK);
     }
 }

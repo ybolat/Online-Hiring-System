@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeService {
 
     private final RegistrationPinCodeRepository registrationPinCodeRepository;
-
     private final UserService userService;
 
     @Autowired
@@ -27,7 +26,7 @@ public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeServic
 
     @Override
     public void create(String email) {
-        User user = userService.getByEmailThrowException(email);
+        User user = this.userService.getByEmailThrowException(email);
         RegistrationPinCode registrationPinCode = new RegistrationPinCode();
 
         int x = (int) ((Math.random()*((9999-1000)+1))+1000);

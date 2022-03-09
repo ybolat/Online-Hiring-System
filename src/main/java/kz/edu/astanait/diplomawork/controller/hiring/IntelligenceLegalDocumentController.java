@@ -30,7 +30,7 @@ public class IntelligenceLegalDocumentController {
     @GetMapping("/get/user/id/{id}")
     public ResponseEntity<List<IntelligenceLegalDocumentDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
         List<IntelligenceLegalDocumentDtoResponse> intelligenceLegalDocumentDtoResponseList =
-                intelligenceLegalDocumentService.getAllByUserId(id).stream().map(IntelligenceLegalDocumentMapper::intelligenceLegalDocumentToDto).collect(Collectors.toList());
+                this.intelligenceLegalDocumentService.getAllByUserId(id).stream().map(IntelligenceLegalDocumentMapper::intelligenceLegalDocumentToDto).collect(Collectors.toList());
         return new ResponseEntity<>(intelligenceLegalDocumentDtoResponseList, HttpStatus.OK);
 
     }

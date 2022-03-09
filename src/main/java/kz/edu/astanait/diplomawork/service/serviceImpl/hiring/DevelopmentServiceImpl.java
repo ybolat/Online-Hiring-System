@@ -20,6 +20,6 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     @Override
     public List<Development> getAllByUserId(Long id) {
-        return developmentRepository.findAllByUserId(id);
+        return this.developmentRepository.findAllByUserId(id);
     }
 }

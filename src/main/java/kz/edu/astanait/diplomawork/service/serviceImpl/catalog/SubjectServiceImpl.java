@@ -23,7 +23,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getAll() {
-        return subjectRepository.findAll();
+        return this.subjectRepository.findAll();
     }
 
     @Override

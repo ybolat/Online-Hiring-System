@@ -31,10 +31,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-
     private final RoleService roleService;
     private final RegistrationPinCodeService registrationPinCodeService;
-
     private final AuthenticationManager authenticationManager;
     private final BCryptPasswordEncoder encoder;
 
@@ -56,7 +54,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public Optional<User> getByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return this.userRepository.findByEmail(email);
     }
 
     @Override
@@ -82,7 +80,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = new User();
 
         user.setEmail(userRegistrationDtoRequest.getEmail());
-        user.setPassword(encoder.encode(userRegistrationDtoRequest.getPassword()));
+        user.setPassword(this.encoder.encode(userRegistrationDtoRequest.getPassword()));
         user.setName(userRegistrationDtoRequest.getName());
         user.setLastname(userRegistrationDtoRequest.getLastname());
         if (Strings.isNotBlank(userRegistrationDtoRequest.getPatronymic())) user.setPatronymic(userRegistrationDtoRequest.getPatronymic());
@@ -90,7 +88,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         User createdUser;
         try{
-            user.setRole(roleService.getByNameThrowException("ROLE_CHALLENGER"));
+            user.setRole(this.roleService.getByNameThrowException("ROLE_CHALLENGER"));
             createdUser = this.userRepository.save(user);
         }catch (Exception e){
             throw new RepositoryException(String
@@ -118,6 +116,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     private void authenticate(String email, String password) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+        this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
     }
 }

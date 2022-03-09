@@ -20,6 +20,6 @@ public class CertificateServiceImpl implements CertificateService {
 
     @Override
     public List<Certificate> getAllByUserId(Long id) {
-        return certificateRepository.findAllByUserId(id);
+        return this.certificateRepository.findAllByUserId(id);
     }
 }

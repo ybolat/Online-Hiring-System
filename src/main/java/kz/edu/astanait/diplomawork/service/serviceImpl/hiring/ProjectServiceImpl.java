@@ -20,6 +20,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getAllByUserId(Long id) {
-        return projectRepository.findAllByUserId(id);
+        return this.projectRepository.findAllByUserId(id);
     }
 }

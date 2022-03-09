@@ -23,7 +23,7 @@ public class ArticleTypeServiceImpl implements ArticleTypeService {
 
     @Override
     public List<ArticleType> getAll() {
-        return articleRepository.findAll();
+        return this.articleRepository.findAll();
     }
 
     @Override

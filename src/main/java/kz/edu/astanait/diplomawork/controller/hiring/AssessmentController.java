@@ -27,7 +27,7 @@ public class AssessmentController {
 
     @GetMapping("/get/request/id/{id}")
     public ResponseEntity<List<AssessmentDtoResponse>> getAllByRequestId(@PathVariable Long id) {
-        List<AssessmentDtoResponse> assessmentDtoResponseList = assessmentService.getAllByRequestId(id)
+        List<AssessmentDtoResponse> assessmentDtoResponseList = this.assessmentService.getAllByRequestId(id)
                 .stream().map(AssessmentMapper::assessmentToDtoResponse).collect(Collectors.toList());
         return new ResponseEntity<>(assessmentDtoResponseList, HttpStatus.OK);
     }

@@ -28,7 +28,7 @@ public class DevelopmentController {
     @GetMapping("/get/user/id/{id}")
     public ResponseEntity<List<DevelopmentDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
         List<DevelopmentDtoResponse> developmentDtoResponseList =
-                developmentService.getAllByUserId(id).stream().map(DevelopmentMapper::developmentToDto).collect(Collectors.toList());
+                this.developmentService.getAllByUserId(id).stream().map(DevelopmentMapper::developmentToDto).collect(Collectors.toList());
         return new ResponseEntity<>(developmentDtoResponseList, HttpStatus.OK);
     }
 }

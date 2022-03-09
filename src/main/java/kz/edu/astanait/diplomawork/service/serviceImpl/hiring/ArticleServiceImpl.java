@@ -21,7 +21,6 @@ import java.util.Optional;
 public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleRepository articleRepository;
-
     private final UserService userService;
     private final ArticleTypeService articleTypeService;
 
@@ -34,7 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getAllByUserId(Long id) {
-        return articleRepository.findArticleByUserId(id);
+        return this.articleRepository.findArticleByUserId(id);
     }
 
     @Override

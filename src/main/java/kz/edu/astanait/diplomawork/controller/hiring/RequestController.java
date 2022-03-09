@@ -26,7 +26,7 @@ public class RequestController {
 
     @GetMapping
     public ResponseEntity<List<RequestDtoResponse>> getAllRequest() {
-        List<RequestDtoResponse> requestDtoResponseList = requestService.getAllRequest()
+        List<RequestDtoResponse> requestDtoResponseList = this.requestService.getAllRequest()
                 .stream().map(RequestMapper::requestToDto).collect(Collectors.toList());
         return new ResponseEntity<>(requestDtoResponseList, HttpStatus.OK);
     }

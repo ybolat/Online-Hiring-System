@@ -22,7 +22,7 @@ public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoServ
 
     @Override
     public Optional<UserProfessionalInfo> getById(Long id) {
-        return userProfessionalInfoRepository.findById(id);
+        return this.userProfessionalInfoRepository.findById(id);
     }
 
     @Override

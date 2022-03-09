@@ -20,6 +20,6 @@ public class AcademicDegreeServiceImpl implements AcademicDegreeService {
 
     @Override
     public List<AcademicDegree> getAll() {
-        return academicDegreeRepository.findAll();
+        return this.academicDegreeRepository.findAll();
     }
 }

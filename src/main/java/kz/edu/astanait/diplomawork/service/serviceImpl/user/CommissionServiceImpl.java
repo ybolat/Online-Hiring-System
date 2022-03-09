@@ -22,7 +22,7 @@ public class CommissionServiceImpl implements CommissionService {
 
     @Override
     public Optional<Commission> getById(Long id) {
-        return commissionRepository.findById(id);
+        return this.commissionRepository.findById(id);
     }
 
     @Override
