@@ -67,7 +67,8 @@ create table user_professional_info(
     scientific_interests varchar(255),
     education varchar(255),
     constraint fk_user_id foreign key (user_id) references users (id),
-    constraint fk_academic_degree_id foreign key (academic_degree_id) references academic_degree (id)
+    constraint fk_academic_degree_id foreign key (academic_degree_id) references academic_degree (id),
+    constraint fk_vacancy_id foreign key ()
 );
 
 create table commission(
@@ -144,12 +145,19 @@ create table certificate(
     constraint fk_user_id foreign key (user_id) references users (id)
 );
 
+create table development_type(
+    id serial primary key,
+    title varchar(255) not null
+);
+
 create table development(
     id serial primary key,
     user_id bigint not null,
     name varchar(255) not null,
     description text,
-    constraint fk_user_id foreign key (user_id) references users (id)
+    development_type_id bigint not null,
+    constraint fk_user_id foreign key (user_id) references users (id),
+    constraint fk_development_type_id foreign key (development_type_id) references development_type (id)
 );
 
 create table intelligence_legal_document(

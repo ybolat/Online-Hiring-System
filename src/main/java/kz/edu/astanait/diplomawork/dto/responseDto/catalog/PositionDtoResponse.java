@@ -2,8 +2,6 @@ package kz.edu.astanait.diplomawork.dto.responseDto.catalog;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-
 @Data
 public class PositionDtoResponse {
 

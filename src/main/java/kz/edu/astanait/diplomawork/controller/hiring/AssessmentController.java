@@ -38,16 +38,16 @@ public class AssessmentController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/id/{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody AssessmentDtoRequest assessmentDtoRequest,
-                                             @PathVariable(name = "id") Long id) {
-        this.assessmentService.update(assessmentDtoRequest, id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/id/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
-        this.assessmentService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @PutMapping("/update/id/{id}")
+//    public ResponseEntity<HttpStatus> update(@RequestBody AssessmentDtoRequest assessmentDtoRequest,
+//                                             @PathVariable(name = "id") Long id) {
+//        this.assessmentService.update(assessmentDtoRequest, id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping("/delete/id/{id}")
+//    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
+//        this.assessmentService.delete(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }

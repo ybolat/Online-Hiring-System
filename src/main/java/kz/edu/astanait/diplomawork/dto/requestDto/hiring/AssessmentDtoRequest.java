@@ -1,7 +1,5 @@
 package kz.edu.astanait.diplomawork.dto.requestDto.hiring;
 
-import kz.edu.astanait.diplomawork.dto.responseDto.hiring.RequestDtoResponse;
-import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
