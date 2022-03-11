@@ -8,7 +8,7 @@ public class AssessmentDtoResponse {
 
     private Long id;
 
-//    private CommissionDtoResponse commission;
+    private CommissionDtoResponse commission;
 
     private RequestDtoResponse request;
 

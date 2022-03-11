@@ -52,7 +52,7 @@ public class AssessmentServiceImpl implements AssessmentService {
     public void create(AssessmentDtoRequest assessmentDtoRequest) {
         Assessment assessment = new Assessment();
 
-//        assessment.setCommission(this.commissionService.getByIdThrowException(assessmentDtoRequest.getCommissionId()));
+        assessment.setCommission(this.commissionService.getByIdThrowException(assessmentDtoRequest.getCommissionId()));
         assessment.setRequest(this.requestService.getByIdThrowException(assessmentDtoRequest.getRequestId()));
         assessment.setVote(assessmentDtoRequest.getVote());
 

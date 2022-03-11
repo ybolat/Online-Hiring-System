@@ -12,7 +12,7 @@ public class AssessmentMapper {
 
         AssessmentDtoResponse assessmentDtoResponse = new AssessmentDtoResponse();
         assessmentDtoResponse.setId(assessment.getId());
-//        if(Objects.nonNull(assessment.getCommission())) assessmentDtoResponse.setCommission(CommissionMapper.commissionToDto(assessment.getCommission()));
+        if(Objects.nonNull(assessment.getCommission())) assessmentDtoResponse.setCommission(CommissionMapper.commissionToDto(assessment.getCommission()));
         if(Objects.nonNull(assessment.getRequest())) assessmentDtoResponse.setRequest(RequestMapper.requestToDto(assessment.getRequest()));
         if(Objects.nonNull(assessment.getVote())) assessmentDtoResponse.setVote(assessment.getVote());
         return assessmentDtoResponse;
