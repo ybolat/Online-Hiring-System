@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ArticleTypeDtoRequest {
 
-    @NotNull(message = "Загаловок не был указан.")
+    @NotNull(message = "Заголовок не был указан.")
     private String title;
 }

@@ -7,22 +7,22 @@ import javax.validation.constraints.NotNull;
 @Data
 public class SubjectDtoRequest {
 
-    @NotNull(message = "Название на английском не была указана.")
+    @NotNull(message = "Название на английском не было указано.")
     private String titleEn;
 
-    @NotNull(message = "Название на русском не был указан.")
+    @NotNull(message = "Название на русском не было указано.")
     private String titleRu;
 
-    @NotNull(message = "Название на казахском не был указан.")
+    @NotNull(message = "Название на казахском не было указано.")
     private String titleKz;
 
-    @NotNull(message = "Описание на английском не была указана.")
+    @NotNull(message = "Описание на английском не было указано.")
     private String descriptionEn;
 
-    @NotNull(message = "Описание на русском не был указан.")
+    @NotNull(message = "Описание на русском не было указано.")
     private String descriptionRu;
 
-    @NotNull(message = "Описание на казахстком не был указан.")
+    @NotNull(message = "Описание на казахстком не было указано.")
     private String descriptionKz;
 
     @NotNull(message = "Код не был указан.")
@@ -31,6 +31,6 @@ public class SubjectDtoRequest {
     @NotNull(message = "Количество кредитов не было указано.")
     private Integer volumeCredits;
 
-    @NotNull(message = "Академическая степень не было указано.")
+    @NotNull(message = "Академическая степень не была указана.")
     private Long academicDegreeId;
 }
