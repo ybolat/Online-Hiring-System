@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.mapper.user;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicDegreeMapper;
+import kz.edu.astanait.diplomawork.mapper.catalog.AcademicTitleMapper;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import org.apache.logging.log4j.util.Strings;
 
@@ -15,7 +16,7 @@ public class UserProfessionalInfoMapper {
         UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse = new UserProfessionalInfoDtoResponse();
         userProfessionalInfoDtoResponse.setId(userProfessionalInfo.getId());
         if(Objects.nonNull(userProfessionalInfo.getAcademicDegree())) userProfessionalInfoDtoResponse.setAcademicDegree(AcademicDegreeMapper.academicDegreeToDto(userProfessionalInfo.getAcademicDegree()));
-        if(Strings.isNotBlank(userProfessionalInfo.getAcademicTitle())) userProfessionalInfoDtoResponse.setAcademicTitle(userProfessionalInfo.getAcademicTitle());
+        if(Objects.nonNull(userProfessionalInfo.getAcademicTitle())) userProfessionalInfoDtoResponse.setAcademicTitle(AcademicTitleMapper.academicTitleToDto(userProfessionalInfo.getAcademicTitle()));
         if(Strings.isNotBlank(userProfessionalInfo.getScopus())) userProfessionalInfoDtoResponse.setScopus(userProfessionalInfo.getScopus());
         if(Strings.isNotBlank(userProfessionalInfo.getResearch())) userProfessionalInfoDtoResponse.setResearch(userProfessionalInfo.getResearch());
         if(Strings.isNotBlank(userProfessionalInfo.getGoogleScholar())) userProfessionalInfoDtoResponse.setGoogleScholar(userProfessionalInfo.getGoogleScholar());

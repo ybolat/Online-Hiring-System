@@ -1,6 +1,8 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.user;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResponse;
+import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicTitleDtoResponse;
+import kz.edu.astanait.diplomawork.model.catalog.AcademicTitle;
 import lombok.Data;
 
 @Data
@@ -12,7 +14,7 @@ public class UserProfessionalInfoDtoResponse {
 
     private AcademicDegreeDtoResponse academicDegree;
 
-    private String academicTitle;
+    private AcademicTitleDtoResponse academicTitle;
 
     private String scopus;
 
