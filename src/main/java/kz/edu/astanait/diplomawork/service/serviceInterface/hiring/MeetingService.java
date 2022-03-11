@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface MeetingService {
 
-
     Optional<Meeting> getById(Long id);
 
     Meeting getByIdThrowException(Long id);

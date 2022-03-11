@@ -2,14 +2,12 @@ package kz.edu.astanait.diplomawork.model.hiring;
 
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "publications")
 @Data
-
 public class Publications {
 
     @Id
