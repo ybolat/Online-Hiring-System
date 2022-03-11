@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.mapper.hiring;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.CertificateDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.user.UserMapper;
+import kz.edu.astanait.diplomawork.mapper.user.UserProfessionalInfoMapper;
 import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import org.apache.logging.log4j.util.Strings;
 
@@ -13,7 +14,7 @@ public class CertificateMapper {
 
         CertificateDtoResponse certificateDtoResponse = new CertificateDtoResponse();
         certificateDtoResponse.setId(certificate.getId());
-        if(Objects.nonNull(certificate.getUser())) certificateDtoResponse.setUser(UserMapper.userToDto(certificate.getUser()));
+        if(Objects.nonNull(certificate.getUserProfessionalInfo())) certificateDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(certificate.getUserProfessionalInfo()));
         if(Strings.isNotBlank(certificate.getCertificate())) certificateDtoResponse.setCertificate(certificate.getCertificate());
         return certificateDtoResponse;
     }

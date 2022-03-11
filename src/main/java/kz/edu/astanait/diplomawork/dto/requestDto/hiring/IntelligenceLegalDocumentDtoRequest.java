@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class IntelligenceLegalDocumentDtoRequest {
 
     @NotNull(message = "Пользователь не был указан.")
-    private Long userId;
+    private Long userProfessionalInfoId;
 
     @NotNull(message = "Документ не был указан.")
     private String document;

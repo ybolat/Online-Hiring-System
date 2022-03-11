@@ -235,5 +235,3 @@ create table publication(
   constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
   constraint fk_publication_type_id foreign key (publication_type_id) references publication_type (id)
 );
-
-

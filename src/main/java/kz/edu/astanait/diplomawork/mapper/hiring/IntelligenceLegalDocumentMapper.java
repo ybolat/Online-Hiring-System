@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.mapper.hiring;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.IntelligenceLegalDocumentDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.user.UserMapper;
+import kz.edu.astanait.diplomawork.mapper.user.UserProfessionalInfoMapper;
 import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
 import org.apache.logging.log4j.util.Strings;
 
@@ -13,7 +14,7 @@ public class IntelligenceLegalDocumentMapper {
 
         IntelligenceLegalDocumentDtoResponse intelligenceLegalDocumentDtoResponse = new IntelligenceLegalDocumentDtoResponse();
         intelligenceLegalDocumentDtoResponse.setId(intelligenceLegalDocument.getId());
-        if(Objects.nonNull(intelligenceLegalDocument.getUser())) intelligenceLegalDocumentDtoResponse.setUser(UserMapper.userToDto(intelligenceLegalDocument.getUser()));
+        if(Objects.nonNull(intelligenceLegalDocument.getUserProfessionalInfo())) intelligenceLegalDocumentDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(intelligenceLegalDocument.getUserProfessionalInfo()));
         if(Strings.isNotBlank(intelligenceLegalDocument.getDocument())) intelligenceLegalDocumentDtoResponse.setDocument(intelligenceLegalDocument.getDocument());
         return intelligenceLegalDocumentDtoResponse;
     }

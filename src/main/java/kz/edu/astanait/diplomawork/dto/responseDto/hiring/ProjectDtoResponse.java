@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.ProjectTypeDtoResponse;
+import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import lombok.Data;
 import java.time.LocalDate;
 
@@ -10,7 +11,7 @@ public class ProjectDtoResponse {
 
     private Long id;
 
-    private UserDtoResponse user;
+    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
 
     private LocalDate startedDate;
 

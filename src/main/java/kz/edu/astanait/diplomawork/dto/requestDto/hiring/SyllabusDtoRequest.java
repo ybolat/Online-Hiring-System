@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class SyllabusDtoRequest {
 
     @NotNull(message = "Пользователь не был указан.")
-    private Long userId;
+    private Long userProfessionalInfoId;
 
     @NotNull(message = "Предмет не был указан.")
     private Long subjectId;

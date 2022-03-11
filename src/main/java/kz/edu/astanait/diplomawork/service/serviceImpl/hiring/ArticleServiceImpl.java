@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.model.hiring.Article;
 import kz.edu.astanait.diplomawork.repository.hiring.ArticleRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ArticleTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ArticleService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,14 @@ import java.util.Optional;
 public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleRepository articleRepository;
-    private final UserService userService;
+
+    private final UserProfessionalInfoService userProfessionalInfoService;
     private final ArticleTypeService articleTypeService;
 
     @Autowired
-    public ArticleServiceImpl(ArticleRepository articleRepository, UserService userService, ArticleTypeService articleTypeService) {
+    public ArticleServiceImpl(ArticleRepository articleRepository, UserProfessionalInfoService userProfessionalInfoService, ArticleTypeService articleTypeService) {
         this.articleRepository = articleRepository;
-        this.userService = userService;
+        this.userProfessionalInfoService = userProfessionalInfoService;
         this.articleTypeService = articleTypeService;
     }
 
@@ -54,7 +56,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         article.setApa(articleDtoRequest.getApa());
         article.setDoi(articleDtoRequest.getDoi());
-        article.setUser(this.userService.getByIdThrowException(articleDtoRequest.getUserId()));
+        article.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(articleDtoRequest.getUserProfessionalInfoId()));
         article.setArticleType(this.articleTypeService.getByIdThrowException(articleDtoRequest.getArticleTypeId()));
 
         try{

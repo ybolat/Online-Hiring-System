@@ -14,7 +14,7 @@ public class ArticleDtoRequest {
     private String doi;
 
     @NotNull(message = "Пользователь не был указан.")
-    private Long userId;
+    private Long userProfessionalInfoId;
 
     @NotNull(message = "Тип статьи не был указан.")
     private Long articleTypeId;

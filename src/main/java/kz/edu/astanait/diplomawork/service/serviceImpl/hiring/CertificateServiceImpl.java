@@ -7,6 +7,7 @@ import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import kz.edu.astanait.diplomawork.repository.hiring.CertificateRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.CertificateService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,12 @@ public class CertificateServiceImpl implements CertificateService {
 
     private final CertificateRepository certificateRepository;
 
-    private final UserService userService;
+    private final UserProfessionalInfoService userProfessionalInfoService;
 
     @Autowired
-    public CertificateServiceImpl(CertificateRepository certificateRepository, UserService userService) {
+    public CertificateServiceImpl(CertificateRepository certificateRepository, UserProfessionalInfoService userProfessionalInfoService) {
         this.certificateRepository = certificateRepository;
-        this.userService = userService;
+        this.userProfessionalInfoService = userProfessionalInfoService;
     }
 
     @Override
@@ -49,7 +50,7 @@ public class CertificateServiceImpl implements CertificateService {
     public void create(CertificateDtoRequest certificateDtoRequest) {
         Certificate certificate = new Certificate();
 
-        certificate.setUser(this.userService.getByIdThrowException(certificateDtoRequest.getUserId()));
+        certificate.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(certificateDtoRequest.getUserProfessionalInfoId()));
         certificate.setCertificate(certificate.getCertificate());
 
         try{

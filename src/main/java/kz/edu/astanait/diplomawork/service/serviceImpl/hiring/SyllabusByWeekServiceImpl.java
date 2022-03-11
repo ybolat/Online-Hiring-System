@@ -7,6 +7,7 @@ import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.SyllabusByWeek;
 import kz.edu.astanait.diplomawork.repository.hiring.SyllabusByWeekRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusByWeekService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,10 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
 
     private final SyllabusByWeekRepository syllabusByWeekRepository;
 
-    private final SyllabusServiceImpl syllabusService;
+    private final SyllabusService syllabusService;
 
     @Autowired
-    public SyllabusByWeekServiceImpl(SyllabusByWeekRepository syllabusByWeekRepository, SyllabusServiceImpl syllabusService) {
+    public SyllabusByWeekServiceImpl(SyllabusByWeekRepository syllabusByWeekRepository, SyllabusService syllabusService) {
         this.syllabusByWeekRepository = syllabusByWeekRepository;
         this.syllabusService = syllabusService;
     }

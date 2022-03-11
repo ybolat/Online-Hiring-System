@@ -9,6 +9,7 @@ import kz.edu.astanait.diplomawork.repository.hiring.SyllabusRepository;
 import kz.edu.astanait.diplomawork.service.serviceImpl.catalog.SubjectServiceImpl;
 import kz.edu.astanait.diplomawork.service.serviceImpl.user.UserServiceImpl;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,13 @@ public class SyllabusServiceImpl implements SyllabusService {
 
     private final SyllabusRepository syllabusRepository;
 
-    private final UserServiceImpl userService;
-
+    private final UserProfessionalInfoService userProfessionalInfoService;
     private final SubjectServiceImpl subjectService;
 
     @Autowired
-    public SyllabusServiceImpl(SyllabusRepository syllabusRepository, UserServiceImpl userService, SubjectServiceImpl subjectService) {
+    public SyllabusServiceImpl(SyllabusRepository syllabusRepository, UserProfessionalInfoService userProfessionalInfoService, SubjectServiceImpl subjectService) {
         this.syllabusRepository = syllabusRepository;
-        this.userService = userService;
+        this.userProfessionalInfoService = userProfessionalInfoService;
         this.subjectService = subjectService;
     }
 
@@ -52,7 +52,7 @@ public class SyllabusServiceImpl implements SyllabusService {
     public void create(SyllabusDtoRequest syllabusDtoRequest) {
         Syllabus syllabus = new Syllabus();
 
-        syllabus.setUser(this.userService.getByIdThrowException(syllabusDtoRequest.getUserId()));
+        syllabus.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(syllabusDtoRequest.getUserProfessionalInfoId()));
         syllabus.setSubject(this.subjectService.getByIdThrowException(syllabusDtoRequest.getSubjectId()));
 
         try{
