@@ -35,6 +35,6 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
     public IntelligenceLegalDocument getByIdThrowException(Long id) {
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException
-                        (String.format(ExceptionDescription.CustomNotFoundException, "IntelligenceLegalDocument", "id", id)));
+                        (String.format(ExceptionDescription.CustomNotFoundException, "Intelligence Legal Document", "id", id)));
     }
 }
