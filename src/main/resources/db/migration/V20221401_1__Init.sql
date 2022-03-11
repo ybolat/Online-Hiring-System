@@ -3,6 +3,12 @@ create table role(
     role_name varchar(255) not null unique
 );
 
+create table registration_pin_code(
+    id serial primary key,
+    user_id bigint not null unique,
+    pin_code int not null
+);
+
 create table academic_degree(
     id serial primary key,
     title varchar(255) not null unique
@@ -17,17 +23,10 @@ create table users(
     lastname varchar(255) not null,
     patronymic varchar(255),
     phone varchar(20) not null,
-    position varchar(255),
+    created_date timestamp not null,
     is_active boolean default false,
     is_locked boolean default false,
-    created_date timestamp not null,
     constraint fk_role_id foreign key (role_id) references role (id)
-);
-
-create table registration_pin_code(
-    id serial primary key,
-    user_id bigint not null unique,
-    pin_code int not null
 );
 
 create table department(
@@ -68,7 +67,7 @@ create table user_professional_info(
     education varchar(255),
     constraint fk_user_id foreign key (user_id) references users (id),
     constraint fk_academic_degree_id foreign key (academic_degree_id) references academic_degree (id),
-    constraint fk_vacancy_id foreign key ()
+    constraint fk_vacancy_id foreign key (vacancy_id) references vacancy (id)
 );
 
 create table commission(
@@ -122,9 +121,9 @@ create table article(
     id serial primary key,
     apa text,
     doi text,
+    user_id bigint not null,
     article_type_id bigint not null,
     link text,
-    user_id bigint not null,
     constraint fk_user_id foreign key (user_id) references users (id),
     constraint fk_article_type_id foreign key (article_type_id) references article_type (id)
 );
@@ -133,7 +132,7 @@ create table assessment(
     id serial primary key,
     commission_id bigint not null,
     request_id bigint not null,
-    rate Float,
+    vote boolean,
     constraint fk_commission_id foreign key (commission_id) references commission (id),
     constraint fk_request_id foreign key (request_id) references request (id)
 );
@@ -188,6 +187,7 @@ create table project(
     user_id bigint not null,
     started_date timestamp not null,
     finished_date timestamp,
+    role varchar(255) not null,
     sum Float,
     fund varchar(255),
     project_type_id bigint not null,

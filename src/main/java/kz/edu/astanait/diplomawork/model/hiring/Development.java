@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
-import kz.edu.astanait.diplomawork.model.catalog.ArticleType;
 import kz.edu.astanait.diplomawork.model.catalog.DevelopmentType;
 import kz.edu.astanait.diplomawork.model.user.User;
 import lombok.Data;

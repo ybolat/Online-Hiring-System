@@ -18,7 +18,6 @@ public class UserMapper {
         if(Strings.isNotBlank(user.getLastname())) userDtoResponse.setLastname(user.getLastname());
         if(Strings.isNotBlank(user.getPatronymic())) userDtoResponse.setPatronymic(user.getPatronymic());
         if(Strings.isNotBlank(user.getPhone())) userDtoResponse.setPhone(user.getPhone());
-        if(Strings.isNotBlank(user.getPosition())) userDtoResponse.setPosition(user.getPosition());
         if(Objects.nonNull(user.getCreatedDate())) userDtoResponse.setCreatedDate(user.getCreatedDate());
         return userDtoResponse;
     }
