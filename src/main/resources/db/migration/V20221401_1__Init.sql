@@ -52,22 +52,30 @@ create table vacancy(
     constraint fk_position_id foreign key (position_id) references position (id)
 );
 
+create table academic_title(
+    id serial primary key,
+    title varchar(255) not null
+);
+
 create table user_professional_info(
     id serial primary key,
     user_id bigint not null,
     vacancy_id  bigint not null,
     academic_degree_id bigint not null,
-    academic_title varchar(255),
+    academic_title_id varchar(255),
     scopus_id varchar(500),
-    research_id varchar(500) not null,
+    h_index bigint,
+    research_id varchar(500),
     google_scholar varchar(255),
     orcid varchar(255),
     experience varchar(255),
+    academic_experience varchar(255),
     scientific_interests varchar(255),
-    education varchar(255),
+    education varchar(255) not null,
     constraint fk_user_id foreign key (user_id) references users (id),
     constraint fk_academic_degree_id foreign key (academic_degree_id) references academic_degree (id),
-    constraint fk_vacancy_id foreign key (vacancy_id) references vacancy (id)
+    constraint fk_vacancy_id foreign key (vacancy_id) references vacancy (id),
+    constraint fk_academic_title_id foreign key (academic_title_id) references academic_title (id)
 );
 
 create table commission(
@@ -121,10 +129,10 @@ create table article(
     id serial primary key,
     apa text,
     doi text,
-    user_id bigint not null,
+    user_professional_info_id bigint not null,
     article_type_id bigint not null,
     link text,
-    constraint fk_user_id foreign key (user_id) references users (id),
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
     constraint fk_article_type_id foreign key (article_type_id) references article_type (id)
 );
 
@@ -139,9 +147,9 @@ create table assessment(
 
 create table certificate(
     id serial primary key,
-    user_id bigint not null,
+    user_professional_info_id bigint not null,
     certificate text not null,
-    constraint fk_user_id foreign key (user_id) references users (id)
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id)
 );
 
 create table development_type(
@@ -151,19 +159,19 @@ create table development_type(
 
 create table development(
     id serial primary key,
-    user_id bigint not null,
+    user_professional_info_id bigint not null,
     name varchar(255) not null,
     description text,
     development_type_id bigint not null,
-    constraint fk_user_id foreign key (user_id) references users (id),
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
     constraint fk_development_type_id foreign key (development_type_id) references development_type (id)
 );
 
 create table intelligence_legal_document(
     id serial primary key,
-    user_id bigint not null,
+    user_professional_info_id bigint not null,
     document text not null,
-    constraint fk_user_id foreign key (user_id) references users (id)
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id)
 );
 
 create table meeting(
@@ -184,22 +192,22 @@ create table commission_meeting
 
 create table project(
     id serial primary key,
-    user_id bigint not null,
+    user_professional_info_id bigint not null,
     started_date timestamp not null,
     finished_date timestamp,
     role varchar(255) not null,
     sum Float,
     fund varchar(255),
     project_type_id bigint not null,
-    constraint fk_user_id foreign key (user_id) references users (id),
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
     constraint fk_project_type_id foreign key (project_type_id) references project_type (id)
 );
 
 create table syllabus(
     id serial primary key,
-    user_id bigint not null,
+    user_professional_info_id bigint not null,
     subject_id bigint not null,
-    constraint fk_user_id foreign key (user_id) references users (id),
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
     constraint fk_subject_id foreign key (subject_id) references subject (id)
 );
 
@@ -210,6 +218,22 @@ create table syllabus_by_week(
     title varchar(255) not null ,
     description text,
     constraint fk_syllabus_id foreign key (syllabus_id) references syllabus (id)
-)
+);
+
+create table publication_type(
+    id serial primary key,
+    name varchar(255) not null
+);
+
+create table publication(
+  id serial primary key,
+  name varchar(255) not null,
+  link text not null,
+  published_date timestamp not null,
+  user_professional_info_id bigint not null,
+  publication_type_id bigint not null,
+  constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
+  constraint fk_publication_type_id foreign key (publication_type_id) references publication_type (id)
+);
 
 

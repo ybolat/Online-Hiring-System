@@ -1,7 +1,7 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
-import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.model.catalog.ArticleType;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,8 +25,8 @@ public class Article {
     private String doi;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "user_professional_info_id")
+    private UserProfessionalInfo userProfessionalInfo;
 
     @ManyToOne
     @JoinColumn(name = "article_type_id")

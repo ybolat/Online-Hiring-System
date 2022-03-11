@@ -29,7 +29,8 @@ public class UserProfessionalInfo {
     @JoinColumn(name = "academic_degree_id")
     private AcademicDegree academicDegree;
 
-    @Column(name = "academic_title_id")
+    @ManyToOne
+    @JoinColumn(name = "academic_title_id")
     private AcademicTitle academicTitle;
 
     @Column(name = "scopus_id")

@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.model.hiring;
 
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.model.catalog.ProjectType;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,8 +18,8 @@ public class Project {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "user_professional_info_id")
+    private UserProfessionalInfo userProfessionalInfo;
 
     @Column(name = "started_date")
     private LocalDate startedDate;

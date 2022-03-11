@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
 import kz.edu.astanait.diplomawork.model.user.User;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,8 +16,8 @@ public class Certificate {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "user_professional_info_id")
+    private UserProfessionalInfo userProfessionalInfo;
 
     @Column(name = "certificate")
     private String certificate;
