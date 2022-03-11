@@ -8,6 +8,4 @@ public class ProjectTypeDtoResponse {
     private Long id;
 
     private String title;
-
-
 }
