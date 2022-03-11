@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.model.user;
 
 import kz.edu.astanait.diplomawork.model.catalog.AcademicDegree;
+import kz.edu.astanait.diplomawork.model.catalog.AcademicTitle;
 import kz.edu.astanait.diplomawork.model.catalog.Position;
 import kz.edu.astanait.diplomawork.model.hiring.Vacancy;
 import lombok.Data;
@@ -28,8 +29,8 @@ public class UserProfessionalInfo {
     @JoinColumn(name = "academic_degree_id")
     private AcademicDegree academicDegree;
 
-    @Column(name = "academic_title")
-    private String academicTitle;
+    @Column(name = "academic_title_id")
+    private AcademicTitle academicTitle;
 
     @Column(name = "scopus_id")
     private String scopus;
