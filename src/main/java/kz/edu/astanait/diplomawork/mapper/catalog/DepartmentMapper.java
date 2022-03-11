@@ -8,9 +8,9 @@ public class DepartmentMapper {
 
     public static DepartmentDtoResponse departmentToDto(Department department) {
 
-            DepartmentDtoResponse departmentDtoResponse = new DepartmentDtoResponse();
-            departmentDtoResponse.setId(department.getId());
-            if(Strings.isNotBlank(department.getDepartmentName())) departmentDtoResponse.setDepartmentName(department.getDepartmentName());
-            return departmentDtoResponse;
+        DepartmentDtoResponse departmentDtoResponse = new DepartmentDtoResponse();
+        departmentDtoResponse.setId(department.getId());
+        if(Strings.isNotBlank(department.getDepartmentName())) departmentDtoResponse.setDepartmentName(department.getDepartmentName());
+        return departmentDtoResponse;
     }
 }
