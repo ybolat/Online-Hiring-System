@@ -1,13 +1,20 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.VacancyDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Vacancy;
 import kz.edu.astanait.diplomawork.repository.hiring.VacancyRepository;
+import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DepartmentService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.PositionService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.VacancyService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -15,9 +22,19 @@ public class VacancyServiceImpl implements VacancyService {
 
     private final VacancyRepository vacancyRepository;
 
+    private final DepartmentService departmentService;
+    private final PositionService positionService;
+
     @Autowired
-    public VacancyServiceImpl(VacancyRepository vacancyRepository) {
+    public VacancyServiceImpl(VacancyRepository vacancyRepository, DepartmentService departmentService, PositionService positionService) {
         this.vacancyRepository = vacancyRepository;
+        this.departmentService = departmentService;
+        this.positionService = positionService;
+    }
+
+    @Override
+    public List<Vacancy> getAll() {
+        return this.vacancyRepository.findAll();
     }
 
     @Override
@@ -30,5 +47,52 @@ public class VacancyServiceImpl implements VacancyService {
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Vacancy", "id", id)));
+    }
+
+    @Override
+    public void create(VacancyDtoRequest vacancyDtoRequest) {
+        Vacancy vacancy = new Vacancy();
+
+        vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
+        vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
+        vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
+        vacancy.setStart_date(vacancyDtoRequest.getStart_date());
+        vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
+        vacancy.setNumber(vacancyDtoRequest.getNumber());
+
+        try{
+            this.vacancyRepository.save(vacancy);
+        }catch (Exception e){
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "vacancy"));
+        }
+    }
+
+    @Override
+    public void update(VacancyDtoRequest vacancyDtoRequest, Long id) {
+        Vacancy vacancy = this.getByIdThrowException(id);
+
+        if(Objects.nonNull(vacancyDtoRequest.getDepartmentId())) vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
+        if(Objects.nonNull(vacancyDtoRequest.getPositionId())) vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
+        if(Strings.isNotBlank(vacancyDtoRequest.getLink_directory())) vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
+        if(Objects.nonNull(vacancyDtoRequest.getStart_date())) vacancy.setStart_date(vacancyDtoRequest.getStart_date());
+        if(Objects.nonNull(vacancyDtoRequest.getFinish_date())) vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
+        if(Objects.nonNull(vacancyDtoRequest.getNumber())) vacancy.setNumber(vacancyDtoRequest.getNumber());
+
+        try {
+            this.vacancyRepository.save(vacancy);
+        }catch (Exception e){
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "vacancy"));
+        }
+     }
+
+    @Override
+    public void delete(Long id) {
+        Vacancy vacancy = this.getByIdThrowException(id);
+
+        try{
+            this.vacancyRepository.delete(vacancy);
+        }catch (Exception e){
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "vacancy"));
+        }
     }
 }
