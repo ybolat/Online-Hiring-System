@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
-import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.ProjectTypeDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import lombok.Data;
@@ -16,6 +15,8 @@ public class ProjectDtoResponse {
     private LocalDate startedDate;
 
     private LocalDate finishedDate;
+
+    private String role;
 
     private Float sum;
 

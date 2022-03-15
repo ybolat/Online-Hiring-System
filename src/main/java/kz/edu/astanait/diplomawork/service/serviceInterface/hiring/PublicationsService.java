@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.PublicationsDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Publications;
 import java.util.List;
 import java.util.Optional;
@@ -12,4 +13,9 @@ public interface PublicationsService {
 
     Publications getByIdThrowException(Long id);
 
+    void create(PublicationsDtoRequest publicationsDtoRequest);
+
+    void update(PublicationsDtoRequest publicationsDtoRequest, Long id);
+
+    void delete(Long id);
 }

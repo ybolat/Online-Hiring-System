@@ -1,13 +1,16 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.IntelligenceLegalDocumentDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
 import kz.edu.astanait.diplomawork.repository.hiring.IntelligenceLegalDocumentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.IntelligenceLegalDocumentService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +19,12 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
 
     private final IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository;
 
+    private final UserProfessionalInfoService userProfessionalInfoService;
+
     @Autowired
-    public IntelligenceLegalDocumentServiceImpl(IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository) {
+    public IntelligenceLegalDocumentServiceImpl(IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository, UserProfessionalInfoService userProfessionalInfoService) {
         this.intelligenceLegalDocumentRepository = intelligenceLegalDocumentRepository;
+        this.userProfessionalInfoService = userProfessionalInfoService;
     }
 
     @Override
@@ -36,5 +42,47 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Intelligence Legal Document", "id", id)));
+    }
+
+    @Override
+    public void create(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest) {
+
+        IntelligenceLegalDocument intelligenceLegalDocument = new IntelligenceLegalDocument();
+
+        intelligenceLegalDocument.setDocument(intelligenceLegalDocumentDtoRequest.getDocument());
+        intelligenceLegalDocument.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(intelligenceLegalDocumentDtoRequest.getUserProfessionalInfoId()));
+
+        try{
+            this.intelligenceLegalDocumentRepository.save(intelligenceLegalDocument);
+        }catch (Exception e){
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "intelligenceLegalDocument"));
+        }
+    }
+
+    @Override
+    public void update(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Long id) {
+        IntelligenceLegalDocument intelligenceLegalDocument = this.getByIdThrowException(id);
+
+        if(Strings.isNotBlank(intelligenceLegalDocumentDtoRequest.getDocument())) intelligenceLegalDocument.setDocument(intelligenceLegalDocument.getDocument());
+
+        try{
+            this.intelligenceLegalDocumentRepository.save(intelligenceLegalDocument);
+        }catch (Exception e){
+            throw new RepositoryException(String
+            .format(ExceptionDescription.RepositoryException, "updating", "intelligence legal document"));
+        }
+
+    }
+
+    @Override
+    public void delete(Long id) {
+        IntelligenceLegalDocument intelligenceLegalDocument = this.getByIdThrowException(id);
+
+        try{
+            this.intelligenceLegalDocumentRepository.delete(intelligenceLegalDocument);
+        }catch (Exception e){
+            throw new RepositoryException(String
+            .format(ExceptionDescription.RepositoryException, "deleting", "intelligence legal document"));
+        }
     }
 }

@@ -18,6 +18,6 @@ public class PublicationsDtoRequest {
     @NotNull(message = "Дата публикации не была указана.")
     private LocalDateTime publishedDate;
 
-    @NotNull(message = "Информация о пользователе не была указана.")
-    private UserProfessionalInfo userProfessionalInfo;
+    @NotNull(message = "Пользователь не был указан.")
+    private Long userProfessionalInfoId;
 }
