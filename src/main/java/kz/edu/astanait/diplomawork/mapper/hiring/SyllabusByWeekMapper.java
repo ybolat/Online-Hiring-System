@@ -9,7 +9,6 @@ import java.util.Objects;
 public class SyllabusByWeekMapper {
 
     public static SyllabusByWeekDtoResponse syllabusByWeekToDto(SyllabusByWeek syllabusByWeek) {
-
         SyllabusByWeekDtoResponse syllabusByWeekDtoResponse = new SyllabusByWeekDtoResponse();
         syllabusByWeekDtoResponse.setId(syllabusByWeek.getId());
         if(Objects.nonNull(syllabusByWeek.getSyllabus())) syllabusByWeekDtoResponse.setSyllabus(SyllabusMapper.syllabusToDto(syllabusByWeek.getSyllabus()));

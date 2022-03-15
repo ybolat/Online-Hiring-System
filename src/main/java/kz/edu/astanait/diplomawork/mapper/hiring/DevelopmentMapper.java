@@ -11,7 +11,6 @@ import java.util.Objects;
 public class DevelopmentMapper {
 
     public static DevelopmentDtoResponse developmentToDto(Development development) {
-
         DevelopmentDtoResponse developmentDtoResponse = new DevelopmentDtoResponse();
         developmentDtoResponse.setId(development.getId());
         if(Objects.nonNull(development.getUserProfessionalInfo())) developmentDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(development.getUserProfessionalInfo()));

@@ -24,7 +24,7 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-    @GetMapping("get-all")
+    @GetMapping("/get-all")
     public ResponseEntity<List<StatusDtoResponse>> getAll() {
         List<StatusDtoResponse> statusDtoResponseList = this.statusService.getAll()
                 .stream().map(StatusMapper::statusToDto).collect(Collectors.toList());

@@ -10,7 +10,6 @@ import java.util.Objects;
 public class PublicationsMapper {
 
     public static PublicationsDtoResponse publicationsToDto(Publications publications) {
-
         PublicationsDtoResponse publicationsDtoResponse = new PublicationsDtoResponse();
         publicationsDtoResponse.setId(publications.getId());
         if(Strings.isNotBlank(publications.getName())) publicationsDtoResponse.setName(publications.getName());

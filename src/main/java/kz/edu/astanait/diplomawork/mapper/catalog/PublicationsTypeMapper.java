@@ -10,7 +10,6 @@ import org.springframework.security.core.parameters.P;
 public class PublicationsTypeMapper {
 
     public static PublicationsTypeDtoResponse publicationsTypeToDto(PublicationsType publicationsType){
-
         PublicationsTypeDtoResponse publicationsTypeDtoResponse = new PublicationsTypeDtoResponse();
         publicationsTypeDtoResponse.setId(publicationsType.getId());
         if(Strings.isNotBlank(publicationsType.getName())) publicationsTypeDtoResponse.setName(publicationsType.getName());

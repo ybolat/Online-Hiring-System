@@ -7,7 +7,6 @@ import org.apache.logging.log4j.util.Strings;
 public class DevelopmentTypeMapper {
 
     public static DevelopmentTypeDtoResponse developmentTypeToDto(DevelopmentType developmentType) {
-
         DevelopmentTypeDtoResponse developmentTypeDtoResponse = new DevelopmentTypeDtoResponse();
         developmentTypeDtoResponse.setId(developmentType.getId());
         if(Strings.isNotBlank(developmentType.getTitle())) developmentTypeDtoResponse.setTitle(developmentType.getTitle());

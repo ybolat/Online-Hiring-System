@@ -24,7 +24,7 @@ public class DevelopmentTypeController {
         this.developmentTypeService = developmentTypeService;
     }
 
-    @GetMapping("get-all")
+    @GetMapping("/get-all")
     public ResponseEntity<List<DevelopmentTypeDtoResponse>> getAll() {
         List<DevelopmentTypeDtoResponse> developmentTypeDtoResponseList = this.developmentTypeService.getAll().
                 stream().map(DevelopmentTypeMapper::developmentTypeToDto).collect(Collectors.toList());

@@ -11,7 +11,6 @@ import java.util.Objects;
 public class CertificateMapper {
 
     public static CertificateDtoResponse certificateToDto (Certificate certificate){
-
         CertificateDtoResponse certificateDtoResponse = new CertificateDtoResponse();
         certificateDtoResponse.setId(certificate.getId());
         if(Objects.nonNull(certificate.getUserProfessionalInfo())) certificateDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(certificate.getUserProfessionalInfo()));

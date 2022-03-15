@@ -12,7 +12,6 @@ import java.util.Objects;
 public class ProjectMapper {
 
     public static ProjectDtoResponse projectToDto(Project project) {
-
         ProjectDtoResponse projectDtoResponse = new ProjectDtoResponse();
         projectDtoResponse.setId(project.getId());
         if(Objects.nonNull(project.getUserProfessionalInfo())) projectDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(project.getUserProfessionalInfo()));

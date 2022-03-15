@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class MeetingMapper {
 
     public static MeetingDtoResponse meetingToDto(Meeting meeting) {
-
         MeetingDtoResponse meetingDtoResponse = new MeetingDtoResponse();
         meetingDtoResponse.setId(meeting.getId());
         if(Strings.isNotBlank(meeting.getName())) meetingDtoResponse.setName(meeting.getName());

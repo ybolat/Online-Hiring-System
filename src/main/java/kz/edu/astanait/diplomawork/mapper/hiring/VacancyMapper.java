@@ -11,7 +11,6 @@ import java.util.Objects;
 public class VacancyMapper {
 
     public static VacancyDtoResponse vacancyToDto(Vacancy vacancy) {
-
         VacancyDtoResponse vacancyDtoResponse = new VacancyDtoResponse();
         vacancyDtoResponse.setId(vacancy.getId());
         if(Objects.nonNull(vacancy.getDepartment())) vacancyDtoResponse.setDepartment(DepartmentMapper.departmentToDto(vacancy.getDepartment()));

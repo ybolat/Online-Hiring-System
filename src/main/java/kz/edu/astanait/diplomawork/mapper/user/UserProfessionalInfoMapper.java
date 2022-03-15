@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.mapper.user;
 
-import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicDegreeMapper;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicTitleMapper;
@@ -12,7 +11,6 @@ import java.util.Objects;
 public class UserProfessionalInfoMapper {
 
     public static UserProfessionalInfoDtoResponse userProfessionalInfoToDto (UserProfessionalInfo userProfessionalInfo){
-
         UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse = new UserProfessionalInfoDtoResponse();
         userProfessionalInfoDtoResponse.setId(userProfessionalInfo.getId());
         if(Objects.nonNull(userProfessionalInfo.getAcademicDegree())) userProfessionalInfoDtoResponse.setAcademicDegree(AcademicDegreeMapper.academicDegreeToDto(userProfessionalInfo.getAcademicDegree()));

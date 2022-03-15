@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.PositionServ
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,11 @@ public class PositionServiceImpl implements PositionService {
     @Autowired
     public PositionServiceImpl(PositionRepository positionRepository) {
         this.positionRepository = positionRepository;
+    }
+
+    @Override
+    public List<Position> getAll() {
+        return this.positionRepository.findAll();
     }
 
     @Override

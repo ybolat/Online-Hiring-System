@@ -7,7 +7,6 @@ import org.apache.logging.log4j.util.Strings;
 public class AcademicTitleMapper {
 
     public static AcademicTitleDtoResponse academicTitleToDto(AcademicTitle academicTitle) {
-
         AcademicTitleDtoResponse academicTitleDtoResponse = new AcademicTitleDtoResponse();
         academicTitleDtoResponse.setId(academicTitle.getId());
         if(Strings.isNotBlank(academicTitle.getTitle())) academicTitleDtoResponse.setTitle(academicTitle.getTitle());

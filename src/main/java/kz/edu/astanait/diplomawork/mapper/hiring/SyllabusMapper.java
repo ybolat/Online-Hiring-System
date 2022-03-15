@@ -11,7 +11,6 @@ import java.util.Objects;
 public class SyllabusMapper {
 
     public static SyllabusDtoResponse syllabusToDto(Syllabus syllabus) {
-
         SyllabusDtoResponse syllabusDtoResponse = new SyllabusDtoResponse();
         syllabusDtoResponse.setId(syllabus.getId());
         if(Objects.nonNull(syllabus.getUserProfessionalInfo())) syllabusDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(syllabus.getUserProfessionalInfo()));

@@ -1,10 +1,13 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.catalog;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.catalog.DepartmentDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.catalog.Department;
 import kz.edu.astanait.diplomawork.repository.catalog.DepartmentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DepartmentService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +39,42 @@ public class DepartmentServiceImpl implements DepartmentService {
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Department", "id", id)));
+    }
+
+    @Override
+    public void create(DepartmentDtoRequest departmentDtoRequest) {
+        Department department = new Department();
+
+        department.setDepartmentName(departmentDtoRequest.getDepartmentName());
+
+        try{
+            this.departmentRepository.save(department);
+        }catch (Exception e){
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "department"));
+        }
+    }
+
+    @Override
+    public void update(DepartmentDtoRequest departmentDtoRequest, Long id) {
+        Department department = this.getByIdThrowException(id);
+
+        if(Strings.isNotBlank(departmentDtoRequest.getDepartmentName())) department.setDepartmentName(departmentDtoRequest.getDepartmentName());
+
+        try {
+            this.departmentRepository.save(department);
+        }catch (Exception e){
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "department"));
+        }
+    }
+
+    @Override
+    public void delete(Long id) {
+        Department department = this.getByIdThrowException(id);
+
+        try {
+            this.departmentRepository.delete(department);
+        }catch (Exception e) {
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "department"));
+        }
     }
 }

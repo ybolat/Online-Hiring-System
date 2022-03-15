@@ -7,7 +7,6 @@ import org.apache.logging.log4j.util.Strings;
 public class PositionMapper {
 
     public static PositionDtoResponse positionToDto(Position position) {
-
         PositionDtoResponse positionDtoResponse = new PositionDtoResponse();
         positionDtoResponse.setId(position.getId());
         if(Strings.isNotBlank(position.getPositionName())) positionDtoResponse.setPositionName(position.getPositionName());

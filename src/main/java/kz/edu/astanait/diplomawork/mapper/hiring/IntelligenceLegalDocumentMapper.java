@@ -11,7 +11,6 @@ import java.util.Objects;
 public class IntelligenceLegalDocumentMapper {
 
     public static IntelligenceLegalDocumentDtoResponse intelligenceLegalDocumentToDto(IntelligenceLegalDocument intelligenceLegalDocument) {
-
         IntelligenceLegalDocumentDtoResponse intelligenceLegalDocumentDtoResponse = new IntelligenceLegalDocumentDtoResponse();
         intelligenceLegalDocumentDtoResponse.setId(intelligenceLegalDocument.getId());
         if(Objects.nonNull(intelligenceLegalDocument.getUserProfessionalInfo())) intelligenceLegalDocumentDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(intelligenceLegalDocument.getUserProfessionalInfo()));

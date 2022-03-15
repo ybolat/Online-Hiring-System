@@ -10,7 +10,6 @@ import java.util.Objects;
 public class CommissionMapper {
 
     public static CommissionDtoResponse commissionToDto(Commission commission) {
-
         CommissionDtoResponse commissionDtoResponse = new CommissionDtoResponse();
         commissionDtoResponse.setId(commission.getId());
         if(Objects.nonNull(commission.getRole())) commissionDtoResponse.setRole(RoleMapper.roleToDto(commission.getRole()));

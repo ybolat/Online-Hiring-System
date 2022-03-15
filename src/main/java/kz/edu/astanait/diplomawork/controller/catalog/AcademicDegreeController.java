@@ -24,7 +24,7 @@ public class AcademicDegreeController {
         this.academicDegreeService = academicDegreeService;
     }
 
-    @GetMapping("get-all")
+    @GetMapping("/get-all")
     public ResponseEntity<List<AcademicDegreeDtoResponse>> getAll() {
         List<AcademicDegreeDtoResponse> academicDegreeDtoResponseList = this.academicDegreeService.getAll()
                 .stream().map(AcademicDegreeMapper::academicDegreeToDto).collect(Collectors.toList());
