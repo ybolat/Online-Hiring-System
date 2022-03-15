@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DevelopmentT
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,11 @@ public class DevelopmentTypeServiceImpl implements DevelopmentTypeService {
     @Autowired
     public DevelopmentTypeServiceImpl(DevelopmentTypeRepository developmentTypeRepository) {
         this.developmentTypeRepository = developmentTypeRepository;
+    }
+
+    @Override
+    public List<DevelopmentType> getAll() {
+        return this.developmentTypeRepository.findAll();
     }
 
     @Override
