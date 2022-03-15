@@ -25,8 +25,8 @@ public class IntelligenceLegalDocumentController {
         this.intelligenceLegalDocumentService = intelligenceLegalDocumentService;
     }
 
-    @GetMapping("/get/user/id/{id}")
-    public ResponseEntity<List<IntelligenceLegalDocumentDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
+    @GetMapping("/get/user-professional/id/{id}")
+    public ResponseEntity<List<IntelligenceLegalDocumentDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id) {
         List<IntelligenceLegalDocumentDtoResponse> intelligenceLegalDocumentDtoResponseList =
                 this.intelligenceLegalDocumentService.getAllByUserProfessionalInfoId(id).stream().map(IntelligenceLegalDocumentMapper::intelligenceLegalDocumentToDto).collect(Collectors.toList());
         return new ResponseEntity<>(intelligenceLegalDocumentDtoResponseList, HttpStatus.OK);

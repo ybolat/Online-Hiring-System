@@ -25,8 +25,8 @@ public class SyllabusController {
         this.syllabusService = syllabusService;
     }
 
-    @GetMapping("/get/user/id/{id}")
-    public ResponseEntity<List<SyllabusDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
+    @GetMapping("/get/user-professional-info/id/{id}")
+    public ResponseEntity<List<SyllabusDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id) {
         List<SyllabusDtoResponse> syllabusDtoResponseList =
                 this.syllabusService.getAllByUserId(id).stream().map(SyllabusMapper::syllabusToDto).collect(Collectors.toList());
         return new ResponseEntity<>(syllabusDtoResponseList, HttpStatus.OK);

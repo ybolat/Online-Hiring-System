@@ -24,7 +24,7 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @GetMapping("/get/user/id/{id}")
+    @GetMapping("/get/user-professional-info/id/{id}")
     public ResponseEntity<List<ArticleDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id) {
         List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserProfessionalInfoId(id)
                 .stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());

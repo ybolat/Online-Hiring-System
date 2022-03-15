@@ -25,8 +25,8 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<ProjectDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
+    @GetMapping("get/user-professional-info/id/{id}")
+    public ResponseEntity<List<ProjectDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id) {
         List<ProjectDtoResponse> projectDtoResponseList =
                 this.projectService.getAllByUserProfessionalInfoId(id).stream().map(ProjectMapper::projectToDto).collect(Collectors.toList());
         return new ResponseEntity<>(projectDtoResponseList, HttpStatus.OK);
