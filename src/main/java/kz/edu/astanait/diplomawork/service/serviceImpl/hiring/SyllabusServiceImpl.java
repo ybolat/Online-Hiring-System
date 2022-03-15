@@ -7,7 +7,6 @@ import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Syllabus;
 import kz.edu.astanait.diplomawork.repository.hiring.SyllabusRepository;
 import kz.edu.astanait.diplomawork.service.serviceImpl.catalog.SubjectServiceImpl;
-import kz.edu.astanait.diplomawork.service.serviceImpl.user.UserServiceImpl;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class SyllabusServiceImpl implements SyllabusService {
 
     @Override
     public List<Syllabus> getAllByUserId(Long id) {
-        return this.syllabusRepository.findAllByUserId(id);
+        return this.syllabusRepository.findAllByUserProfessionalInfoId(id);
     }
 
     @Override

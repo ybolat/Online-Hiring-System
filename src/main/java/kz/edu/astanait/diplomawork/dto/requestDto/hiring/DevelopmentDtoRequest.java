@@ -15,4 +15,7 @@ public class DevelopmentDtoRequest {
 
     @NotNull(message = "Описание не было указано.")
     private String description;
+
+    @NotNull(message = "Тип разработки не был указан.")
+    private Long developmentTypeId;
 }

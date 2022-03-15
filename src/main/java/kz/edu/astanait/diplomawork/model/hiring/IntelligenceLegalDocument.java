@@ -7,7 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Intelligence_legal_documents")
+@Table(name = "intelligence_legal_document")
 @Data
 public class IntelligenceLegalDocument {
 

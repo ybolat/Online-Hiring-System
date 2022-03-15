@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface CertificateService {
 
-    List<Certificate> getAllByUserId(Long id);
+    List<Certificate> getAllByUserProfessionalInfoId(Long id);
 
     Optional<Certificate> getById(Long id);
 

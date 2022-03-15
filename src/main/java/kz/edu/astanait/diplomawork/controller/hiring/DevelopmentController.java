@@ -1,16 +1,15 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.DevelopmentDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.DevelopmentDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.hiring.DevelopmentMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.DevelopmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +27,26 @@ public class DevelopmentController {
     @GetMapping("/get/user/id/{id}")
     public ResponseEntity<List<DevelopmentDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
         List<DevelopmentDtoResponse> developmentDtoResponseList =
-                this.developmentService.getAllByUserId(id).stream().map(DevelopmentMapper::developmentToDto).collect(Collectors.toList());
+                this.developmentService.getAllByUserProfessionalInfoId(id).stream().map(DevelopmentMapper::developmentToDto).collect(Collectors.toList());
         return new ResponseEntity<>(developmentDtoResponseList, HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody DevelopmentDtoRequest developmentDtoRequest){
+        this.developmentService.create(developmentDtoRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/id/{id}")
+    public ResponseEntity<HttpStatus> update(@RequestBody DevelopmentDtoRequest developmentDtoRequest,
+                                             @PathVariable(name = "id") Long id){
+        this.developmentService.update(developmentDtoRequest, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/id/{id}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
+        this.developmentService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface IntelligenceLegalDocumentRepository extends JpaRepository<IntelligenceLegalDocument, Long> {
-    List<IntelligenceLegalDocument> findAllByUserId(long id);
+    List<IntelligenceLegalDocument> findAllByUserProfessionalInfoId(long id);
 }

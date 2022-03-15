@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IntelligenceLegalDocumentService {
 
-    List<IntelligenceLegalDocument> getAllByUserId(Long id);
+    List<IntelligenceLegalDocument> getAllByUserProfessionalInfoId(Long id);
 
     Optional<IntelligenceLegalDocument> getById(Long id);
 

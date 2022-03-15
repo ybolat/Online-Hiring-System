@@ -28,7 +28,7 @@ public class CertificateController {
     @GetMapping("/get/user/id/{id}")
     public ResponseEntity<List<CertificateDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
         List<CertificateDtoResponse> certificateDtoResponseList =
-                this.certificateService.getAllByUserId(id).stream().map(CertificateMapper::certificateToDto).collect(Collectors.toList());
+                this.certificateService.getAllByUserProfessionalInfoId(id).stream().map(CertificateMapper::certificateToDto).collect(Collectors.toList());
         return new ResponseEntity<>(certificateDtoResponseList, HttpStatus.OK);
     }
 }

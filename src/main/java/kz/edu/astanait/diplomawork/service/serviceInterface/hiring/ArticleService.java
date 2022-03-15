@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ArticleService {
 
-    List<Article> getAllByUserId(Long id);
+    List<Article> getAllByUserProfessionalInfoId(Long id);
 
     Optional<Article> getById(Long id);
 
@@ -19,4 +19,8 @@ public interface ArticleService {
     void update(ArticleDtoRequest articleDtoRequest, Long id);
 
     void delete(Long id);
+
+//    List<Article> getAllOrderByArticleName();
+
+    List<Article> getAllByUserProfessionalInfoIdOrderByArticleName(Long id);
 }

@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface PublicationsService {
 
-    List<Publications> getAllByUserId(Long id);
+    List<Publications> getAllByUserProfessionalInfoId(Long id);
 
     Optional<Publications> getById(Long id);
 

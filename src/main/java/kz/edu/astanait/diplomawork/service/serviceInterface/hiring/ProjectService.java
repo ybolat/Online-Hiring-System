@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ProjectService {
 
-    List<Project> getAllByUserId(Long id);
+    List<Project> getAllByUserProfessionalInfoId(Long id);
 
     Optional<Project> getById(Long id);
 

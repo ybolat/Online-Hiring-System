@@ -15,6 +15,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,13 +32,14 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
+
     private final RoleService roleService;
     private final RegistrationPinCodeService registrationPinCodeService;
     private final AuthenticationManager authenticationManager;
     private final BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, RegistrationPinCodeService registrationPinCodeService, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, @Lazy RegistrationPinCodeService registrationPinCodeService, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.registrationPinCodeService = registrationPinCodeService;

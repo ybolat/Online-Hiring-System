@@ -25,8 +25,8 @@ public class ArticleController {
     }
 
     @GetMapping("/get/user/id/{id}")
-    public ResponseEntity<List<ArticleDtoResponse>> getAllByUserId(@PathVariable(name = "id") Long id) {
-        List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserId(id)
+    public ResponseEntity<List<ArticleDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id) {
+        List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserProfessionalInfoId(id)
                 .stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
         return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
     }
@@ -48,5 +48,19 @@ public class ArticleController {
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
         this.articleService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    @GetMapping("/get/order-by/article-name")
+//    public ResponseEntity<List<ArticleDtoResponse>> getAllOrderByArticleName() {
+//        List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllOrderByArticleName().
+//                stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
+//        return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
+//    }
+
+    @GetMapping("/get/user/id/{id}/order-by/article-name")
+    public ResponseEntity<List<ArticleDtoResponse>> getAllByUserProfessionalInfoIdOrderByArticleName(@PathVariable(name = "id") Long id) {
+        List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserProfessionalInfoIdOrderByArticleName(id)
+                .stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
     }
 }

@@ -22,8 +22,8 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
     }
 
     @Override
-    public List<IntelligenceLegalDocument> getAllByUserId(Long id) {
-        return this.intelligenceLegalDocumentRepository.findAllByUserId(id);
+    public List<IntelligenceLegalDocument> getAllByUserProfessionalInfoId(Long id) {
+        return this.intelligenceLegalDocumentRepository.findAllByUserProfessionalInfoId(id);
     }
 
     @Override

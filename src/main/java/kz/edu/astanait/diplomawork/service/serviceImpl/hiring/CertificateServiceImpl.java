@@ -30,8 +30,8 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public List<Certificate> getAllByUserId(Long id) {
-        return this.certificateRepository.findAllByUserId(id);
+    public List<Certificate> getAllByUserProfessionalInfoId(Long id) {
+        return this.certificateRepository.findAllByUserProfessionalInfoId(id);
     }
 
     @Override

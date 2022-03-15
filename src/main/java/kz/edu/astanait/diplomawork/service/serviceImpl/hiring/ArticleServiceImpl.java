@@ -34,8 +34,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> getAllByUserId(Long id) {
-        return this.articleRepository.findArticleByUserId(id);
+    public List<Article> getAllByUserProfessionalInfoId(Long id) {
+        return this.articleRepository.findArticleByUserProfessionalInfoId(id);
     }
 
     @Override
@@ -93,5 +93,15 @@ public class ArticleServiceImpl implements ArticleService {
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "article"));
         }
+    }
+
+//    @Override
+//    public List<Article> getAllOrderByArticleName() {
+//        return this.articleRepository.findAllArticleOrderByArticleName();
+//    }
+
+    @Override
+    public List<Article> getAllByUserProfessionalInfoIdOrderByArticleName(Long id) {
+        return this.articleRepository.findAllByUserProfessionalInfoIdOrderByArticleName(id);
     }
 }

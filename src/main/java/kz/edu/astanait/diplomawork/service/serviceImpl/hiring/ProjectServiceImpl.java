@@ -22,8 +22,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getAllByUserId(Long id) {
-        return this.projectRepository.findAllByUserId(id);
+    public List<Project> getAllByUserProfessionalInfoId(Long id) {
+        return this.projectRepository.findAllByUserProfessionalInfoId(id);
     }
 
     @Override

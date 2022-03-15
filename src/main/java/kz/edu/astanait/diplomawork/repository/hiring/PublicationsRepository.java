@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface PublicationsRepository extends JpaRepository<Publications, Long> {
-    List<Publications> findAllByUserId(Long id);
+    List<Publications> findAllByUserProfessionalInfoId(Long id);
 }

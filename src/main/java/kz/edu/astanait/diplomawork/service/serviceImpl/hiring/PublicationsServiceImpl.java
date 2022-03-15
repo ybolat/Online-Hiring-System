@@ -22,8 +22,8 @@ public class PublicationsServiceImpl implements PublicationsService {
     }
 
     @Override
-    public List<Publications> getAllByUserId(Long id) {
-        return this.publicationsRepository.findAllByUserId(id);
+    public List<Publications> getAllByUserProfessionalInfoId(Long id) {
+        return this.publicationsRepository.findAllByUserProfessionalInfoId(id);
     }
 
     @Override

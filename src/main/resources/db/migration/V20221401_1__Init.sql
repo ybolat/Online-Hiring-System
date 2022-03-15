@@ -62,7 +62,7 @@ create table user_professional_info(
     user_id bigint not null,
     vacancy_id  bigint not null,
     academic_degree_id bigint not null,
-    academic_title_id varchar(255),
+    academic_title_id bigint,
     scopus_id varchar(500),
     h_index bigint,
     research_id varchar(500),
@@ -127,6 +127,7 @@ create table article_type(
 
 create table article(
     id serial primary key,
+    article_name varchar(255) not null,
     apa text,
     doi text,
     user_professional_info_id bigint not null,
