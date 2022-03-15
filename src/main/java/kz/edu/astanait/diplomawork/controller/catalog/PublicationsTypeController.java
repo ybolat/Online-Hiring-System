@@ -27,7 +27,7 @@ public class PublicationsTypeController {
         this.publicationsTypeService = publicationsTypeService;
     }
 
-    @GetMapping
+    @GetMapping("get-all")
     public ResponseEntity<List<PublicationsTypeDtoResponse>> getAll() {
         List<PublicationsTypeDtoResponse> publicationsTypeDtoResponseList = this.publicationsTypeService.getAll()
                 .stream().map(PublicationsTypeMapper::publicationsTypeToDto).collect(Collectors.toList());

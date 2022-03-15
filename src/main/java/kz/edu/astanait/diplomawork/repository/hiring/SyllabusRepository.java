@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface SyllabusRepository extends JpaRepository<Syllabus, Long> {
-
     List<Syllabus> findAllByUserProfessionalInfoId(Long id);
 }

@@ -22,7 +22,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public Optional<Position> getById(Long id) {
-        return Optional.empty();
+        return this.positionRepository.findById(id);
     }
 
     @Override

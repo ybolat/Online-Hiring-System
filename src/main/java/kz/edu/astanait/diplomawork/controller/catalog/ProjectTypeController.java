@@ -24,7 +24,7 @@ public class ProjectTypeController {
         this.projectTypeService = projectTypeService;
     }
 
-    @GetMapping
+    @GetMapping("/get-all")
     public ResponseEntity<List<ProjectTypeDtoResponse>> getAll() {
         List<ProjectTypeDtoResponse> projectDtoResponseList = this.projectTypeService.getAll()
                 .stream().map(ProjectTypeMapper::projectTypeToDto).collect(Collectors.toList());

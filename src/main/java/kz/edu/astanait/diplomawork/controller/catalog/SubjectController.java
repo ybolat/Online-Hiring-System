@@ -22,7 +22,7 @@ public class SubjectController {
         this.subjectService = subjectService;
     }
 
-    @GetMapping
+    @GetMapping("get-all")
     public ResponseEntity<List<SubjectDtoResponse>> getAllSubject() {
         List<SubjectDtoResponse> subjectDtoResponseList = this.subjectService.getAll()
                 .stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList());

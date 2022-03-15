@@ -9,12 +9,9 @@ import java.util.List;
 
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
-
     List<Article> findArticleByUserProfessionalInfoId(Long id);
-
 //    @Query(nativeQuery = true, value = "select * from article order by article_name")
 //    List<Article> findAllArticleOrderByArticleName();
 //
-
     List<Article> findAllByUserProfessionalInfoIdOrderByArticleName(Long id);
 }
