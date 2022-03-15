@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DepartmentSe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
+    }
+
+    @Override
+    public List<Department> getAll() {
+        return this.departmentRepository.findAll();
     }
 
     @Override
