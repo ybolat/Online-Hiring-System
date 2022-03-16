@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SyllabusByWeekService {
+
     List<SyllabusByWeek> getAllBySyllabusId(Long id);
 
     Optional<SyllabusByWeek> getById(Long id);

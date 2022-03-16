@@ -20,6 +20,6 @@ public class RequestDtoRequest {
     @NotNull(message = "Дополнение не было указано.")
     private String additional;
 
-    @NotNull(message = "Дата создания не была указана.")
-    private LocalDateTime createdDate;
+//    @NotNull(message = "Дата создания не была указана.")
+//    private LocalDateTime createdDate;
 }

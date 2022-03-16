@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.user.CommissionServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,11 @@ public class CommissionServiceImpl implements CommissionService {
     @Autowired
     public CommissionServiceImpl(CommissionRepository commissionRepository) {
         this.commissionRepository = commissionRepository;
+    }
+
+    @Override
+    public List<Commission> getAll() {
+        return this.commissionRepository.findAll();
     }
 
     @Override
