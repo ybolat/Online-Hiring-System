@@ -27,7 +27,7 @@ public class CommissionController {
 
     @GetMapping("/get/id/{id}")
     public ResponseEntity<CommissionDtoResponse> getById(@PathVariable (name = "id") Long id) {
-        CommissionDtoResponse commissionDtoResponse = CommissionMapper.commissionToDto(commissionService.getByIdThrowException(id));
+        CommissionDtoResponse commissionDtoResponse = CommissionMapper.commissionToDto(this.commissionService.getByIdThrowException(id));
         return new ResponseEntity<>(commissionDtoResponse, HttpStatus.OK);
     }
 

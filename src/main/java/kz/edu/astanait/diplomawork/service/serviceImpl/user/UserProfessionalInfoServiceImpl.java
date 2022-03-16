@@ -5,6 +5,7 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.user.UserProfessionalInfoRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoServ
     private final UserProfessionalInfoRepository userProfessionalInfoRepository;
 
     @Autowired
-    public UserProfessionalInfoServiceImpl(UserProfessionalInfoRepository userProfessionalInfoRepository) {
+    public UserProfessionalInfoServiceImpl(UserProfessionalInfoRepository userProfessionalInfoRepository, UserService userService) {
         this.userProfessionalInfoRepository = userProfessionalInfoRepository;
     }
 
@@ -30,5 +31,17 @@ public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoServ
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException(String
                         .format(ExceptionDescription.CustomNotFoundException, "User professional info", "id", id)));
+    }
+
+    @Override
+    public Optional<UserProfessionalInfo> getByUserId(Long id) {
+        return this.userProfessionalInfoRepository.findByUserId(id);
+    }
+
+    @Override
+    public UserProfessionalInfo getByUserIdThrowException(Long id) {
+        return this.getByUserId(id).
+                orElseThrow(() -> new CustomNotFoundException(String.format(
+                        ExceptionDescription.CustomNotFoundException, "User professional info", "User id", id)));
     }
 }

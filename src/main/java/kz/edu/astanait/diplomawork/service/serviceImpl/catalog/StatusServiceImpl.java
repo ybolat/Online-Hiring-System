@@ -37,4 +37,16 @@ public class StatusServiceImpl implements StatusService {
                 .orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Status", "id", id)));
     }
+
+    @Override
+    public Optional<Status> getByStatusName(String statusName) {
+        return this.statusRepository.findByStatusName(statusName);
+    }
+
+    @Override
+    public Status getByStatusNameThrowException(String statusName) {
+        return this.getByStatusName(statusName).
+                orElseThrow(() -> new CustomNotFoundException(String.format(ExceptionDescription.
+                        CustomNotFoundException, "Status", "Status Name", statusName)));
+    }
 }

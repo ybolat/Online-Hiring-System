@@ -13,4 +13,8 @@ public interface StatusService {
     Optional<Status> getById(Long id);
 
     Status getByIdThrowException(Long id);
+
+    Optional<Status> getByStatusName(String statusName);
+
+    Status getByStatusNameThrowException(String statusName);
 }
