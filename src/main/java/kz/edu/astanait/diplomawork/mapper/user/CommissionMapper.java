@@ -14,6 +14,7 @@ public class CommissionMapper {
         commissionDtoResponse.setId(commission.getId());
         if(Objects.nonNull(commission.getRole())) commissionDtoResponse.setRole(RoleMapper.roleToDto(commission.getRole()));
         if(Strings.isNotBlank(commission.getEmail())) commissionDtoResponse.setEmail(commission.getEmail());
+        if(Objects.nonNull(commission.getIsVote())) commissionDtoResponse.setIsVote(commission.getIsVote());
         return commissionDtoResponse;
     }
 }

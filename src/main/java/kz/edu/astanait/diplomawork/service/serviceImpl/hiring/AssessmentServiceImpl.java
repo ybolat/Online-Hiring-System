@@ -21,13 +21,11 @@ public class AssessmentServiceImpl implements AssessmentService {
 
     private final AssessmentRepository assessmentRepository;
 
-    private final CommissionService commissionService;
     private final RequestService requestService;
 
     @Autowired
-    public AssessmentServiceImpl(AssessmentRepository assessmentRepository, CommissionService commissionService, RequestService requestService) {
+    public AssessmentServiceImpl(AssessmentRepository assessmentRepository, RequestService requestService) {
         this.assessmentRepository = assessmentRepository;
-        this.commissionService = commissionService;
         this.requestService = requestService;
     }
 
@@ -52,7 +50,6 @@ public class AssessmentServiceImpl implements AssessmentService {
     public void create(AssessmentDtoRequest assessmentDtoRequest) {
         Assessment assessment = new Assessment();
 
-        assessment.setCommission(this.commissionService.getByIdThrowException(assessmentDtoRequest.getCommissionId()));
         assessment.setRequest(this.requestService.getByIdThrowException(assessmentDtoRequest.getRequestId()));
         assessment.setVote(assessmentDtoRequest.getVote());
 

@@ -15,10 +15,6 @@ public class Assessment {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "commission_id")
-    private Commission commission;
-
-    @ManyToOne
     @JoinColumn(name = "request_id")
     private Request request;
 

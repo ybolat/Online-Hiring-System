@@ -25,7 +25,7 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectTypeService projectTypeService;
 
     @Autowired
-    public ProjectServiceImpl(ProjectRepository projectRepository, UserProfessionalInfoService userProfessionalInfoService, ProjectType projectType, ProjectTypeService projectTypeService) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, UserProfessionalInfoService userProfessionalInfoService, ProjectTypeService projectTypeService) {
         this.projectRepository = projectRepository;
         this.userProfessionalInfoService = userProfessionalInfoService;
         this.projectTypeService = projectTypeService;

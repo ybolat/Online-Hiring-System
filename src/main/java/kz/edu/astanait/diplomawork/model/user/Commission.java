@@ -20,4 +20,7 @@ public class Commission {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "is_vote")
+    private Boolean isVote;
 }

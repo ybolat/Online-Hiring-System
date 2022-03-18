@@ -8,8 +8,6 @@ public class AssessmentDtoResponse {
 
     private Long id;
 
-    private CommissionDtoResponse commission;
-
     private RequestDtoResponse request;
 
     private Boolean vote;
