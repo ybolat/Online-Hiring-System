@@ -1,7 +1,6 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.security;
 
 import kz.edu.astanait.diplomawork.model.security.Role;
-
 import java.util.Optional;
 
 public interface RoleService {

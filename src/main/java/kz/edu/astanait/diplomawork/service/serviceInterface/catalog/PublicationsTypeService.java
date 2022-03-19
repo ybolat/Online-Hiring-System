@@ -1,6 +1,6 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.catalog;
-import kz.edu.astanait.diplomawork.model.catalog.PublicationsType;
 
+import kz.edu.astanait.diplomawork.model.catalog.PublicationsType;
 import java.util.List;
 import java.util.Optional;
 

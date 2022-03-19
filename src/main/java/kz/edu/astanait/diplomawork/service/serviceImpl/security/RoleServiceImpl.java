@@ -6,9 +6,7 @@ import kz.edu.astanait.diplomawork.model.security.Role;
 import kz.edu.astanait.diplomawork.repository.security.RoleRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service

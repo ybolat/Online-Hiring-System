@@ -4,7 +4,6 @@ import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ProjectDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
-import kz.edu.astanait.diplomawork.model.catalog.ProjectType;
 import kz.edu.astanait.diplomawork.model.hiring.Project;
 import kz.edu.astanait.diplomawork.repository.hiring.ProjectRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ProjectTypeService;

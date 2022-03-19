@@ -7,7 +7,6 @@ import kz.edu.astanait.diplomawork.repository.hiring.MeetingRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.MeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service

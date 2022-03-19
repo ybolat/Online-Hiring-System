@@ -8,7 +8,6 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessiona
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service

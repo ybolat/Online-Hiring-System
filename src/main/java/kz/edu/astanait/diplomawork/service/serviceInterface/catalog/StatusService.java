@@ -1,7 +1,6 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.catalog;
 
 import kz.edu.astanait.diplomawork.model.catalog.Status;
-import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 
 import java.util.List;
 import java.util.Optional;

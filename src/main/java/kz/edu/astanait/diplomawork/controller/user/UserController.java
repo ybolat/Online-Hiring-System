@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.controller.user;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.user.UserAuthorizationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserRegistrationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.user.UserMapper;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -32,11 +30,6 @@ public class UserController {
         UserDtoResponse userDtoResponse = UserMapper.userToDto(user);
 
         return new ResponseEntity<>(userDtoResponse, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/authorization")
-    public ResponseEntity<UserDtoResponse> activate(@Valid @RequestBody UserAuthorizationDtoRequest userAuthorizationDtoRequest, HttpServletRequest request) {
-         return this.userService.authorization(userAuthorizationDtoRequest, request);
     }
 
     @PostMapping("/activate")
