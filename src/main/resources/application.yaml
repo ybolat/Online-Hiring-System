@@ -5,9 +5,9 @@ spring:
         ddl-auto: validate
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/DiplomaWork
+    url: jdbc:postgresql://localhost:5432/diploma-db
     username: postgres
-    password: 2202
+    password: 123
 
 security:
   token:
@@ -17,14 +17,14 @@ security:
     token-cannot-be-verified: Token can not be verified
     token-prefix: 'Bearer '
     audience: Astanait.edu.kz client
-    expiration-time: 360_000_0
+    expiration-time: 180_000_000
     jwt-token-header: Jwt-Token
 
 
 email:
   verification:
    simple_mail_transfer_protocol: smtps
-   username: Astana IT University
+   username: test.diploma2022@gmail.com
    password: DiplomaWork1357$
    from_email: test.diploma2022@gmail.com
    email_subject: Verification account
