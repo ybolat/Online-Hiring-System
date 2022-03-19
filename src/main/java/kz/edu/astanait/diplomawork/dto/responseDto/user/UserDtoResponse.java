@@ -22,8 +22,6 @@ public class UserDtoResponse {
 
     private String phone;
 
-    private String position;
-
     private LocalDateTime createdDate;
 
     private boolean isActive;
