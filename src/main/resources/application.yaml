@@ -23,15 +23,15 @@ security:
 
 email:
   verification:
-   simple_mail_transfer_protocol: smtp
-   username: test.diploma@outlook.com
-   password: DiplomaWork2022
-   from_email: noreply@astanait.edu.kz
+   simple_mail_transfer_protocol: smtps
+   username: Astana IT University
+   password: DiplomaWork1357$
+   from_email: test.diploma2022@gmail.com
    email_subject: Verification account
-   gmail_smtp_server: smtp.office365.com
-   smtp_host: smtp.office365.com
+   gmail_smtp_server: smtp.gmail.com
+   smtp_host: mail.smtp.host
    smtp_auth: mail.smtp.auth
    smtp_port: mail.smtp.port
-   default_port: 587
+   default_port: 465
    smtp_starttls_enable: mail.smtp.starttls.enable
    smtp_starttls_required: mail.smtp.starttls.required
