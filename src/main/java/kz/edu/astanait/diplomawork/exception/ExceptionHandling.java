@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,7 @@ public class ExceptionHandling {
 
     private static final String NOT_ENOUGH_PERMISSION = "You do not have enough permission";
     private static final String ACCOUNT_LOCKED = "Your account has been locked. Please contact administration";
+    private static final String INCORRECT_CREDENTIALS = "Email or password incorrect. Please try again";
 
     @ExceptionHandler(RepositoryException.class)
     public ResponseEntity<HttpResponseException> RepositoryException(RepositoryException exception) {
@@ -33,6 +35,11 @@ public class ExceptionHandling {
     public ResponseEntity<HttpResponseException> CustomNotFoundException(CustomNotFoundException exception) {
         LOGGER.error(exception.getMessage());
         return createHttpResponse(BAD_REQUEST, exception.getMessage());
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<HttpResponseException> badCredentialsException() {
+        return createHttpResponse(BAD_REQUEST, INCORRECT_CREDENTIALS);
     }
 
     @ExceptionHandler(CustomException.class)

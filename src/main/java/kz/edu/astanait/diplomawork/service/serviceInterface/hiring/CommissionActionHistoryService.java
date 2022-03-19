@@ -1,6 +1,4 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
-
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.AssessmentDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.CommissionActionHistoryDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.CommissionActionHistory;
 import java.util.List;
@@ -15,8 +13,4 @@ public interface CommissionActionHistoryService {
     CommissionActionHistory getByIdThrowException(Long id);
 
     void create(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest);
-
-//    void update(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest, Long id);
-//
-//    void delete(Long id);
 }
