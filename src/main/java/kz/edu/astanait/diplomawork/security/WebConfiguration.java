@@ -31,11 +31,11 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(encoder);
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().and().cors().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().authorizeRequests().anyRequest().permitAll();
     }
 
     @Bean

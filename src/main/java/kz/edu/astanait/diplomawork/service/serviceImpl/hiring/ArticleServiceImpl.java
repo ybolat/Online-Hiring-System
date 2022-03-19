@@ -49,6 +49,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> getAllByUserProfessionalInfoIdOrderByArticleName(Long id) {
+        return this.articleRepository.findAllByUserProfessionalInfoIdOrderByArticleName(id);
+    }
+
+    @Override
     public void create(ArticleDtoRequest articleDtoRequest) {
         Article article = new Article();
 
@@ -97,9 +102,4 @@ public class ArticleServiceImpl implements ArticleService {
 //    public List<Article> getAllOrderByArticleName() {
 //        return this.articleRepository.findAllArticleOrderByArticleName();
 //    }
-
-    @Override
-    public List<Article> getAllByUserProfessionalInfoIdOrderByArticleName(Long id) {
-        return this.articleRepository.findAllByUserProfessionalInfoIdOrderByArticleName(id);
-    }
 }
