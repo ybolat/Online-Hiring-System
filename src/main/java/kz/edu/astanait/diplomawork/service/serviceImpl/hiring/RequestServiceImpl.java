@@ -50,6 +50,21 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public List<Request> getAllByStatus(Long id) {
+        return this.requestRepository.findAllByStatusId(id);
+    }
+
+    @Override
+    public List<Request> getAllOrderByCreatedDate(LocalDateTime createdDate) {
+        return this.requestRepository.findAllOrderByCreatedDate(createdDate);
+    }
+
+    @Override
+    public List<Request> getAllOrderByCreatedDateDesc(LocalDateTime createdDate) {
+        return this.requestRepository.findAllOrderByCreatedDateDesc(createdDate);
+    }
+
+    @Override
     public void create(RequestDtoRequest requestDtoRequest) {
         Request request = new Request();
 
@@ -57,7 +72,6 @@ public class RequestServiceImpl implements RequestService {
         request.setStatus(this.statusService.getByIdThrowException(requestDtoRequest.getStatusId()));
         request.setBackground(requestDtoRequest.getBackground());
         request.setAdditional(requestDtoRequest.getAdditional());
-        //request.setCreatedDate(requestDtoRequest.getCreatedDate());
 
         try{
             this.requestRepository.save(request);
@@ -89,21 +103,6 @@ public class RequestServiceImpl implements RequestService {
         }catch (Exception e){
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "request"));
         }
-    }
-
-    @Override
-    public List<Request> getAllByStatus(Long id) {
-        return this.requestRepository.findAllByStatusId(id);
-    }
-
-    @Override
-    public List<Request> getAllOrderByCreatedDate(LocalDateTime createdDate) {
-        return this.requestRepository.findAllOrderByCreatedDate(createdDate);
-    }
-
-    @Override
-    public List<Request> getAllOrderByCreatedDateDesc(LocalDateTime createdDate) {
-        return this.requestRepository.findAllOrderByCreatedDateDesc(createdDate);
     }
 
 }
