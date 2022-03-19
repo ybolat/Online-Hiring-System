@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 @EnableWebSecurity
 public class WebConfiguration extends WebSecurityConfigurerAdapter {
@@ -25,7 +27,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
 
     @Autowired
-    public WebConfiguration(@Lazy UserServiceImpl userService, BCryptPasswordEncoder encoder, JWTAuthorizationFilter jwtAuthorizationFilter) {
+    public WebConfiguration(@Lazy UserServiceImpl userService, BCryptPasswordEncoder encoder, @Lazy JWTAuthorizationFilter jwtAuthorizationFilter) {
         this.userService = userService;
         this.encoder = encoder;
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
