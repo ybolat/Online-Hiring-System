@@ -11,6 +11,4 @@ public class CommissionDtoResponse {
     private RoleDtoResponse role;
 
     private String email;
-
-    private Boolean isVote;
 }

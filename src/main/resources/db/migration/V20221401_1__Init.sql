@@ -82,7 +82,6 @@ create table commission(
     id serial primary key,
     role_id bigint not null,
     email varchar(255) not null unique,
-    is_vote boolean,
     constraint fk_role_id foreign key (role_id) references role (id)
 );
 
@@ -142,6 +141,15 @@ create table assessment(
     id serial primary key,
     request_id bigint not null,
     vote boolean,
+    constraint fk_request_id foreign key (request_id) references request (id)
+);
+
+create table commission_action_history(
+    id serial primary key,
+    commission_id bigint not null,
+    request_id bigint not null,
+    is_vote boolean,
+    constraint fk_commission_id foreign key (commission_id) references commission (id),
     constraint fk_request_id foreign key (request_id) references request (id)
 );
 
