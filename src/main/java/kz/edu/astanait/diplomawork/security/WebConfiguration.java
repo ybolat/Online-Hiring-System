@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.security;
 
+import kz.edu.astanait.diplomawork.constant.SecurityConstant;
 import kz.edu.astanait.diplomawork.service.serviceImpl.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +36,8 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests().anyRequest().permitAll();
+                .and().authorizeRequests().antMatchers(SecurityConstant.PERMITTED_URL).permitAll()
+                .anyRequest().authenticated();
     }
 
     @Bean
