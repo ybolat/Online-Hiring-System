@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/catalog/academic-degree")
+@PreAuthorize("hasRole('ROLE_CHALLENGER')")
 public class AcademicDegreeController {
 
     private final AcademicDegreeService academicDegreeService;
