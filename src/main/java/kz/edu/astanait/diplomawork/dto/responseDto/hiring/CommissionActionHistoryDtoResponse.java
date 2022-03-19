@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
+import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -9,9 +10,9 @@ public class CommissionActionHistoryDtoResponse {
 
     private Long id;
 
-    private Long commission;
+    private CommissionDtoResponse commission;
 
-    private Long request;
+    private RequestDtoResponse request;
 
     private Boolean isVote;
 }
