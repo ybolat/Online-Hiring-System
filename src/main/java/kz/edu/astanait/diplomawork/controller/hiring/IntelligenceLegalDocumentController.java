@@ -1,5 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ArticleDtoRequest;
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.IntelligenceLegalDocumentDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.IntelligenceLegalDocumentDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.hiring.IntelligenceLegalDocumentMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.IntelligenceLegalDocumentService;
@@ -7,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,25 @@ public class IntelligenceLegalDocumentController {
         List<IntelligenceLegalDocumentDtoResponse> intelligenceLegalDocumentDtoResponseList =
                 this.intelligenceLegalDocumentService.getAllByUserProfessionalInfoId(id).stream().map(IntelligenceLegalDocumentMapper::intelligenceLegalDocumentToDto).collect(Collectors.toList());
         return new ResponseEntity<>(intelligenceLegalDocumentDtoResponseList, HttpStatus.OK);
+    }
 
+    @PostMapping("/create")
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest) {
+        this.intelligenceLegalDocumentService.create(intelligenceLegalDocumentDtoRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/id/{id}")
+    public ResponseEntity<HttpStatus> update(@RequestBody IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest,
+                                             @PathVariable(name = "id") Long id) {
+        this.intelligenceLegalDocumentService.update(intelligenceLegalDocumentDtoRequest, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/id/{id}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
+        this.intelligenceLegalDocumentService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

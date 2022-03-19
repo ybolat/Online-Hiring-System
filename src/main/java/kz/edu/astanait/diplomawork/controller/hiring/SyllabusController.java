@@ -1,5 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ArticleDtoRequest;
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.SyllabusDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.hiring.SyllabusMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusService;
@@ -7,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,5 +32,17 @@ public class SyllabusController {
         List<SyllabusDtoResponse> syllabusDtoResponseList =
                 this.syllabusService.getAllByUserId(id).stream().map(SyllabusMapper::syllabusToDto).collect(Collectors.toList());
         return new ResponseEntity<>(syllabusDtoResponseList, HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody SyllabusDtoRequest syllabusDtoRequest) {
+        this.syllabusService.create(syllabusDtoRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/id/{id}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
+        this.syllabusService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
