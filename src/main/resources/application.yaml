@@ -8,3 +8,14 @@ spring:
     url: jdbc:postgresql://localhost:5432/DiplomaWork
     username: postgres
     password: 2202
+
+security:
+  token:
+    secret:
+    client-ip: Client ip
+    issuer: Astanait.edu.kz server
+    token-cannot-be-verified: Token can not be verified
+    token-prefix: 'Bearer '
+    audience: Astanait.edu.kz client
+    expiration-time: 360_000_0
+    jwt-token-header: Jwt-Token

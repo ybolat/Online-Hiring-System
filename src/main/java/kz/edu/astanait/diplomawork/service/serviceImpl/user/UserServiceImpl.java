@@ -2,13 +2,17 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.user;
 
 import static kz.edu.astanait.diplomawork.exception.ExceptionDescription.*;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.user.UserAuthorizationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserRegistrationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
+import kz.edu.astanait.diplomawork.enviroment.JWTEnvironmentBuilder;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
+import kz.edu.astanait.diplomawork.mapper.user.UserMapper;
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.user.UserRepository;
+import kz.edu.astanait.diplomawork.security.JWTTokenProvider;
 import kz.edu.astanait.diplomawork.security.UserPrincipal;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RegistrationPinCodeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService;
@@ -16,6 +20,8 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,14 +43,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final RegistrationPinCodeService registrationPinCodeService;
     private final AuthenticationManager authenticationManager;
     private final BCryptPasswordEncoder encoder;
+    private final JWTEnvironmentBuilder jwtEnvironmentBuilder;
+    private final JWTTokenProvider jwtTokenProvider;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, @Lazy RegistrationPinCodeService registrationPinCodeService, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, @Lazy RegistrationPinCodeService registrationPinCodeService, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder, JWTEnvironmentBuilder jwtEnvironmentBuilder, JWTTokenProvider jwtTokenProvider) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.registrationPinCodeService = registrationPinCodeService;
         this.authenticationManager = authenticationManager;
         this.encoder = encoder;
+        this.jwtEnvironmentBuilder = jwtEnvironmentBuilder;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
@@ -52,7 +62,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
          User user = this.getByEmailThrowException(username);
          return new UserPrincipal(user);
     }
-
 
     @Override
     public Optional<User> getByEmail(String email) {
@@ -113,9 +122,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return createdUser;
     }
 
-    public ResponseEntity<UserDtoResponse> authorization(String email, String password, HttpServletRequest request) {
-        return null;
+    @Override
+    public ResponseEntity<UserDtoResponse> authorization(UserAuthorizationDtoRequest authorizationDtoRequest, HttpServletRequest request) {
+        String email = authorizationDtoRequest.getEmail().toLowerCase().trim();
+        String password = authorizationDtoRequest.getPassword().trim();
+
+        authenticate(email, password);
+
+        User user = getByEmailThrowException(email);
+        UserPrincipal userPrincipal = new UserPrincipal(user);
+        String ipFromClient = jwtTokenProvider.getIpFromClient(request);
+        HttpHeaders jwt = getJwtHeader(userPrincipal, ipFromClient);
+        UserDtoResponse userDtoResponse = UserMapper.userToDto(user);
+        return new ResponseEntity<>(userDtoResponse, jwt, HttpStatus.OK);
+
     }
+
+    private HttpHeaders getJwtHeader(UserPrincipal userPrincipal, String ipFromClient) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(jwtEnvironmentBuilder.getJWT_TOKEN_HEADER(), jwtTokenProvider.generateToken(userPrincipal, ipFromClient));
+        return httpHeaders;
+    }
+
 
     private void authenticate(String email, String password) {
         this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
