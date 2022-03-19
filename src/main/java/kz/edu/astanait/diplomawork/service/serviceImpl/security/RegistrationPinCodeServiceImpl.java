@@ -68,6 +68,7 @@ public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeServic
             this.registrationPinCodeRepository.save(registrationPinCode);
             this.emailService.sendVerificationPinCode(user, pinCode);
         } catch (Exception e) {
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "creating", "pin code for registration"));
         }

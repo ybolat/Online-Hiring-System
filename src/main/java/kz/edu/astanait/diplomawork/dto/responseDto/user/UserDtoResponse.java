@@ -27,8 +27,4 @@ public class UserDtoResponse {
     private boolean isActive;
 
     private boolean isLocked;
-
-    protected void onCreate() {
-        this.createdDate = LocalDateTime.now();
-    }
 }
