@@ -14,6 +14,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 @Log4j2
 public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeService {
@@ -30,17 +33,40 @@ public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeServic
     }
 
     @Override
+    public Optional<RegistrationPinCode> getByUserEmail(String email) {
+        return this.registrationPinCodeRepository.findByUserEmail(email);
+    }
+
+    @Override
+    public RegistrationPinCode getByUserEmailThrowException(String email) {
+        return this.getByUserEmail(email)
+                .orElseThrow(() -> new CustomNotFoundException(
+                        String.format(ExceptionDescription.CustomNotFoundException, "Registration pin code", "users email", email)));
+    }
+
+    @Override
     public void create(String email) {
         User user = this.userService.getByEmailThrowException(email);
-        RegistrationPinCode registrationPinCode = new RegistrationPinCode();
+        Optional<RegistrationPinCode> registrationPinCode = this.getByUserEmail(email);
 
         int x = (int) ((Math.random()*((9999-1000)+1))+1000);
-        registrationPinCode.setUser(user);
-        registrationPinCode.setPinCode(x);
 
-        try{
+        if (registrationPinCode.isPresent()) {
+             this.manipulate(registrationPinCode.get(), user, x, true);
+        }
+        else {
+            RegistrationPinCode newPinCode = new RegistrationPinCode();
+            this.manipulate(newPinCode, user, x, false);
+        }
+    }
+
+    private void manipulate(RegistrationPinCode registrationPinCode, User user, int pinCode, boolean exist) {
+        if (!exist) registrationPinCode.setUser(user);
+        registrationPinCode.setPinCode(pinCode);
+
+        try {
             this.registrationPinCodeRepository.save(registrationPinCode);
-            this.emailService.sendVerificationPinCode(user, x);
+            this.emailService.sendVerificationPinCode(user, pinCode);
         } catch (Exception e) {
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "creating", "pin code for registration"));
@@ -48,31 +74,9 @@ public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeServic
     }
 
     @Override
-    public void update(String email) {
-        RegistrationPinCode registrationPinCode = this.getByUserEmail(email);
-
-        int x = (int) ((Math.random()*((9999-1000)+1))+1000);
-        registrationPinCode.setPinCode(x);
-
-        try{
-            this.registrationPinCodeRepository.save(registrationPinCode);
-        } catch (Exception e) {
-            throw new RepositoryException(String
-                    .format(ExceptionDescription.RepositoryException, "updating", "pin code for registration"));
-        }
-    }
-
-    @Override
     public RegistrationPinCode checkPinCode(Integer pinCode, String email) {
         return this.registrationPinCodeRepository.findByPinCodeAndUserEmail(pinCode, email)
                 .orElseThrow(() -> new CustomException("Пин код не валидный, попробуйте еще раз."));
-    }
-
-    @Override
-    public RegistrationPinCode getByUserEmail(String email) {
-        return this.registrationPinCodeRepository.findByUserEmail(email)
-                .orElseThrow(() -> new CustomNotFoundException(
-                        String.format(ExceptionDescription.CustomNotFoundException, "Registration pin code", "users email", email)));
     }
 }
 
