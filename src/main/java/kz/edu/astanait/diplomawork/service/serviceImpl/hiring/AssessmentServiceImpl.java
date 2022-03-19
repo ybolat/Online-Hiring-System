@@ -8,19 +8,15 @@ import kz.edu.astanait.diplomawork.model.hiring.Assessment;
 import kz.edu.astanait.diplomawork.repository.hiring.AssessmentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.AssessmentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService;
-import kz.edu.astanait.diplomawork.service.serviceInterface.user.CommissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class AssessmentServiceImpl implements AssessmentService {
 
     private final AssessmentRepository assessmentRepository;
-
     private final RequestService requestService;
 
     @Autowired

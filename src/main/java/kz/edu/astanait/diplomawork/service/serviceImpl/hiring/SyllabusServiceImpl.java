@@ -11,7 +11,6 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusServi
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

@@ -3,13 +3,11 @@ package kz.edu.astanait.diplomawork.controller.hiring;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.AssessmentDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.AssessmentDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.hiring.AssessmentMapper;
-import kz.edu.astanait.diplomawork.model.hiring.Assessment;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.AssessmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;

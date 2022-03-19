@@ -1,7 +1,6 @@
 package kz.edu.astanait.diplomawork.dto.requestDto.hiring;
 
 import lombok.Data;
-
 import javax.validation.constraints.NotNull;
 
 @Data

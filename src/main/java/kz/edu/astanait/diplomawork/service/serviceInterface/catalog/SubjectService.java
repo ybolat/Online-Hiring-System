@@ -2,7 +2,6 @@ package kz.edu.astanait.diplomawork.service.serviceInterface.catalog;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.catalog.SubjectDtoRequest;
 import kz.edu.astanait.diplomawork.model.catalog.Subject;
-
 import java.util.List;
 import java.util.Optional;
 

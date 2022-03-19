@@ -7,7 +7,6 @@ import kz.edu.astanait.diplomawork.repository.catalog.PositionRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

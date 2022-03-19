@@ -7,7 +7,6 @@ import kz.edu.astanait.diplomawork.repository.catalog.AcademicDegreeRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicDegreeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
