@@ -9,12 +9,14 @@ import kz.edu.astanait.diplomawork.repository.hiring.SyllabusRepository;
 import kz.edu.astanait.diplomawork.service.serviceImpl.catalog.SubjectServiceImpl;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class SyllabusServiceImpl implements SyllabusService {
 
     private final SyllabusRepository syllabusRepository;
@@ -56,6 +58,7 @@ public class SyllabusServiceImpl implements SyllabusService {
         try{
             this.syllabusRepository.save(syllabus);
         } catch (Exception e) {
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "creating" , "syllabus"));
         }
@@ -75,6 +78,7 @@ public class SyllabusServiceImpl implements SyllabusService {
         try{
             this.syllabusRepository.delete(syllabus);
         } catch (Exception e) {
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "syllabus"));
         }

@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import kz.edu.astanait.diplomawork.repository.hiring.CertificateRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.CertificateService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class CertificateServiceImpl implements CertificateService {
 
     private final CertificateRepository certificateRepository;
@@ -54,6 +56,7 @@ public class CertificateServiceImpl implements CertificateService {
         try{
             this.certificateRepository.save(certificate);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "certificate"));
         }
     }
@@ -67,6 +70,7 @@ public class CertificateServiceImpl implements CertificateService {
         try{
             this.certificateRepository.save(certificate);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "certificate"));
         }
     }
@@ -78,6 +82,7 @@ public class CertificateServiceImpl implements CertificateService {
         try{
             this.certificateRepository.save(certificate);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "certificate"));
         }
     }

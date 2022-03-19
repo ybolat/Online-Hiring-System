@@ -7,6 +7,7 @@ import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.catalog.Department;
 import kz.edu.astanait.diplomawork.repository.catalog.DepartmentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DepartmentService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
@@ -49,6 +51,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         try{
             this.departmentRepository.save(department);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "department"));
         }
     }
@@ -62,6 +65,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         try {
             this.departmentRepository.save(department);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "department"));
         }
     }
@@ -73,6 +77,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         try {
             this.departmentRepository.delete(department);
         }catch (Exception e) {
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "department"));
         }
     }

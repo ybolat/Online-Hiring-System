@@ -9,6 +9,7 @@ import kz.edu.astanait.diplomawork.repository.hiring.DevelopmentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DevelopmentTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.DevelopmentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class DevelopmentServiceImpl implements DevelopmentService {
 
     private final DevelopmentRepository developmentRepository;
@@ -60,6 +62,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         try {
             this.developmentRepository.save(development);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "development"));
         }
     }
@@ -75,6 +78,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         try{
             this.developmentRepository.save(development);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "development"));
         }
     }
@@ -86,6 +90,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         try{
             this.developmentRepository.delete(development);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "development"));
         }
     }

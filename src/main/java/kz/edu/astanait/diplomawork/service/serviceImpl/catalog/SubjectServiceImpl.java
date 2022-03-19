@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.model.catalog.Subject;
 import kz.edu.astanait.diplomawork.repository.catalog.SubjectRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicDegreeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.SubjectService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class SubjectServiceImpl implements SubjectService {
 
     private final SubjectRepository subjectRepository;
@@ -62,6 +64,7 @@ public class SubjectServiceImpl implements SubjectService {
         try{
             this.subjectRepository.save(subject);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "subject"));
         }
     }
@@ -83,6 +86,7 @@ public class SubjectServiceImpl implements SubjectService {
         try{
             this.subjectRepository.save(subject);
         } catch (Exception e) {
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException,"updating", "subject"));
         }
     }
@@ -94,6 +98,7 @@ public class SubjectServiceImpl implements SubjectService {
         try{
             this.subjectRepository.delete(subject);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "subject"));
         }
     }

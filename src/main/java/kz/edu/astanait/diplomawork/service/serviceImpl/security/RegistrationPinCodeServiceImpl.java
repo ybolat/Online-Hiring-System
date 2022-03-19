@@ -9,10 +9,12 @@ import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.security.RegistrationPinCodeRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RegistrationPinCodeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Log4j2
 public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeService {
 
     private final RegistrationPinCodeRepository registrationPinCodeRepository;

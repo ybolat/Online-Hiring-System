@@ -9,6 +9,7 @@ import kz.edu.astanait.diplomawork.repository.hiring.ArticleRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ArticleTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ArticleService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleRepository articleRepository;
@@ -65,6 +67,7 @@ public class ArticleServiceImpl implements ArticleService {
         try{
             this.articleRepository.save(article);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "creating", "article"));
         }
@@ -81,6 +84,7 @@ public class ArticleServiceImpl implements ArticleService {
         try{
             this.articleRepository.save(article);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "updating", "article"));
         }
@@ -93,6 +97,7 @@ public class ArticleServiceImpl implements ArticleService {
         try{
             this.articleRepository.delete(article);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "article"));
         }

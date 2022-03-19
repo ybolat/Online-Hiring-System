@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.model.hiring.Publications;
 import kz.edu.astanait.diplomawork.repository.hiring.PublicationsRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.PublicationsService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class PublicationsServiceImpl implements PublicationsService {
 
     private final PublicationsRepository publicationsRepository;
@@ -55,6 +57,7 @@ public class PublicationsServiceImpl implements PublicationsService {
         try{
             this.publicationsRepository.save(publications);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "creating", "publications"));
         }
@@ -72,6 +75,7 @@ public class PublicationsServiceImpl implements PublicationsService {
         try{
             this.publicationsRepository.save(publications);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "updating", "publications"));
         }
@@ -84,6 +88,7 @@ public class PublicationsServiceImpl implements PublicationsService {
         try{
             this.publicationsRepository.delete(publications);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "publications"));
         }

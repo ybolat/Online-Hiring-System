@@ -9,6 +9,7 @@ import kz.edu.astanait.diplomawork.repository.hiring.RequestRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.StatusService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class RequestServiceImpl implements RequestService {
 
     private final RequestRepository requestRepository;
@@ -75,6 +77,7 @@ public class RequestServiceImpl implements RequestService {
         try{
             this.requestRepository.save(request);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "request"));
         }
     }
@@ -89,6 +92,7 @@ public class RequestServiceImpl implements RequestService {
         try {
             this.requestRepository.save(request);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "request"));
         }
     }
@@ -100,6 +104,7 @@ public class RequestServiceImpl implements RequestService {
         try{
             this.requestRepository.delete(request);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "request"));
         }
     }

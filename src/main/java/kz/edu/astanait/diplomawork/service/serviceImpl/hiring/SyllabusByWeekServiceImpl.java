@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.model.hiring.SyllabusByWeek;
 import kz.edu.astanait.diplomawork.repository.hiring.SyllabusByWeekRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusByWeekService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
 
     private final SyllabusByWeekRepository syllabusByWeekRepository;
@@ -56,6 +58,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
         try{
             this.syllabusByWeekRepository.save(syllabusByWeek);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "creating", "syllabus by week"));
         }
@@ -71,6 +74,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
         try{
             this.syllabusByWeekRepository.save(syllabusByWeek);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "updating", "syllabus by week"));
         }
@@ -83,6 +87,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
         try{
             this.syllabusByWeekRepository.delete(syllabusByWeek);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "syllabus by week"));
         }

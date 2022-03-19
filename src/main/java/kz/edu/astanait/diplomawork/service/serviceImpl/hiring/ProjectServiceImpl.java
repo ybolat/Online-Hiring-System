@@ -9,6 +9,7 @@ import kz.edu.astanait.diplomawork.repository.hiring.ProjectRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ProjectTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ProjectService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
@@ -63,6 +65,7 @@ public class ProjectServiceImpl implements ProjectService {
         try{
             this.projectRepository.save(project);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "creating", "project"));
         }
@@ -82,6 +85,7 @@ public class ProjectServiceImpl implements ProjectService {
         try{
             this.projectRepository.save(project);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
             .format(ExceptionDescription.RepositoryException, "updating", "project"));
         }
@@ -94,6 +98,7 @@ public class ProjectServiceImpl implements ProjectService {
         try{
             this.projectRepository.delete(project);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "project"));
         }

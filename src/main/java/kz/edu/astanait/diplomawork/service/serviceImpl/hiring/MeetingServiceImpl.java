@@ -5,11 +5,13 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.model.hiring.Meeting;
 import kz.edu.astanait.diplomawork.repository.hiring.MeetingRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.MeetingService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class MeetingServiceImpl implements MeetingService {
 
     private final MeetingRepository meetingRepository;

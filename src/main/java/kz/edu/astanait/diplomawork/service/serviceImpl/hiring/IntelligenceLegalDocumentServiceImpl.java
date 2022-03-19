@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
 import kz.edu.astanait.diplomawork.repository.hiring.IntelligenceLegalDocumentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.IntelligenceLegalDocumentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDocumentService {
 
     private final IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository;
@@ -55,6 +57,7 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
         try{
             this.intelligenceLegalDocumentRepository.save(intelligenceLegalDocument);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "intelligenceLegalDocument"));
         }
     }
@@ -68,6 +71,7 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
         try{
             this.intelligenceLegalDocumentRepository.save(intelligenceLegalDocument);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
             .format(ExceptionDescription.RepositoryException, "updating", "intelligence legal document"));
         }
@@ -81,6 +85,7 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
         try{
             this.intelligenceLegalDocumentRepository.delete(intelligenceLegalDocument);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
             .format(ExceptionDescription.RepositoryException, "deleting", "intelligence legal document"));
         }

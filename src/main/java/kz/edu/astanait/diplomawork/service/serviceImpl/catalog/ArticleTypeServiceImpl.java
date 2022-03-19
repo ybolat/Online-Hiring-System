@@ -5,12 +5,14 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.model.catalog.ArticleType;
 import kz.edu.astanait.diplomawork.repository.catalog.ArticleTypeRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ArticleTypeService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class ArticleTypeServiceImpl implements ArticleTypeService {
 
     private final ArticleTypeRepository articleRepository;

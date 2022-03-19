@@ -5,11 +5,13 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.model.security.Role;
 import kz.edu.astanait.diplomawork.repository.security.RoleRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;

@@ -8,12 +8,14 @@ import kz.edu.astanait.diplomawork.model.hiring.Assessment;
 import kz.edu.astanait.diplomawork.repository.hiring.AssessmentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.AssessmentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class AssessmentServiceImpl implements AssessmentService {
 
     private final AssessmentRepository assessmentRepository;
@@ -52,6 +54,7 @@ public class AssessmentServiceImpl implements AssessmentService {
         try{
             this.assessmentRepository.save(assessment);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "assessment"));
         }
     }
@@ -65,6 +68,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 //        try {
 //            this.assessmentRepository.save(assessment);
 //        }catch (Exception e){
+//            log.error(e);
 //            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "assessment"));
 //        }
 //    }
@@ -76,6 +80,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 //        try {
 //            this.assessmentRepository.delete(assessment);
 //        }catch (Exception e){
+//            log.error(e);
 //            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "assessment"));
 //        }
 //    }

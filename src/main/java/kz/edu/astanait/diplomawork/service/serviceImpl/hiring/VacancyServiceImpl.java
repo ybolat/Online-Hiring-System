@@ -9,6 +9,7 @@ import kz.edu.astanait.diplomawork.repository.hiring.VacancyRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DepartmentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.PositionService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.VacancyService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class VacancyServiceImpl implements VacancyService {
 
     private final VacancyRepository vacancyRepository;
@@ -62,6 +64,7 @@ public class VacancyServiceImpl implements VacancyService {
         try{
             this.vacancyRepository.save(vacancy);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "vacancy"));
         }
     }
@@ -80,6 +83,7 @@ public class VacancyServiceImpl implements VacancyService {
         try {
             this.vacancyRepository.save(vacancy);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "vacancy"));
         }
      }
@@ -91,6 +95,7 @@ public class VacancyServiceImpl implements VacancyService {
         try{
             this.vacancyRepository.delete(vacancy);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "vacancy"));
         }
     }

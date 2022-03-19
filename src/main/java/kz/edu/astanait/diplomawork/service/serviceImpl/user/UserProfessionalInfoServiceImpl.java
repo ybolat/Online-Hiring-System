@@ -6,11 +6,13 @@ import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.user.UserProfessionalInfoRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoService {
 
     private final UserProfessionalInfoRepository userProfessionalInfoRepository;
