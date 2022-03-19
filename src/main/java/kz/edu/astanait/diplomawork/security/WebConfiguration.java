@@ -7,12 +7,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -20,11 +22,13 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserServiceImpl userService;
     private final BCryptPasswordEncoder encoder;
+    private final JWTAuthorizationFilter jwtAuthorizationFilter;
 
     @Autowired
-    public WebConfiguration(@Lazy UserServiceImpl userService, BCryptPasswordEncoder encoder) {
+    public WebConfiguration(@Lazy UserServiceImpl userService, BCryptPasswordEncoder encoder, JWTAuthorizationFilter jwtAuthorizationFilter) {
         this.userService = userService;
         this.encoder = encoder;
+        this.jwtAuthorizationFilter = jwtAuthorizationFilter;
     }
 
     @Override
@@ -37,7 +41,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests().antMatchers(SecurityConstant.PERMITTED_URL).permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated().and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
