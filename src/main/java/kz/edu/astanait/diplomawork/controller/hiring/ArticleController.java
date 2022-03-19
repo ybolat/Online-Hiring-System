@@ -7,6 +7,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ArticleServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/hiring/article")
+@PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMSISSION')")
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -26,6 +28,13 @@ public class ArticleController {
     @GetMapping("/get/user-professional-info/id/{id}")
     public ResponseEntity<List<ArticleDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id) {
         List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserProfessionalInfoId(id)
+                .stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/user-professional/id/{id}/order-by/article-name")
+    public ResponseEntity<List<ArticleDtoResponse>> getAllByUserProfessionalInfoIdOrderByArticleName(@PathVariable(name = "id") Long id) {
+        List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserProfessionalInfoIdOrderByArticleName(id)
                 .stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
         return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
     }
@@ -48,18 +57,11 @@ public class ArticleController {
         this.articleService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 //    @GetMapping("/get/order-by/article-name")
 //    public ResponseEntity<List<ArticleDtoResponse>> getAllOrderByArticleName() {
 //        List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllOrderByArticleName().
 //                stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
 //        return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
-//    }
 
-    @GetMapping("/get/user/id/{id}/order-by/article-name")
-    public ResponseEntity<List<ArticleDtoResponse>> getAllByUserProfessionalInfoIdOrderByArticleName(@PathVariable(name = "id") Long id) {
-        List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserProfessionalInfoIdOrderByArticleName(id)
-                .stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
-        return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
-    }
+//    }
 }

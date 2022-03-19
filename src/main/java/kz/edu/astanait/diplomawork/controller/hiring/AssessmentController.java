@@ -7,6 +7,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.AssessmentSer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/hiring/assessment")
+@PreAuthorize("hasRole('ROLE_COMMISSION')")
 public class AssessmentController {
 
     private final AssessmentService assessmentService;
@@ -35,17 +37,4 @@ public class AssessmentController {
         this.assessmentService.create(assessmentDtoRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-//    @PutMapping("/update/id/{id}")
-//    public ResponseEntity<HttpStatus> update(@RequestBody AssessmentDtoRequest assessmentDtoRequest,
-//                                             @PathVariable(name = "id") Long id) {
-//        this.assessmentService.update(assessmentDtoRequest, id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/delete/id/{id}")
-//    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
-//        this.assessmentService.delete(id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 }

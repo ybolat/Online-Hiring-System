@@ -6,6 +6,7 @@ import kz.edu.astanait.diplomawork.mapper.catalog.SubjectMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.SubjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/catalog/subject")
+@PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_ADMIN')")
 public class SubjectController {
 
     private final SubjectService subjectService;
@@ -25,6 +27,13 @@ public class SubjectController {
     public ResponseEntity<List<SubjectDtoResponse>> getAllSubject() {
         List<SubjectDtoResponse> subjectDtoResponseList = this.subjectService.getAll()
                 .stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(subjectDtoResponseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-all/academic-degree/id/{id}")
+    public ResponseEntity<List<SubjectDtoResponse>> getAllByAcademicDegreeId(@PathVariable(name = "id") Long id) {
+        List<SubjectDtoResponse> subjectDtoResponseList = this.subjectService.getAllByAcademicDegreeId(id).
+                stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList());
         return new ResponseEntity<>(subjectDtoResponseList, HttpStatus.OK);
     }
 
@@ -45,13 +54,6 @@ public class SubjectController {
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
         this.subjectService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/get-all/academic-degree/id/{id}")
-    public ResponseEntity<List<SubjectDtoResponse>> getAllByAcademicDegreeId(@PathVariable(name = "id") Long id) {
-        List<SubjectDtoResponse> subjectDtoResponseList = this.subjectService.getAllByAcademicDegreeId(id).
-                stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList());
-        return new ResponseEntity<>(subjectDtoResponseList, HttpStatus.OK);
     }
 
     @GetMapping("/get-all/academic-degree/id/{id}/order-by/title-en")
