@@ -16,13 +16,10 @@ public class SubjectDtoRequest {
     @NotNull(message = "Название на казахском не было указано.")
     private String titleKz;
 
-    @NotNull(message = "Описание на английском не было указано.")
     private String descriptionEn;
 
-    @NotNull(message = "Описание на русском не было указано.")
     private String descriptionRu;
 
-    @NotNull(message = "Описание на казахстком не было указано.")
     private String descriptionKz;
 
     @NotNull(message = "Код не был указан.")
