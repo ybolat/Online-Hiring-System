@@ -9,6 +9,7 @@ import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.security.RegistrationPinCodeRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RegistrationPinCodeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.utils.EmailService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,13 @@ public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeServic
 
     private final RegistrationPinCodeRepository registrationPinCodeRepository;
     private final UserService userService;
+    private final EmailService emailService;
 
     @Autowired
-    public RegistrationPinCodeServiceImpl(RegistrationPinCodeRepository registrationPinCodeRepository, UserService userService) {
+    public RegistrationPinCodeServiceImpl(RegistrationPinCodeRepository registrationPinCodeRepository, UserService userService, EmailService emailService) {
         this.registrationPinCodeRepository = registrationPinCodeRepository;
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -37,6 +40,7 @@ public class RegistrationPinCodeServiceImpl implements RegistrationPinCodeServic
 
         try{
             this.registrationPinCodeRepository.save(registrationPinCode);
+            this.emailService.sendVerificationPinCode(user, x);
         } catch (Exception e) {
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "creating", "pin code for registration"));

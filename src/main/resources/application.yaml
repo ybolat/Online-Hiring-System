@@ -19,3 +19,19 @@ security:
     audience: Astanait.edu.kz client
     expiration-time: 360_000_0
     jwt-token-header: Jwt-Token
+
+
+email:
+  verification:
+   simple_mail_transfer_protocol: smtp
+   username: test.diploma@outlook.com
+   password: DiplomaWork2022
+   from_email: noreply@astanait.edu.kz
+   email_subject: Verification account
+   gmail_smtp_server: smtp.office365.com
+   smtp_host: smtp.office365.com
+   smtp_auth: mail.smtp.auth
+   smtp_port: mail.smtp.port
+   default_port: 587
+   smtp_starttls_enable: mail.smtp.starttls.enable
+   smtp_starttls_required: mail.smtp.starttls.required
