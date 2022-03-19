@@ -11,7 +11,7 @@ spring:
 
 security:
   token:
-    secret:
+    secret: sdf548@!#df4884d5g4r68dfg1r#@#@$sd84e61f63f@##s6d5f#@f@#f#@@5f45s6f3@
     client-ip: Client ip
     issuer: Astanait.edu.kz server
     token-cannot-be-verified: Token can not be verified
