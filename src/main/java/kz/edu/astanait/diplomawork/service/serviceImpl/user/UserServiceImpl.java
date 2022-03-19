@@ -17,6 +17,7 @@ import kz.edu.astanait.diplomawork.security.UserPrincipal;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RegistrationPinCodeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -34,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
@@ -101,6 +103,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             user.setRole(this.roleService.getByNameThrowException("ROLE_CHALLENGER"));
             createdUser = this.userRepository.save(user);
         }catch (Exception e){
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "registering", "user"));
         }
@@ -115,6 +118,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         try{
             createdUser = this.userRepository.save(user);
         } catch (Exception e) {
+            log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "updating", "user"));
         }
