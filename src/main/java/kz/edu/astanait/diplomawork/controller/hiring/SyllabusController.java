@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ArticleDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.SyllabusDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.hiring.SyllabusMapper;
