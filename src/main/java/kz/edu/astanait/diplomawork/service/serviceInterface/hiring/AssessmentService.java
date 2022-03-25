@@ -14,8 +14,4 @@ public interface AssessmentService {
     Assessment getByIdThrowException(Long id);
 
     void create(AssessmentDtoRequest assessmentDtoRequest);
-
-//    void update(AssessmentDtoRequest assessmentDtoRequest, Long id);
-//
-//    void delete(Long id);
 }

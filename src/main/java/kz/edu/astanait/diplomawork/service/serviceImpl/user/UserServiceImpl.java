@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         } catch (Exception e) {
             log.error(e);
             throw new RepositoryException(String
-                    .format(ExceptionDescription.RepositoryException, "updating", "user"));
+                    .format(ExceptionDescription.RepositoryException, "activating", "user"));
         }
         return createdUser;
     }
@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         String email = authorizationDtoRequest.getEmail().toLowerCase().trim();
         String password = authorizationDtoRequest.getPassword().trim();
 
-        authenticate(email, password);
+        this.authenticate(email, password);
 
         User user = getByEmailThrowException(email);
         UserPrincipal userPrincipal = new UserPrincipal(user);

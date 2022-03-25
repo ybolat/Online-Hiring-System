@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.user;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.VacancyDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicTitleDtoResponse;
 import kz.edu.astanait.diplomawork.model.catalog.AcademicTitle;
@@ -11,6 +12,8 @@ public class UserProfessionalInfoDtoResponse {
     private Long id;
 
     private UserDtoResponse user;
+
+    private VacancyDtoRequest vacancy;
 
     private AcademicDegreeDtoResponse academicDegree;
 

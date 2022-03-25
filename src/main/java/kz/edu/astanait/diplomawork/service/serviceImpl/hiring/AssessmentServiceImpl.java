@@ -58,30 +58,4 @@ public class AssessmentServiceImpl implements AssessmentService {
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "assessment"));
         }
     }
-
-//    @Override
-//    public void update(AssessmentDtoRequest assessmentDtoRequest, Long id) {
-//        Assessment assessment = this.getByIdThrowException(id);
-//
-//        if(Objects.nonNull(assessmentDtoRequest.getVote())) assessment.setVote(assessmentDtoRequest.getVote());
-//
-//        try {
-//            this.assessmentRepository.save(assessment);
-//        }catch (Exception e){
-//            log.error(e);
-//            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "assessment"));
-//        }
-//    }
-
-//    @Override
-//    public void delete(Long id) {
-//        Assessment assessment = this.getByIdThrowException(id);
-//
-//        try {
-//            this.assessmentRepository.delete(assessment);
-//        }catch (Exception e){
-//            log.error(e);
-//            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "assessment"));
-//        }
-//    }
 }
