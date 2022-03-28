@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.CommissionActionHistoryDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.CommissionActionHistoryDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.hiring.CertificateMapper;
 import kz.edu.astanait.diplomawork.mapper.hiring.CommissionActionHistoryMapper;
@@ -10,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +29,9 @@ public class CommissionActionHistoryController {
         this.commissionActionHistoryService = commissionActionHistoryService;
     }
 
-    public ResponseEntity<List<CommissionActionHistoryDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id){
-        List<CommissionActionHistoryDtoResponse> commissionActionHistoryDtoResponseList =
-                this.commissionActionHistoryService.getAllByUserProfessionalInfoId(id).stream().map(CommissionActionHistoryMapper::commissionActionHistoryToDto)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(commissionActionHistoryDtoResponseList, HttpStatus.OK);
+    @PostMapping("/create")
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest){
+        this.commissionActionHistoryService.create(commissionActionHistoryDtoRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

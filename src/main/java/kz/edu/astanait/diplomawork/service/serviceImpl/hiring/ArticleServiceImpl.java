@@ -102,9 +102,4 @@ public class ArticleServiceImpl implements ArticleService {
                     .format(ExceptionDescription.RepositoryException, "deleting", "article"));
         }
     }
-
-//    @Override
-//    public List<Article> getAllOrderByArticleName() {
-//        return this.articleRepository.findAllArticleOrderByArticleName();
-//    }
 }

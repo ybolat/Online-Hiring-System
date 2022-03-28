@@ -10,5 +10,7 @@ public interface CommissionActionHistoryService {
 
     CommissionActionHistory getByIdThrowException(Long id);
 
+    List<CommissionActionHistory> getByRequestId(Long id);
+
     void create(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest);
 }

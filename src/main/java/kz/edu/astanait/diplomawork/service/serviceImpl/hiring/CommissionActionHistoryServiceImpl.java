@@ -42,6 +42,11 @@ public class CommissionActionHistoryServiceImpl implements CommissionActionHisto
     }
 
     @Override
+    public List<CommissionActionHistory> getByRequestId(Long id) {
+        return this.commissionActionHistoryRepository.findByRequestId(id);
+    }
+
+    @Override
     public void create(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest) {
         CommissionActionHistory commissionActionHistory = new CommissionActionHistory();
 
