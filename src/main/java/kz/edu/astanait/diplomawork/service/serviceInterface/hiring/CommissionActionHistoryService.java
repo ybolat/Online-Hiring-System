@@ -6,8 +6,6 @@ import java.util.Optional;
 
 public interface CommissionActionHistoryService {
 
-    List<CommissionActionHistory> getAllByUserProfessionalInfoId(Long id);
-
     Optional<CommissionActionHistory> getById(Long id);
 
     CommissionActionHistory getByIdThrowException(Long id);
