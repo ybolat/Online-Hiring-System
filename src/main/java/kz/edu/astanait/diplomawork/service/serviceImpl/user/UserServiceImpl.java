@@ -142,8 +142,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void changePassword(Long id, String password) {
-        User user = this.getByIdThrowException(id);
+    public void changePassword(String email, String password) {
+        User user = this.getByEmailThrowException(email);
 
         user.setPassword(this.encoder.encode(password));
 

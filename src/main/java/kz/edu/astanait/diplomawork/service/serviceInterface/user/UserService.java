@@ -26,5 +26,5 @@ public interface UserService {
 
     ResponseEntity<UserDtoResponse> authorization(UserAuthorizationDtoRequest authorizationDtoRequest, HttpServletRequest request);
 
-    void changePassword(Long id, String password);
+    void changePassword(String email, String password);
 }

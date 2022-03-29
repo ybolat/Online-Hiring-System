@@ -46,4 +46,11 @@ public class UserController {
         UserDtoResponse userDtoResponse = UserMapper.userToDto(user);
         return new ResponseEntity<>(userDtoResponse, HttpStatus.OK);
     }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<HttpStatus> changePassword(@RequestParam(name = "email") String email,
+                                                     @RequestParam(name = "password") String password) {
+        this.userService.changePassword(email, password);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
