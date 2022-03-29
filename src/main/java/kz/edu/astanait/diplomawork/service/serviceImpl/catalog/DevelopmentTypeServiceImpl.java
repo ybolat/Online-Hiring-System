@@ -5,14 +5,12 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.model.catalog.DevelopmentType;
 import kz.edu.astanait.diplomawork.repository.catalog.DevelopmentTypeRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DevelopmentTypeService;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Log4j2
 public class DevelopmentTypeServiceImpl implements DevelopmentTypeService {
 
     private final DevelopmentTypeRepository developmentTypeRepository;

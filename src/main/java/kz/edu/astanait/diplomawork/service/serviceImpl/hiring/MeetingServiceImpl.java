@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@Log4j2
 public class MeetingServiceImpl implements MeetingService {
 
     private final MeetingRepository meetingRepository;

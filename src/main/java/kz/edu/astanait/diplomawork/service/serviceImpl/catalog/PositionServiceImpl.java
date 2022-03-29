@@ -5,14 +5,12 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.model.catalog.Position;
 import kz.edu.astanait.diplomawork.repository.catalog.PositionRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.PositionService;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Log4j2
 public class PositionServiceImpl implements PositionService {
 
     private final PositionRepository positionRepository;
