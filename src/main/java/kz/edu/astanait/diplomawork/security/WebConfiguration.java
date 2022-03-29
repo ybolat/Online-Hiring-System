@@ -53,18 +53,4 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    @Bean
-    public WebMvcConfigurer configurer() {
-        return new WebMvcConfigurer() {
-
-            @Override
-            public void addCorsMappings(CorsRegistry registry){
-                registry.addMapping("localhost:300/**")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*")
-                        .allowedOrigins("/**");
-            }
-        };
-    }
 }
