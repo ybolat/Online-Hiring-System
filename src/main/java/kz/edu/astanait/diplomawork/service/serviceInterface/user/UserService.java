@@ -25,4 +25,6 @@ public interface UserService {
     User activate(String email, Integer pinCode);
 
     ResponseEntity<UserDtoResponse> authorization(UserAuthorizationDtoRequest authorizationDtoRequest, HttpServletRequest request);
+
+    void changePassword(Long id, String password);
 }

@@ -141,6 +141,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+    @Override
+    public void changePassword(Long id, String password) {
+        User user = this.getByIdThrowException(id);
+
+        user.setPassword(this.encoder.encode(password));
+
+        try {
+            this.userRepository.save(user);
+        }catch (Exception e){
+            log.error(e);
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "changing", "password"));
+        }
+    }
+
     private HttpHeaders getJwtHeader(UserPrincipal userPrincipal, String ipFromClient) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(jwtEnvironmentBuilder.getJWT_TOKEN_HEADER(), jwtTokenProvider.generateToken(userPrincipal, ipFromClient));
