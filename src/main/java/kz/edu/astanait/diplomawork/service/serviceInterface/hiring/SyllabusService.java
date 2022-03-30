@@ -1,7 +1,10 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusByWeekDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Syllabus;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +18,7 @@ public interface SyllabusService {
 
     void create(SyllabusDtoRequest syllabusDtoRequest);
 
-//    void update(SyllabusDtoRequest syllabusDtoRequest, Long id);
+    void update(SyllabusDtoRequest syllabusDtoRequest, Long id, HashMap<Long, SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList);
 
     void delete(Long id);
 }

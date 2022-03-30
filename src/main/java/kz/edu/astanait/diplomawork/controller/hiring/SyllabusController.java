@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusByWeekDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.SyllabusDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.hiring.SyllabusMapper;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,14 @@ public class SyllabusController {
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody SyllabusDtoRequest syllabusDtoRequest) {
         this.syllabusService.create(syllabusDtoRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/id/{id}")
+    public ResponseEntity<HttpStatus> update(@RequestBody SyllabusDtoRequest syllabusDtoRequest,
+                                             @PathVariable(name = "id") Long id,
+                                             @RequestParam(name = "SyllabusByWeekList") HashMap<Long, SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestHashMap) {
+        this.syllabusService.update(syllabusDtoRequest, id, syllabusByWeekDtoRequestHashMap);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/id/{id}")

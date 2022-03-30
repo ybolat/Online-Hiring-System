@@ -11,9 +11,10 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusServi
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 
 @Service
 @Log4j2
@@ -24,7 +25,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
     private final SyllabusService syllabusService;
 
     @Autowired
-    public SyllabusByWeekServiceImpl(SyllabusByWeekRepository syllabusByWeekRepository, SyllabusService syllabusService) {
+    public SyllabusByWeekServiceImpl(SyllabusByWeekRepository syllabusByWeekRepository, @Lazy SyllabusService syllabusService) {
         this.syllabusByWeekRepository = syllabusByWeekRepository;
         this.syllabusService = syllabusService;
     }
@@ -47,16 +48,22 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
     }
 
     @Override
-    public void create(SyllabusByWeekDtoRequest syllabusByWeekDtoRequest) {
-        SyllabusByWeek syllabusByWeek = new SyllabusByWeek();
+    public void create(List<SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList) {
+        List<SyllabusByWeek> syllabusByWeekList = new ArrayList<>();
 
-        syllabusByWeek.setSyllabus(this.syllabusService.getByIdThrowException(syllabusByWeekDtoRequest.getSyllabusId()));
-        syllabusByWeek.setWeekNumber(syllabusByWeekDtoRequest.getWeekNumber());
-        syllabusByWeek.setTitle(syllabusByWeekDtoRequest.getTitle());
-        syllabusByWeek.setDescription(syllabusByWeekDtoRequest.getDescription());
+        for (SyllabusByWeekDtoRequest syllabusByWeekDtoRequest : syllabusByWeekDtoRequestList) {
+            SyllabusByWeek syllabusByWeek = new SyllabusByWeek();
+
+            syllabusByWeek.setSyllabus(this.syllabusService.getByIdThrowException(syllabusByWeekDtoRequest.getSyllabusId()));
+            syllabusByWeek.setWeekNumber(syllabusByWeekDtoRequest.getWeekNumber());
+            syllabusByWeek.setTitle(syllabusByWeekDtoRequest.getTitle());
+            syllabusByWeek.setDescription(syllabusByWeekDtoRequest.getDescription());
+
+            syllabusByWeekList.add(syllabusByWeek);
+        }
 
         try{
-            this.syllabusByWeekRepository.save(syllabusByWeek);
+            this.syllabusByWeekRepository.saveAll(syllabusByWeekList);
         }catch (Exception e){
             log.error(e);
             throw new RepositoryException(String
@@ -65,27 +72,31 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
     }
 
     @Override
-    public void update(SyllabusByWeekDtoRequest syllabusByWeekDtoRequest, Long id) {
-        SyllabusByWeek syllabusByWeek = this.getByIdThrowException(id);
+    public void update(HashMap<Long, SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestHashMap) {
+        List<SyllabusByWeek> syllabusByWeekList = new ArrayList<>();
+        for (Map.Entry<Long, SyllabusByWeekDtoRequest> set : syllabusByWeekDtoRequestHashMap.entrySet()) {
+            SyllabusByWeek syllabusByWeek = this.getByIdThrowException(set.getKey());
 
-        if (Strings.isNotBlank(syllabusByWeekDtoRequest.getTitle())) syllabusByWeek.setTitle(syllabusByWeekDtoRequest.getTitle());
-        if (Strings.isNotBlank(syllabusByWeekDtoRequest.getDescription())) syllabusByWeek.setDescription(syllabusByWeekDtoRequest.getDescription());
+            if(Strings.isNotBlank(set.getValue().getDescription())) syllabusByWeek.setDescription(set.getValue().getDescription());
+            if(Strings.isNotBlank(set.getValue().getTitle())) syllabusByWeek.setTitle(set.getValue().getTitle());
 
-        try{
-            this.syllabusByWeekRepository.save(syllabusByWeek);
+            syllabusByWeekList.add(syllabusByWeek);
+        }
+
+        try {
+            this.syllabusByWeekRepository.saveAll(syllabusByWeekList);
         }catch (Exception e){
             log.error(e);
-            throw new RepositoryException(String
-                    .format(ExceptionDescription.RepositoryException, "updating", "syllabus by week"));
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "syllabus by week"));
         }
     }
 
     @Override
     public void delete(Long id) {
-        SyllabusByWeek syllabusByWeek = this.getByIdThrowException(id);
+        List<SyllabusByWeek> syllabusByWeekList = this.getAllBySyllabusId(id);
 
         try{
-            this.syllabusByWeekRepository.delete(syllabusByWeek);
+            this.syllabusByWeekRepository.deleteAll(syllabusByWeekList);
         }catch (Exception e){
             log.error(e);
             throw new RepositoryException(String

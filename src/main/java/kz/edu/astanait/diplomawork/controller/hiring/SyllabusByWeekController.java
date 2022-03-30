@@ -34,21 +34,8 @@ public class SyllabusByWeekController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody SyllabusByWeekDtoRequest syllabusByWeekDtoRequest) {
-        this.syllabusByWeekService.create(syllabusByWeekDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody List<SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList) {
+        this.syllabusByWeekService.create(syllabusByWeekDtoRequestList);
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @PutMapping("/update/id/{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody SyllabusByWeekDtoRequest syllabusByWeekDtoRequest,
-                                             @PathVariable(name = "id") Long id) {
-        this.syllabusByWeekService.update(syllabusByWeekDtoRequest, id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/id/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
-        this.syllabusByWeekService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
