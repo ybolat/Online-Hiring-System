@@ -16,7 +16,6 @@ public class UserProfessionalInfoDtoRequest {
     @NotNull(message =  "Академическая степень не была указано.")
     private Long academicDegreeId;
 
-    @NotNull(message =  "Академическая название не была указано.")
     private Long academicTitleId;
 
     private String scopus;
