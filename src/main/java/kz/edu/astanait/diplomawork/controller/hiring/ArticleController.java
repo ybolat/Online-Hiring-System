@@ -57,11 +57,4 @@ public class ArticleController {
         this.articleService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-//    @GetMapping("/get/order-by/article-name")
-//    public ResponseEntity<List<ArticleDtoResponse>> getAllOrderByArticleName() {
-//        List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllOrderByArticleName().
-//                stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
-//        return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
-
-//    }
 }
