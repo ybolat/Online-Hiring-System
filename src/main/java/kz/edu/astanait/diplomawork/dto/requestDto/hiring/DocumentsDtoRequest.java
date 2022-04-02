@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.dto.requestDto.hiring;
 
-import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -15,5 +14,5 @@ public class DocumentsDtoRequest {
     private String documentName;
 
     @NotNull(message = "Пользователь не был указан.")
-    private Long userDtoResponseId;
+    private Long userId;
 }
