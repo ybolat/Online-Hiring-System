@@ -243,3 +243,13 @@ create table publication(
   constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
   constraint fk_publication_type_id foreign key (publication_type_id) references publication_type (id)
 );
+
+create table documents
+(
+    id serial primary key,
+    document text not null,
+    document_name text not null,
+    user_id bigint not null,
+    constraint fk_user_id foreign key (user_id) references users (id)
+);
+
