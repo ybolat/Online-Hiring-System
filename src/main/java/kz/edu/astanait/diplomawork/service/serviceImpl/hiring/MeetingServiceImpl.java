@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.MeetingDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.model.hiring.Meeting;
@@ -30,5 +31,10 @@ public class MeetingServiceImpl implements MeetingService {
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Meeting", "id", id)));
+    }
+
+    @Override
+    public void create(MeetingDtoRequest meetingDtoRequest) {
+
     }
 }
