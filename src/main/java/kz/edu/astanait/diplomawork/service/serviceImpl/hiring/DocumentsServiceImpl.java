@@ -13,6 +13,9 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.security.Principal;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -41,12 +44,13 @@ public class DocumentsServiceImpl implements DocumentsService {
     }
 
     @Override
-    public void create(DocumentsDtoRequest documentsDtoRequest) {
+    public void create(DocumentsDtoRequest documentsDtoRequest, Principal principal) throws IOException {
         Documents documents = new Documents();
 
-        documents.setDocument(documentsDtoRequest.getDocument());
+        documents.setDocument(documentsDtoRequest.getDocument().getBytes());
+        documents.setContentType(documentsDtoRequest.getDocument().getContentType());
         documents.setDocumentName(documentsDtoRequest.getDocumentName());
-        documents.setUser(this.userService.getByIdThrowException(documentsDtoRequest.getUserDtoResponseId()));
+        documents.setUser(this.userService.getByEmailThrowException(principal.getName()));
 
         try {
             this.documentsRepository.save(documents);
@@ -57,10 +61,13 @@ public class DocumentsServiceImpl implements DocumentsService {
     }
 
     @Override
-    public void update(DocumentsDtoRequest documentsDtoRequest, Long id) {
+    public void update(DocumentsDtoRequest documentsDtoRequest, Long id) throws IOException {
         Documents documents = this.getByIdThrowException(id);
 
-        if(Strings.isNotBlank(documentsDtoRequest.getDocument())) documents.setDocument(documentsDtoRequest.getDocument());
+        if(Objects.nonNull(documentsDtoRequest.getDocument())) {
+            documents.setDocument(documentsDtoRequest.getDocument().getBytes());
+            documents.setContentType(documentsDtoRequest.getDocument().getContentType());
+        }
         if(Strings.isNotBlank(documentsDtoRequest.getDocumentName())) documents.setDocumentName(documentsDtoRequest.getDocumentName());
 
         try {

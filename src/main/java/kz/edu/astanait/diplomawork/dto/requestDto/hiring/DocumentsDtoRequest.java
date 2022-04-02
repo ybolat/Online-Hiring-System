@@ -1,6 +1,8 @@
 package kz.edu.astanait.diplomawork.dto.requestDto.hiring;
 
 import lombok.Data;
+import org.hibernate.boot.Metadata;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 
@@ -8,11 +10,8 @@ import javax.validation.constraints.NotNull;
 public class DocumentsDtoRequest {
 
     @NotNull(message = "Документ не был отправлен.")
-    private String document;
+    private MultipartFile document;
 
     @NotNull(message = "Название документа не было указано.")
     private String documentName;
-
-    @NotNull(message = "Пользователь не был указан.")
-    private Long userId;
 }

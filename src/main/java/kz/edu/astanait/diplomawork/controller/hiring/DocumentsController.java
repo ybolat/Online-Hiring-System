@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/hiring/documents")
@@ -21,14 +23,14 @@ public class DocumentsController {
     }
 
     @PostMapping("/crete")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody DocumentsDtoRequest documentsDtoRequest) {
-        this.documentsService.create(documentsDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody DocumentsDtoRequest documentsDtoRequest, Principal principal) throws IOException {
+        this.documentsService.create(documentsDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/update/id/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody DocumentsDtoRequest documentsDtoRequest,
-                                             @PathVariable(name = "id") Long id) {
+                                             @PathVariable(name = "id") Long id) throws IOException {
         this.documentsService.update(documentsDtoRequest, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

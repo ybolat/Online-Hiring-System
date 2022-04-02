@@ -15,7 +15,10 @@ public class Documents {
     private Long id;
 
     @Column(name = "document")
-    private String document;
+    private byte[] document;
+
+    @Column(name = "content_type")
+    private String contentType;
 
     @Column(name = "document_name")
     private String documentName;
