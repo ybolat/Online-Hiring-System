@@ -5,12 +5,15 @@ import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Publications;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.PublicationsRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.PublicationsService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -46,13 +49,15 @@ public class PublicationsServiceImpl implements PublicationsService {
     }
 
     @Override
-    public void create(PublicationsDtoRequest publicationsDtoRequest) {
+    public void create(PublicationsDtoRequest publicationsDtoRequest, Principal principal) {
         Publications publications = new Publications();
+
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
         publications.setName(publicationsDtoRequest.getName());
         publications.setLink(publicationsDtoRequest.getLink());
         publications.setPublishedDate(publicationsDtoRequest.getPublishedDate());
-        publications.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(publicationsDtoRequest.getUserProfessionalInfoId()));
+        publications.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
 
         try{
             this.publicationsRepository.save(publications);

@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/hiring/publications")
@@ -24,8 +25,8 @@ public class PublicationsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody PublicationsDtoRequest publicationsDtoRequest) {
-        this.publicationsService.create(publicationsDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody PublicationsDtoRequest publicationsDtoRequest, Principal principal) {
+        this.publicationsService.create(publicationsDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

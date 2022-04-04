@@ -5,6 +5,7 @@ import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Development;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.DevelopmentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DevelopmentTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.DevelopmentService;
@@ -13,6 +14,8 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -51,10 +54,12 @@ public class DevelopmentServiceImpl implements DevelopmentService {
     }
 
     @Override
-    public void create(DevelopmentDtoRequest developmentDtoRequest) {
+    public void create(DevelopmentDtoRequest developmentDtoRequest, Principal principal) {
         Development development = new Development();
 
-        development.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(developmentDtoRequest.getUserProfessionalInfoId()));
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
+
+        development.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
         development.setName(developmentDtoRequest.getName());
         development.setDescription(developmentDtoRequest.getDescription());
         development.setDevelopmentType(this.developmentTypeService.getByIdThrowException(developmentDtoRequest.getDevelopmentTypeId()));

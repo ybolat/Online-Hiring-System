@@ -5,6 +5,7 @@ import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Article;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.ArticleRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ArticleTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ArticleService;
@@ -13,6 +14,8 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -56,12 +59,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void create(ArticleDtoRequest articleDtoRequest) {
+    public void create(ArticleDtoRequest articleDtoRequest, Principal principal) {
         Article article = new Article();
+
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
         article.setApa(articleDtoRequest.getApa());
         article.setDoi(articleDtoRequest.getDoi());
-        article.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(articleDtoRequest.getUserProfessionalInfoId()));
+        article.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
         article.setArticleType(this.articleTypeService.getByIdThrowException(articleDtoRequest.getArticleTypeId()));
 
         try{

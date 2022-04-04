@@ -6,6 +6,7 @@ import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Syllabus;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.SyllabusRepository;
 import kz.edu.astanait.diplomawork.service.serviceImpl.catalog.SubjectServiceImpl;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusByWeekService;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -56,10 +58,12 @@ public class SyllabusServiceImpl implements SyllabusService {
     }
 
     @Override
-    public void create(SyllabusDtoRequest syllabusDtoRequest) {
+    public void create(SyllabusDtoRequest syllabusDtoRequest, Principal principal) {
         Syllabus syllabus = new Syllabus();
 
-        syllabus.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(syllabusDtoRequest.getUserProfessionalInfoId()));
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
+
+        syllabus.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
         syllabus.setSubject(this.subjectService.getByIdThrowException(syllabusDtoRequest.getSubjectId()));
 
         try{

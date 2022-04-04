@@ -8,9 +8,6 @@ import java.time.LocalDateTime;
 @Data
 public class RequestDtoRequest {
 
-    @NotNull(message = "Пользователь не был указан.")
-    private Long userId;
-
     @NotNull(message = "Статус не был указан.")
     private Long statusId;
 

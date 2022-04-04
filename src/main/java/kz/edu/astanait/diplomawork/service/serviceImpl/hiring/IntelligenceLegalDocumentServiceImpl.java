@@ -5,6 +5,7 @@ import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.IntelligenceLegalDocumentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.IntelligenceLegalDocumentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
@@ -12,6 +13,8 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,12 +50,13 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
     }
 
     @Override
-    public void create(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest) {
-
+    public void create(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Principal principal) {
         IntelligenceLegalDocument intelligenceLegalDocument = new IntelligenceLegalDocument();
 
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
+
         intelligenceLegalDocument.setDocument(intelligenceLegalDocumentDtoRequest.getDocument());
-        intelligenceLegalDocument.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(intelligenceLegalDocumentDtoRequest.getUserProfessionalInfoId()));
+        intelligenceLegalDocument.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
 
         try{
             this.intelligenceLegalDocumentRepository.save(intelligenceLegalDocument);

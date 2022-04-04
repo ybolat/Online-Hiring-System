@@ -2,6 +2,8 @@ package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.DevelopmentDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Development;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +15,7 @@ public interface DevelopmentService {
 
     Development getByIdThrowException(Long id);
 
-    void create(DevelopmentDtoRequest developmentDtoRequest);
+    void create(DevelopmentDtoRequest developmentDtoRequest, Principal principal);
 
     void update(DevelopmentDtoRequest developmentDtoRequest, Long id);
 

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,8 +41,8 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody ArticleDtoRequest articleDtoRequest) {
-        this.articleService.create(articleDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody ArticleDtoRequest articleDtoRequest, Principal principal) {
+        this.articleService.create(articleDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

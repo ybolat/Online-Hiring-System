@@ -5,6 +5,7 @@ import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Project;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.ProjectRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ProjectTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ProjectService;
@@ -13,6 +14,8 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -50,11 +53,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void create(ProjectDtoRequest projectDtoRequest) {
-
+    public void create(ProjectDtoRequest projectDtoRequest, Principal principal) {
         Project project = new Project();
 
-        project.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(projectDtoRequest.getUserProfessionalInfoId()));
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
+
+        project.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
         project.setStartedDate(projectDtoRequest.getStartedDate());
         project.setFinishedDate(projectDtoRequest.getFinishedDate());
         project.setRole(projectDtoRequest.getRole());

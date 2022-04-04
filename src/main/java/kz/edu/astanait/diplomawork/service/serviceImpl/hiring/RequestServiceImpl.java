@@ -13,6 +13,8 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -66,10 +68,10 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void create(RequestDtoRequest requestDtoRequest) {
+    public void create(RequestDtoRequest requestDtoRequest, Principal principal) {
         Request request = new Request();
 
-        request.setUser(this.userService.getByIdThrowException(requestDtoRequest.getUserId()));
+        request.setUser(this.userService.getByEmailThrowException(principal.getName()));
         request.setStatus(this.statusService.getByIdThrowException(requestDtoRequest.getStatusId()));
         request.setBackground(requestDtoRequest.getBackground());
         request.setAdditional(requestDtoRequest.getAdditional());

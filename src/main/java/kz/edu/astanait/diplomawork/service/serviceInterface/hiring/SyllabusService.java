@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusByWeekDtoReques
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Syllabus;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public interface SyllabusService {
 
     Syllabus getByIdThrowException(Long id);
 
-    void create(SyllabusDtoRequest syllabusDtoRequest);
+    void create(SyllabusDtoRequest syllabusDtoRequest, Principal principal);
 
     void update(SyllabusDtoRequest syllabusDtoRequest, Long id, HashMap<Long, SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList);
 

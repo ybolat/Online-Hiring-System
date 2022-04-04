@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.dto.requestDto.user.UserProfessionalInfoDtoRe
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.user.UserProfessionalInfoRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicDegreeService;
@@ -61,6 +62,11 @@ public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoServ
         return this.getByUserId(id).
                 orElseThrow(() -> new CustomNotFoundException(String.format(
                         ExceptionDescription.CustomNotFoundException, "User professional info", "User id", id)));
+    }
+
+    @Override
+    public User getByUserEmailThrowException(String email) {
+        return this.userService.getByEmailThrowException(email);
     }
 
     @Override

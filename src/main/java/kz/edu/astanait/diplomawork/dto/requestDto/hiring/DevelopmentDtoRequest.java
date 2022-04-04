@@ -7,9 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class DevelopmentDtoRequest {
 
-    @NotNull(message = "Пользователь не был указан.")
-    private Long userProfessionalInfoId;
-
     @NotNull(message = "Название не было указано.")
     private String name;
 

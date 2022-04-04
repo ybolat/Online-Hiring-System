@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,8 +34,8 @@ public class DevelopmentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody DevelopmentDtoRequest developmentDtoRequest){
-        this.developmentService.create(developmentDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody DevelopmentDtoRequest developmentDtoRequest, Principal principal){
+        this.developmentService.create(developmentDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

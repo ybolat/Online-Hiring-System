@@ -7,9 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CertificateDtoRequest {
 
-    @NotNull(message = "Пользователь не был указан.")
-    private Long userProfessionalInfoId;
-
     @NotNull(message = "Сертификат не был указан.")
     private String certificate;
 }

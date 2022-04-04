@@ -2,6 +2,8 @@ package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.IntelligenceLegalDocumentDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +15,7 @@ public interface IntelligenceLegalDocumentService {
 
     IntelligenceLegalDocument getByIdThrowException(Long id);
 
-    void create(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest);
+    void create(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Principal principal);
 
     void update(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Long id);
 

@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,8 +35,8 @@ public class CertificateController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody CertificateDtoRequest certificateDtoRequest){
-        this.certificateService.create(certificateDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody CertificateDtoRequest certificateDtoRequest, Principal principal){
+        this.certificateService.create(certificateDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

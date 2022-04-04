@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,8 +37,8 @@ public class SyllabusController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody SyllabusDtoRequest syllabusDtoRequest) {
-        this.syllabusService.create(syllabusDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody SyllabusDtoRequest syllabusDtoRequest, Principal principal) {
+        this.syllabusService.create(syllabusDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

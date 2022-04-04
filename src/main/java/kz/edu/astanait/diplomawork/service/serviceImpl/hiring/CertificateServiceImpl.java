@@ -5,12 +5,15 @@ import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Certificate;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.CertificateRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.CertificateService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -47,10 +50,12 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public void create(CertificateDtoRequest certificateDtoRequest) {
+    public void create(CertificateDtoRequest certificateDtoRequest, Principal principal) {
         Certificate certificate = new Certificate();
 
-        certificate.setUserProfessionalInfo(this.userProfessionalInfoService.getByIdThrowException(certificateDtoRequest.getUserProfessionalInfoId()));
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
+
+        certificate.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
         certificate.setCertificate(certificate.getCertificate());
 
         try{

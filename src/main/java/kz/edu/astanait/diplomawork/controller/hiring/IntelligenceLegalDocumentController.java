@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,8 +36,8 @@ public class IntelligenceLegalDocumentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest) {
-        this.intelligenceLegalDocumentService.create(intelligenceLegalDocumentDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Principal principal) {
+        this.intelligenceLegalDocumentService.create(intelligenceLegalDocumentDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
