@@ -156,8 +156,9 @@ create table commission_action_history(
 create table certificate(
     id serial primary key,
     user_professional_info_id bigint not null,
-    certificate text not null,
-    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id)
+    documents_id bigint not null,
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
+    constraint fk_documents_id foreign key (documents_id) references documents (id)
 );
 
 create table development_type(
@@ -249,7 +250,6 @@ create table documents
     id serial primary key,
     document text not null,
     document_name text not null,
-    user_id bigint not null,
-    constraint fk_user_id foreign key (user_id) references users (id)
+    content_type varchar(255) not null
 );
 

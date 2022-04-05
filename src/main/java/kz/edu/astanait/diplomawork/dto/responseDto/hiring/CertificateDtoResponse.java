@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
-import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import lombok.Data;
 
@@ -11,5 +10,5 @@ public class CertificateDtoResponse {
 
     private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
 
-    private String certificate;
+    private DocumentsDtoResponse documentsDtoResponse;
 }

@@ -1,10 +1,9 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.DocumentsDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Documents;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.Optional;
 
 public interface DocumentsService {
@@ -13,9 +12,9 @@ public interface DocumentsService {
 
     Documents getByIdThrowException(Long id);
 
-    void create(DocumentsDtoRequest documentsDtoRequest, Principal principal) throws IOException;
+    Documents create(String fileName, MultipartFile file);
 
-    void update(DocumentsDtoRequest documentsDtoRequest, Long id) throws IOException;
+    Documents update(String fileName, MultipartFile file, Long id);
 
     void delete(Long id);
 }

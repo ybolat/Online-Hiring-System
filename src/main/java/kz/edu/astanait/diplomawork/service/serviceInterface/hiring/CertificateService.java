@@ -1,7 +1,7 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.CertificateDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Certificate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
@@ -15,9 +15,9 @@ public interface CertificateService {
 
     Certificate getByIdThrowException(Long id);
 
-    void create(CertificateDtoRequest certificateDtoRequest, Principal principal);
+    void create(String fileName, MultipartFile file, Principal principal);
 
-    void update(CertificateDtoRequest certificateDtoRequest, Long id);
+    void update(Long id, String fileName, MultipartFile file, Principal principal);
 
-    void delete(Long id);
+    void delete(Long id, Principal principal);
 }

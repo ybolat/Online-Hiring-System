@@ -12,6 +12,4 @@ public class DocumentsDtoResponse {
     private String document;
 
     private String documentName;
-
-    private UserDtoResponse userDtoResponse;
 }

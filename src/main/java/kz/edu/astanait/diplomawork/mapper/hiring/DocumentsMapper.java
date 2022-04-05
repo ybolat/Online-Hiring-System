@@ -14,7 +14,6 @@ public class DocumentsMapper {
         documents.setId(documents.getId());
         if(Strings.isNotBlank(documents.getDocument())) documentsDtoResponse.setDocument(documents.getDocument());
         if(Strings.isNotBlank(documents.getDocumentName())) documentsDtoResponse.setDocumentName(documents.getDocumentName());
-        if(Objects.nonNull(documents.getUser())) documentsDtoResponse.setUserDtoResponse(UserMapper.userToDto(documents.getUser()));
         return documentsDtoResponse;
     }
 }

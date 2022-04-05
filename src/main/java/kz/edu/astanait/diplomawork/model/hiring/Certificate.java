@@ -18,6 +18,7 @@ public class Certificate {
     @JoinColumn(name = "user_professional_info_id")
     private UserProfessionalInfo userProfessionalInfo;
 
-    @Column(name = "certificate")
-    private String certificate;
+    @ManyToOne
+    @JoinColumn(name = "documents_id")
+    private Documents documents;
 }

@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
-import kz.edu.astanait.diplomawork.model.user.User;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,19 +10,15 @@ import javax.persistence.*;
 public class Documents {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "document")
-    private byte[] document;
+    private String document;
 
     @Column(name = "content_type")
     private String contentType;
 
     @Column(name = "document_name")
     private String documentName;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 }

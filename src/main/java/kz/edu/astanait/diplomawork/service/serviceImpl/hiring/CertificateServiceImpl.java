@@ -2,16 +2,21 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.CertificateDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
+import kz.edu.astanait.diplomawork.exception.domain.CustomException;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.CertificateRepository;
+import kz.edu.astanait.diplomawork.service.serviceImpl.utils.SecurityUtils;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.CertificateService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.DocumentsService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,11 +30,13 @@ public class CertificateServiceImpl implements CertificateService {
     private final CertificateRepository certificateRepository;
 
     private final UserProfessionalInfoService userProfessionalInfoService;
+    private final DocumentsService documentsService;
 
     @Autowired
-    public CertificateServiceImpl(CertificateRepository certificateRepository, UserProfessionalInfoService userProfessionalInfoService) {
+    public CertificateServiceImpl(CertificateRepository certificateRepository, UserProfessionalInfoService userProfessionalInfoService, DocumentsService documentsService) {
         this.certificateRepository = certificateRepository;
         this.userProfessionalInfoService = userProfessionalInfoService;
+        this.documentsService = documentsService;
     }
 
     @Override
@@ -50,13 +57,13 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public void create(CertificateDtoRequest certificateDtoRequest, Principal principal) {
+    public void create(String fileName, MultipartFile file, Principal principal) {
         Certificate certificate = new Certificate();
 
         User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
         certificate.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
-        certificate.setCertificate(certificate.getCertificate());
+        certificate.setDocuments(this.documentsService.create(fileName, file));
 
         try{
             this.certificateRepository.save(certificate);
@@ -67,10 +74,12 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public void update(CertificateDtoRequest certificateDtoRequest, Long id) {
+    public void update(Long id, String fileName, MultipartFile file, Principal principal) {
         Certificate certificate = this.getByIdThrowException(id);
 
-        if(Objects.nonNull(certificateDtoRequest.getCertificate())) certificate.setCertificate(certificateDtoRequest.getCertificate());
+        SecurityUtils.checkAccessByPrincipal(certificate.getUserProfessionalInfo().getUser().getEmail(), principal);
+
+        if (Strings.isNotBlank(fileName) || Objects.nonNull(file)) certificate.setDocuments(this.documentsService.update(fileName, file, certificate.getDocuments().getId()));
 
         try{
             this.certificateRepository.save(certificate);
@@ -81,11 +90,13 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id, Principal principal) {
         Certificate certificate = this.getByIdThrowException(id);
 
+        SecurityUtils.checkAccessByPrincipal(certificate.getUserProfessionalInfo().getUser().getEmail(), principal);
+
         try{
-            this.certificateRepository.save(certificate);
+            this.certificateRepository.delete(certificate);
         }catch (Exception e){
             log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "certificate"));

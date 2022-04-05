@@ -12,7 +12,7 @@ public class CertificateMapper {
         CertificateDtoResponse certificateDtoResponse = new CertificateDtoResponse();
         certificateDtoResponse.setId(certificate.getId());
         if(Objects.nonNull(certificate.getUserProfessionalInfo())) certificateDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(certificate.getUserProfessionalInfo()));
-        if(Strings.isNotBlank(certificate.getCertificate())) certificateDtoResponse.setCertificate(certificate.getCertificate());
+        if(Objects.nonNull(certificate.getDocuments())) certificateDtoResponse.setDocumentsDtoResponse(DocumentsMapper.documentsToDto(certificate.getDocuments()));
         return certificateDtoResponse;
     }
 }
