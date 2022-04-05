@@ -9,6 +9,14 @@ create table registration_pin_code(
     pin_code int not null
 );
 
+create table documents
+(
+    id serial primary key,
+    document text not null,
+    document_name text not null,
+    content_type varchar(255) not null
+);
+
 create table academic_degree(
     id serial primary key,
     title varchar(255) not null unique
@@ -245,11 +253,5 @@ create table publication(
   constraint fk_publication_type_id foreign key (publication_type_id) references publication_type (id)
 );
 
-create table documents
-(
-    id serial primary key,
-    document text not null,
-    document_name text not null,
-    content_type varchar(255) not null
-);
+
 
