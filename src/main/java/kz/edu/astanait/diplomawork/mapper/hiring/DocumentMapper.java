@@ -1,15 +1,12 @@
 package kz.edu.astanait.diplomawork.mapper.hiring;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.DocumentsDtoResponse;
-import kz.edu.astanait.diplomawork.mapper.user.UserMapper;
-import kz.edu.astanait.diplomawork.model.hiring.Documents;
+import kz.edu.astanait.diplomawork.model.hiring.Document;
 import org.apache.logging.log4j.util.Strings;
 
-import java.util.Objects;
+public class DocumentMapper {
 
-public class DocumentsMapper {
-
-    public static DocumentsDtoResponse documentsToDto(Documents documents) {
+    public static DocumentsDtoResponse documentsToDto(Document documents) {
         DocumentsDtoResponse documentsDtoResponse = new DocumentsDtoResponse();
         documents.setId(documents.getId());
         if(Strings.isNotBlank(documents.getDocument())) documentsDtoResponse.setDocument(documents.getDocument());

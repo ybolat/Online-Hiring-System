@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/diploma-db
     username: postgres
-    password: 123
+    password: 4245
   servlet:
    multipart:
     max-file-size: 10MB
@@ -26,6 +26,9 @@ security:
     expiration-time: 180_000_000
     jwt-token-header: Jwt-Token
 
+scopus:
+ api:
+  key: 12e49d4f860ec296a32e840aaa5ffb0f
 
 email:
   verification:

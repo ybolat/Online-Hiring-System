@@ -20,5 +20,5 @@ public class Certificate {
 
     @ManyToOne
     @JoinColumn(name = "documents_id")
-    private Documents documents;
+    private Document document;
 }
