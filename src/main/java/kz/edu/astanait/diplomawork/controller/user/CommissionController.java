@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.user;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.user.CommissionMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.CommissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/user/commission")
-public class CommissionController {
+public class CommissionController extends ExceptionHandling {
 
     private final CommissionService commissionService;
 

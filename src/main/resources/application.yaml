@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/diploma-db
     username: postgres
-    password: 4245
+    password: 123
   servlet:
    multipart:
     max-file-size: 10MB

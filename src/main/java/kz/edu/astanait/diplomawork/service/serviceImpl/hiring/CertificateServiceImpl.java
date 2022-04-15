@@ -63,7 +63,7 @@ public class CertificateServiceImpl implements CertificateService {
         User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
         certificate.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
-        certificate.setDocuments(this.documentsService.create(fileName, file));
+        certificate.setDocument(this.documentsService.create(fileName, file));
 
         try{
             this.certificateRepository.save(certificate);
@@ -79,7 +79,7 @@ public class CertificateServiceImpl implements CertificateService {
 
         SecurityUtils.checkAccessByPrincipal(certificate.getUserProfessionalInfo().getUser().getEmail(), principal);
 
-        if (Strings.isNotBlank(fileName) || Objects.nonNull(file)) certificate.setDocuments(this.documentsService.update(fileName, file, certificate.getDocuments().getId()));
+        if (Strings.isNotBlank(fileName) || Objects.nonNull(file)) certificate.setDocument(this.documentsService.update(fileName, file, certificate.getDocument().getId()));
 
         try{
             this.certificateRepository.save(certificate);

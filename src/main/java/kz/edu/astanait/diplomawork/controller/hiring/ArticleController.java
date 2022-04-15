@@ -33,7 +33,7 @@ public class ArticleController {
         return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
     }
 
-    @GetMapping("/get/user-professional/id/{id}/order-by/article-name")
+    @GetMapping("/get/user-professional-info/id/{id}/order-by/article-name")
     public ResponseEntity<List<ArticleDtoResponse>> getAllByUserProfessionalInfoIdOrderByArticleName(@PathVariable(name = "id") Long id) {
         List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserProfessionalInfoIdOrderByArticleName(id)
                 .stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
