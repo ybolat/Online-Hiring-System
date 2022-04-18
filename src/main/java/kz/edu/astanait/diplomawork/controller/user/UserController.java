@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.user;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserAuthorizationDtoRequest;
+import kz.edu.astanait.diplomawork.dto.requestDto.user.UserChangePasswordDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserRegistrationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.user.UserMapper;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -48,9 +50,9 @@ public class UserController {
     }
 
     @PutMapping("/change-password")
-    public ResponseEntity<HttpStatus> changePassword(@RequestParam(name = "email") String email,
-                                                     @RequestParam(name = "password") String password) {
-        this.userService.changePassword(email, password);
+    public ResponseEntity<HttpStatus> changePassword(@Valid @RequestBody UserChangePasswordDtoRequest userDto,
+                                                     Principal principal) {
+        this.userService.changePassword(principal, userDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.user;
 import static kz.edu.astanait.diplomawork.exception.ExceptionDescription.*;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserAuthorizationDtoRequest;
+import kz.edu.astanait.diplomawork.dto.requestDto.user.UserChangePasswordDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserRegistrationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.enviroment.JWTEnvironmentBuilder;
@@ -32,6 +33,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.Optional;
 
 @Service
@@ -142,10 +144,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void changePassword(String email, String password) {
-        User user = this.getByEmailThrowException(email);
+    public void changePassword(Principal principal, UserChangePasswordDtoRequest userDto) {
+        User user = this.getByEmailThrowException(principal.getName());
 
-        user.setPassword(this.encoder.encode(password));
+        user.setPassword(this.encoder.encode(userDto.getPassword()));
 
         try {
             this.userRepository.save(user);

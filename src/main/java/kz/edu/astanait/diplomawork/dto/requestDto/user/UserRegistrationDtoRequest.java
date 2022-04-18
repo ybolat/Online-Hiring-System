@@ -12,7 +12,7 @@ public class UserRegistrationDtoRequest {
     private String email;
 
     @NotNull(message = "Пароль не может быть пустым.")
-    @Min(value = 8)
+    @Min(value = 8, message = "Длина пароля должна быть не менее 8 символов.")
     private String password;
     
     @NotNull(message = "Имя не может быть пустым.")
