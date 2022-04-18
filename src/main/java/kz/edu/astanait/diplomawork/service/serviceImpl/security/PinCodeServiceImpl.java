@@ -6,7 +6,7 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.security.PinCode;
 import kz.edu.astanait.diplomawork.model.user.User;
-import kz.edu.astanait.diplomawork.repository.security.RegistrationPinCodeRepository;
+import kz.edu.astanait.diplomawork.repository.security.PinCodeRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.PinCodeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.utils.EmailService;
@@ -14,26 +14,30 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
 public class PinCodeServiceImpl implements PinCodeService {
 
-    private final RegistrationPinCodeRepository registrationPinCodeRepository;
+    private final PinCodeRepository pinCodeRepository;
     private final UserService userService;
     private final EmailService emailService;
 
     @Autowired
-    public PinCodeServiceImpl(RegistrationPinCodeRepository registrationPinCodeRepository, UserService userService, EmailService emailService) {
-        this.registrationPinCodeRepository = registrationPinCodeRepository;
+    public PinCodeServiceImpl(PinCodeRepository pinCodeRepository, UserService userService, EmailService emailService) {
+        this.pinCodeRepository = pinCodeRepository;
         this.userService = userService;
         this.emailService = emailService;
     }
 
     @Override
     public Optional<PinCode> getByUserEmail(String email) {
-        return this.registrationPinCodeRepository.findByUserEmail(email);
+        return this.pinCodeRepository.findByUserEmail(email);
     }
 
     @Override
@@ -64,7 +68,7 @@ public class PinCodeServiceImpl implements PinCodeService {
         registrationPinCode.setPinCode(pinCode);
 
         try {
-            this.registrationPinCodeRepository.save(registrationPinCode);
+            this.pinCodeRepository.save(registrationPinCode);
             this.emailService.sendVerificationPinCode(user, pinCode);
         } catch (Exception e) {
             log.error(e);
@@ -75,8 +79,23 @@ public class PinCodeServiceImpl implements PinCodeService {
 
     @Override
     public PinCode checkPinCode(Integer pinCode, String email) {
-        return this.registrationPinCodeRepository.findByPinCodeAndUserEmail(pinCode, email)
+        this.deleteInvalidPinCode();
+
+        return this.pinCodeRepository.findByPinCodeAndUserEmail(pinCode, email)
                 .orElseThrow(() -> new CustomException("Пин код не валидный, попробуйте еще раз."));
+    }
+
+    private void deleteInvalidPinCode() {
+        List<PinCode> pinCodeList = this.pinCodeRepository.findAll();
+        pinCodeList = pinCodeList.stream().filter(v -> v.getCreatedDate().plusMinutes(30).isBefore(LocalDateTime.now()))
+        .collect(Collectors.toList());
+
+        try{
+            this.pinCodeRepository.deleteAll(pinCodeList);
+        }
+        catch (Exception e){
+            log.error(e);
+        }
     }
 }
 

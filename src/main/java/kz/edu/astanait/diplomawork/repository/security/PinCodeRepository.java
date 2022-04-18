@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RegistrationPinCodeRepository extends JpaRepository<PinCode, Long> {
+public interface PinCodeRepository extends JpaRepository<PinCode, Long> {
     Optional<PinCode> findByPinCodeAndUserEmail(Integer pinCode, String email);
     Optional<PinCode> findByUserEmail(String email);
 }
