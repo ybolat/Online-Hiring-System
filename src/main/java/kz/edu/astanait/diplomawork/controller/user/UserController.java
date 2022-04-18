@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.dto.requestDto.user.UserAuthorizationDtoReque
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserChangePasswordDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserRegistrationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.user.UserMapper;
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
@@ -13,13 +14,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/user")
-public class UserController {
+public class UserController extends ExceptionHandling {
 
     private final UserService userService;
 
@@ -53,6 +55,12 @@ public class UserController {
     public ResponseEntity<HttpStatus> changePassword(@Valid @RequestBody UserChangePasswordDtoRequest userDto,
                                                      Principal principal) {
         this.userService.changePassword(principal, userDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/forgot-password")
+    public ResponseEntity<HttpStatus> changePassword(@RequestParam(name = "email") String email) throws MessagingException {
+        this.userService.forgotPassword(email);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

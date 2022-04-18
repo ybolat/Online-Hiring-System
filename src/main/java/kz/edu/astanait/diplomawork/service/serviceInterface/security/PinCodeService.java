@@ -13,4 +13,6 @@ public interface PinCodeService {
     Optional<PinCode> getByUserEmail(String email);
 
     PinCode getByUserEmailThrowException(String email);
+
+    String generatePassword();
 }

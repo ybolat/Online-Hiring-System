@@ -34,6 +34,12 @@ public class EmailServiceImpl implements EmailService {
         sendEmail(message);
     }
 
+    @Override
+    public void sendMessage(String email, String text) throws MessagingException {
+        Message message = createEmail(email, new Date(), text);
+        sendEmail(message);
+    }
+
     private void sendEmail(Message message) throws MessagingException {
         SMTPTransport smtpTransport = (SMTPTransport) getEmailSession().getTransport(emailEnvironmentBuilder.SIMPLE_MAIL_TRANSFER_PROTOCOL);
         smtpTransport.connect(emailEnvironmentBuilder.GMAIL_SMTP_SERVER, emailEnvironmentBuilder.USERNAME, emailEnvironmentBuilder.PASSWORD);

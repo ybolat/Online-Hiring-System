@@ -18,6 +18,7 @@ import kz.edu.astanait.diplomawork.security.UserPrincipal;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.PinCodeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.utils.EmailService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Optional;
@@ -48,9 +51,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final BCryptPasswordEncoder encoder;
     private final JWTEnvironmentBuilder jwtEnvironmentBuilder;
     private final JWTTokenProvider jwtTokenProvider;
+    private final EmailService emailService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, @Lazy PinCodeService pinCodeService, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder, JWTEnvironmentBuilder jwtEnvironmentBuilder, JWTTokenProvider jwtTokenProvider) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, @Lazy PinCodeService pinCodeService, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder, JWTEnvironmentBuilder jwtEnvironmentBuilder, JWTTokenProvider jwtTokenProvider, EmailService emailService) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.pinCodeService = pinCodeService;
@@ -58,6 +62,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.encoder = encoder;
         this.jwtEnvironmentBuilder = jwtEnvironmentBuilder;
         this.jwtTokenProvider = jwtTokenProvider;
+        this.emailService = emailService;
     }
 
     @Override
@@ -155,6 +160,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "changing", "password"));
         }
+    }
+
+    @Override
+    public void forgotPassword(String email) throws MessagingException {
+        User user = this.getByEmailThrowException(email);
+        String generatePassword = this.pinCodeService.generatePassword();
+        System.out.println(generatePassword);
+        user.setPassword(this.encoder.encode(generatePassword));
+
+        try {
+            this.userRepository.save(user);
+        }catch (Exception e){
+            log.error(e);
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "changing", "password"));
+        }
+
+        emailService.sendMessage(user.getEmail(), String.format("Hello, dear %s %s, your new password: %s", user.getName(), user.getLastname(), generatePassword));
     }
 
     private HttpHeaders getJwtHeader(UserPrincipal userPrincipal, String ipFromClient) {

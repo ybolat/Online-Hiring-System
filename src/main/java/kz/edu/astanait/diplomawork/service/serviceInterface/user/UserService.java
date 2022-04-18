@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import kz.edu.astanait.diplomawork.model.user.User;
 import org.springframework.http.ResponseEntity;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Optional;
@@ -29,4 +30,6 @@ public interface UserService {
     ResponseEntity<UserDtoResponse> authorization(UserAuthorizationDtoRequest authorizationDtoRequest, HttpServletRequest request);
 
     void changePassword(Principal principal, UserChangePasswordDtoRequest userDto);
+
+    void forgotPassword(String email) throws MessagingException;
 }

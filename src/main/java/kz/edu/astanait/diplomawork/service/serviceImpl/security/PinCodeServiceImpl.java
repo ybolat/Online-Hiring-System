@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Service
@@ -96,6 +97,30 @@ public class PinCodeServiceImpl implements PinCodeService {
         catch (Exception e){
             log.error(e);
         }
+    }
+
+    public String generatePassword() {
+        StringBuilder password = new StringBuilder();
+
+        String ABC = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+        String characters = "!@#$%&";
+
+        for (int i = 0; i < 4; i++) {
+            int randomNum = ThreadLocalRandom.current().nextInt(0, 51 + 1);
+            password.append(ABC.charAt(randomNum));
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int randomNum = ThreadLocalRandom.current().nextInt(0, 7 + 1);
+            password.append(characters.charAt(randomNum));
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int randomNum = ThreadLocalRandom.current().nextInt(0, 9 + 1);
+            password.append(randomNum);
+        }
+
+        return String.valueOf(password);
     }
 }
 

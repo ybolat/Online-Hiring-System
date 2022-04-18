@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/registration-pin-code")
+@RequestMapping("/api/v1/pin-code")
 public class PinCodeController extends ExceptionHandling {
 
     private final PinCodeService pinCodeService;
