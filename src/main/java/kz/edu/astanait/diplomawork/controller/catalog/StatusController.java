@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
@@ -30,5 +31,11 @@ public class StatusController {
         List<StatusDtoResponse> statusDtoResponseList = this.statusService.getAll()
                 .stream().map(StatusMapper::statusToDto).collect(Collectors.toList());
         return new ResponseEntity<>(statusDtoResponseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/status/title/{title}")
+    public ResponseEntity<StatusDtoResponse> getByStatusName(@PathVariable(name = "title") String title) {
+        StatusDtoResponse statusDtoResponse = StatusMapper.statusToDto(this.statusService.getByStatusNameThrowException(title));
+        return new ResponseEntity<>(statusDtoResponse, HttpStatus.OK);
     }
 }
