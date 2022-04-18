@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.ProjectTypeDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.ProjectTypeMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ProjectTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/catalog/project-type")
 @PreAuthorize("hasRole('ROLE_CHALLENGER')")
-public class ProjectTypeController {
+public class ProjectTypeController extends ExceptionHandling {
 
     private final ProjectTypeService projectTypeService;
 

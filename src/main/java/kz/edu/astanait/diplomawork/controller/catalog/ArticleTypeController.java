@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.ArticleTypeDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.ArticleTypeMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ArticleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/catalog/article-type")
 @PreAuthorize("hasRole('ROLE_CHALLENGER')")
-public class ArticleTypeController {
+public class ArticleTypeController extends ExceptionHandling {
 
     private final ArticleTypeService articleTypeService;
 

@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.PositionDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.PositionMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/catalog/position")
 @PreAuthorize("hasRole('ROLE_CHALLENGER')")
-public class PositionController {
+public class PositionController extends ExceptionHandling {
 
     private final PositionService positionService;
 

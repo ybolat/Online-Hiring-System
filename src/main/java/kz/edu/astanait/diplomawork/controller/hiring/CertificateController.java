@@ -1,7 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.CertificateDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.CertificateDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.hiring.CertificateMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.CertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/hiring/certificate")
 @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMISSION')")
-public class CertificateController {
+public class CertificateController extends ExceptionHandling {
 
     private final CertificateService certificateService;
 

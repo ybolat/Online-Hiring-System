@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/catalog/status")
-@PreAuthorize("hasRole('ROLE_CHALLENGER')")
+@PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMISSION')")
 public class StatusController {
 
     private final StatusService statusService;
@@ -39,3 +39,5 @@ public class StatusController {
         return new ResponseEntity<>(statusDtoResponse, HttpStatus.OK);
     }
 }
+
+

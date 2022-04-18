@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.controller.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ArticleDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.ArticleDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.hiring.ArticleMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/hiring/article")
 @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMSISSION')")
-public class ArticleController {
+public class ArticleController extends ExceptionHandling {
 
     private final ArticleService articleService;
 

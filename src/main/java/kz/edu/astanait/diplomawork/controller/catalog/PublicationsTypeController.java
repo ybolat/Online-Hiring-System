@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.PublicationsTypeDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.PublicationsTypeMapper;
 import kz.edu.astanait.diplomawork.mapper.hiring.PublicationsMapper;
 import kz.edu.astanait.diplomawork.model.catalog.PublicationsType;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/catalog/publications-type")
 @PreAuthorize("hasRole('ROLE_CHALLENGER')")
-public class PublicationsTypeController {
+public class PublicationsTypeController extends ExceptionHandling {
 
     private final PublicationsTypeService publicationsTypeService;
 

@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.controller.hiring;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusByWeekDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.SyllabusDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.hiring.SyllabusMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/hiring/syllabus")
 @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMISSION')")
-public class SyllabusController {
+public class SyllabusController extends ExceptionHandling {
 
     private final SyllabusService syllabusService;
 

@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicDegreeMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicDegreeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/catalog/academic-degree")
 @PreAuthorize("hasRole('ROLE_CHALLENGER')")
-public class AcademicDegreeController {
+public class AcademicDegreeController extends ExceptionHandling {
 
     private final AcademicDegreeService academicDegreeService;
 

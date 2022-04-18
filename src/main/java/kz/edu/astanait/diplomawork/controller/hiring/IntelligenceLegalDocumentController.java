@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.controller.hiring;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ArticleDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.IntelligenceLegalDocumentDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.IntelligenceLegalDocumentDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.hiring.IntelligenceLegalDocumentMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.IntelligenceLegalDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/hiring/intelligence-legal-document")
 @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMISSION')")
-public class IntelligenceLegalDocumentController {
+public class IntelligenceLegalDocumentController extends ExceptionHandling {
 
     private final IntelligenceLegalDocumentService intelligenceLegalDocumentService;
 

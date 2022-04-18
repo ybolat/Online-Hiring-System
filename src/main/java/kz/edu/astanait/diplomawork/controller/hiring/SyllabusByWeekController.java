@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.controller.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusByWeekDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.SyllabusByWeekDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.hiring.SyllabusByWeekMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusByWeekService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/hiring/syllabus-by-week")
 @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMISSION')")
-public class SyllabusByWeekController {
+public class SyllabusByWeekController extends ExceptionHandling {
 
     private final SyllabusByWeekService syllabusByWeekService;
 

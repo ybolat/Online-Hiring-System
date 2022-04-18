@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.controller.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.CommissionActionHistoryDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.CommissionActionHistoryDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.hiring.CertificateMapper;
 import kz.edu.astanait.diplomawork.mapper.hiring.CommissionActionHistoryMapper;
 import kz.edu.astanait.diplomawork.mapper.user.CommissionMapper;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/hiring/commission-action-history")
 @PreAuthorize("hasRole('ROLE_COMMISSION')")
-public class CommissionActionHistoryController {
+public class CommissionActionHistoryController extends ExceptionHandling {
 
     private final CommissionActionHistoryService commissionActionHistoryService;
 
@@ -35,3 +36,5 @@ public class CommissionActionHistoryController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
+
+

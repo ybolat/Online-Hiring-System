@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.catalog.DepartmentDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.DepartmentDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.DepartmentMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/catalog/department")
 @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_ADMIN')")
-public class DepartmentController {
+public class DepartmentController extends ExceptionHandling {
 
     private final DepartmentService departmentService;
 

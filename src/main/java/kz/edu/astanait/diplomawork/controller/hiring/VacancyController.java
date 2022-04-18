@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.controller.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.VacancyDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.VacancyDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.hiring.VacancyMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/hiring/vacancy")
 @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMISSION')")
-public class VacancyController {
+public class VacancyController extends ExceptionHandling {
 
     private final VacancyService vacancyService;
 

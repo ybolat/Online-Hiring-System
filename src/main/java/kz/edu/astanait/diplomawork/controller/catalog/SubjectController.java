@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.catalog.SubjectDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.SubjectDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.SubjectMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.SubjectService;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/catalog/subject")
 @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_ADMIN')")
-public class SubjectController {
+public class SubjectController extends ExceptionHandling {
 
     private final SubjectService subjectService;
 

@@ -1,6 +1,7 @@
 package kz.edu.astanait.diplomawork.controller.catalog;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicTitleDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicTitleMapper;
 import kz.edu.astanait.diplomawork.model.catalog.AcademicTitle;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicTitleService;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/catalog/academic-title")
 @PreAuthorize("hasRole('ROLE_CHALLENGER')")
-public class AcademicTitleController {
+public class AcademicTitleController extends ExceptionHandling {
 
     private final AcademicTitleService academicTitleService;
 

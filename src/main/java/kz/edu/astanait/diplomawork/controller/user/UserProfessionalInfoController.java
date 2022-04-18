@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.controller.user;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserProfessionalInfoDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
+import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.user.UserProfessionalInfoMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/user/user-professional-info")
-public class UserProfessionalInfoController {
+public class UserProfessionalInfoController extends ExceptionHandling {
 
     private final UserProfessionalInfoService userProfessionalInfoService;
 
