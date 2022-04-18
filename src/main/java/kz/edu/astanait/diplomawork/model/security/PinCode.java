@@ -4,11 +4,12 @@ import kz.edu.astanait.diplomawork.model.user.User;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "registration_pin_code")
+@Table(name = "pin_code")
 @Data
-public class RegistrationPinCode {
+public class PinCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +21,12 @@ public class RegistrationPinCode {
 
     @Column(name = "pin_code")
     private Integer pinCode;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdDate = LocalDateTime.now();
+    }
 }

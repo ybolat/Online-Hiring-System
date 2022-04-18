@@ -3,10 +3,11 @@ create table role(
     role_name varchar(255) not null unique
 );
 
-create table registration_pin_code(
+create table pin_code(
     id serial primary key,
     user_id bigint not null unique,
-    pin_code int not null
+    pin_code int not null,
+    created_date timestamp not null
 );
 
 create table documents

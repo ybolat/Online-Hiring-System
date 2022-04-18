@@ -15,7 +15,7 @@ import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.user.UserRepository;
 import kz.edu.astanait.diplomawork.security.JWTTokenProvider;
 import kz.edu.astanait.diplomawork.security.UserPrincipal;
-import kz.edu.astanait.diplomawork.service.serviceInterface.security.RegistrationPinCodeService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.security.PinCodeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -43,17 +43,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
 
     private final RoleService roleService;
-    private final RegistrationPinCodeService registrationPinCodeService;
+    private final PinCodeService pinCodeService;
     private final AuthenticationManager authenticationManager;
     private final BCryptPasswordEncoder encoder;
     private final JWTEnvironmentBuilder jwtEnvironmentBuilder;
     private final JWTTokenProvider jwtTokenProvider;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService, @Lazy RegistrationPinCodeService registrationPinCodeService, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder, JWTEnvironmentBuilder jwtEnvironmentBuilder, JWTTokenProvider jwtTokenProvider) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, @Lazy PinCodeService pinCodeService, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder, JWTEnvironmentBuilder jwtEnvironmentBuilder, JWTTokenProvider jwtTokenProvider) {
         this.userRepository = userRepository;
         this.roleService = roleService;
-        this.registrationPinCodeService = registrationPinCodeService;
+        this.pinCodeService = pinCodeService;
         this.authenticationManager = authenticationManager;
         this.encoder = encoder;
         this.jwtEnvironmentBuilder = jwtEnvironmentBuilder;
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public User activate(String email, Integer pinCode) {
-        User user = this.registrationPinCodeService.checkPinCode(pinCode, email).getUser();
+        User user = this.pinCodeService.checkPinCode(pinCode, email).getUser();
 
         user.setActive(true);
         User createdUser;
