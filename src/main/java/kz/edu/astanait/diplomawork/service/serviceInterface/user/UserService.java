@@ -4,7 +4,6 @@ import kz.edu.astanait.diplomawork.dto.requestDto.user.UserAuthorizationDtoReque
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserChangePasswordDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserRegistrationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
-import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import kz.edu.astanait.diplomawork.model.user.User;
 import org.springframework.http.ResponseEntity;
 

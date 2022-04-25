@@ -14,7 +14,6 @@ public class DiplomaWorkApplication {
         SpringApplication.run(DiplomaWorkApplication.class, args);
     }
 
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
