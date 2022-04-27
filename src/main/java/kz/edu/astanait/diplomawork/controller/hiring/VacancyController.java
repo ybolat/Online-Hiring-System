@@ -26,6 +26,7 @@ public class VacancyController extends ExceptionHandling {
         this.vacancyService = vacancyService;
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/get-all")
     public ResponseEntity<List<VacancyDtoResponse>> getAll() {
         List<VacancyDtoResponse> vacancyDtoResponseList = this.vacancyService.getAll().stream().
