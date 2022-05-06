@@ -34,6 +34,12 @@ public class VacancyController extends ExceptionHandling {
         return new ResponseEntity<>(vacancyDtoResponseList, HttpStatus.OK);
     }
 
+    @GetMapping("/get/id/{id}")
+    public ResponseEntity<VacancyDtoResponse> getById(@PathVariable(name = "id") Long id) {
+        VacancyDtoResponse vacancyDtoResponse = VacancyMapper.vacancyToDto(this.vacancyService.getByIdThrowException(id));
+        return new ResponseEntity<>(vacancyDtoResponse, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody VacancyDtoRequest vacancyDtoRequest) {
         this.vacancyService.create(vacancyDtoRequest);
