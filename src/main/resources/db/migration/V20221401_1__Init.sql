@@ -31,7 +31,7 @@ create table users(
     name varchar(255) not null,
     lastname varchar(255) not null,
     patronymic varchar(255),
-    phone varchar(20) not null,
+    phone varchar(20) not null unique,
     created_date timestamp not null,
     is_active boolean default false,
     is_locked boolean default false,

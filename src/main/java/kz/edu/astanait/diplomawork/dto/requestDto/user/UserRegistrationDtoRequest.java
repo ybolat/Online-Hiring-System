@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 public class UserRegistrationDtoRequest {
@@ -12,7 +13,7 @@ public class UserRegistrationDtoRequest {
     private String email;
 
     @NotNull(message = "Пароль не может быть пустым.")
-    @Min(value = 8, message = "Длина пароля должна быть не менее 8 символов.")
+    @Size(min = 8, message = "Длина пароля должна быть не менее 8 символов.")
     private String password;
     
     @NotNull(message = "Имя не может быть пустым.")
