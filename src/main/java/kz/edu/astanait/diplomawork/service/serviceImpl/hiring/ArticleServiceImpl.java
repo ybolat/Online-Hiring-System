@@ -62,6 +62,10 @@ public class ArticleServiceImpl implements ArticleService {
         return this.articleRepository.findAllByUserProfessionalInfoIdOrderByArticleName(id);
     }
 
+    public void helloWorld() {
+        System.out.println("hello world");
+    }
+
 //    @Override
 //    public Integer getAverageNumOfArticles(LocalDateTime dateTime, Long id) {
 //        List<User> userList = this.userService.getAllAcceptedUsers(dateTime, id);
