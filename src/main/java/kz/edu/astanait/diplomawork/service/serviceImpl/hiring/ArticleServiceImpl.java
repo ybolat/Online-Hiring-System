@@ -62,18 +62,18 @@ public class ArticleServiceImpl implements ArticleService {
         return this.articleRepository.findAllByUserProfessionalInfoIdOrderByArticleName(id);
     }
 
-    @Override
-    public Integer getAverageNumOfArticles(LocalDateTime dateTime, Long id) {
-        List<User> userList = this.userService.getAllAcceptedUsers(dateTime, id);
-        double sum = 0;
-
-        for (int i = 0; i < userList.size(); i++) {
-            List<Article> articleList = this.articleRepository.findByUserId(id);
-            sum += articleList.size();
-        }
-
-        return (int) sum / userList.size();
-    }
+//    @Override
+//    public Integer getAverageNumOfArticles(LocalDateTime dateTime, Long id) {
+//        List<User> userList = this.userService.getAllAcceptedUsers(dateTime, id);
+//        double sum = 0;
+//
+//        for (int i = 0; i < userList.size(); i++) {
+//            List<Article> articleList = this.articleRepository.findByUserId(id);
+//            sum += articleList.size();
+//        }
+//
+//        return (int) sum / userList.size();
+//    }
 
     @Override
     public void create(ArticleDtoRequest articleDtoRequest, Principal principal) {

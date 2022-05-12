@@ -18,7 +18,7 @@ public interface ArticleService {
 
     List<Article> getAllByUserProfessionalInfoIdOrderByArticleName(Long id);
 
-    Integer getAverageNumOfArticles(LocalDateTime dateTime, Long id);
+//    Integer getAverageNumOfArticles(LocalDateTime dateTime, Long id);
 
     void create(ArticleDtoRequest articleDtoRequest, Principal principal);
 
