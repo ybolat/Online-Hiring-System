@@ -22,6 +22,8 @@ public interface RequestService {
 
     List<Request> getAllOrderByCreatedDateDesc(LocalDateTime createdDate);
 
+    Double getPercentageOfAcceptedRequestSince(LocalDateTime startDate, Long statusId);
+
     void create(RequestDtoRequest requestDtoRequest, Principal principal);
 
     void update(RequestDtoRequest requestDtoRequest, Long id);

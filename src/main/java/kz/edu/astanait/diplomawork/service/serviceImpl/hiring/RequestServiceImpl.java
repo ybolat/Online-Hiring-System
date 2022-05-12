@@ -68,6 +68,13 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public Double getPercentageOfAcceptedRequestSince(LocalDateTime startDate, Long statusId) {
+        Double acceptedRequestNumber = this.requestRepository.findNumberOfAllAcceptedSince(startDate, statusId);
+        Double allRequestNumber = this.requestRepository.findNumberOfAllSince(startDate);
+        return (acceptedRequestNumber * 100) / allRequestNumber;
+    }
+
+    @Override
     public void create(RequestDtoRequest requestDtoRequest, Principal principal) {
         Request request = new Request();
 

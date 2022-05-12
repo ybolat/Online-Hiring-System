@@ -36,6 +36,13 @@ public class RequestController extends ExceptionHandling {
         return new ResponseEntity<>(requestDtoResponseList, HttpStatus.OK);
     }
 
+    @GetMapping("/get/percentage-of-accepted")
+    public ResponseEntity<Double> getPercentageOfAcceptedRequestSince(@RequestParam(name = "date") LocalDateTime startedDate,
+                                                                      @RequestParam(name = "statusID") Long id) {
+        Double percentage = this.requestService.getPercentageOfAcceptedRequestSince(startedDate, id);
+        return new ResponseEntity<>(percentage, HttpStatus.OK);
+    }
+
     @GetMapping("/get/page/{num}")
     public ResponseEntity<List<RequestDtoResponse>> getLimited(@PathVariable(name = "num") int num) {
         List<RequestDtoResponse> requestDtoResponseList = this.requestService.getAll()
@@ -46,25 +53,6 @@ public class RequestController extends ExceptionHandling {
             result.add(requestDtoResponseList.get(i));
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody RequestDtoRequest requestDtoRequest, Principal principal) {
-        this.requestService.create(requestDtoRequest, principal);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @PutMapping("/update/id/{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody RequestDtoRequest requestDtoRequest,
-                                             @PathVariable(name = "id") Long id) {
-        this.requestService.update(requestDtoRequest, id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/id/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
-        this.requestService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get-all/status/id/{id}")
@@ -86,5 +74,24 @@ public class RequestController extends ExceptionHandling {
         List<RequestDtoResponse> requestDtoResponseList = this.requestService.getAllOrderByCreatedDateDesc(createdDate).stream().
                 map(RequestMapper::requestToDto).collect(Collectors.toList());
         return new ResponseEntity<>(requestDtoResponseList, HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody RequestDtoRequest requestDtoRequest, Principal principal) {
+        this.requestService.create(requestDtoRequest, principal);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/id/{id}")
+    public ResponseEntity<HttpStatus> update(@RequestBody RequestDtoRequest requestDtoRequest,
+                                             @PathVariable(name = "id") Long id) {
+        this.requestService.update(requestDtoRequest, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/id/{id}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
+        this.requestService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
