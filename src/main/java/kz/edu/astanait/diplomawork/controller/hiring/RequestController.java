@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,18 @@ public class RequestController extends ExceptionHandling {
         List<RequestDtoResponse> requestDtoResponseList = this.requestService.getAll()
                 .stream().map(RequestMapper::requestToDto).collect(Collectors.toList());
         return new ResponseEntity<>(requestDtoResponseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/page/{num}")
+    public ResponseEntity<List<RequestDtoResponse>> getLimited(@PathVariable(name = "num") int num) {
+        List<RequestDtoResponse> requestDtoResponseList = this.requestService.getAll()
+                .stream().map(RequestMapper::requestToDto).collect(Collectors.toList());
+        List<RequestDtoResponse> result = new ArrayList<>();
+
+        for (int i = (num - 1) * 2; i < num * 3; i++) {
+            result.add(requestDtoResponseList.get(i));
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping("/create")
