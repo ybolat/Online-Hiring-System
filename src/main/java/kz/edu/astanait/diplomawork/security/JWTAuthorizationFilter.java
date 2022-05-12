@@ -44,23 +44,23 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.OK.value());
         } else {
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-            if (authorizationHeader == null || !authorizationHeader.startsWith(jwtEnvironmentBuilder.getTOKEN_PREFIX())) {
+            if (authorizationHeader == null || !authorizationHeader.startsWith(this.jwtEnvironmentBuilder.getTOKEN_PREFIX())) {
                 filterChain.doFilter(request, response);
                 return;
             }
-            String token = authorizationHeader.substring(jwtEnvironmentBuilder.getTOKEN_PREFIX().length());
+            String token = authorizationHeader.substring(this.jwtEnvironmentBuilder.getTOKEN_PREFIX().length());
             String username;
             UserPrincipal userPrincipal;
             try {
-                username = jwtTokenProvider.getSubject(token);
-                userPrincipal = new UserPrincipal(userService.getByEmailThrowException(username));
+                username = this.jwtTokenProvider.getSubject(token);
+                userPrincipal = new UserPrincipal(this.userService.getByEmailThrowException(username));
                 if (!userPrincipal.isAccountNonLocked()) {
                     response.setStatus(UNAUTHORIZED.value());
                     return;
                 }
-                if (jwtTokenProvider.isTokenValid(username, token, request)) {
+                if (this.jwtTokenProvider.isTokenValid(username, token, request)) {
                     List<GrantedAuthority> authorities = new ArrayList<>(userPrincipal.getAuthorities());
-                    Authentication authentication = jwtTokenProvider.getAuthentication(username, authorities, request);
+                    Authentication authentication = this.jwtTokenProvider.getAuthentication(username, authorities, request);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 } else {
                     SecurityContextHolder.clearContext();

@@ -30,11 +30,11 @@ public class JWTTokenProvider {
     }
 
     public String generateToken(UserPrincipal userPrincipal, String ipFromClient) {
-        return JWT.create().withIssuer(jwtEnvironmentBuilder.getISSUER()).withAudience(jwtEnvironmentBuilder.getAUDIENCE())
+        return JWT.create().withIssuer(this.jwtEnvironmentBuilder.getISSUER()).withAudience(this.jwtEnvironmentBuilder.getAUDIENCE())
                 .withIssuedAt(new Date()).withSubject(userPrincipal.getUsername())
-                .withClaim(jwtEnvironmentBuilder.getCLIENT_IP(), ipFromClient)
-                .withExpiresAt(new Date(System.currentTimeMillis() + jwtEnvironmentBuilder.getEXPIRATION_TIME()))
-                .sign(HMAC512(jwtEnvironmentBuilder.getSECRET().getBytes()));
+                .withClaim(this.jwtEnvironmentBuilder.getCLIENT_IP(), ipFromClient)
+                .withExpiresAt(new Date(System.currentTimeMillis() + this.jwtEnvironmentBuilder.getEXPIRATION_TIME()))
+                .sign(HMAC512(this.jwtEnvironmentBuilder.getSECRET().getBytes()));
     }
 
     public String getSubject(String token) {
@@ -54,7 +54,7 @@ public class JWTTokenProvider {
         Date expiration = jwtVerifier.verify(token).getExpiresAt();
         String ipFromClient = getIpFromClient(request);
         if (username != null && !expiration.before(new Date()) && jwtVerifier.verify(token)
-                .getClaim(jwtEnvironmentBuilder.getCLIENT_IP()).asString().equals(ipFromClient)) {
+                .getClaim(this.jwtEnvironmentBuilder.getCLIENT_IP()).asString().equals(ipFromClient)) {
             return true;
         } else {
             throw new TokenExpiredException("Token is not valid");
@@ -69,10 +69,10 @@ public class JWTTokenProvider {
         JWTVerifier jwtVerifier;
 
         try {
-            Algorithm algorithm = HMAC512(jwtEnvironmentBuilder.getSECRET());
-            jwtVerifier = JWT.require(algorithm).withIssuer(jwtEnvironmentBuilder.getISSUER()).build();
+            Algorithm algorithm = HMAC512(this.jwtEnvironmentBuilder.getSECRET());
+            jwtVerifier = JWT.require(algorithm).withIssuer(this.jwtEnvironmentBuilder.getISSUER()).build();
         }catch (JWTVerificationException e){
-            throw new JWTVerificationException(jwtEnvironmentBuilder.getTOKEN_CANNOT_BE_VERIFIED());
+            throw new JWTVerificationException(this.jwtEnvironmentBuilder.getTOKEN_CANNOT_BE_VERIFIED());
         }
         return jwtVerifier;
     }
