@@ -24,7 +24,7 @@ security:
     token-prefix: 'Bearer '
     audience: Astanait.edu.kz client
     expiration-time: 180_000_000
-    jwt-token-header: Jwt-Token
+    jwt-token-header: JwtToken
 
 scopus:
  api:
