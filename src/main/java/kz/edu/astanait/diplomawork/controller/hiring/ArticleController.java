@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,13 @@ public class ArticleController extends ExceptionHandling {
         List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getAllByUserProfessionalInfoId(id)
                 .stream().map(ArticleMapper::articleToDto).collect(Collectors.toList());
         return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/average")
+    public ResponseEntity<Integer> getAverageNumOfArticles(@RequestParam(name = "dateTime") LocalDateTime dateTime,
+                                                           @RequestParam(name = "statusId") Long id) {
+        Integer average = this.articleService.getAverageNumOfArticles(dateTime, id);
+        return new ResponseEntity<>(average, HttpStatus.OK);
     }
 
     @GetMapping("/get/user-professional-info/id/{id}/order-by/article-name")

@@ -37,6 +37,8 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -85,6 +87,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public Optional<User> getByID(Long id) {
         return this.userRepository.findById(id);
+    }
+
+    @Override
+    public List<User> getAllAcceptedUsers(LocalDateTime dateTime, Long id) {
+        return this.userRepository.findAllAcceptedUsers(dateTime, id);
     }
 
     @Override

@@ -10,12 +10,14 @@ import kz.edu.astanait.diplomawork.repository.hiring.ArticleRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ArticleTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ArticleService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,12 +30,14 @@ public class ArticleServiceImpl implements ArticleService {
 
     private final UserProfessionalInfoService userProfessionalInfoService;
     private final ArticleTypeService articleTypeService;
+    private final UserService userService;
 
     @Autowired
-    public ArticleServiceImpl(ArticleRepository articleRepository, UserProfessionalInfoService userProfessionalInfoService, ArticleTypeService articleTypeService) {
+    public ArticleServiceImpl(ArticleRepository articleRepository, UserProfessionalInfoService userProfessionalInfoService, ArticleTypeService articleTypeService, UserService userService) {
         this.articleRepository = articleRepository;
         this.userProfessionalInfoService = userProfessionalInfoService;
         this.articleTypeService = articleTypeService;
+        this.userService = userService;
     }
 
     @Override
@@ -56,6 +60,19 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getAllByUserProfessionalInfoIdOrderByArticleName(Long id) {
         return this.articleRepository.findAllByUserProfessionalInfoIdOrderByArticleName(id);
+    }
+
+    @Override
+    public Integer getAverageNumOfArticles(LocalDateTime dateTime, Long id) {
+        List<User> userList = this.userService.getAllAcceptedUsers(dateTime, id);
+        double sum = 0;
+
+        for (int i = 0; i < userList.size(); i++) {
+            List<Article> articleList = this.articleRepository.findByUserId(id);
+            sum += articleList.size();
+        }
+
+        return (int) sum / userList.size();
     }
 
     @Override

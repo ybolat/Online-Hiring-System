@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -19,6 +21,8 @@ public interface UserService {
     User getByEmailThrowException(String email);
 
     Optional<User> getByID(Long id);
+
+    List<User> getAllAcceptedUsers(LocalDateTime dateTime, Long id);
 
     User getByIdThrowException(Long id);
 
