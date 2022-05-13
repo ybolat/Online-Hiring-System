@@ -35,12 +35,12 @@ public class ArticleController extends ExceptionHandling {
         return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
     }
 
-//    @GetMapping("/get/average")
-//    public ResponseEntity<Integer> getAverageNumOfArticles(@RequestParam(name = "dateTime") LocalDateTime dateTime,
-//                                                           @RequestParam(name = "statusId") Long id) {
-//        Integer average = this.articleService.getAverageNumOfArticles(dateTime, id);
-//        return new ResponseEntity<>(average, HttpStatus.OK);
-//    }
+    @GetMapping("/get/average")
+    public ResponseEntity<Integer> getAverageNumOfArticles(@RequestParam(name = "dateTime") LocalDateTime dateTime,
+                                                           @RequestParam(name = "statusId") Long id) {
+        Integer average = this.articleService.getAverageNumOfArticles(dateTime, id);
+        return new ResponseEntity<>(average, HttpStatus.OK);
+    }
 
     @GetMapping("/get/user-professional-info/id/{id}/order-by/article-name")
     public ResponseEntity<List<ArticleDtoResponse>> getAllByUserProfessionalInfoIdOrderByArticleName(@PathVariable(name = "id") Long id) {
