@@ -32,6 +32,8 @@ scopus:
 
 teams:
  userPrincipal: y.bolat@astanait.edu.kz
+ login:
+  resource: https://graph.microsoft.com
 
 
 email:

@@ -1,15 +1,19 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.feign;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.feign.teams.TeamsEventDtoRequest;
+import kz.edu.astanait.diplomawork.dto.requestDto.feign.teams.TeamsLoginDtoRequest;
 import kz.edu.astanait.diplomawork.feignClient.TeamsClient;
+import kz.edu.astanait.diplomawork.feignClient.TeamsLoginClient;
+import kz.edu.astanait.diplomawork.model.user.TeamsAdminCredential;
 import kz.edu.astanait.diplomawork.service.serviceInterface.feign.TeamsService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.TeamsAdminCredentialService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
+import java.util.HashMap;
 
 @Service
 public class TeamsServiceImpl implements TeamsService {
@@ -17,15 +21,18 @@ public class TeamsServiceImpl implements TeamsService {
     @Value("${teams.userPrincipal}")
     private String userPrincipal;
 
+    @Value("${teams.login.resource}")
+    private String resource;
+
     private final TeamsClient teamsClient;
+    private final TeamsLoginClient teamsLoginClient;
+    private final TeamsAdminCredentialService teamsAdminCredentialService;
 
     @Autowired
-    public TeamsServiceImpl(TeamsClient teamsClient) {
+    public TeamsServiceImpl(TeamsClient teamsClient, TeamsLoginClient teamsLoginClient, TeamsAdminCredentialService teamsAdminCredentialService) {
         this.teamsClient = teamsClient;
-    }
-
-    private Object teamsLogin(Principal principal) {
-
+        this.teamsLoginClient = teamsLoginClient;
+        this.teamsAdminCredentialService = teamsAdminCredentialService;
     }
 
     @Override
@@ -78,8 +85,24 @@ public class TeamsServiceImpl implements TeamsService {
         json.put("onlineMeetingProvider", "teamsForBusiness");
 
         String body = json.toString();
-        String token = "eyJ0eXAiOiJKV1QiLCJub25jZSI6Ik1LbHh3MVFvcnZsbl9HamM5VmVadlRMT0ZsQXoyR1BONlhpMU9GNUF5RzgiLCJhbGciOiJSUzI1NiIsIng1dCI6ImpTMVhvMU9XRGpfNTJ2YndHTmd2UU8yVnpNYyIsImtpZCI6ImpTMVhvMU9XRGpfNTJ2YndHTmd2UU8yVnpNYyJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8xNThmMTVmMy04M2UwLTQ5MDYtODI0Yy02OWJkYzUwZDlkNjEvIiwiaWF0IjoxNjUyNTI1MDg3LCJuYmYiOjE2NTI1MjUwODcsImV4cCI6MTY1MjUyODk4NywiYWlvIjoiRTJaZ1lGRGRLZER6N2JwTU1GdnA2MFdIQThwdkF3QT0iLCJhcHBfZGlzcGxheW5hbWUiOiJZZXJhc3N5bF9EaXBsb21hX1dvcmsiLCJhcHBpZCI6ImE0ZTdiNGQ4LTJiOWEtNDVjYy04ZmI1LWZlZDY2MGVkMTg0NSIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzE1OGYxNWYzLTgzZTAtNDkwNi04MjRjLTY5YmRjNTBkOWQ2MS8iLCJpZHR5cCI6ImFwcCIsIm9pZCI6IjRiODJmYTM4LTBjNDktNDk3OC1iYmM2LTMxZGZkYWE0NDM3YSIsInJoIjoiMC5BVHdBOHhXUEZlQ0RCa21DVEdtOXhRMmRZUU1BQUFBQUFBQUF3QUFBQUFBQUFBQThBQUEuIiwicm9sZXMiOlsiQ2FsZW5kYXJzLlJlYWRXcml0ZSJdLCJzdWIiOiI0YjgyZmEzOC0wYzQ5LTQ5NzgtYmJjNi0zMWRmZGFhNDQzN2EiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiIxNThmMTVmMy04M2UwLTQ5MDYtODI0Yy02OWJkYzUwZDlkNjEiLCJ1dGkiOiJLa0RoNEJPWUlVeVNKTzFOX3hjSUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyIwOTk3YTFkMC0wZDFkLTRhY2ItYjQwOC1kNWNhNzMxMjFlOTAiXSwieG1zX3RjZHQiOjE1NjY1MjcyNTl9.dtojCfRF-R1dnhBWrInYipzvWvyyOPMDRdY3M9k4BsulCntxUpyyToDCVMB8eSRA7xSFfsZ198v9ZpGBlqT4mF208SeJAlMFrqk6-I3Yu2nHb6zTwS5VewL4ipjVyCb6AWOiNpKJV4b-8CEOUJ2x9I78qpF8BC4YRHaRrMoKHqKytOer8IoEEl3VczCu6huOiyRV8S5dcvA9IOST8FptpLpc4HpVjpbF7wZzfWweeDFI2hXGoGB-oHp0TmIMZnGY9bcd5svyGNpf-gDDGzfr8zYk9jYu1cpde19nP9ykCv8r73GUMimCiwKONUtwNIa8ArF0-yx1HJGMxZ1669BbJQ";
+
+        String token = this.teamsLogin();
 
         return this.teamsClient.createEvent(token, userPrincipal, body);
+    }
+
+    private String teamsLogin() {
+        TeamsAdminCredential teamsAdminCredential = this.teamsAdminCredentialService.getByCommissionEmailThrowException("y.bolat@astanait.edu.kz");
+
+        String directoryId = teamsAdminCredential.getDirectoryId();
+
+        TeamsLoginDtoRequest teamsLoginDtoRequest = new TeamsLoginDtoRequest();
+        teamsLoginDtoRequest.setClient_id(teamsAdminCredential.getClientId());
+        teamsLoginDtoRequest.setGrant_type(teamsAdminCredential.getGrantType());
+        teamsLoginDtoRequest.setResource(resource);
+        teamsLoginDtoRequest.setClient_secret(teamsAdminCredential.getClient_secret());
+
+        HashMap<String, String> response = this.teamsLoginClient.teamsLogin(directoryId, teamsLoginDtoRequest);
+        return response.get("access_token");
     }
 }

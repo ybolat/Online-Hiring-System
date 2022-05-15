@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class TeamsLoginDtoRequest {
-    private String grantType;
-    private String clientId;
-    private String clientSecret;
+    private String grant_type;
+    private String client_id;
+    private String client_secret;
     private String resource;
 }

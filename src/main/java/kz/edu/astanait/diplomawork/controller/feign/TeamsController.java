@@ -24,6 +24,6 @@ public class TeamsController {
     @PostMapping("/create/event")
     public ResponseEntity<Object> createEvent(@RequestBody TeamsEventDtoRequest teamsEventDtoRequest) {
         Object teams = teamsService.create(teamsEventDtoRequest);
-        return new ResponseEntity<>(teams, HttpStatus.OK);
+        return new ResponseEntity<>(teams, HttpStatus.CREATED);
     }
 }
