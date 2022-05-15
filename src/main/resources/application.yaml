@@ -30,6 +30,10 @@ scopus:
  api:
   key: 12e49d4f860ec296a32e840aaa5ffb0f
 
+teams:
+ userPrincipal: y.bolat@astanait.edu.kz
+
+
 email:
   verification:
    simple_mail_transfer_protocol: smtps
