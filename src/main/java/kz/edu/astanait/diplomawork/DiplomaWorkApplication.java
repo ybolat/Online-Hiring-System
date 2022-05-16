@@ -21,17 +21,17 @@ public class DiplomaWorkApplication {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigure() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .exposedHeaders("*")
-                        .allowedOrigins("http://localhost:3000");
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigure() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+//                        .allowedHeaders("*")
+//                        .exposedHeaders("*")
+//                        .allowedOrigins("http://localhost:3000");
+//            }
+//        };
+//    }
 }
