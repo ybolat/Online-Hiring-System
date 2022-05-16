@@ -49,21 +49,21 @@ create table position(
 
 );
 
+create table academic_title(
+    id serial primary key,
+    title varchar(255) not null
+);
+
 create table vacancy(
     id serial primary key,
     department_id bigint not null,
-    position_id bigint not null,
+    academic_title_id bigint not null,
     link_directory varchar(500) not null,
     start_date timestamp not null,
     finish_date timestamp not null,
     number bigint not null,
     constraint fk_department_id foreign key (department_id) references department (id),
-    constraint fk_position_id foreign key (position_id) references position (id)
-);
-
-create table academic_title(
-    id serial primary key,
-    title varchar(255) not null
+    constraint fk_academic_title_id foreign key (academic_title_id) references academic_title (id)
 );
 
 create table user_professional_info(
