@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.model.security;
+package kz.edu.astanait.diplomawork.security;
 
 import kz.edu.astanait.diplomawork.model.user.User;
 import org.springframework.security.core.GrantedAuthority;

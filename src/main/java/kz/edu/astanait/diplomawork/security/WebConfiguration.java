@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.model.security;
+package kz.edu.astanait.diplomawork.security;
 
 import kz.edu.astanait.diplomawork.constant.SecurityConstant;
 import kz.edu.astanait.diplomawork.service.serviceImpl.user.UserServiceImpl;
@@ -39,7 +39,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests().antMatchers(SecurityConstant.PERMITTED_URL).permitAll()
                 .anyRequest().authenticated().and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

@@ -1,7 +1,6 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.user;
 
 import kz.edu.astanait.diplomawork.dto.responseDto.security.RoleDtoResponse;
-import kz.edu.astanait.diplomawork.model.security.Role;
 import lombok.Data;
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.model.security;
+package kz.edu.astanait.diplomawork.security;
 
 import kz.edu.astanait.diplomawork.enviroment.JWTEnvironmentBuilder;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
