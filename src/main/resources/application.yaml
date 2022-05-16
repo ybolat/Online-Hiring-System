@@ -26,15 +26,10 @@ security:
     expiration-time: 180_000_000
     jwt-token-header: JwtToken
 
-scopus:
- api:
-  key: 12e49d4f860ec296a32e840aaa5ffb0f
-
 teams:
  userPrincipal: y.bolat@astanait.edu.kz
  login:
   resource: https://graph.microsoft.com
-
 
 email:
   verification:
