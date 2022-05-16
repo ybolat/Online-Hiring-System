@@ -50,4 +50,5 @@ public class User {
     protected void onCreate() {
         this.createdDate = LocalDateTime.now();
     }
+
 }

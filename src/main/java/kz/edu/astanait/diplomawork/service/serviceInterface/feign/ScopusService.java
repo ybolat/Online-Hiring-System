@@ -1,6 +1,10 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.feign;
 
+import java.security.Principal;
+
 public interface ScopusService {
 
-    void getScopusInformation(Long id);
+    boolean getAuthorInformation(Principal principal);
+
+    void getScopusInformation(Principal principal);
 }

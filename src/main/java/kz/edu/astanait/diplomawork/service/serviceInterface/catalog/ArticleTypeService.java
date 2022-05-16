@@ -12,4 +12,8 @@ public interface ArticleTypeService {
     Optional<ArticleType> getById(Long id);
 
     ArticleType getByIdThrowException(Long id);
+
+    Optional<ArticleType> getByName(String name);
+
+    ArticleType getByNameThrowException(String name);
 }

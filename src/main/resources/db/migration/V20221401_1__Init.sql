@@ -142,6 +142,8 @@ create table article(
     user_professional_info_id bigint not null,
     article_type_id bigint not null,
     link text,
+    authors text not null,
+    source text not null,
     constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
     constraint fk_article_type_id foreign key (article_type_id) references article_type (id)
 );
@@ -244,15 +246,26 @@ create table publication_type(
 );
 
 create table publication(
-  id serial primary key,
-  name varchar(255) not null,
-  link text not null,
-  published_date timestamp not null,
-  user_professional_info_id bigint not null,
-  publication_type_id bigint not null,
-  constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
-  constraint fk_publication_type_id foreign key (publication_type_id) references publication_type (id)
+    id serial primary key,
+    name varchar(255) not null,
+    link text not null,
+    published_date timestamp not null,
+    user_professional_info_id bigint not null,
+    publication_type_id bigint not null,
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
+    constraint fk_publication_type_id foreign key (publication_type_id) references publication_type (id)
 );
+
+create table teams_admin_credential(
+    id serial primary key,
+    directory_id varchar(255) not null,
+    grant_type varchar(255) not null,
+    client_id varchar(255) not null,
+    client_secret varchar(255) not null,
+    admin_id bigint not null,
+    constraint fk_admin_id foreign key (admin_id) references commission(id)
+);
+
 
 
 

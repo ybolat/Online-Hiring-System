@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.security;
+package kz.edu.astanait.diplomawork.model.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

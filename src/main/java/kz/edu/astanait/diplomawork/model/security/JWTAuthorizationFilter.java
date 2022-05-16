@@ -1,8 +1,7 @@
-package kz.edu.astanait.diplomawork.security;
+package kz.edu.astanait.diplomawork.model.security;
 
 import kz.edu.astanait.diplomawork.enviroment.JWTEnvironmentBuilder;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Component

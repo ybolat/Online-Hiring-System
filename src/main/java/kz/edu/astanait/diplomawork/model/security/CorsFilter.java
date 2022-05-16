@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.security;
+package kz.edu.astanait.diplomawork.model.security;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;

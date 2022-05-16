@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.security;
+package kz.edu.astanait.diplomawork.model.security;
 
 import kz.edu.astanait.diplomawork.constant.SecurityConstant;
 import kz.edu.astanait.diplomawork.service.serviceImpl.user.UserServiceImpl;

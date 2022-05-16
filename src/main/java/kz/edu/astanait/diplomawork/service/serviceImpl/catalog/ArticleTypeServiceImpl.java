@@ -36,4 +36,16 @@ public class ArticleTypeServiceImpl implements ArticleTypeService {
                 .orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Article type", "id", id)));
     }
+
+    @Override
+    public Optional<ArticleType> getByName(String name) {
+        return this.articleRepository.findByTitle(name);
+    }
+
+    @Override
+    public ArticleType getByNameThrowException(String name) {
+        return this.getByName(name).orElseThrow(
+                () -> new CustomNotFoundException
+                        (String.format(ExceptionDescription.CustomNotFoundException, "Article type", "name", name)));
+    }
 }

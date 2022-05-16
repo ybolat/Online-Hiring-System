@@ -5,12 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
-import java.util.List;
 
 @FeignClient(url = "localhost:8100/api/v1/scopus", name = "scopus")
 public interface ScopusClient {
 
-    @GetMapping("/get-information")
-    HashMap<String, List<String>> searchScopus(@RequestParam(name = "id") String scopusId);
+    @GetMapping("/get/information")
+    HashMap<String, String> getArticleInformation(@RequestParam(name = "id") String scopusId);
 
+    @GetMapping("/get/author")
+    HashMap<String, String> getAuthorInformation(@RequestParam(name = "id") String scopusId);
 }

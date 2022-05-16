@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api/v1/scopus")
 public class ScopusController {
@@ -20,9 +22,9 @@ public class ScopusController {
         this.scopusService = scopusService;
     }
 
-    @GetMapping ("/get/information/id/{id}")
-    public ResponseEntity<HttpStatus> getScopusInformation(@PathVariable(name = "id") Long id) {
-        this.scopusService.getScopusInformation(id);
+    @GetMapping ("/get/information")
+    public ResponseEntity<HttpStatus> getScopusInformation(Principal principal) {
+        this.scopusService.getScopusInformation(principal);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

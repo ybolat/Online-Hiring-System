@@ -34,4 +34,10 @@ public class Article {
 
     @Column(name = "link")
     private String link;
+
+    @Column(name = "authors")
+    private String authors;
+
+    @Column(name = "source")
+    private String source;
 }

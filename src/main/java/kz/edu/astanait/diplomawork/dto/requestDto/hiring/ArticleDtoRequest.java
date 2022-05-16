@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ArticleDtoRequest {
 
+    @NotNull(message = "Название не была указана.")
+    private String title;
+
     @NotNull(message = "APA не был указан.")
     private String apa;
 
@@ -17,4 +20,10 @@ public class ArticleDtoRequest {
 
     @NotNull(message = "Ссылка не была указана.")
     private String link;
+
+    @NotNull(message = "Авторы не были указаны.")
+    private String authors;
+
+    @NotNull(message = "Публикация не была указана.")
+    private String source;
 }
