@@ -11,8 +11,8 @@ public class VacancyDtoRequest {
     @NotNull(message = "Департамент не был указан.")
     private Long departmentId;
 
-    @NotNull(message = "Позиция не была указана.")
-    private Long positionId;
+    @NotNull(message = "Академическая степень не была указана.")
+    private Long academicTitleId;
 
     @NotNull(message = "Ссылка не была указана.")
     private String link_directory;

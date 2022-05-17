@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
+import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicTitleDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.DepartmentDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.PositionDtoResponse;
 import lombok.Data;
@@ -13,7 +14,7 @@ public class VacancyDtoResponse {
 
     private DepartmentDtoResponse department;
 
-    private PositionDtoResponse position;
+    private AcademicTitleDtoResponse academicTitleDtoResponse;
 
     private String link_directory;
 

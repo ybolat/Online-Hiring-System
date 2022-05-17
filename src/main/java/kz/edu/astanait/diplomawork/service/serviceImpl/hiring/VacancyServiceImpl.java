@@ -6,6 +6,7 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Vacancy;
 import kz.edu.astanait.diplomawork.repository.hiring.VacancyRepository;
+import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicTitleService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DepartmentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.PositionService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.VacancyService;
@@ -24,13 +25,13 @@ public class VacancyServiceImpl implements VacancyService {
     private final VacancyRepository vacancyRepository;
 
     private final DepartmentService departmentService;
-    private final PositionService positionService;
+    private final AcademicTitleService academicTitleService;
 
     @Autowired
-    public VacancyServiceImpl(VacancyRepository vacancyRepository, DepartmentService departmentService, PositionService positionService) {
+    public VacancyServiceImpl(VacancyRepository vacancyRepository, DepartmentService departmentService, AcademicTitleService academicTitleService) {
         this.vacancyRepository = vacancyRepository;
         this.departmentService = departmentService;
-        this.positionService = positionService;
+        this.academicTitleService = academicTitleService;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class VacancyServiceImpl implements VacancyService {
         Vacancy vacancy = new Vacancy();
 
         vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
-        vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
+        vacancy.setAcademicTitle(this.academicTitleService.getByIdThrowException(vacancyDtoRequest.getAcademicTitleId()));
         vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
         vacancy.setStart_date(vacancyDtoRequest.getStart_date());
         vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
@@ -74,7 +75,7 @@ public class VacancyServiceImpl implements VacancyService {
         Vacancy vacancy = this.getByIdThrowException(id);
 
         if(Objects.nonNull(vacancyDtoRequest.getDepartmentId())) vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
-        if(Objects.nonNull(vacancyDtoRequest.getPositionId())) vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
+        if(Objects.nonNull(vacancyDtoRequest.getAcademicTitleId())) vacancy.setAcademicTitle(this.academicTitleService.getByIdThrowException(vacancyDtoRequest.getAcademicTitleId()));
         if(Strings.isNotBlank(vacancyDtoRequest.getLink_directory())) vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
         if(Objects.nonNull(vacancyDtoRequest.getStart_date())) vacancy.setStart_date(vacancyDtoRequest.getStart_date());
         if(Objects.nonNull(vacancyDtoRequest.getFinish_date())) vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
