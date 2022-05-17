@@ -10,14 +10,6 @@ create table pin_code(
     created_date timestamp not null
 );
 
-create table documents
-(
-    id serial primary key,
-    document text not null,
-    document_name text not null,
-    content_type varchar(255) not null
-);
-
 create table academic_degree(
     id serial primary key,
     title varchar(255) not null unique
@@ -41,6 +33,16 @@ create table users(
 create table department(
     id serial primary key,
     department_name varchar(255) not null
+);
+
+create table documents
+(
+    id serial primary key,
+    document text not null,
+    document_name text not null,
+    user_id bigint not null,
+    content_type varchar(255) not null,
+    constraint fk_user_id foreign key (user_id) references users(id)
 );
 
 create table position(
