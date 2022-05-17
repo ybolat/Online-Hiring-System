@@ -6,6 +6,7 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Article;
 import kz.edu.astanait.diplomawork.model.user.User;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.hiring.ArticleRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ArticleTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ArticleService;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -81,8 +83,11 @@ public class ArticleServiceImpl implements ArticleService {
 
         User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
+        article.setArticleName(articleDtoRequest.getTitle());
         article.setApa(articleDtoRequest.getApa());
         article.setDoi(articleDtoRequest.getDoi());
+        article.setAuthors(articleDtoRequest.getAuthors());
+        article.setSource(articleDtoRequest.getSource());
         article.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
         article.setArticleType(this.articleTypeService.getByIdThrowException(articleDtoRequest.getArticleTypeId()));
 
@@ -102,6 +107,9 @@ public class ArticleServiceImpl implements ArticleService {
         if (Strings.isNotBlank(articleDtoRequest.getApa())) article.setApa(articleDtoRequest.getApa());
         if (Strings.isNotBlank(articleDtoRequest.getDoi())) article.setDoi(articleDtoRequest.getDoi());
         if (Objects.nonNull(articleDtoRequest.getArticleTypeId())) article.setArticleType(this.articleTypeService.getByIdThrowException(articleDtoRequest.getArticleTypeId()));
+        if (Strings.isNotBlank(articleDtoRequest.getAuthors())) article.setAuthors(articleDtoRequest.getAuthors());
+        if (Strings.isNotBlank(articleDtoRequest.getSource())) article.setSource(articleDtoRequest.getSource());
+
 
         try{
             this.articleRepository.save(article);
@@ -122,6 +130,34 @@ public class ArticleServiceImpl implements ArticleService {
             log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "article"));
+        }
+    }
+
+    @Override
+    public void createAll(List<ArticleDtoRequest> articleDtoRequestList, Principal principal) {
+        List<Article> articleList = new ArrayList<>();
+
+        User user = this.userService.getByEmailThrowException(principal.getName());
+        UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(user.getId());
+
+        for (ArticleDtoRequest articleDtoRequest : articleDtoRequestList) {
+            Article article = new Article();
+
+            article.setArticleName(articleDtoRequest.getTitle());
+            article.setApa(articleDtoRequest.getApa());
+            article.setDoi(articleDtoRequest.getDoi());
+            article.setUserProfessionalInfo(userProfessionalInfo);
+            article.setAuthors(articleDtoRequest.getAuthors());
+            article.setSource(articleDtoRequest.getSource());
+            article.setArticleType(this.articleTypeService.getByIdThrowException(articleDtoRequest.getArticleTypeId()));
+
+            articleList.add(article);
+        }
+
+        try {
+            this.articleRepository.saveAll(articleList);
+        }catch (Exception e){
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating list of", "articles"));
         }
     }
 }

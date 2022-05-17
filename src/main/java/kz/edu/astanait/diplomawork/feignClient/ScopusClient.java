@@ -10,7 +10,7 @@ import java.util.HashMap;
 public interface ScopusClient {
 
     @GetMapping("/get/information")
-    HashMap<String, String> getArticleInformation(@RequestParam(name = "id") String scopusId);
+    HashMap<Integer, String> getArticleInformation(@RequestParam(name = "id") String scopusId);
 
     @GetMapping("/get/author")
     HashMap<String, String> getAuthorInformation(@RequestParam(name = "id") String scopusId);

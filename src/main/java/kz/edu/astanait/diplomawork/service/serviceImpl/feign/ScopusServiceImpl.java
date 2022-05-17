@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class ScopusServiceImpl implements ScopusService {
@@ -32,55 +34,60 @@ public class ScopusServiceImpl implements ScopusService {
     }
 
     @Override
-    public boolean getAuthorInformation(Principal principal) {
+    public AtomicReference<Boolean> getAuthorInformation(Principal principal) {
         UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(
                 this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName()).getId());
 
         HashMap<String, String> result = this.scopusClient.getAuthorInformation(userProfessionalInfo.getScopus());
-        AtomicInteger i = new AtomicInteger();
+        AtomicReference<Boolean> bool = new AtomicReference<>(false);
+
         result.forEach((k,v) -> {
             int index = k.indexOf(",");
             String lastname = k.substring(0, index);
             String name = k.substring(index + 2);
 
-            if (userProfessionalInfo.getUser().getName().equals(name) && userProfessionalInfo.getUser().getLastname().equals(lastname)) {
+            if (userProfessionalInfo.getUser().getName().equalsIgnoreCase(name) && userProfessionalInfo.getUser().getLastname().equalsIgnoreCase(lastname)) {
                 if (userProfessionalInfo.getOrcid().equals(v)) {
-                    i.set(1);
+                    bool.set(true);
                 }
             }
         });
-        AtomicInteger atomicInteger = new AtomicInteger();
-        atomicInteger.set(1);
-        return i.equals(atomicInteger);
+        return bool;
     }
 
     @Override
-    public void getScopusInformation(Principal principal) {
+    public Boolean getScopusInformation(Principal principal) {
+        AtomicReference<Boolean> check = this.getAuthorInformation(principal);
+
+        if (!check.get()){
+            return false;
+        }
+
         UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(
                 this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName()).getId());
 
-        HashMap<String, String> result = this.scopusClient.getArticleInformation(userProfessionalInfo.getScopus());
+        HashMap<Integer, String>result = this.scopusClient.getArticleInformation(userProfessionalInfo.getScopus());
+        List<ArticleDtoRequest> articleDtoRequestList = new ArrayList<>();
+
         result.forEach((k,v) -> {
+            System.out.println(k);
             int idx1 = v.indexOf("$");
             int idx2 = v.indexOf("<");
             int idx3 = v.indexOf(">");
             int idx4 = v.indexOf("{");
 
-            String title = v.substring(0,idx1);
-            String articleType = v.substring(idx1, idx2);
-            String doi = v.substring(idx2, idx3);
-            String documentAuthors = v.substring(idx3, idx4);
-            String source = v.substring(idx4);
-
             ArticleDtoRequest articleDtoRequest = new ArticleDtoRequest();
 
-            articleDtoRequest.setArticleTypeId(this.articleTypeService.getByNameThrowException(articleType).getId());
-            articleDtoRequest.setDoi(doi);
-            articleDtoRequest.setTitle(title);
-            articleDtoRequest.setAuthors(documentAuthors);
-            articleDtoRequest.setSource(source);
+            articleDtoRequest.setTitle(v.substring(0,idx1));
+            articleDtoRequest.setArticleTypeId(this.articleTypeService.getByNameThrowException(v.substring(idx1 + 1, idx2)).getId());
+            articleDtoRequest.setDoi(v.substring(idx2 + 1, idx3));
+            articleDtoRequest.setAuthors(v.substring(idx3 + 1, idx4));
+            articleDtoRequest.setSource(v.substring(idx4 + 1));
 
-            this.articleService.create(articleDtoRequest, principal);
+            articleDtoRequestList.add(articleDtoRequest);
+
         });
+        this.articleService.createAll(articleDtoRequestList, principal);
+        return true;
     }
 }

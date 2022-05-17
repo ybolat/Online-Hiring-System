@@ -25,4 +25,6 @@ public interface ArticleService {
     void update(ArticleDtoRequest articleDtoRequest, Long id);
 
     void delete(Long id);
+
+    void createAll(List<ArticleDtoRequest> articleDtoRequests, Principal principal);
 }

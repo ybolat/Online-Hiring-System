@@ -1,10 +1,11 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.feign;
 
 import java.security.Principal;
+import java.util.concurrent.atomic.AtomicReference;
 
 public interface ScopusService {
 
-    boolean getAuthorInformation(Principal principal);
+    AtomicReference<Boolean> getAuthorInformation(Principal principal);
 
-    void getScopusInformation(Principal principal);
+    Boolean getScopusInformation(Principal principal);
 }
