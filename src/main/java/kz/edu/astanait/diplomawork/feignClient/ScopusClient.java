@@ -10,8 +10,8 @@ import java.util.HashMap;
 public interface ScopusClient {
 
     @GetMapping("/get/information")
-    HashMap<Integer, String> getArticleInformation(@RequestParam(name = "url") String url);
+    HashMap<Integer, String> getArticleInformation(@RequestParam(name = "id") String id);
 
     @GetMapping("/get/author")
-    HashMap<String, String> getAuthorInformation(@RequestParam(name = "url") String url);
+    HashMap<String, String> getAuthorInformation(@RequestParam(name = "id") String id);
 }
