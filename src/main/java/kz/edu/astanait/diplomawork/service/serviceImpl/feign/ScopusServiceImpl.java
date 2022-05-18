@@ -38,7 +38,7 @@ public class ScopusServiceImpl implements ScopusService {
         UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(
                 this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName()).getId());
 
-        HashMap<String, String> result = this.scopusClient.getAuthorInformation(userProfessionalInfo.getScopus());
+        HashMap<String, String> result = this.scopusClient.getAuthorInformation(userProfessionalInfo.getScopusLink());
         AtomicReference<Boolean> bool = new AtomicReference<>(false);
 
         result.forEach((k,v) -> {
@@ -66,7 +66,7 @@ public class ScopusServiceImpl implements ScopusService {
         UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(
                 this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName()).getId());
 
-        HashMap<Integer, String>result = this.scopusClient.getArticleInformation(userProfessionalInfo.getScopus());
+        HashMap<Integer, String>result = this.scopusClient.getArticleInformation(userProfessionalInfo.getScopusLink());
         List<ArticleDtoRequest> articleDtoRequestList = new ArrayList<>();
 
         result.forEach((k,v) -> {

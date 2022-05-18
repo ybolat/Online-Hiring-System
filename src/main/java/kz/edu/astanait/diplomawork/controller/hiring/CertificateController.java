@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,13 @@ public class CertificateController extends ExceptionHandling {
                                              MultipartFile file,
                                              Principal principal){
         this.certificateService.create(fileName, file, principal);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@RequestParam(name = "file")HashMap<String, MultipartFile> file,
+                                                Principal principal) {
+        this.certificateService.createAll(file, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

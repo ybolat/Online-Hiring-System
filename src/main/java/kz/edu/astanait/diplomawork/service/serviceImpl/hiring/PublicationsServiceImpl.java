@@ -7,6 +7,7 @@ import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Publications;
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.PublicationsRepository;
+import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.PublicationsTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.PublicationsService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import lombok.extern.log4j.Log4j2;
@@ -25,10 +26,13 @@ public class PublicationsServiceImpl implements PublicationsService {
     private final PublicationsRepository publicationsRepository;
     private final UserProfessionalInfoService userProfessionalInfoService;
 
+    private final PublicationsTypeService publicationsTypeService;
+
     @Autowired
-    public PublicationsServiceImpl(PublicationsRepository publicationsRepository, UserProfessionalInfoService userProfessionalInfoService) {
+    public PublicationsServiceImpl(PublicationsRepository publicationsRepository, UserProfessionalInfoService userProfessionalInfoService, PublicationsTypeService publicationsTypeService) {
         this.publicationsRepository = publicationsRepository;
         this.userProfessionalInfoService = userProfessionalInfoService;
+        this.publicationsTypeService = publicationsTypeService;
     }
 
     @Override
@@ -57,6 +61,7 @@ public class PublicationsServiceImpl implements PublicationsService {
         publications.setName(publicationsDtoRequest.getName());
         publications.setLink(publicationsDtoRequest.getLink());
         publications.setPublishedDate(publicationsDtoRequest.getPublishedDate());
+        publications.setPublicationsType(this.publicationsTypeService.getByIdThrowException(publicationsDtoRequest.getPublicationTypeId()));
         publications.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
 
         try{
@@ -73,9 +78,10 @@ public class PublicationsServiceImpl implements PublicationsService {
     public void update(PublicationsDtoRequest publicationsDtoRequest, Long id) {
         Publications publications = this.getByIdThrowException(id);
 
-        if(Objects.nonNull(publications.getName())) publications.setName(publications.getName());
-        if(Objects.nonNull(publications.getLink())) publications.setLink(publications.getLink());
-        if(Objects.nonNull(publications.getPublishedDate())) publications.setPublishedDate(publications.getPublishedDate());
+        if (Objects.nonNull(publicationsDtoRequest.getName())) publications.setName(publicationsDtoRequest.getName());
+        if (Objects.nonNull(publicationsDtoRequest.getLink())) publications.setLink(publicationsDtoRequest.getLink());
+        if (Objects.nonNull(publicationsDtoRequest.getPublishedDate())) publications.setPublishedDate(publicationsDtoRequest.getPublishedDate());
+        if (Objects.nonNull(publicationsDtoRequest.getPublicationTypeId())) publications.setPublicationsType(this.publicationsTypeService.getByIdThrowException(publicationsDtoRequest.getPublicationTypeId()));
 
         try{
             this.publicationsRepository.save(publications);

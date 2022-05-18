@@ -40,9 +40,7 @@ create table documents
     id serial primary key,
     document text not null,
     document_name text not null,
-    user_id bigint not null,
-    content_type varchar(255) not null,
-    constraint fk_user_id foreign key (user_id) references users(id)
+    content_type varchar(255) not null
 );
 
 create table position(
@@ -86,7 +84,6 @@ create table user_professional_info(
     google_scholar_h_index bigint,
     orcid varchar(255),
     experience varchar(255),
-    academic_experience varchar(255),
     scientific_interests varchar(255),
     education varchar(255) not null,
     constraint fk_user_id foreign key (user_id) references users (id),

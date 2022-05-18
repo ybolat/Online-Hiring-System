@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.model.hiring;
 
+import kz.edu.astanait.diplomawork.model.catalog.PublicationsType;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import lombok.Data;
 import javax.persistence.*;
@@ -22,6 +23,10 @@ public class Publications {
 
     @Column(name = "published_date")
     private LocalDateTime publishedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "publication_type_id")
+    private PublicationsType publicationsType;
 
     @ManyToOne
     @JoinColumn(name = "user_professional_info_id")

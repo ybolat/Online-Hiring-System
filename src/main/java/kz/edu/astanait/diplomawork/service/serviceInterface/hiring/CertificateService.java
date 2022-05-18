@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,8 @@ public interface CertificateService {
     Certificate getByIdThrowException(Long id);
 
     void create(String fileName, MultipartFile file, Principal principal);
+
+    void createAll(HashMap<String, MultipartFile> file, Principal principal);
 
     void update(Long id, String fileName, MultipartFile file, Principal principal);
 

@@ -11,6 +11,8 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestServic
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +58,27 @@ public class AssessmentServiceImpl implements AssessmentService {
         }catch (Exception e){
             log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "assessment"));
+        }
+    }
+
+    @Override
+    public void createAll(List<AssessmentDtoRequest> assessmentDtoRequestList) {
+        List<Assessment> assessmentList = new ArrayList<>();
+
+        for (AssessmentDtoRequest assessmentDtoRequest: assessmentDtoRequestList) {
+            Assessment assessment = new Assessment();
+
+            assessment.setRequest(this.requestService.getByIdThrowException(assessmentDtoRequest.getRequestId()));
+            assessment.setVote(assessmentDtoRequest.getVote());
+
+            assessmentList.add(assessment);
+        }
+
+        try {
+            this.assessmentRepository.saveAll(assessmentList);
+        }catch (Exception e){
+            log.error(e);
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "assessment list"));
         }
     }
 }

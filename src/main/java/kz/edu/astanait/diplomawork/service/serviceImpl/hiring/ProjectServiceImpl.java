@@ -79,12 +79,12 @@ public class ProjectServiceImpl implements ProjectService {
     public void update(ProjectDtoRequest projectDtoRequest, Long id) {
         Project project = this.getByIdThrowException(id);
 
-        if(Objects.nonNull(projectDtoRequest.getStartedDate())) project.setStartedDate(project.getStartedDate());
-        if(Objects.nonNull(projectDtoRequest.getFinishedDate())) project.setFinishedDate(project.getFinishedDate());
-        if(Strings.isNotBlank(projectDtoRequest.getRole())) project.setRole(project.getRole());
-        if(Objects.nonNull(projectDtoRequest.getSum())) project.setSum(project.getSum());
-        if(Strings.isNotBlank(projectDtoRequest.getFund())) project.setFund(project.getFund());
-        if(Objects.nonNull(projectDtoRequest.getProjectTypeId())) project.setProjectType(project.getProjectType());
+        if(Objects.nonNull(projectDtoRequest.getStartedDate())) project.setStartedDate(projectDtoRequest.getStartedDate());
+        if(Objects.nonNull(projectDtoRequest.getFinishedDate())) project.setFinishedDate(projectDtoRequest.getFinishedDate());
+        if(Strings.isNotBlank(projectDtoRequest.getRole())) project.setRole(projectDtoRequest.getRole());
+        if(Objects.nonNull(projectDtoRequest.getSum())) project.setSum(projectDtoRequest.getSum());
+        if(Strings.isNotBlank(projectDtoRequest.getFund())) project.setFund(projectDtoRequest.getFund());
+        if(Objects.nonNull(projectDtoRequest.getProjectTypeId())) project.setProjectType(this.projectTypeService.getByIdThrowException(projectDtoRequest.getProjectTypeId()));
 
         try{
             this.projectRepository.save(project);

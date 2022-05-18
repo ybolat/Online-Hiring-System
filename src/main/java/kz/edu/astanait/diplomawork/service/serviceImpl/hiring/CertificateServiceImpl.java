@@ -19,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Log4j2
@@ -70,6 +68,28 @@ public class CertificateServiceImpl implements CertificateService {
         }catch (Exception e){
             log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "certificate"));
+        }
+    }
+
+    @Override
+    public void createAll(HashMap<String, MultipartFile> file, Principal principal) {
+        List<Certificate> certificateList = new ArrayList<>();
+
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
+
+        file.forEach((k, v) -> {
+            Certificate certificate = new Certificate();
+            certificate.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
+            certificate.setDocument(this.documentsService.create(k, v));
+
+            certificateList.add(certificate);
+        });
+
+
+        try {
+            this.certificateRepository.saveAll(certificateList);
+        }catch (Exception e){
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "certificate list"));
         }
     }
 

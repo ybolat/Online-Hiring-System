@@ -1,7 +1,8 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
+import kz.edu.astanait.diplomawork.dto.responseDto.catalog.PublicationsTypeDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
-import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
+
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -15,6 +16,8 @@ public class PublicationsDtoResponse {
     private String link;
 
     private LocalDateTime publishedDate;
+
+    private PublicationsTypeDtoResponse publicationsTypeDtoResponse;
 
     private UserProfessionalInfoDtoResponse userProfessionalInfo;
 }

@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.dto.requestDto.hiring;
 
-import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -17,4 +16,7 @@ public class PublicationsDtoRequest {
 
     @NotNull(message = "Дата публикации не была указана.")
     private LocalDateTime publishedDate;
+
+    @NotNull(message = "Тип публикации не была указана.")
+    private Long publicationTypeId;
 }

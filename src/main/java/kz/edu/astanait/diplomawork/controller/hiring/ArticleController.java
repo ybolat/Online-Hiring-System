@@ -55,6 +55,12 @@ public class ArticleController extends ExceptionHandling {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<ArticleDtoRequest> articleDtoRequest, Principal principal) {
+        this.articleService.createAll(articleDtoRequest, principal);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @PutMapping("/update/id/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody ArticleDtoRequest articleDtoRequest,
                                                  @PathVariable(name = "id") Long id) {
