@@ -20,6 +20,7 @@ public class VacancyMapper {
         if(Objects.nonNull(vacancy.getStart_date())) vacancyDtoResponse.setStart_date(vacancy.getStart_date());
         if(Objects.nonNull(vacancy.getFinish_date())) vacancyDtoResponse.setFinish_date(vacancy.getFinish_date());
         if(Objects.nonNull(vacancy.getNumber())) vacancyDtoResponse.setNumber(vacancy.getNumber());
+        if(Objects.nonNull(vacancy.getPosition())) vacancyDtoResponse.setPosition(PositionMapper.positionToDto(vacancy.getPosition()));
         return vacancyDtoResponse;
     }
 }

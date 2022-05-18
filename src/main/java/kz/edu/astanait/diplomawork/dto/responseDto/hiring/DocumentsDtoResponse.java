@@ -9,5 +9,7 @@ public class DocumentsDtoResponse {
 
     private String document;
 
+    private String contentType;
+
     private String documentName;
 }

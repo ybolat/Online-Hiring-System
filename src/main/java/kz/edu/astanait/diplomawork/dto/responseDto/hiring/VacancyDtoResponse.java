@@ -16,6 +16,8 @@ public class VacancyDtoResponse {
 
     private AcademicTitleDtoResponse academicTitleDtoResponse;
 
+    private PositionDtoResponse position;
+
     private String link_directory;
 
     private LocalDateTime start_date;
