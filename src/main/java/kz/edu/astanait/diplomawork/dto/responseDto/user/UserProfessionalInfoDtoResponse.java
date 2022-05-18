@@ -21,9 +21,19 @@ public class UserProfessionalInfoDtoResponse {
 
     private String scopus;
 
+    private Long scopusHIndex;
+
+    private String scopusLink;
+
     private String research;
 
+    private Long researchHIndex;
+
+    private String researchLink;
+
     private String googleScholar;
+
+    private Long googleScholarHIndex;
 
     private String orcid;
 

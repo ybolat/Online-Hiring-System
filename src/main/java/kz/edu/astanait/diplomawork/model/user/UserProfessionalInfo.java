@@ -2,7 +2,6 @@ package kz.edu.astanait.diplomawork.model.user;
 
 import kz.edu.astanait.diplomawork.model.catalog.AcademicDegree;
 import kz.edu.astanait.diplomawork.model.catalog.AcademicTitle;
-import kz.edu.astanait.diplomawork.model.catalog.Position;
 import kz.edu.astanait.diplomawork.model.hiring.Vacancy;
 import lombok.Data;
 
@@ -23,7 +22,7 @@ public class UserProfessionalInfo {
 
     @ManyToOne
     @JoinColumn(name = "vacancy_id")
-    private Vacancy vacancyId;
+    private Vacancy vacancy;
 
     @ManyToOne
     @JoinColumn(name = "academic_degree_id")
@@ -36,11 +35,26 @@ public class UserProfessionalInfo {
     @Column(name = "scopus_id")
     private String scopus;
 
+    @Column(name = "scopus_h_index")
+    private Long scopusHIndex;
+
+    @Column(name = "scopus_link")
+    private String scopusLink;
+
     @Column(name = "research_id")
     private String research;
 
+    @Column(name = "research_h_index")
+    private Long researchHIndex;
+
+    @Column(name = "research_link")
+    private String researchLink;
+
     @Column(name = "google_scholar")
     private String googleScholar;
+
+    @Column(name = "google_scholar_h_index")
+    private Long googleScholarHIndex;
 
     @Column(name = "orcid")
     private String orcid;

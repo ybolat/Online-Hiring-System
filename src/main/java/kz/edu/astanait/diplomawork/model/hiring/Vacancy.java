@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.model.hiring;
 
 import kz.edu.astanait.diplomawork.model.catalog.AcademicTitle;
 import kz.edu.astanait.diplomawork.model.catalog.Department;
+import kz.edu.astanait.diplomawork.model.catalog.Position;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,6 +24,10 @@ public class Vacancy {
     @ManyToOne
     @JoinColumn(name = "academic_title_id")
     private AcademicTitle academicTitle;
+
+    @ManyToOne
+    @JoinColumn(name = "position_id")
+    private Position position;
 
     @Column(name = "link_directory")
     private String link_directory;

@@ -31,6 +31,9 @@ teams:
  login:
   resource: https://graph.microsoft.com
 
+share:
+  secretKey: AITUDiplomaWork2022$
+
 email:
   verification:
    simple_mail_transfer_protocol: smtps

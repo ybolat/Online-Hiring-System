@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.dto.requestDto.user.UserProfessionalInfoDtoRe
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 
+import java.security.Principal;
 import java.util.Optional;
 
 public interface UserProfessionalInfoService {
@@ -18,7 +19,7 @@ public interface UserProfessionalInfoService {
 
     User getByUserEmailThrowException(String email);
 
-    void createProfile(UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest);
+    void createProfile(UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest, Principal principal);
 
     void updateProfile(UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest, Long id);
 }

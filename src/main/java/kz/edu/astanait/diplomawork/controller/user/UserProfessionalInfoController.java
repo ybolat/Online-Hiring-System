@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/user/user-professional-info")
@@ -31,8 +32,8 @@ public class UserProfessionalInfoController extends ExceptionHandling {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> createProfile(@Valid @RequestBody UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest){
-        this.userProfessionalInfoService.createProfile(userProfessionalInfoDtoRequest);
+    public ResponseEntity<HttpStatus> createProfile(@Valid @RequestBody UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest, Principal principal){
+        this.userProfessionalInfoService.createProfile(userProfessionalInfoDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

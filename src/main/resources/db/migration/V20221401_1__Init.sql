@@ -60,12 +60,14 @@ create table vacancy(
     id serial primary key,
     department_id bigint not null,
     academic_title_id bigint not null,
+    position_id bigint not null,
     link_directory varchar(500) not null,
     start_date timestamp not null,
     finish_date timestamp not null,
     number bigint not null,
     constraint fk_department_id foreign key (department_id) references department (id),
-    constraint fk_academic_title_id foreign key (academic_title_id) references academic_title (id)
+    constraint fk_academic_title_id foreign key (academic_title_id) references academic_title (id),
+    constraint fk_position_id foreign key (position_id) references position (id)
 );
 
 create table user_professional_info(
@@ -75,9 +77,13 @@ create table user_professional_info(
     academic_degree_id bigint not null,
     academic_title_id bigint,
     scopus_id varchar(500),
-    h_index bigint,
+    scopus_h_index bigint,
+    scopus_link varchar(500),
+    research_h_index bigint,
     research_id varchar(500),
+    research_link varchar(500),
     google_scholar varchar(255),
+    google_scholar_h_index bigint,
     orcid varchar(255),
     experience varchar(255),
     academic_experience varchar(255),
@@ -266,6 +272,18 @@ create table teams_admin_credential(
     client_secret varchar(255) not null,
     admin_id bigint not null,
     constraint fk_admin_id foreign key (admin_id) references commission(id)
+);
+
+create table user_document (
+    id serial primary key,
+    cv bigint not null,
+    passport bigint not null,
+    photo bigint not null,
+    user_id bigint not null,
+    constraint fk_cv foreign key  (cv) references documents (id),
+    constraint fk_passport foreign key (passport) references documents (id),
+    constraint fk_photo foreign key (photo) references documents (id),
+    constraint fk_user_id foreign key (user_id) references users (id)
 );
 
 

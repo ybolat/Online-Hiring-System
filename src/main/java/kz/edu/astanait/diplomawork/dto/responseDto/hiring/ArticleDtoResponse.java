@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.hiring;
 
-import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.ArticleTypeDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import lombok.Data;

@@ -17,6 +17,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -70,20 +71,25 @@ public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoServ
     }
 
     @Override
-    public void createProfile(UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest) {
+    public void createProfile(UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest, Principal principal) {
         UserProfessionalInfo userProfessionalInfo = new UserProfessionalInfo();
 
-        userProfessionalInfo.setUser(this.userService.getByIdThrowException(userProfessionalInfoDtoRequest.getUserId()));
-        userProfessionalInfo.setVacancyId(this.vacancyService.getByIdThrowException(userProfessionalInfoDtoRequest.getVacancyId()));
+        userProfessionalInfo.setUser(this.userService.getByEmailThrowException(principal.getName()));
+        userProfessionalInfo.setVacancy(this.vacancyService.getByIdThrowException(userProfessionalInfoDtoRequest.getVacancyId()));
         userProfessionalInfo.setAcademicDegree(this.academicDegreeService.getByIdThrowException(userProfessionalInfoDtoRequest.getAcademicDegreeId()));
         userProfessionalInfo.setAcademicTitle(this.academicTitleService.getByIdThrowException(userProfessionalInfoDtoRequest.getAcademicTitleId()));
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getScopus())) userProfessionalInfo.setScopus(userProfessionalInfoDtoRequest.getScopus());
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getResearch())) userProfessionalInfo.setResearch(userProfessionalInfoDtoRequest.getResearch());
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getGoogleScholar())) userProfessionalInfo.setGoogleScholar(userProfessionalInfoDtoRequest.getGoogleScholar());
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getOrcid())) userProfessionalInfo.setOrcid(userProfessionalInfoDtoRequest.getOrcid());
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getExperience())) userProfessionalInfo.setExperience(userProfessionalInfoDtoRequest.getExperience());
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getScientificInterests())) userProfessionalInfo.setScientificInterests(userProfessionalInfoDtoRequest.getScientificInterests());
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getEducation())) userProfessionalInfo.setEducation(userProfessionalInfoDtoRequest.getEducation());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getScopus())) userProfessionalInfo.setScopus(userProfessionalInfoDtoRequest.getScopus());
+        if (Objects.nonNull(userProfessionalInfoDtoRequest.getScopusHIndex())) userProfessionalInfo.setScopusHIndex(userProfessionalInfoDtoRequest.getScopusHIndex());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getScopusLink())) userProfessionalInfo.setScopusLink(userProfessionalInfoDtoRequest.getScopusLink());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getResearch())) userProfessionalInfo.setResearch(userProfessionalInfoDtoRequest.getResearch());
+        if (Objects.nonNull(userProfessionalInfoDtoRequest.getResearchHIndex())) userProfessionalInfo.setResearchHIndex(userProfessionalInfoDtoRequest.getResearchHIndex());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getResearchLink())) userProfessionalInfo.setResearchLink(userProfessionalInfoDtoRequest.getResearchLink());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getGoogleScholar())) userProfessionalInfo.setGoogleScholar(userProfessionalInfoDtoRequest.getGoogleScholar());
+        if (Objects.nonNull(userProfessionalInfoDtoRequest.getGoogleScholarHIndex())) userProfessionalInfo.setGoogleScholarHIndex(userProfessionalInfoDtoRequest.getGoogleScholarHIndex());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getOrcid())) userProfessionalInfo.setOrcid(userProfessionalInfoDtoRequest.getOrcid());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getExperience())) userProfessionalInfo.setExperience(userProfessionalInfoDtoRequest.getExperience());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getScientificInterests())) userProfessionalInfo.setScientificInterests(userProfessionalInfoDtoRequest.getScientificInterests());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getEducation())) userProfessionalInfo.setEducation(userProfessionalInfoDtoRequest.getEducation());
 
         try {
             this.userProfessionalInfoRepository.save(userProfessionalInfo);
@@ -97,12 +103,17 @@ public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoServ
     public void updateProfile(UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest, Long id) {
         UserProfessionalInfo userProfessionalInfo = this.getByIdThrowException(id);
 
-        if(Objects.nonNull(userProfessionalInfoDtoRequest.getVacancyId())) userProfessionalInfo.setVacancyId(this.vacancyService.getByIdThrowException(userProfessionalInfoDtoRequest.getVacancyId()));
+        if(Objects.nonNull(userProfessionalInfoDtoRequest.getVacancyId())) userProfessionalInfo.setVacancy(this.vacancyService.getByIdThrowException(userProfessionalInfoDtoRequest.getVacancyId()));
         if(Objects.nonNull(userProfessionalInfoDtoRequest.getAcademicDegreeId())) userProfessionalInfo.setAcademicDegree(this.academicDegreeService.getByIdThrowException(userProfessionalInfoDtoRequest.getAcademicDegreeId()));
         if(Objects.nonNull(userProfessionalInfoDtoRequest.getAcademicTitleId())) userProfessionalInfo.setAcademicTitle(this.academicTitleService.getByIdThrowException(userProfessionalInfoDtoRequest.getAcademicTitleId()));
         if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getScopus())) userProfessionalInfo.setScopus(userProfessionalInfoDtoRequest.getScopus());
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getResearch())) userProfessionalInfo.setResearch(userProfessionalInfoDtoRequest.getResearch());
-        if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getGoogleScholar())) userProfessionalInfo.setGoogleScholar(userProfessionalInfoDtoRequest.getGoogleScholar());
+        if (Objects.nonNull(userProfessionalInfoDtoRequest.getScopusHIndex())) userProfessionalInfo.setScopusHIndex(userProfessionalInfoDtoRequest.getScopusHIndex());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getScopusLink())) userProfessionalInfo.setScopusLink(userProfessionalInfoDtoRequest.getScopusLink());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getResearch())) userProfessionalInfo.setResearch(userProfessionalInfoDtoRequest.getResearch());
+        if (Objects.nonNull(userProfessionalInfoDtoRequest.getResearchHIndex())) userProfessionalInfo.setResearchHIndex(userProfessionalInfoDtoRequest.getResearchHIndex());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getResearchLink())) userProfessionalInfo.setResearchLink(userProfessionalInfoDtoRequest.getResearchLink());
+        if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getGoogleScholar())) userProfessionalInfo.setGoogleScholar(userProfessionalInfoDtoRequest.getGoogleScholar());
+        if (Objects.nonNull(userProfessionalInfoDtoRequest.getGoogleScholarHIndex())) userProfessionalInfo.setGoogleScholarHIndex(userProfessionalInfoDtoRequest.getGoogleScholarHIndex());
         if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getOrcid())) userProfessionalInfo.setOrcid(userProfessionalInfoDtoRequest.getOrcid());
         if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getExperience())) userProfessionalInfo.setExperience(userProfessionalInfoDtoRequest.getExperience());
         if(Strings.isNotBlank(userProfessionalInfoDtoRequest.getScientificInterests())) userProfessionalInfo.setScientificInterests(userProfessionalInfoDtoRequest.getScientificInterests());

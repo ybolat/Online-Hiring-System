@@ -7,9 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserProfessionalInfoDtoRequest {
 
-    @NotNull(message = "Пользователь не был указан.")
-    private Long userId;
-
     @NotNull(message = "Вакансия не была указана.")
     private Long vacancyId;
 
@@ -20,9 +17,19 @@ public class UserProfessionalInfoDtoRequest {
 
     private String scopus;
 
+    private Long scopusHIndex;
+
+    private String scopusLink;
+
     private String research;
 
+    private Long researchHIndex;
+
+    private String researchLink;
+
     private String googleScholar;
+
+    private Long googleScholarHIndex;
 
     private String orcid;
 
