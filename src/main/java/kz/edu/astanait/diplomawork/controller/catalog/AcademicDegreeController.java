@@ -4,6 +4,8 @@ import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResp
 import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicDegreeMapper;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicDegreeService;
+import org.springdoc.api.annotations.ParameterObject;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class AcademicDegreeController extends ExceptionHandling {
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<AcademicDegreeDtoResponse>> getAll() {
+    public ResponseEntity<List<AcademicDegreeDtoResponse>> getAll(@ParameterObject Pageable pageable) {
         List<AcademicDegreeDtoResponse> academicDegreeDtoResponseList = this.academicDegreeService.getAll()
                 .stream().map(AcademicDegreeMapper::academicDegreeToDto).collect(Collectors.toList());
         return new ResponseEntity<>(academicDegreeDtoResponseList, HttpStatus.OK);
