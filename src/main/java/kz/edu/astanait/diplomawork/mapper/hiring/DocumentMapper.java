@@ -10,6 +10,7 @@ public class DocumentMapper {
         DocumentsDtoResponse documentsDtoResponse = new DocumentsDtoResponse();
         documents.setId(documents.getId());
         if(Strings.isNotBlank(documents.getDocument())) documentsDtoResponse.setDocument(documents.getDocument());
+        if(Strings.isNotBlank(documents.getContentType())) documentsDtoResponse.setContentType(documents.getContentType());
         if(Strings.isNotBlank(documents.getDocumentName())) documentsDtoResponse.setDocumentName(documents.getDocumentName());
         return documentsDtoResponse;
     }
