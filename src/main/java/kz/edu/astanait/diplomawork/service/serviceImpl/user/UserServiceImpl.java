@@ -173,6 +173,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void forgotPassword(String email, Integer pinCode) throws MessagingException {
         User user = this.getByEmailThrowException(email);
         this.pinCodeService.checkPinCode(pinCode, email);
+
         String generatePassword = this.pinCodeService.generatePassword();
 
         user.setPassword(this.encoder.encode(generatePassword));
@@ -184,7 +185,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "changing", "password"));
         }
 
-        emailService.sendMessage(user.getEmail(), String.format("Hello, dear %s %s, your new password: %s", user.getName(), user.getLastname(), generatePassword));
+        emailService.sendMessage(user.getEmail(), String.format("Hello, dear %s %s, your new password is: %s", user.getName(), user.getLastname(), generatePassword));
     }
 
     private HttpHeaders getJwtHeader(UserPrincipal userPrincipal, String ipFromClient) {

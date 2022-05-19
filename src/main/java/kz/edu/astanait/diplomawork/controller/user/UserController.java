@@ -61,7 +61,7 @@ public class UserController extends ExceptionHandling {
     }
 
     @PutMapping("/forgot-password")
-    public ResponseEntity<HttpStatus> changePassword(@RequestParam(name = "email") String email,
+    public ResponseEntity<HttpStatus> forgotPassword(@RequestParam(name = "email") String email,
                                                      @RequestParam(name = "pin_code") Integer pinCode) throws MessagingException {
         this.userService.forgotPassword(email, pinCode);
         return new ResponseEntity<>(HttpStatus.OK);
