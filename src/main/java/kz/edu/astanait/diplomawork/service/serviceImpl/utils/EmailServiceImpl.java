@@ -29,7 +29,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendVerificationPinCode(User user, int pinCode) throws MessagingException {
-        String text = String.format("Hello, dear %s %s, your verification pin code for registration is: %s", user.getName(), user.getLastname(), pinCode);
+        String text = String.format("Hello, dear %s %s, your pin code is: %s", user.getName(), user.getLastname(), pinCode);
         Message message = createEmail(user.getEmail(), new Date(), text);
         sendEmail(message);
     }
