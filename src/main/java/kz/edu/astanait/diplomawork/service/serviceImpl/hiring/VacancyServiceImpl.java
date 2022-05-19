@@ -14,6 +14,8 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,12 +28,14 @@ public class VacancyServiceImpl implements VacancyService {
 
     private final DepartmentService departmentService;
     private final AcademicTitleService academicTitleService;
+    private final PositionService positionService;
 
     @Autowired
-    public VacancyServiceImpl(VacancyRepository vacancyRepository, DepartmentService departmentService, AcademicTitleService academicTitleService) {
+    public VacancyServiceImpl(VacancyRepository vacancyRepository, DepartmentService departmentService, AcademicTitleService academicTitleService, PositionService positionService) {
         this.vacancyRepository = vacancyRepository;
         this.departmentService = departmentService;
         this.academicTitleService = academicTitleService;
+        this.positionService = positionService;
     }
 
     @Override
@@ -57,6 +61,7 @@ public class VacancyServiceImpl implements VacancyService {
 
         vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
         vacancy.setAcademicTitle(this.academicTitleService.getByIdThrowException(vacancyDtoRequest.getAcademicTitleId()));
+        vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
         vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
         vacancy.setStart_date(vacancyDtoRequest.getStart_date());
         vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
@@ -76,6 +81,7 @@ public class VacancyServiceImpl implements VacancyService {
 
         if(Objects.nonNull(vacancyDtoRequest.getDepartmentId())) vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
         if(Objects.nonNull(vacancyDtoRequest.getAcademicTitleId())) vacancy.setAcademicTitle(this.academicTitleService.getByIdThrowException(vacancyDtoRequest.getAcademicTitleId()));
+        if(Objects.nonNull(vacancyDtoRequest.getPositionId())) vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
         if(Strings.isNotBlank(vacancyDtoRequest.getLink_directory())) vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
         if(Objects.nonNull(vacancyDtoRequest.getStart_date())) vacancy.setStart_date(vacancyDtoRequest.getStart_date());
         if(Objects.nonNull(vacancyDtoRequest.getFinish_date())) vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
@@ -98,6 +104,32 @@ public class VacancyServiceImpl implements VacancyService {
         }catch (Exception e){
             log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "vacancy"));
+        }
+    }
+
+    @Override
+    public void createAll(List<VacancyDtoRequest> vacancyDtoRequestList){
+        List<Vacancy> vacancyList = new ArrayList<>();
+
+        for(VacancyDtoRequest vacancyDtoRequest: vacancyDtoRequestList) {
+            Vacancy vacancy = new Vacancy();
+
+            vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
+            vacancy.setAcademicTitle(this.academicTitleService.getByIdThrowException(vacancyDtoRequest.getAcademicTitleId()));
+            vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
+            vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
+            vacancy.setStart_date(vacancyDtoRequest.getStart_date());
+            vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
+            vacancy.setNumber(vacancyDtoRequest.getNumber());
+
+            vacancyList.add(vacancy);
+
+            try {
+                this.vacancyRepository.saveAll(vacancyList);
+            }catch (Exception e){
+                log.error(e);
+                throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "vacancy list"));
+            }
         }
     }
 }

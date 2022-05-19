@@ -56,4 +56,10 @@ public class SyllabusController extends ExceptionHandling {
         this.syllabusService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<SyllabusDtoRequest> syllabusDtoRequest, Principal principal) {
+        this.syllabusService.createAll(syllabusDtoRequest, principal);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

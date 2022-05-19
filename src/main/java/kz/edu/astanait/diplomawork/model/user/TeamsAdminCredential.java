@@ -23,7 +23,7 @@ public class TeamsAdminCredential {
     private String clientId;
 
     @Column(name = "client_secret")
-    private String client_secret;
+    private String clientSecret;
 
     @ManyToOne
     @JoinColumn(name = "admin_id")

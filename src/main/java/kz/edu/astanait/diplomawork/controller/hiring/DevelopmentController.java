@@ -52,4 +52,10 @@ public class DevelopmentController extends ExceptionHandling {
         this.developmentService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<DevelopmentDtoRequest> developmentDtoRequestList, Principal principal) {
+        this.developmentService.createAll(developmentDtoRequestList, principal);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

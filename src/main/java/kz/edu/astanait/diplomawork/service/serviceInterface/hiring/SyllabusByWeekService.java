@@ -21,4 +21,5 @@ public interface SyllabusByWeekService {
 
     void delete(Long id);
 
+    void createAll(List<SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList);
 }

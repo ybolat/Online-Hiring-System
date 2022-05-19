@@ -30,4 +30,5 @@ public interface RequestService {
 
     void delete(Long id);
 
+    void createAll(List<RequestDtoRequest> requestDtoRequestList);
 }

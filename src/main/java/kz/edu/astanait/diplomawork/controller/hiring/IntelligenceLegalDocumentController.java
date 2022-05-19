@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ArticleDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.IntelligenceLegalDocumentDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.IntelligenceLegalDocumentDtoResponse;
 import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
@@ -53,6 +52,12 @@ public class IntelligenceLegalDocumentController extends ExceptionHandling {
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
         this.intelligenceLegalDocumentService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<IntelligenceLegalDocumentDtoRequest> intelligenceLegalDocumentDtoRequestList, Principal principal) {
+        this.intelligenceLegalDocumentService.createAll(intelligenceLegalDocumentDtoRequestList, principal);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

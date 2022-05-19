@@ -20,4 +20,6 @@ public interface ProjectService {
     void update(ProjectDtoRequest projectDtoRequest, Long id);
 
     void delete(Long id);
+
+    void createAll(List<ProjectDtoRequest> projectDtoRequestList, Principal principal);
 }

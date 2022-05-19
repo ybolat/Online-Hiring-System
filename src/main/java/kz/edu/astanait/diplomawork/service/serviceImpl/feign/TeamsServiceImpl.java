@@ -100,7 +100,7 @@ public class TeamsServiceImpl implements TeamsService {
         teamsLoginDtoRequest.setClient_id(teamsAdminCredential.getClientId());
         teamsLoginDtoRequest.setGrant_type(teamsAdminCredential.getGrantType());
         teamsLoginDtoRequest.setResource(resource);
-        teamsLoginDtoRequest.setClient_secret(teamsAdminCredential.getClient_secret());
+        teamsLoginDtoRequest.setClient_secret(teamsAdminCredential.getClientSecret());
 
         HashMap<String, String> response = this.teamsLoginClient.teamsLogin(directoryId, teamsLoginDtoRequest);
         return response.get("access_token");

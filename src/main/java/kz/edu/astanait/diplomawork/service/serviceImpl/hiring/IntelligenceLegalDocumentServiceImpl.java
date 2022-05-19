@@ -6,15 +6,18 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
 import kz.edu.astanait.diplomawork.model.user.User;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.hiring.IntelligenceLegalDocumentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.IntelligenceLegalDocumentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +26,14 @@ import java.util.Optional;
 public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDocumentService {
 
     private final IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository;
-
     private final UserProfessionalInfoService userProfessionalInfoService;
+    private final UserService userService;
 
     @Autowired
-    public IntelligenceLegalDocumentServiceImpl(IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository, UserProfessionalInfoService userProfessionalInfoService) {
+    public IntelligenceLegalDocumentServiceImpl(IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository, UserProfessionalInfoService userProfessionalInfoService, UserService userService) {
         this.intelligenceLegalDocumentRepository = intelligenceLegalDocumentRepository;
         this.userProfessionalInfoService = userProfessionalInfoService;
+        this.userService = userService;
     }
 
     @Override
@@ -93,5 +97,30 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
             throw new RepositoryException(String
             .format(ExceptionDescription.RepositoryException, "deleting", "intelligence legal document"));
         }
+    }
+
+    @Override
+    public void createAll(List<IntelligenceLegalDocumentDtoRequest> intelligenceLegalDocumentDtoRequestList, Principal principal){
+        List<IntelligenceLegalDocument> intelligenceLegalDocumentList = new ArrayList<>();
+
+        User user = this.userService.getByEmailThrowException(principal.getName());
+        UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(user.getId());
+
+        for(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest: intelligenceLegalDocumentDtoRequestList){
+            IntelligenceLegalDocument intelligenceLegalDocument = new IntelligenceLegalDocument();
+
+            intelligenceLegalDocument.setUserProfessionalInfo(userProfessionalInfo);
+            intelligenceLegalDocument.setDocument(intelligenceLegalDocumentDtoRequest.getDocument());
+
+            intelligenceLegalDocumentList.add(intelligenceLegalDocument);
+        }
+
+        try{
+            this.intelligenceLegalDocumentRepository.saveAll(intelligenceLegalDocumentList);
+        }catch (Exception e){
+            log.error(e);
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "intelligenceLegalDocumentService"));
+        }
+
     }
 }

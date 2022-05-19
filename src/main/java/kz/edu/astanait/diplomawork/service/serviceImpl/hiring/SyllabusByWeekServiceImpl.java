@@ -104,4 +104,27 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
         }
     }
 
+    @Override
+    public void createAll(List<SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList){
+        List<SyllabusByWeek> syllabusByWeekList = new ArrayList<>();
+
+        for(SyllabusByWeekDtoRequest syllabusByWeekDtoRequest: syllabusByWeekDtoRequestList){
+            SyllabusByWeek syllabusByWeek = new SyllabusByWeek();
+
+            syllabusByWeek.setSyllabus(this.syllabusService.getByIdThrowException(syllabusByWeekDtoRequest.getSyllabusId()));
+            syllabusByWeek.setWeekNumber(syllabusByWeekDtoRequest.getWeekNumber());
+            syllabusByWeek.setTitle(syllabusByWeekDtoRequest.getTitle());
+            syllabusByWeek.setDescription(syllabusByWeekDtoRequest.getDescription());
+
+            syllabusByWeekList.add(syllabusByWeek);
+        }
+
+        try {
+            this.syllabusByWeekRepository.saveAll(syllabusByWeekList);
+        }catch (Exception e){
+            log.error(e);
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "syllabusByWeekList"));
+        }
+
+    }
 }

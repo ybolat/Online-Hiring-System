@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.controller.hiring;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ArticleDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.PublicationsDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.PublicationsService;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/hiring/publications")
@@ -42,5 +42,11 @@ public class PublicationsController extends ExceptionHandling {
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
         this.publicationsService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<PublicationsDtoRequest> publicationsDtoRequestList, Principal principal) {
+        this.publicationsService.createAll(publicationsDtoRequestList, principal);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

@@ -6,16 +6,19 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Project;
 import kz.edu.astanait.diplomawork.model.user.User;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.hiring.ProjectRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.ProjectTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.ProjectService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -27,12 +30,14 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final UserProfessionalInfoService userProfessionalInfoService;
     private final ProjectTypeService projectTypeService;
+    private final UserService userService;
 
     @Autowired
-    public ProjectServiceImpl(ProjectRepository projectRepository, UserProfessionalInfoService userProfessionalInfoService, ProjectTypeService projectTypeService) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, UserProfessionalInfoService userProfessionalInfoService, ProjectTypeService projectTypeService, UserService userService) {
         this.projectRepository = projectRepository;
         this.userProfessionalInfoService = userProfessionalInfoService;
         this.projectTypeService = projectTypeService;
+        this.userService = userService;
     }
 
     @Override
@@ -105,6 +110,37 @@ public class ProjectServiceImpl implements ProjectService {
             log.error(e);
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "project"));
+        }
+    }
+
+    @Override
+    public void createAll(List<ProjectDtoRequest> projectDtoRequestList, Principal principal){
+        List<Project> projectList = new ArrayList<>();
+
+
+        User user = this.userService.getByEmailThrowException(principal.getName());
+        UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(user.getId());
+
+        for(ProjectDtoRequest projectDtoRequest: projectDtoRequestList){
+            Project project = new Project();
+
+
+            project.setUserProfessionalInfo(userProfessionalInfo);
+            project.setStartedDate(projectDtoRequest.getStartedDate());
+            project.setFinishedDate(projectDtoRequest.getFinishedDate());
+            project.setRole(projectDtoRequest.getRole());
+            project.setSum(projectDtoRequest.getSum());
+            project.setFund(projectDtoRequest.getFund());
+            project.setProjectType(this.projectTypeService.getByIdThrowException(projectDtoRequest.getProjectTypeId()));
+
+            projectList.add(project);
+        }
+
+        try{
+            this.projectRepository.saveAll(projectList);
+        }catch (Exception e){
+            log.error(e);
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "projectServiceImpl"));
         }
     }
 }

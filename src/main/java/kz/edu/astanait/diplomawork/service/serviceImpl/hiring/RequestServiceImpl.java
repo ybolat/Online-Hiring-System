@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,4 +119,26 @@ public class RequestServiceImpl implements RequestService {
         }
     }
 
+    @Override
+    public void createAll(List<RequestDtoRequest> requestDtoRequestList){
+        List<Request> requestList = new ArrayList<>();
+
+        for(RequestDtoRequest requestDtoRequest: requestDtoRequestList){
+            Request request = new Request();
+
+            request.setStatus(this.statusService.getByIdThrowException(requestDtoRequest.getStatusId()));
+            request.setCreatedDate(requestDtoRequest.getCreatedDate());
+            request.setBackground(requestDtoRequest.getBackground());
+            request.setAdditional(requestDtoRequest.getAdditional());
+
+            requestList.add(request);
+        }
+
+        try {
+            this.requestRepository.saveAll(requestList);
+        }catch (Exception e){
+            log.error(e);
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "requestServiceImpl list"));
+        }
+    }
 }

@@ -11,7 +11,10 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestServic
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.CommissionService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +63,28 @@ public class CommissionActionHistoryServiceImpl implements CommissionActionHisto
             log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "commission action history"));
         }
+    }
+
+    @Override
+    public void createAll(List<CommissionActionHistoryDtoRequest> commissionActionHistoryDtoRequestList) {
+        List<CommissionActionHistory> commissionActionHistoryList = new ArrayList<>();
+
+        for(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest: commissionActionHistoryDtoRequestList){
+            CommissionActionHistory commissionActionHistory = new CommissionActionHistory();
+
+            commissionActionHistory.setRequest(this.requestService.getByIdThrowException(commissionActionHistoryDtoRequest.getRequestId()));
+            commissionActionHistory.setCommission(this.commissionService.getByIdThrowException(commissionActionHistoryDtoRequest.getCommissionId()));
+            commissionActionHistory.setIsVote(commissionActionHistoryDtoRequest.getIsVote());
+
+            commissionActionHistoryList.add(commissionActionHistory);
+        }
+
+        try{
+            this.commissionActionHistoryRepository.saveAll(commissionActionHistoryList);
+        }catch (Exception e){
+            log.error(e);
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating","commissionActionHistory"));
+        }
+
     }
 }

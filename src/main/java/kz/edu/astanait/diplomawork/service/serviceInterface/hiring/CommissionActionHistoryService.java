@@ -13,4 +13,6 @@ public interface CommissionActionHistoryService {
     List<CommissionActionHistory> getByRequestId(Long id);
 
     void create(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest);
+
+    void createAll(List<CommissionActionHistoryDtoRequest> commissionActionHistoryDtoRequestList);
 }

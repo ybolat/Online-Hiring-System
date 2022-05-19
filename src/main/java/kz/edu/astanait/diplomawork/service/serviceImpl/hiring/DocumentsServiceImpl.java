@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.DocumentsDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -108,4 +111,27 @@ public class DocumentsServiceImpl implements DocumentsService {
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "document"));
         }
     }
+
+//    public void createAll(List<DocumentsDtoRequest> documentsDtoRequestList){
+//        List<Document> documentList = new ArrayList<>();
+//
+//        for(DocumentsDtoRequest documentsDtoRequest: documentsDtoRequestList){
+//            Document document = new Document();
+//
+//            document.setDocument(documentsDtoRequest.getDocument());
+//            document.setDocumentName(documentsDtoRequest.getDocumentName());
+//            document.setContentType(documentsDtoRequest.getContentType());
+//
+//            documentList.add(document);
+//        }
+//
+//        try{
+//            this.documentsRepository.saveAll(documentList);
+//        }catch (Exception e){
+//            log.error(e);
+//            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "document list"));
+//        }
+//    }
+
+
 }

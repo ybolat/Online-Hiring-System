@@ -3,7 +3,6 @@ package kz.edu.astanait.diplomawork.dto.responseDto.user;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.VacancyDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicTitleDtoResponse;
-import kz.edu.astanait.diplomawork.model.catalog.AcademicTitle;
 import lombok.Data;
 
 @Data

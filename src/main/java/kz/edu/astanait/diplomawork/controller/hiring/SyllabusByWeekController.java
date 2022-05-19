@@ -39,4 +39,10 @@ public class SyllabusByWeekController extends ExceptionHandling {
         this.syllabusByWeekService.create(syllabusByWeekDtoRequestList);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList) {
+        this.syllabusByWeekService.createAll(syllabusByWeekDtoRequestList);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

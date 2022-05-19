@@ -20,4 +20,6 @@ public interface DevelopmentService {
     void update(DevelopmentDtoRequest developmentDtoRequest, Long id);
 
     void delete(Long id);
+
+    void createAll(List<DevelopmentDtoRequest> developmentDtoRequestList, Principal principal);
 }

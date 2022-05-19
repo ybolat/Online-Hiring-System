@@ -94,4 +94,10 @@ public class RequestController extends ExceptionHandling {
         this.requestService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<RequestDtoRequest> requestDtoRequestList) {
+        this.requestService.createAll(requestDtoRequestList);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

@@ -1,21 +1,25 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
+import antlr.NameSpace;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.DevelopmentDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Development;
 import kz.edu.astanait.diplomawork.model.user.User;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.hiring.DevelopmentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.DevelopmentTypeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.DevelopmentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,12 +32,14 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     private final UserProfessionalInfoService userProfessionalInfoService;
     private final DevelopmentTypeService developmentTypeService;
+    private final UserService userService;
 
     @Autowired
-    public DevelopmentServiceImpl(DevelopmentRepository developmentRepository, UserProfessionalInfoService userProfessionalInfoService, DevelopmentTypeService developmentTypeService) {
+    public DevelopmentServiceImpl(DevelopmentRepository developmentRepository, UserProfessionalInfoService userProfessionalInfoService, DevelopmentTypeService developmentTypeService, UserService userService) {
         this.developmentRepository = developmentRepository;
         this.userProfessionalInfoService = userProfessionalInfoService;
         this.developmentTypeService = developmentTypeService;
+        this.userService = userService;
     }
 
     @Override
@@ -97,6 +103,32 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         }catch (Exception e){
             log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "development"));
+        }
+    }
+
+    @Override
+    public void createAll(List<DevelopmentDtoRequest> developmentDtoRequestList, Principal principal) {
+        List<Development> developmentList = new ArrayList<>();
+
+        User user = this.userService.getByEmailThrowException(principal.getName());
+        UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(user.getId());
+
+        for(DevelopmentDtoRequest developmentDtoRequest: developmentDtoRequestList){
+            Development development = new Development();
+
+            development.setUserProfessionalInfo(userProfessionalInfo);
+            development.setName(developmentDtoRequest.getName());
+            development.setDescription(developmentDtoRequest.getDescription());
+            development.setDevelopmentType(this.developmentTypeService.getByIdThrowException(developmentDtoRequest.getDevelopmentTypeId()));
+
+            developmentList.add(development);
+
+            try{
+                this.developmentRepository.saveAll(developmentList);
+            }catch (Exception e){
+                log.error(e);
+                throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating","DevelopmentServiceImpl"));
+            }
         }
     }
 }

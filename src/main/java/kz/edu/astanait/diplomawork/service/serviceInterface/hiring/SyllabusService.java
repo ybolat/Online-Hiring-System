@@ -22,4 +22,6 @@ public interface SyllabusService {
     void update(SyllabusDtoRequest syllabusDtoRequest, Long id, HashMap<Long, SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList);
 
     void delete(Long id);
+
+    void createAll(List<SyllabusDtoRequest> syllabusDtoRequestList, Principal principal);
 }

@@ -18,4 +18,6 @@ public interface VacancyService {
     void update(VacancyDtoRequest vacancyDtoRequest, Long id);
 
     void delete(Long id);
+
+    void createAll(List<VacancyDtoRequest> vacancyDtoRequestList);
 }

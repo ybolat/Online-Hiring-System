@@ -20,4 +20,6 @@ public interface IntelligenceLegalDocumentService {
     void update(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Long id);
 
     void delete(Long id);
+
+    void createAll(List<IntelligenceLegalDocumentDtoRequest> intelligenceLegalDocumentDtoRequestList, Principal principal);
 }

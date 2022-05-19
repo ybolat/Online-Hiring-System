@@ -7,17 +7,20 @@ import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Syllabus;
 import kz.edu.astanait.diplomawork.model.user.User;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.hiring.SyllabusRepository;
 import kz.edu.astanait.diplomawork.service.serviceImpl.catalog.SubjectServiceImpl;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusByWeekService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.SyllabusService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -31,13 +34,15 @@ public class SyllabusServiceImpl implements SyllabusService {
     private final UserProfessionalInfoService userProfessionalInfoService;
     private final SubjectServiceImpl subjectService;
     private final SyllabusByWeekService syllabusByWeekService;
+    private final UserService userService;
 
     @Autowired
-    public SyllabusServiceImpl(SyllabusRepository syllabusRepository, UserProfessionalInfoService userProfessionalInfoService, SubjectServiceImpl subjectService, @Lazy SyllabusByWeekService syllabusByWeekService) {
+    public SyllabusServiceImpl(SyllabusRepository syllabusRepository, UserProfessionalInfoService userProfessionalInfoService, SubjectServiceImpl subjectService, @Lazy SyllabusByWeekService syllabusByWeekService, UserService userService) {
         this.syllabusRepository = syllabusRepository;
         this.userProfessionalInfoService = userProfessionalInfoService;
         this.subjectService = subjectService;
         this.syllabusByWeekService = syllabusByWeekService;
+        this.userService = userService;
     }
 
     @Override
@@ -102,5 +107,30 @@ public class SyllabusServiceImpl implements SyllabusService {
             throw new RepositoryException(String
                     .format(ExceptionDescription.RepositoryException, "deleting", "syllabus"));
         }
+    }
+
+    @Override
+    public void createAll(List<SyllabusDtoRequest> syllabusDtoRequestList, Principal principal){
+        List<Syllabus> syllabusList = new ArrayList<>();
+
+        User user = this.userService.getByEmailThrowException(principal.getName());
+        UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(user.getId());
+
+        for(SyllabusDtoRequest syllabusDtoRequest: syllabusDtoRequestList){
+            Syllabus syllabus = new Syllabus();
+
+            syllabus.setUserProfessionalInfo(userProfessionalInfo);
+            syllabus.setSubject(this.subjectService.getByIdThrowException(syllabusDtoRequest.getSubjectId()));
+
+            syllabusList.add(syllabus);
+
+            try{
+                this.syllabusRepository.saveAll(syllabusList);
+            }catch (Exception e){
+                log.error(e);
+                throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating","syllabusList"));
+            }
+        }
+
     }
 }

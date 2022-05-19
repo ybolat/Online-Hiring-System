@@ -20,4 +20,6 @@ public interface PublicationsService {
     void update(PublicationsDtoRequest publicationsDtoRequest, Long id);
 
     void delete(Long id);
+
+    void createAll(List<PublicationsDtoRequest> publicationsDtoRequestList, Principal principal);
 }

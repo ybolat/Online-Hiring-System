@@ -58,4 +58,10 @@ public class VacancyController extends ExceptionHandling {
         this.vacancyService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/create/all")
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<VacancyDtoRequest> vacancyDtoRequest) {
+        this.vacancyService.createAll(vacancyDtoRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
