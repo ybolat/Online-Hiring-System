@@ -52,7 +52,7 @@ public class UserController extends ExceptionHandling {
         return new ResponseEntity<>(userDtoResponse, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_CHALLENGER')")
     @PutMapping("/change-password")
     public ResponseEntity<HttpStatus> changePassword(@Valid @RequestBody UserChangePasswordDtoRequest userDto,
                                                      Principal principal) {
