@@ -110,7 +110,7 @@ public class PinCodeServiceImpl implements PinCodeService {
         }
 
         for (int i = 0; i < 4; i++) {
-            int randomNum = ThreadLocalRandom.current().nextInt(0, 5 + 1);
+            int randomNum = ThreadLocalRandom.current().nextInt(0, 6 + 1);
             password.append(characters.charAt(randomNum));
         }
 
