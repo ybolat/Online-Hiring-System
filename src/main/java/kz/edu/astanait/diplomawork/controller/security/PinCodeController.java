@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
+
 @RestController
 @RequestMapping("/api/v1/pin-code")
+@PermitAll
 public class PinCodeController extends ExceptionHandling {
 
     private final PinCodeService pinCodeService;
