@@ -10,5 +10,5 @@ public class IntelligenceLegalDocumentDtoResponse {
 
     private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
 
-    private String document;
+    private DocumentsDtoResponse document;
 }

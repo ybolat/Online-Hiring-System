@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.dto.requestDto.user;
 
-import kz.edu.astanait.diplomawork.model.user.Commission;
 import lombok.Data;
 import javax.validation.constraints.NotNull;
 
@@ -20,5 +19,5 @@ public class TeamsAdminCredentialDtoRequest {
     private String clientSecret;
 
     @NotNull(message = "asd")
-    private Commission commission;
+    private Long commissionId;
 }

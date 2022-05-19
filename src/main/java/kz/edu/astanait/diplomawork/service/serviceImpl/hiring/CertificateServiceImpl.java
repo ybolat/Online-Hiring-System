@@ -1,8 +1,6 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.CertificateDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
-import kz.edu.astanait.diplomawork.exception.domain.CustomException;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Certificate;
@@ -114,6 +112,8 @@ public class CertificateServiceImpl implements CertificateService {
         Certificate certificate = this.getByIdThrowException(id);
 
         SecurityUtils.checkAccessByPrincipal(certificate.getUserProfessionalInfo().getUser().getEmail(), principal);
+
+        this.documentsService.delete(certificate.getDocument().getId());
 
         try{
             this.certificateRepository.delete(certificate);

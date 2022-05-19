@@ -10,9 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,27 +38,32 @@ public class IntelligenceLegalDocumentController extends ExceptionHandling {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Principal principal) {
-        this.intelligenceLegalDocumentService.create(intelligenceLegalDocumentDtoRequest, principal);
+    public ResponseEntity<HttpStatus> create(@RequestParam(name = "file_name") String fileName,
+                                             MultipartFile file,
+                                             Principal principal) {
+        this.intelligenceLegalDocumentService.create(fileName, file, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/update/id/{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest,
-                                             @PathVariable(name = "id") Long id) {
-        this.intelligenceLegalDocumentService.update(intelligenceLegalDocumentDtoRequest, id);
+    public ResponseEntity<HttpStatus> update(@PathVariable(name = "id") Long id,
+                                             @RequestParam(name = "file_name", required = false) String fileName,
+                                             MultipartFile file,
+                                             Principal principal) {
+        this.intelligenceLegalDocumentService.update(id, fileName, file, principal);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/id/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
-        this.intelligenceLegalDocumentService.delete(id);
+    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id, Principal principal) {
+        this.intelligenceLegalDocumentService.delete(id, principal);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<IntelligenceLegalDocumentDtoRequest> intelligenceLegalDocumentDtoRequestList, Principal principal) {
-        this.intelligenceLegalDocumentService.createAll(intelligenceLegalDocumentDtoRequestList, principal);
+    public ResponseEntity<HttpStatus> createAll(@RequestParam(name = "file") HashMap<String, MultipartFile> file,
+                                                Principal principal) {
+        this.intelligenceLegalDocumentService.createAll(file, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

@@ -14,7 +14,7 @@ public class IntelligenceLegalDocumentMapper {
         IntelligenceLegalDocumentDtoResponse intelligenceLegalDocumentDtoResponse = new IntelligenceLegalDocumentDtoResponse();
         intelligenceLegalDocumentDtoResponse.setId(intelligenceLegalDocument.getId());
         if(Objects.nonNull(intelligenceLegalDocument.getUserProfessionalInfo())) intelligenceLegalDocumentDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(intelligenceLegalDocument.getUserProfessionalInfo()));
-        if(Strings.isNotBlank(intelligenceLegalDocument.getDocument())) intelligenceLegalDocumentDtoResponse.setDocument(intelligenceLegalDocument.getDocument());
+        if(Objects.nonNull(intelligenceLegalDocument.getDocument())) intelligenceLegalDocumentDtoResponse.setDocument(DocumentMapper.documentsToDto(intelligenceLegalDocument.getDocument()));
         return intelligenceLegalDocumentDtoResponse;
     }
 }

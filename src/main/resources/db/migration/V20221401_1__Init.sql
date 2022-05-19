@@ -195,8 +195,9 @@ create table development(
 create table intelligence_legal_document(
     id serial primary key,
     user_professional_info_id bigint not null,
-    document text not null,
-    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id)
+    document_id bigint not null,
+    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
+    constraint fk_document_id foreign key (document_id) references documents (id)
 );
 
 create table meeting(

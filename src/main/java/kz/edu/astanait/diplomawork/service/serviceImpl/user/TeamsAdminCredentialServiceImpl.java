@@ -58,7 +58,7 @@ public class TeamsAdminCredentialServiceImpl implements TeamsAdminCredentialServ
         teamsAdminCredential.setGrantType(teamsAdminCredentialDtoRequest.getGrantType());
         teamsAdminCredential.setClientId(teamsAdminCredentialDtoRequest.getClientId());
         teamsAdminCredential.setClientSecret(teamsAdminCredentialDtoRequest.getClientSecret());
-        teamsAdminCredential.setCommission(this.commissionService.getByIdThrowException(teamsAdminCredential.getId()));
+        teamsAdminCredential.setCommission(this.commissionService.getByIdThrowException(teamsAdminCredentialDtoRequest.getCommissionId()));
 
         try{
             this.teamsAdminCredentialRepository.save(teamsAdminCredential);
@@ -75,7 +75,7 @@ public class TeamsAdminCredentialServiceImpl implements TeamsAdminCredentialServ
         if(Strings.isNotBlank(teamsAdminCredentialDtoRequest.getGrantType())) teamsAdminCredential.setGrantType(teamsAdminCredentialDtoRequest.getGrantType());
         if(Strings.isNotBlank(teamsAdminCredentialDtoRequest.getClientId())) teamsAdminCredential.setClientId(teamsAdminCredentialDtoRequest.getClientId());
         if(Strings.isNotBlank(teamsAdminCredentialDtoRequest.getClientSecret())) teamsAdminCredential.setClientSecret(teamsAdminCredentialDtoRequest.getClientSecret());
-        if(Objects.nonNull(teamsAdminCredentialDtoRequest.getCommission())) teamsAdminCredential.setCommission(teamsAdminCredentialDtoRequest.getCommission());
+        if(Objects.nonNull(teamsAdminCredentialDtoRequest.getCommissionId())) teamsAdminCredential.setCommission(this.commissionService.getByIdThrowException(teamsAdminCredentialDtoRequest.getCommissionId()));
 
         try {
             this.teamsAdminCredentialRepository.save(teamsAdminCredential);

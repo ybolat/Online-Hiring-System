@@ -18,6 +18,7 @@ public class IntelligenceLegalDocument {
     @JoinColumn(name = "user_professional_info_id")
     private UserProfessionalInfo userProfessionalInfo;
 
-    @Column(name = "document")
-    private String document;
+    @ManyToOne
+    @JoinColumn(name = "document_id")
+    private Document document;
 }

@@ -4,10 +4,13 @@ import kz.edu.astanait.diplomawork.dto.requestDto.hiring.IntelligenceLegalDocume
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
+import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.hiring.IntelligenceLegalDocumentRepository;
+import kz.edu.astanait.diplomawork.service.serviceImpl.utils.SecurityUtils;
+import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.DocumentsService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.IntelligenceLegalDocumentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
@@ -15,23 +18,25 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Log4j2
 public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDocumentService {
 
     private final IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository;
+
+    private final DocumentsService documentsService;
     private final UserProfessionalInfoService userProfessionalInfoService;
     private final UserService userService;
 
     @Autowired
-    public IntelligenceLegalDocumentServiceImpl(IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository, UserProfessionalInfoService userProfessionalInfoService, UserService userService) {
+    public IntelligenceLegalDocumentServiceImpl(IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository, DocumentsService documentsService, UserProfessionalInfoService userProfessionalInfoService, UserService userService) {
         this.intelligenceLegalDocumentRepository = intelligenceLegalDocumentRepository;
+        this.documentsService = documentsService;
         this.userProfessionalInfoService = userProfessionalInfoService;
         this.userService = userService;
     }
@@ -54,27 +59,27 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
     }
 
     @Override
-    public void create(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Principal principal) {
+    public void create(String fileName, MultipartFile file, Principal principal) {
         IntelligenceLegalDocument intelligenceLegalDocument = new IntelligenceLegalDocument();
 
         User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
-        intelligenceLegalDocument.setDocument(intelligenceLegalDocumentDtoRequest.getDocument());
         intelligenceLegalDocument.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
+        intelligenceLegalDocument.setDocument(this.documentsService.create(fileName, file));
 
         try{
             this.intelligenceLegalDocumentRepository.save(intelligenceLegalDocument);
         }catch (Exception e){
             log.error(e);
-            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "intelligenceLegalDocument"));
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "intelligence legal document", "certificate"));
         }
     }
 
     @Override
-    public void update(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest, Long id) {
+    public void update(Long id, String fileName, MultipartFile file, Principal principal) {
         IntelligenceLegalDocument intelligenceLegalDocument = this.getByIdThrowException(id);
 
-        if(Strings.isNotBlank(intelligenceLegalDocumentDtoRequest.getDocument())) intelligenceLegalDocument.setDocument(intelligenceLegalDocument.getDocument());
+        if (Strings.isNotBlank(fileName) || Objects.nonNull(file)) intelligenceLegalDocument.setDocument(this.documentsService.update(fileName, file, intelligenceLegalDocument.getDocument().getId()));
 
         try{
             this.intelligenceLegalDocumentRepository.save(intelligenceLegalDocument);
@@ -87,8 +92,12 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id, Principal principal) {
         IntelligenceLegalDocument intelligenceLegalDocument = this.getByIdThrowException(id);
+
+        SecurityUtils.checkAccessByPrincipal(intelligenceLegalDocument.getUserProfessionalInfo().getUser().getEmail(), principal);
+
+        this.documentsService.delete(intelligenceLegalDocument.getDocument().getId());
 
         try{
             this.intelligenceLegalDocumentRepository.delete(intelligenceLegalDocument);
@@ -100,27 +109,24 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
     }
 
     @Override
-    public void createAll(List<IntelligenceLegalDocumentDtoRequest> intelligenceLegalDocumentDtoRequestList, Principal principal){
+    public void createAll(HashMap<String, MultipartFile> file, Principal principal){
         List<IntelligenceLegalDocument> intelligenceLegalDocumentList = new ArrayList<>();
 
-        User user = this.userService.getByEmailThrowException(principal.getName());
-        UserProfessionalInfo userProfessionalInfo = this.userProfessionalInfoService.getByUserIdThrowException(user.getId());
+        User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
-        for(IntelligenceLegalDocumentDtoRequest intelligenceLegalDocumentDtoRequest: intelligenceLegalDocumentDtoRequestList){
+        file.forEach((k, v) -> {
             IntelligenceLegalDocument intelligenceLegalDocument = new IntelligenceLegalDocument();
-
-            intelligenceLegalDocument.setUserProfessionalInfo(userProfessionalInfo);
-            intelligenceLegalDocument.setDocument(intelligenceLegalDocumentDtoRequest.getDocument());
+            intelligenceLegalDocument.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
+            intelligenceLegalDocument.setDocument(this.documentsService.create(k, v));
 
             intelligenceLegalDocumentList.add(intelligenceLegalDocument);
-        }
+        });
 
-        try{
+
+        try {
             this.intelligenceLegalDocumentRepository.saveAll(intelligenceLegalDocumentList);
         }catch (Exception e){
-            log.error(e);
-            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "intelligenceLegalDocumentService"));
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "certificate list"));
         }
-
     }
 }
