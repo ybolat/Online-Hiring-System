@@ -170,10 +170,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void forgotPassword(String email) throws MessagingException {
+    public void forgotPassword(String email, Integer pinCode) throws MessagingException {
         User user = this.getByEmailThrowException(email);
+        this.pinCodeService.checkPinCode(pinCode, email);
         String generatePassword = this.pinCodeService.generatePassword();
-        System.out.println(generatePassword);
+
         user.setPassword(this.encoder.encode(generatePassword));
 
         try {

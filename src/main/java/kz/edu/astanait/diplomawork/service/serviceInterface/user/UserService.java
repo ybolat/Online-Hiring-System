@@ -34,5 +34,5 @@ public interface UserService {
 
     void changePassword(Principal principal, UserChangePasswordDtoRequest userDto);
 
-    void forgotPassword(String email) throws MessagingException;
+    void forgotPassword(String email, Integer pinCode) throws MessagingException;
 }
