@@ -284,6 +284,10 @@ create table user_document (
     constraint fk_user_id foreign key (user_id) references users (id)
 );
 
-
-
-
+create table subject_user (
+    id serial primary key,
+    subject_id bigint not null,
+    user_professional_information_id bigint not null,
+    constraint fk_subject_id foreign key (subject_id) references subject(id),
+    constraint fk_user_id foreign key (user_professional_information_id) references user_professional_info(id)
+);

@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.dto.requestDto.user;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 public class UserProfessionalInfoDtoRequest {
@@ -38,4 +39,6 @@ public class UserProfessionalInfoDtoRequest {
     private String scientificInterests;
 
     private String education;
+
+    private List<Long> subjectsId;
 }

@@ -65,6 +65,4 @@ public class CertificateController extends ExceptionHandling {
         this.certificateService.delete(id, principal);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }

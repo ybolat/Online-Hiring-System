@@ -2,10 +2,12 @@ package kz.edu.astanait.diplomawork.model.user;
 
 import kz.edu.astanait.diplomawork.model.catalog.AcademicDegree;
 import kz.edu.astanait.diplomawork.model.catalog.AcademicTitle;
+import kz.edu.astanait.diplomawork.model.catalog.Subject;
 import kz.edu.astanait.diplomawork.model.hiring.Vacancy;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user_professional_info")
@@ -67,4 +69,12 @@ public class UserProfessionalInfo {
 
     @Column(name = "education")
     private String education;
+
+    @ManyToMany
+    @JoinTable(
+            name = "subject_user",
+            joinColumns = @JoinColumn(name = "subject_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_professional_information_id")
+    )
+    private List<Subject> subjectList;
 }
