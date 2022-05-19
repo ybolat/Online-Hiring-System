@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.dto.responseDto.share;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicTitleDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.PositionDtoResponse;
+import kz.edu.astanait.diplomawork.dto.responseDto.catalog.SubjectDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.*;
 import lombok.Data;
 
@@ -45,7 +46,7 @@ public class UserDataDtoResponse {
 
     private String experience;
 
-//    private String препродоваемыеДисциплины;
+    private List<SubjectDtoResponse> subjectDtoResponseList;
 
     private String scientificInterests;
 

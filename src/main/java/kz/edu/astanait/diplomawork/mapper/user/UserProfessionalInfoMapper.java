@@ -3,10 +3,12 @@ package kz.edu.astanait.diplomawork.mapper.user;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicDegreeMapper;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicTitleMapper;
+import kz.edu.astanait.diplomawork.mapper.catalog.SubjectMapper;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class UserProfessionalInfoMapper {
 
@@ -22,6 +24,7 @@ public class UserProfessionalInfoMapper {
         if (Strings.isNotBlank(userProfessionalInfo.getResearchLink())) userProfessionalInfoDtoResponse.setResearchLink(userProfessionalInfo.getResearchLink());
         if (Strings.isNotBlank(userProfessionalInfo.getResearch())) userProfessionalInfoDtoResponse.setResearch(userProfessionalInfo.getResearch());
         if (Strings.isNotBlank(userProfessionalInfo.getGoogleScholar())) userProfessionalInfoDtoResponse.setGoogleScholar(userProfessionalInfo.getGoogleScholar());
+        if (Objects.nonNull(userProfessionalInfo.getSubjectList())) userProfessionalInfoDtoResponse.setSubjectDtoResponseList(userProfessionalInfo.getSubjectList().stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList()));
         if (Objects.nonNull(userProfessionalInfo.getGoogleScholarHIndex())) userProfessionalInfoDtoResponse.setGoogleScholarHIndex(userProfessionalInfo.getGoogleScholarHIndex());
         if (Strings.isNotBlank(userProfessionalInfo.getOrcid())) userProfessionalInfoDtoResponse.setOrcid(userProfessionalInfo.getOrcid());
         if (Strings.isNotBlank(userProfessionalInfo.getExperience())) userProfessionalInfoDtoResponse.setExperience(userProfessionalInfo.getExperience());

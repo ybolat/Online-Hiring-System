@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.dto.responseDto.share.UserDataDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicDegreeMapper;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicTitleMapper;
 import kz.edu.astanait.diplomawork.mapper.catalog.PositionMapper;
+import kz.edu.astanait.diplomawork.mapper.catalog.SubjectMapper;
 import kz.edu.astanait.diplomawork.mapper.hiring.*;
 import kz.edu.astanait.diplomawork.model.hiring.*;
 import kz.edu.astanait.diplomawork.model.user.User;
@@ -80,6 +81,7 @@ public class UserDataServiceImpl implements UserDataService {
             userDataDtoResponse.setGoogleScholarHIndex(userProfessionalInfo.getGoogleScholarHIndex());
             userDataDtoResponse.setOrcidLink(userProfessionalInfo.getOrcid());
             userDataDtoResponse.setExperience(userProfessionalInfo.getExperience());
+            userDataDtoResponse.setSubjectDtoResponseList(userProfessionalInfo.getSubjectList().stream().map(SubjectMapper::subjectToDto).collect(Collectors.toList()));
             userDataDtoResponse.setScientificInterests(userProfessionalInfo.getScientificInterests());
             userDataDtoResponse.setProjectDtoResponse(projectList.stream().map(ProjectMapper::projectToDto).collect(Collectors.toList()));
             userDataDtoResponse.setArticleDtoResponses(articleList.stream().map(ArticleMapper::articleToDto).collect(Collectors.toList()));
