@@ -52,6 +52,7 @@ public class UserController extends ExceptionHandling {
         return new ResponseEntity<>(userDtoResponse, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/change-password")
     public ResponseEntity<HttpStatus> changePassword(@Valid @RequestBody UserChangePasswordDtoRequest userDto,
                                                      Principal principal) {
@@ -59,7 +60,6 @@ public class UserController extends ExceptionHandling {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/forgot-password")
     public ResponseEntity<HttpStatus> changePassword(@RequestParam(name = "email") String email) throws MessagingException {
         this.userService.forgotPassword(email);
