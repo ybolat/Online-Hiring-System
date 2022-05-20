@@ -4,13 +4,11 @@ import kz.edu.astanait.diplomawork.dto.requestDto.user.UserProfessionalInfoDtoRe
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
-import kz.edu.astanait.diplomawork.model.catalog.Subject;
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.user.UserProfessionalInfoRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicDegreeService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.AcademicTitleService;
-import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.SubjectService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.VacancyService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
@@ -35,16 +33,14 @@ public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoServ
     private final VacancyService vacancyService;
     private final AcademicDegreeService academicDegreeService;
     private final AcademicTitleService academicTitleService;
-    private final SubjectService subjectService;
 
     @Autowired
-    public UserProfessionalInfoServiceImpl(UserProfessionalInfoRepository userProfessionalInfoRepository, UserService userService, UserService userService1, VacancyService vacancyService, AcademicDegreeService academicDegreeService, AcademicTitleService academicTitleService, SubjectService subjectService) {
+    public UserProfessionalInfoServiceImpl(UserProfessionalInfoRepository userProfessionalInfoRepository, UserService userService, VacancyService vacancyService, AcademicDegreeService academicDegreeService, AcademicTitleService academicTitleService) {
         this.userProfessionalInfoRepository = userProfessionalInfoRepository;
-        this.userService = userService1;
+        this.userService = userService;
         this.vacancyService = vacancyService;
         this.academicDegreeService = academicDegreeService;
         this.academicTitleService = academicTitleService;
-        this.subjectService = subjectService;
     }
 
     @Override
