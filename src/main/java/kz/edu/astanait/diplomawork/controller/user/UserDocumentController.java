@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/api/v1/user-document")
+@RequestMapping("/api/v1/user/user-document")
 @PreAuthorize("hasRole('ROLE_CHALLENGER')")
 public class UserDocumentController extends ExceptionHandling {
 
@@ -34,13 +34,13 @@ public class UserDocumentController extends ExceptionHandling {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody UserDocumentDtoRequest userDocumentDtoRequest, Principal principal){
+    public ResponseEntity<HttpStatus> create(@Valid @ModelAttribute  UserDocumentDtoRequest userDocumentDtoRequest, Principal principal){
         this.userDocumentService.create(userDocumentDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/update/id/{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody UserDocumentDtoRequest userDocumentDtoRequest,
+    public ResponseEntity<HttpStatus> update(@ModelAttribute UserDocumentDtoRequest userDocumentDtoRequest,
                                              @PathVariable(name = "id") Long id){
         this.userDocumentService.update(userDocumentDtoRequest, id);
         return new ResponseEntity<>(HttpStatus.OK);

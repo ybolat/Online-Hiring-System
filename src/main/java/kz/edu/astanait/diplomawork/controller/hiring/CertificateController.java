@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +29,12 @@ public class CertificateController extends ExceptionHandling {
         this.certificateService = certificateService;
     }
 
+    @GetMapping("/get/id/{id}")
+    public ResponseEntity<CertificateDtoResponse> getById(@PathVariable(name = "id") Long id) {
+        CertificateDtoResponse certificateDtoResponse = CertificateMapper.certificateToDto(this.certificateService.getByIdThrowException(id));
+        return new ResponseEntity<>(certificateDtoResponse, HttpStatus.OK);
+    }
+
     @GetMapping("/get/user-professional-info/id/{id}")
     public ResponseEntity<List<CertificateDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id) {
         List<CertificateDtoResponse> certificateDtoResponseList =
@@ -44,7 +51,7 @@ public class CertificateController extends ExceptionHandling {
     }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@RequestParam(name = "file")HashMap<String, MultipartFile> file,
+    public ResponseEntity<HttpStatus> createAll(@ModelAttribute(name = "file")HashMap<String, MultipartFile> file,
                                                 Principal principal) {
         this.certificateService.createAll(file, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);

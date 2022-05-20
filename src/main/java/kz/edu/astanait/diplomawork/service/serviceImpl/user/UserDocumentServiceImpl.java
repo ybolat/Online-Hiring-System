@@ -12,6 +12,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.Objects;
 import java.util.Optional;
@@ -54,6 +55,7 @@ public class UserDocumentServiceImpl implements UserDocumentService {
     }
 
     @Override
+    @Transactional
     public void create(UserDocumentDtoRequest userDocumentDtoRequest, Principal principal) {
         UserDocument userDocument = new UserDocument();
 
@@ -70,6 +72,7 @@ public class UserDocumentServiceImpl implements UserDocumentService {
     }
 
     @Override
+    @Transactional
     public void update(UserDocumentDtoRequest userDocumentDtoRequest, Long id) {
         UserDocument userDocument = this.getByIdThrowException(id);
 
@@ -85,6 +88,7 @@ public class UserDocumentServiceImpl implements UserDocumentService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         UserDocument userDocument = this.getByIdThrowException(id);
 

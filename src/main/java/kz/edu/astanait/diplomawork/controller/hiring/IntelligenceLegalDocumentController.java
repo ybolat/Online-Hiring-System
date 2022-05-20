@@ -60,7 +60,7 @@ public class IntelligenceLegalDocumentController extends ExceptionHandling {
     }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@RequestParam(name = "file") HashMap<String, MultipartFile> file,
+    public ResponseEntity<HttpStatus> createAll(@ModelAttribute(name = "file") HashMap<String, MultipartFile> file,
                                                 Principal principal) {
         this.intelligenceLegalDocumentService.createAll(file, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);

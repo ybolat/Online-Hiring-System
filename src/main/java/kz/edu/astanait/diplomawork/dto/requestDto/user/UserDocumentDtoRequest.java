@@ -4,9 +4,10 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
-public class UserDocumentDtoRequest {
+public class UserDocumentDtoRequest implements Serializable {
 
     @NotNull(message = "Резюме не может быть пустым.")
     private MultipartFile cv;
