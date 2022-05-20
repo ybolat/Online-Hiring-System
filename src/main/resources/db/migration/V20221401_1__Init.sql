@@ -200,22 +200,6 @@ create table intelligence_legal_document(
     constraint fk_document_id foreign key (document_id) references documents (id)
 );
 
-create table meeting(
-    id serial primary key,
-    name varchar(255),
-    link varchar(500),
-    date_time timestamp not null,
-    request_id bigint not null,
-    constraint  fk_request_id foreign key (request_id) references request (id)
-);
-
-create table commission_meeting
-(
-    meeting_id    bigint not null,
-    commission_id bigint not null,
-    primary key (meeting_id, commission_id)
-);
-
 create table project(
     id serial primary key,
     user_professional_info_id bigint not null,
