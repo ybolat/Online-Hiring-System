@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface SyllabusService {
 
-    List<Syllabus> getAllByUserId(Long id);
+    List<Syllabus> getAllByUserProfessionalInfoId(Long id);
 
     Optional<Syllabus> getById(Long id);
 

@@ -69,12 +69,4 @@ public class UserProfessionalInfo {
 
     @Column(name = "education")
     private String education;
-
-    @ManyToMany
-    @JoinTable(
-            name = "subject_user",
-            joinColumns = @JoinColumn(name = "subject_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_professional_information_id")
-    )
-    private List<Subject> subjectList;
 }

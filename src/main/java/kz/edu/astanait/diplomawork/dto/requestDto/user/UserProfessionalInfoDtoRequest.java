@@ -39,6 +39,4 @@ public class UserProfessionalInfoDtoRequest {
     private String scientificInterests;
 
     private String education;
-
-    private List<Long> subjectsId;
 }

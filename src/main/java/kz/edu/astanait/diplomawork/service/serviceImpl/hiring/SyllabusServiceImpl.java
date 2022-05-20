@@ -46,7 +46,7 @@ public class SyllabusServiceImpl implements SyllabusService {
     }
 
     @Override
-    public List<Syllabus> getAllByUserId(Long id) {
+    public List<Syllabus> getAllByUserProfessionalInfoId(Long id) {
         return this.syllabusRepository.findAllByUserProfessionalInfoId(id);
     }
 

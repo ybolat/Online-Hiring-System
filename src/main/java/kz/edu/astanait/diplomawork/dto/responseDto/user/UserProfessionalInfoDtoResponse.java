@@ -44,6 +44,4 @@ public class UserProfessionalInfoDtoResponse {
     private String scientificInterests;
 
     private String education;
-
-    private List<SubjectDtoResponse> subjectDtoResponseList;
 }

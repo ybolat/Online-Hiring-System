@@ -79,20 +79,11 @@ public class UserProfessionalInfoServiceImpl implements UserProfessionalInfoServ
     @Override
     public void createProfile(UserProfessionalInfoDtoRequest userProfessionalInfoDtoRequest, Principal principal) {
         UserProfessionalInfo userProfessionalInfo = new UserProfessionalInfo();
-        List<Subject> subjectList = new ArrayList<>();
-
-        if (Objects.nonNull(userProfessionalInfoDtoRequest.getSubjectsId())){
-            for (int i = 0; i < userProfessionalInfoDtoRequest.getSubjectsId().size(); i++) {
-                Subject subject = this.subjectService.getByIdThrowException(userProfessionalInfoDtoRequest.getSubjectsId().get(i));
-                subjectList.add(subject);
-            }
-        }
 
         userProfessionalInfo.setUser(this.userService.getByEmailThrowException(principal.getName()));
         userProfessionalInfo.setVacancy(this.vacancyService.getByIdThrowException(userProfessionalInfoDtoRequest.getVacancyId()));
         userProfessionalInfo.setAcademicDegree(this.academicDegreeService.getByIdThrowException(userProfessionalInfoDtoRequest.getAcademicDegreeId()));
         userProfessionalInfo.setAcademicTitle(this.academicTitleService.getByIdThrowException(userProfessionalInfoDtoRequest.getAcademicTitleId()));
-        if (Objects.nonNull(userProfessionalInfoDtoRequest.getSubjectsId())) userProfessionalInfo.setSubjectList(subjectList);
         if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getScopus())) userProfessionalInfo.setScopus(userProfessionalInfoDtoRequest.getScopus());
         if (Objects.nonNull(userProfessionalInfoDtoRequest.getScopusHIndex())) userProfessionalInfo.setScopusHIndex(userProfessionalInfoDtoRequest.getScopusHIndex());
         if (Strings.isNotBlank(userProfessionalInfoDtoRequest.getScopusLink())) userProfessionalInfo.setScopusLink(userProfessionalInfoDtoRequest.getScopusLink());
