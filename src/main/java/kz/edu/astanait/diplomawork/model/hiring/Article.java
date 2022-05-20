@@ -32,9 +32,6 @@ public class Article {
     @JoinColumn(name = "article_type_id")
     private ArticleType articleType;
 
-    @Column(name = "link")
-    private String link;
-
     @Column(name = "authors")
     private String authors;
 

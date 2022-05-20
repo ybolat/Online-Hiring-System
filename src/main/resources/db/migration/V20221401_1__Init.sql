@@ -143,10 +143,9 @@ create table article(
     id serial primary key,
     article_name varchar(255) not null,
     apa text,
-    doi text,
+    doi text not null,
     user_professional_info_id bigint not null,
     article_type_id bigint not null,
-    link text,
     authors text not null,
     source text not null,
     constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
@@ -228,22 +227,6 @@ create table syllabus_by_week(
     title varchar(255) not null ,
     description text,
     constraint fk_syllabus_id foreign key (syllabus_id) references syllabus (id)
-);
-
-create table publication_type(
-    id serial primary key,
-    name varchar(255) not null
-);
-
-create table publication(
-    id serial primary key,
-    name varchar(255) not null,
-    link text not null,
-    published_date timestamp not null,
-    user_professional_info_id bigint not null,
-    publication_type_id bigint not null,
-    constraint fk_user_professional_info_id foreign key (user_professional_info_id) references user_professional_info (id),
-    constraint fk_publication_type_id foreign key (publication_type_id) references publication_type (id)
 );
 
 create table teams_admin_credential(

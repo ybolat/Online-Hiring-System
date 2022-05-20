@@ -17,8 +17,6 @@ public class ArticleDtoResponse {
 
     private ArticleTypeDtoResponse articleType;
 
-    private String link;
-
     private String authors;
 
     private String source;

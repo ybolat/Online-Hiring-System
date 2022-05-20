@@ -9,7 +9,6 @@ public class ArticleDtoRequest {
     @NotNull(message = "Название не была указана.")
     private String title;
 
-    @NotNull(message = "APA не был указан.")
     private String apa;
 
     @NotNull(message = "DOI не был указан.")
@@ -17,9 +16,6 @@ public class ArticleDtoRequest {
 
     @NotNull(message = "Тип статьи не был указан.")
     private Long articleTypeId;
-
-    @NotNull(message = "Ссылка не была указана.")
-    private String link;
 
     @NotNull(message = "Авторы не были указаны.")
     private String authors;

@@ -86,7 +86,6 @@ public class ArticleServiceImpl implements ArticleService {
         article.setArticleName(articleDtoRequest.getTitle());
         article.setApa(articleDtoRequest.getApa());
         article.setDoi(articleDtoRequest.getDoi());
-        article.setLink(articleDtoRequest.getLink());
         article.setAuthors(articleDtoRequest.getAuthors());
         article.setSource(articleDtoRequest.getSource());
         article.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
@@ -108,7 +107,6 @@ public class ArticleServiceImpl implements ArticleService {
         if (Strings.isNotBlank(articleDtoRequest.getApa())) article.setApa(articleDtoRequest.getApa());
         if (Strings.isNotBlank(articleDtoRequest.getDoi())) article.setDoi(articleDtoRequest.getDoi());
         if (Objects.nonNull(articleDtoRequest.getArticleTypeId())) article.setArticleType(this.articleTypeService.getByIdThrowException(articleDtoRequest.getArticleTypeId()));
-        if (Strings.isNotBlank(articleDtoRequest.getLink())) article.setLink(articleDtoRequest.getLink());
         if (Strings.isNotBlank(articleDtoRequest.getAuthors())) article.setAuthors(articleDtoRequest.getAuthors());
         if (Strings.isNotBlank(articleDtoRequest.getSource())) article.setSource(articleDtoRequest.getSource());
 
@@ -148,7 +146,6 @@ public class ArticleServiceImpl implements ArticleService {
             article.setArticleName(articleDtoRequest.getTitle());
             article.setApa(articleDtoRequest.getApa());
             article.setDoi(articleDtoRequest.getDoi());
-            article.setLink(articleDtoRequest.getLink());
             article.setUserProfessionalInfo(userProfessionalInfo);
             article.setAuthors(articleDtoRequest.getAuthors());
             article.setSource(articleDtoRequest.getSource());
