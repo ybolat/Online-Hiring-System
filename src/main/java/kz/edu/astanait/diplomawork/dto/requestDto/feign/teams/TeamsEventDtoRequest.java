@@ -2,8 +2,7 @@ package kz.edu.astanait.diplomawork.dto.requestDto.feign.teams;
 
 import lombok.Data;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 
 @Data
 public class TeamsEventDtoRequest {
@@ -11,5 +10,5 @@ public class TeamsEventDtoRequest {
     private String comment;
     private String dateTimeStart;
     private String dateTimeFinish;
-    private HashMap<String, String> attendees;
+    private List<String> attendees;
 }

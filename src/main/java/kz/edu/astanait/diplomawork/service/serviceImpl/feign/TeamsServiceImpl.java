@@ -62,19 +62,20 @@ public class TeamsServiceImpl implements TeamsService {
 
         JSONArray jsonAttendeesArray = new JSONArray();
 
-        teamsEventDtoRequest.getAttendees().forEach((k,v) -> {
+
+
+        for (String s : teamsEventDtoRequest.getAttendees()){
 
             JSONObject jsonEmailMain = new JSONObject();
 
             JSONObject jsonEmailAddress = new JSONObject();
-            jsonEmailAddress.put("address", k);
-            jsonEmailAddress.put("name", v);
+            jsonEmailAddress.put("address", s);
 
             jsonEmailMain.put("emailAddress", jsonEmailAddress);
             jsonEmailMain.put("type", "required");
 
             jsonAttendeesArray.put(jsonEmailMain);
-        });
+        }
 
         json.put("attendees", jsonAttendeesArray);
 
