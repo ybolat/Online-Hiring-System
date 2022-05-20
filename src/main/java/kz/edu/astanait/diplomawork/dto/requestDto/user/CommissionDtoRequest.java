@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class CommissionDtoRequest {
 
     @NotNull(message = "Роль не может быть пустым.")
-    private Long roleId;
+    private String role;
 
     @NotNull(message = "Почта не может быть пустой.")
     private String email;

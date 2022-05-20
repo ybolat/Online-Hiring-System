@@ -65,7 +65,7 @@ public class CommissionServiceImpl implements CommissionService {
         Commission commission = new Commission();
 
         commission.setEmail(commissionDtoRequest.getEmail());
-        commission.setRole(this.roleService.getByIdThrowException(commissionDtoRequest.getRoleId()));
+        commission.setRole(this.roleService.getByNameThrowException(commissionDtoRequest.getRole()));
 
         try{
             this.commissionRepository.save(commission);
@@ -79,7 +79,7 @@ public class CommissionServiceImpl implements CommissionService {
         Commission commission = this.getByIdThrowException(id);
 
         if (Strings.isNotBlank(commissionDtoRequest.getEmail())) commission.setEmail(commissionDtoRequest.getEmail());
-        if (Objects.nonNull(commissionDtoRequest.getRoleId())) commission.setRole(this.roleService.getByIdThrowException(commissionDtoRequest.getRoleId()));
+        if (Strings.isNotBlank(commissionDtoRequest.getRole())) commission.setRole(this.roleService.getByNameThrowException(commissionDtoRequest.getRole()));
 
         try {
             this.commissionRepository.save(commission);
