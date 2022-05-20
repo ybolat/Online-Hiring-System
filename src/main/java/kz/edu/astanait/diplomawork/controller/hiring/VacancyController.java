@@ -40,12 +40,14 @@ public class VacancyController extends ExceptionHandling {
         return new ResponseEntity<>(vacancyDtoResponse, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody VacancyDtoRequest vacancyDtoRequest) {
         this.vacancyService.create(vacancyDtoRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/id/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody VacancyDtoRequest vacancyDtoRequest,
                                              @PathVariable(name = "id") Long id) {
@@ -53,12 +55,14 @@ public class VacancyController extends ExceptionHandling {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/id/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
         this.vacancyService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create/all")
     public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<VacancyDtoRequest> vacancyDtoRequest) {
         this.vacancyService.createAll(vacancyDtoRequest);
