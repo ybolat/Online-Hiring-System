@@ -250,3 +250,12 @@ create table user_document (
     constraint fk_photo foreign key (photo) references documents (id),
     constraint fk_user_id foreign key (user_id) references users (id)
 );
+
+create table meeting (
+    id serial primary key,
+    meeting_link text not null,
+    meeting_title text not null,
+    meeting_description text not null,
+    start_date_time varchar(255) not null,
+    end_date_time varchar(255) not null
+);

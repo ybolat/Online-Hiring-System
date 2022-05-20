@@ -62,8 +62,6 @@ public class TeamsServiceImpl implements TeamsService {
 
         JSONArray jsonAttendeesArray = new JSONArray();
 
-
-
         for (String s : teamsEventDtoRequest.getAttendees()){
 
             JSONObject jsonEmailMain = new JSONObject();
@@ -93,7 +91,7 @@ public class TeamsServiceImpl implements TeamsService {
     }
 
     private String teamsLogin() {
-        TeamsAdminCredential teamsAdminCredential = this.teamsAdminCredentialService.getByCommissionEmailThrowException("y.bolat@astanait.edu.kz");
+        TeamsAdminCredential teamsAdminCredential = this.teamsAdminCredentialService.getByCommissionEmailThrowException(userPrincipal);
 
         String directoryId = teamsAdminCredential.getDirectoryId();
 
