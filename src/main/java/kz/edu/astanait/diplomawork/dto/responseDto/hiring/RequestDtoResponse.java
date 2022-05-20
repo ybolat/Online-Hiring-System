@@ -13,8 +13,6 @@ public class RequestDtoResponse {
 
     private UserDtoResponse user;
 
-    private StatusDtoResponse status;
-
     private String additional;
 
     private LocalDateTime createdDate;

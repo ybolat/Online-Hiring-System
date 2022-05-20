@@ -5,12 +5,11 @@ import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Request;
+import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.repository.hiring.RequestRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.StatusService;
-import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ import java.util.Optional;
 
 @Service
 @Log4j2
-public class RequestServiceImpl implements RequestService {
+public class RequestServiceImpl implements kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService {
 
     private final RequestRepository requestRepository;
 
@@ -93,38 +92,15 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void update(RequestDtoRequest requestDtoRequest, Long id) {
-        Request request = this.getByIdThrowException(id);
-
-        if(Strings.isNotBlank(requestDtoRequest.getAdditional())) request.setAdditional(requestDtoRequest.getAdditional());
-
-        try {
-            this.requestRepository.save(request);
-        }catch (Exception e){
-            log.error(e);
-            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "updating", "request"));
-        }
-    }
-
-    @Override
-    public void delete(Long id) {
-        Request request = this.getByIdThrowException(id);
-
-        try{
-            this.requestRepository.delete(request);
-        }catch (Exception e){
-            log.error(e);
-            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "deleting", "request"));
-        }
-    }
-
-    @Override
-    public void createAll(List<RequestDtoRequest> requestDtoRequestList){
+    public void createAll(List<RequestDtoRequest> requestDtoRequestList, Principal principal){
         List<Request> requestList = new ArrayList<>();
+
+        User user = this.userService.getByEmailThrowException(principal.getName());
 
         for(RequestDtoRequest requestDtoRequest: requestDtoRequestList){
             Request request = new Request();
 
+            request.setUser(user);
             request.setCreatedDate(requestDtoRequest.getCreatedDate());
             request.setAdditional(requestDtoRequest.getAdditional());
 
@@ -135,7 +111,7 @@ public class RequestServiceImpl implements RequestService {
             this.requestRepository.saveAll(requestList);
         }catch (Exception e){
             log.error(e);
-            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "requestServiceImpl list"));
+            throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "request list"));
         }
     }
 }

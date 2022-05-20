@@ -82,22 +82,10 @@ public class RequestController extends ExceptionHandling {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/id/{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody RequestDtoRequest requestDtoRequest,
-                                             @PathVariable(name = "id") Long id) {
-        this.requestService.update(requestDtoRequest, id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/id/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
-        this.requestService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<RequestDtoRequest> requestDtoRequestList) {
-        this.requestService.createAll(requestDtoRequestList);
+    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<RequestDtoRequest> requestDtoRequestList,
+                                                Principal principal) {
+        this.requestService.createAll(requestDtoRequestList, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

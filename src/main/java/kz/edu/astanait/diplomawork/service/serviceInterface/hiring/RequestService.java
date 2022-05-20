@@ -26,9 +26,5 @@ public interface RequestService {
 
     void create(RequestDtoRequest requestDtoRequest, Principal principal);
 
-    void update(RequestDtoRequest requestDtoRequest, Long id);
-
-    void delete(Long id);
-
-    void createAll(List<RequestDtoRequest> requestDtoRequestList);
+    void createAll(List<RequestDtoRequest> requestDtoRequestList, Principal principal);
 }
