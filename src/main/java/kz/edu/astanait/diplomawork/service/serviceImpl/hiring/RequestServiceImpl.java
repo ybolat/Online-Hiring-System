@@ -80,9 +80,9 @@ public class RequestServiceImpl implements RequestService {
         Request request = new Request();
 
         request.setUser(this.userService.getByEmailThrowException(principal.getName()));
-        request.setStatus(this.statusService.getByIdThrowException(requestDtoRequest.getStatusId()));
-        request.setBackground(requestDtoRequest.getBackground());
+        request.setStatus(this.statusService.getByStatusNameThrowException("Pending"));
         request.setAdditional(requestDtoRequest.getAdditional());
+        request.setCreatedDate(requestDtoRequest.getCreatedDate());
 
         try{
             this.requestRepository.save(request);
@@ -96,7 +96,6 @@ public class RequestServiceImpl implements RequestService {
     public void update(RequestDtoRequest requestDtoRequest, Long id) {
         Request request = this.getByIdThrowException(id);
 
-        if(Strings.isNotBlank(requestDtoRequest.getBackground())) request.setBackground(requestDtoRequest.getBackground());
         if(Strings.isNotBlank(requestDtoRequest.getAdditional())) request.setAdditional(requestDtoRequest.getAdditional());
 
         try {
@@ -126,9 +125,7 @@ public class RequestServiceImpl implements RequestService {
         for(RequestDtoRequest requestDtoRequest: requestDtoRequestList){
             Request request = new Request();
 
-            request.setStatus(this.statusService.getByIdThrowException(requestDtoRequest.getStatusId()));
             request.setCreatedDate(requestDtoRequest.getCreatedDate());
-            request.setBackground(requestDtoRequest.getBackground());
             request.setAdditional(requestDtoRequest.getAdditional());
 
             requestList.add(request);

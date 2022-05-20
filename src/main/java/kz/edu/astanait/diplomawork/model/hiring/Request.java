@@ -27,9 +27,6 @@ public class Request {
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
-    @Column(name = "background")
-    private String background;
-
     @Column(name = "additional")
     private String additional;
 

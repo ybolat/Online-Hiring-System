@@ -15,8 +15,6 @@ public class RequestDtoResponse {
 
     private StatusDtoResponse status;
 
-    private String background;
-
     private String additional;
 
     private LocalDateTime createdDate;

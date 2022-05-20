@@ -128,7 +128,6 @@ create table request(
     user_id bigint not null,
     status_id bigint not null,
     created_date timestamp not null,
-    background text,
     additional text,
     constraint fk_user_id foreign key (user_id) references users (id),
     constraint fk_status_id foreign key (status_id) references status (id)

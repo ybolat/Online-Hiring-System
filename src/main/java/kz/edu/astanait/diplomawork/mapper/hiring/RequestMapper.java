@@ -15,7 +15,6 @@ public class RequestMapper {
         requestDtoResponse.setId(request.getId());
         if (Objects.nonNull(request.getUser())) requestDtoResponse.setUser(UserMapper.userToDto(request.getUser()));
         if (Objects.nonNull(request.getStatus())) requestDtoResponse.setStatus(StatusMapper.statusToDto(request.getStatus()));
-        if (Strings.isNotBlank(request.getBackground())) requestDtoResponse.setBackground(request.getBackground());
         if (Strings.isNotBlank(request.getAdditional())) requestDtoResponse.setAdditional(request.getAdditional());
         if (Objects.nonNull(request.getCreatedDate())) requestDtoResponse.setCreatedDate(request.getCreatedDate());
         return requestDtoResponse;
