@@ -10,7 +10,6 @@ import kz.edu.astanait.diplomawork.service.serviceImpl.utils.SecurityUtils;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.DocumentsService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.IntelligenceLegalDocumentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
-import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;

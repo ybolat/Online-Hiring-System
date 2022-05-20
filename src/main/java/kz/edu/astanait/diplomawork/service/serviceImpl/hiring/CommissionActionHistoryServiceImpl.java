@@ -48,6 +48,18 @@ public class CommissionActionHistoryServiceImpl implements CommissionActionHisto
     }
 
     @Override
+    public Optional<CommissionActionHistory> getByCommissionIdAndRequestId(Long cId, Long rId) {
+        return this.commissionActionHistoryRepository.findByCommissionIdAndRequestId(cId, rId);
+    }
+
+    @Override
+    public CommissionActionHistory getByCommissionIdAndRequestIdThrowException(Long cId, Long rId) {
+        return this.getByCommissionIdAndRequestId(cId, rId).
+                orElseThrow(() -> new CustomNotFoundException(String.format(
+                        ExceptionDescription.CustomNotFoundException, "commission action history", "commission and request id", cId + ", " + rId)));
+    }
+
+    @Override
     public void create(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest) {
         CommissionActionHistory commissionActionHistory = new CommissionActionHistory();
 
