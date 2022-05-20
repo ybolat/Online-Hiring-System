@@ -65,6 +65,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         project.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
         project.setStartedDate(projectDtoRequest.getStartedDate());
+        project.setProjectName(projectDtoRequest.getProjectName());
         project.setFinishedDate(projectDtoRequest.getFinishedDate());
         project.setRole(projectDtoRequest.getRole());
         project.setSum(projectDtoRequest.getSum());
@@ -84,12 +85,13 @@ public class ProjectServiceImpl implements ProjectService {
     public void update(ProjectDtoRequest projectDtoRequest, Long id) {
         Project project = this.getByIdThrowException(id);
 
-        if(Objects.nonNull(projectDtoRequest.getStartedDate())) project.setStartedDate(projectDtoRequest.getStartedDate());
-        if(Objects.nonNull(projectDtoRequest.getFinishedDate())) project.setFinishedDate(projectDtoRequest.getFinishedDate());
-        if(Strings.isNotBlank(projectDtoRequest.getRole())) project.setRole(projectDtoRequest.getRole());
-        if(Objects.nonNull(projectDtoRequest.getSum())) project.setSum(projectDtoRequest.getSum());
-        if(Strings.isNotBlank(projectDtoRequest.getFund())) project.setFund(projectDtoRequest.getFund());
-        if(Objects.nonNull(projectDtoRequest.getProjectTypeId())) project.setProjectType(this.projectTypeService.getByIdThrowException(projectDtoRequest.getProjectTypeId()));
+        if (Strings.isNotBlank(projectDtoRequest.getProjectName())) project.setProjectName(projectDtoRequest.getProjectName());
+        if (Objects.nonNull(projectDtoRequest.getStartedDate())) project.setStartedDate(projectDtoRequest.getStartedDate());
+        if (Strings.isNotBlank(projectDtoRequest.getRole())) project.setRole(projectDtoRequest.getRole());
+        if (Objects.nonNull(projectDtoRequest.getFinishedDate())) project.setFinishedDate(projectDtoRequest.getFinishedDate());
+        if (Objects.nonNull(projectDtoRequest.getSum())) project.setSum(projectDtoRequest.getSum());
+        if (Strings.isNotBlank(projectDtoRequest.getFund())) project.setFund(projectDtoRequest.getFund());
+        if (Objects.nonNull(projectDtoRequest.getProjectTypeId())) project.setProjectType(this.projectTypeService.getByIdThrowException(projectDtoRequest.getProjectTypeId()));
 
         try{
             this.projectRepository.save(project);
@@ -124,7 +126,7 @@ public class ProjectServiceImpl implements ProjectService {
         for(ProjectDtoRequest projectDtoRequest: projectDtoRequestList){
             Project project = new Project();
 
-
+            project.setProjectName(projectDtoRequest.getProjectName());
             project.setUserProfessionalInfo(userProfessionalInfo);
             project.setStartedDate(projectDtoRequest.getStartedDate());
             project.setFinishedDate(projectDtoRequest.getFinishedDate());

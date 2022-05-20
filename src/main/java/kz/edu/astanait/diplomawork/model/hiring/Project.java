@@ -20,6 +20,9 @@ public class Project {
     @JoinColumn(name = "user_professional_info_id")
     private UserProfessionalInfo userProfessionalInfo;
 
+    @Column(name = "name")
+    private String projectName;
+
     @Column(name = "started_date")
     private LocalDate startedDate;
 

@@ -1,13 +1,10 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.IntelligenceLegalDocumentDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
-import kz.edu.astanait.diplomawork.model.hiring.Certificate;
 import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
 import kz.edu.astanait.diplomawork.model.user.User;
-import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.repository.hiring.IntelligenceLegalDocumentRepository;
 import kz.edu.astanait.diplomawork.service.serviceImpl.utils.SecurityUtils;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.DocumentsService;
@@ -31,14 +28,12 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
 
     private final DocumentsService documentsService;
     private final UserProfessionalInfoService userProfessionalInfoService;
-    private final UserService userService;
 
     @Autowired
-    public IntelligenceLegalDocumentServiceImpl(IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository, DocumentsService documentsService, UserProfessionalInfoService userProfessionalInfoService, UserService userService) {
+    public IntelligenceLegalDocumentServiceImpl(IntelligenceLegalDocumentRepository intelligenceLegalDocumentRepository, DocumentsService documentsService, UserProfessionalInfoService userProfessionalInfoService) {
         this.intelligenceLegalDocumentRepository = intelligenceLegalDocumentRepository;
         this.documentsService = documentsService;
         this.userProfessionalInfoService = userProfessionalInfoService;
-        this.userService = userService;
     }
 
     @Override

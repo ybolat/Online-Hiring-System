@@ -200,6 +200,7 @@ create table intelligence_legal_document(
 
 create table project(
     id serial primary key,
+    name varchar(255) not null,
     user_professional_info_id bigint not null,
     started_date timestamp not null,
     finished_date timestamp,

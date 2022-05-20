@@ -8,6 +8,9 @@ import java.time.LocalDate;
 @Data
 public class ProjectDtoRequest {
 
+    @NotNull(message = "Название не была указана.")
+    private String projectName;
+
     @NotNull(message = "Дата начала не была указана.")
     private LocalDate startedDate;
 
