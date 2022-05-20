@@ -11,9 +11,6 @@ public class DocumentsDtoRequest {
     @NotNull(message = "Документ не был отправлен.")
     private MultipartFile document;
 
-    @NotNull(message = "Тип контента не был указан.")
-    private String contentType;
-
     @NotNull(message = "Название документа не было указано.")
     private String documentName;
 }
