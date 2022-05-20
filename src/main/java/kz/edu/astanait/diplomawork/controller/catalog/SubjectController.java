@@ -38,12 +38,14 @@ public class SubjectController extends ExceptionHandling {
         return new ResponseEntity<>(subjectDtoResponseList, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody SubjectDtoRequest subjectDtoRequest) {
         this.subjectService.create(subjectDtoRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/id/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody SubjectDtoRequest subjectDtoRequest,
                                              @PathVariable(name = "id") Long id) {
@@ -51,6 +53,7 @@ public class SubjectController extends ExceptionHandling {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/id/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
         this.subjectService.delete(id);

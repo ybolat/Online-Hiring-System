@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessiona
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/user/user-professional-info")
+@PreAuthorize("hasRole('ROLE_CHALLENGER')")
 public class UserProfessionalInfoController extends ExceptionHandling {
 
     private final UserProfessionalInfoService userProfessionalInfoService;
@@ -24,6 +26,7 @@ public class UserProfessionalInfoController extends ExceptionHandling {
         this.userProfessionalInfoService = userProfessionalInfoService;
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMISSION')")
     @GetMapping("/get/user/id/{id}")
     public ResponseEntity<UserProfessionalInfoDtoResponse> getByUserId(@PathVariable(name = "id") Long id) {
         UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse = UserProfessionalInfoMapper.

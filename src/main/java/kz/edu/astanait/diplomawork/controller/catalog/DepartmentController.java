@@ -33,12 +33,14 @@ public class DepartmentController extends ExceptionHandling {
         return new ResponseEntity<>(departmentDtoResponseList, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody DepartmentDtoRequest departmentDtoRequest) {
         this.departmentService.create(departmentDtoRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/id/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody DepartmentDtoRequest departmentDtoRequest,
                                              @PathVariable(name = "id") Long id) {
@@ -46,6 +48,7 @@ public class DepartmentController extends ExceptionHandling {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("delete/id/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable(name = "id") Long id) {
         this.departmentService.delete(id);

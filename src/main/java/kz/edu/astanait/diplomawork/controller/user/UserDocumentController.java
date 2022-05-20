@@ -8,6 +8,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserDocumentSer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/user-document")
+@PreAuthorize("hasRole('ROLE_CHALLENGER')")
 public class UserDocumentController extends ExceptionHandling {
 
     private final UserDocumentService userDocumentService;
@@ -24,6 +26,7 @@ public class UserDocumentController extends ExceptionHandling {
         this.userDocumentService = userDocumentService;
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_CHALLENGER', 'ROLE_COMMISSION')")
     @GetMapping("/get/id/{id}")
     public ResponseEntity<UserDocumentDtoResponse> getById(@PathVariable(name = "id") Long id){
         UserDocumentDtoResponse userDocumentDtoResponse = UserDocumentMapper.userDocumentToDto(this.userDocumentService.getByIdThrowException(id));
