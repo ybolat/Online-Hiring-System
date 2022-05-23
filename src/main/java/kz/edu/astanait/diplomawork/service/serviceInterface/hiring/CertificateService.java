@@ -16,7 +16,7 @@ public interface CertificateService {
 
     Certificate getByIdThrowException(Long id);
 
-    void create(String fileName, MultipartFile file, Principal principal);
+    Certificate create(String fileName, MultipartFile file, Principal principal);
 
     void createAll(HashMap<String, MultipartFile> file, Principal principal);
 

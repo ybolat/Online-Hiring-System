@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,11 +42,12 @@ public class CertificateController extends ExceptionHandling {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@RequestParam(name = "file_name") String fileName,
-                                             MultipartFile file,
-                                             Principal principal){
-        this.certificateService.create(fileName, file, principal);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<CertificateDtoResponse> create(@RequestParam(name = "file_name") String fileName,
+                                              MultipartFile file,
+                                              Principal principal){
+        CertificateDtoResponse certificateDtoResponse = CertificateMapper.certificateToDto(this.certificateService.create(fileName, file, principal));
+        System.out.println(certificateDtoResponse.getDocumentsDtoResponse().getDocument().length());
+        return new ResponseEntity<>(certificateDtoResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/create/all")
