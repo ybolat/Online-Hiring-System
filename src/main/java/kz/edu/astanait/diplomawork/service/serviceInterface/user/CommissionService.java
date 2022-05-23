@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.service.serviceInterface.user;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.user.CommissionAuthorizationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.CommissionDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
 import kz.edu.astanait.diplomawork.model.user.Commission;

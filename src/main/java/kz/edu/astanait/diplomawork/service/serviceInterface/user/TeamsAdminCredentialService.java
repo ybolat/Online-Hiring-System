@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.service.serviceInterface.user;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.TeamsAdminCredentialDtoRequest;
 import kz.edu.astanait.diplomawork.model.user.TeamsAdminCredential;
 
+import java.security.Principal;
 import java.util.Optional;
 
 public interface TeamsAdminCredentialService {
@@ -15,7 +16,7 @@ public interface TeamsAdminCredentialService {
 
     TeamsAdminCredential getByIdThrowException(Long id);
 
-    void create(TeamsAdminCredentialDtoRequest teamsAdminCredentialDtoRequest);
+    void create(TeamsAdminCredentialDtoRequest teamsAdminCredentialDtoRequest, Principal principal);
 
     void update(Long id, TeamsAdminCredentialDtoRequest teamsAdminCredentialDtoRequest);
 

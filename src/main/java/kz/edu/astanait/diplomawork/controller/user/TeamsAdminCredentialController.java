@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/user/teams-admin-credential")
@@ -23,8 +24,8 @@ public class TeamsAdminCredentialController extends ExceptionHandling {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<HttpStatus> create(@Valid @RequestBody TeamsAdminCredentialDtoRequest teamsAdminCredentialDtoRequest) {
-        this.teamsAdminCredentialService.create(teamsAdminCredentialDtoRequest);
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody TeamsAdminCredentialDtoRequest teamsAdminCredentialDtoRequest, Principal principal) {
+        this.teamsAdminCredentialService.create(teamsAdminCredentialDtoRequest, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

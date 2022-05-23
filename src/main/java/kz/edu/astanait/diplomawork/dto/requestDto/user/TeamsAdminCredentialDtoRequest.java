@@ -17,7 +17,4 @@ public class TeamsAdminCredentialDtoRequest {
 
     @NotNull(message = "asd")
     private String clientSecret;
-
-    @NotNull(message = "asd")
-    private Long commissionId;
 }

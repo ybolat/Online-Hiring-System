@@ -12,6 +12,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -51,14 +52,14 @@ public class TeamsAdminCredentialServiceImpl implements TeamsAdminCredentialServ
     }
 
     @Override
-    public void create(TeamsAdminCredentialDtoRequest teamsAdminCredentialDtoRequest){
+    public void create(TeamsAdminCredentialDtoRequest teamsAdminCredentialDtoRequest, Principal principal){
         TeamsAdminCredential teamsAdminCredential = new TeamsAdminCredential();
 
         teamsAdminCredential.setDirectoryId(teamsAdminCredentialDtoRequest.getDirectoryId());
         teamsAdminCredential.setGrantType(teamsAdminCredentialDtoRequest.getGrantType());
         teamsAdminCredential.setClientId(teamsAdminCredentialDtoRequest.getClientId());
         teamsAdminCredential.setClientSecret(teamsAdminCredentialDtoRequest.getClientSecret());
-        teamsAdminCredential.setCommission(this.commissionService.getByIdThrowException(teamsAdminCredentialDtoRequest.getCommissionId()));
+        teamsAdminCredential.setCommission(this.commissionService.getByEmailThrowException(principal.getName()));
 
         try{
             this.teamsAdminCredentialRepository.save(teamsAdminCredential);
@@ -75,7 +76,6 @@ public class TeamsAdminCredentialServiceImpl implements TeamsAdminCredentialServ
         if(Strings.isNotBlank(teamsAdminCredentialDtoRequest.getGrantType())) teamsAdminCredential.setGrantType(teamsAdminCredentialDtoRequest.getGrantType());
         if(Strings.isNotBlank(teamsAdminCredentialDtoRequest.getClientId())) teamsAdminCredential.setClientId(teamsAdminCredentialDtoRequest.getClientId());
         if(Strings.isNotBlank(teamsAdminCredentialDtoRequest.getClientSecret())) teamsAdminCredential.setClientSecret(teamsAdminCredentialDtoRequest.getClientSecret());
-        if(Objects.nonNull(teamsAdminCredentialDtoRequest.getCommissionId())) teamsAdminCredential.setCommission(this.commissionService.getByIdThrowException(teamsAdminCredentialDtoRequest.getCommissionId()));
 
         try {
             this.teamsAdminCredentialRepository.save(teamsAdminCredential);

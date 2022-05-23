@@ -13,7 +13,6 @@ import kz.edu.astanait.diplomawork.mapper.user.CommissionMapper;
 import kz.edu.astanait.diplomawork.model.user.Commission;
 import kz.edu.astanait.diplomawork.repository.user.CommissionRepository;
 import kz.edu.astanait.diplomawork.security.JWTTokenProvider;
-import kz.edu.astanait.diplomawork.security.UserPrincipal;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.CommissionService;
 import org.apache.logging.log4j.util.Strings;
