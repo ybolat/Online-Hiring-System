@@ -21,6 +21,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.utils.EmailService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
@@ -37,7 +38,10 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,6 +107,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User registration(UserRegistrationDtoRequest userRegistrationDtoRequest) {
+
+        List<User> notActiveUsers = userRepository.findByActive(false);
+        notActiveUsers.forEach(v -> {
+
+            if (v.getCreatedDate().plusMinutes(15).isBefore(LocalDateTime.now())) {
+                userRepository.delete(v);
+            }
+        });
+
         User user = new User();
 
         user.setEmail(userRegistrationDtoRequest.getEmail());
@@ -152,7 +165,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         HttpHeaders jwt = getJwtHeader(userPrincipal, ipFromClient);
         UserDtoResponse userDtoResponse = UserMapper.userToDto(user);
         return new ResponseEntity<>(userDtoResponse, jwt, HttpStatus.OK);
-
     }
 
     @Override

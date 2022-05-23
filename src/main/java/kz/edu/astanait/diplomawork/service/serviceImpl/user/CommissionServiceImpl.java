@@ -1,17 +1,26 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.user;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.user.CommissionAuthorizationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.CommissionDtoRequest;
+import kz.edu.astanait.diplomawork.dto.responseDto.feign.MicrosoftAuthDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
+import kz.edu.astanait.diplomawork.enviroment.JWTEnvironmentBuilder;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
+import kz.edu.astanait.diplomawork.exception.domain.AuthorizationException;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
+import kz.edu.astanait.diplomawork.feignClient.MicrosoftServiceClient;
+import kz.edu.astanait.diplomawork.mapper.user.CommissionMapper;
 import kz.edu.astanait.diplomawork.model.user.Commission;
 import kz.edu.astanait.diplomawork.repository.user.CommissionRepository;
+import kz.edu.astanait.diplomawork.security.JWTTokenProvider;
+import kz.edu.astanait.diplomawork.security.UserPrincipal;
 import kz.edu.astanait.diplomawork.service.serviceInterface.security.RoleService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.CommissionService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +31,23 @@ import java.util.Optional;
 @Service
 public class CommissionServiceImpl implements CommissionService {
 
+    @Value("${microsoft.authorization.key}")
+    private String microsoftAuthKey;
+
     private final CommissionRepository commissionRepository;
 
     private final RoleService roleService;
+    private final MicrosoftServiceClient microsoftServiceClient;
+    private final JWTEnvironmentBuilder jwtEnvironmentBuilder;
+    private final JWTTokenProvider jwtTokenProvider;
 
     @Autowired
-    public CommissionServiceImpl(CommissionRepository commissionRepository, RoleService roleService) {
+    public CommissionServiceImpl(CommissionRepository commissionRepository, RoleService roleService, MicrosoftServiceClient microsoftServiceClient, JWTEnvironmentBuilder jwtEnvironmentBuilder, JWTTokenProvider jwtTokenProvider) {
         this.commissionRepository = commissionRepository;
         this.roleService = roleService;
+        this.microsoftServiceClient = microsoftServiceClient;
+        this.jwtEnvironmentBuilder = jwtEnvironmentBuilder;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
@@ -99,13 +117,29 @@ public class CommissionServiceImpl implements CommissionService {
     }
 
     @Override
-    public ResponseEntity<CommissionDtoResponse> authorization(CommissionAuthorizationDtoRequest commissionAuthorizationDtoRequest, HttpServletRequest request) {
-        String email = commissionAuthorizationDtoRequest.getEmail().toLowerCase().trim();
+    public ResponseEntity<CommissionDtoResponse> authorization(String codeAuthenticationRequest, HttpServletRequest request) {
+        ResponseEntity<MicrosoftAuthDtoResponse> microsoftAuthDtoResponse;
 
-        if (this.getAll().contains(email)) {
-            System.out.println("hello world");
+        try {
+            microsoftAuthDtoResponse = microsoftServiceClient.getUserInfoFromMicrosoft(codeAuthenticationRequest, microsoftAuthKey);
+        } catch (Exception e) {
+            System.out.println();
+            throw new AuthorizationException(ExceptionDescription.AuthorizationException);
         }
 
-        return null;
+        if (microsoftAuthDtoResponse.getBody() != null) {
+            String email = microsoftAuthDtoResponse.getBody().getEmail().toLowerCase();
+            Commission commission = this.getByEmailThrowException(email);
+
+            HttpHeaders jwt = this.getJwtHeader(email, jwtTokenProvider.getIpFromClient(request));
+            return new ResponseEntity<>(CommissionMapper.commissionToDto(commission), jwt, HttpStatus.OK);
+        }
+        throw new AuthorizationException(ExceptionDescription.AuthorizationException);
+    }
+
+    private HttpHeaders getJwtHeader(String email, String ipFromClient) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(jwtEnvironmentBuilder.getJWT_TOKEN_HEADER(), jwtTokenProvider.generateTokenForCommission(email, ipFromClient));
+        return httpHeaders;
     }
 }

@@ -28,5 +28,5 @@ public interface CommissionService {
 
     void delete(Long id);
 
-    ResponseEntity<CommissionDtoResponse> authorization(CommissionAuthorizationDtoRequest commissionAuthorizationDtoRequest, HttpServletRequest request);
+    ResponseEntity<CommissionDtoResponse> authorization(String codeAuthenticationRequest, HttpServletRequest request);
 }

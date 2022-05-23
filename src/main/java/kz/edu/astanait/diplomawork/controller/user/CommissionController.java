@@ -1,5 +1,6 @@
 package kz.edu.astanait.diplomawork.controller.user;
 
+import kz.edu.astanait.diplomawork.dto.requestDto.user.CommissionAuthorizationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.CommissionDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
 import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +33,11 @@ public class CommissionController extends ExceptionHandling {
     public ResponseEntity<CommissionDtoResponse> getById(@PathVariable (name = "id") Long id) {
         CommissionDtoResponse commissionDtoResponse = CommissionMapper.commissionToDto(this.commissionService.getByIdThrowException(id));
         return new ResponseEntity<>(commissionDtoResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/authorization")
+    public ResponseEntity<CommissionDtoResponse> authorization(@RequestBody CommissionAuthorizationDtoRequest commissionDtoRequest, HttpServletRequest request) {
+       return commissionService.authorization(commissionDtoRequest.getCodeAuthorization(), request);
     }
 
     @GetMapping("/get-all")

@@ -5,4 +5,5 @@ public class ExceptionDescription {
     public static final String RepositoryException = "Something went wrong during the %1$s %2$s, please, try again!";
     public static final String CustomNotFoundException = "%1$s not found by %2$s: %3$s";
     public static final String AccessException = "You are trying to %1$s someone else's data!";
+    public static final String AuthorizationException = "Something went wrong, try again or contact the administration!";
 }

@@ -1,8 +1,6 @@
 package kz.edu.astanait.diplomawork.controller.feign;
 
 import kz.edu.astanait.diplomawork.service.serviceInterface.feign.ScopusService;
-import org.apache.el.parser.BooleanNode;
-import org.json.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

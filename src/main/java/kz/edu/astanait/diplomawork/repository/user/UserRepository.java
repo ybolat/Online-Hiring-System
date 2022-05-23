@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(nativeQuery = true, value = "select * from users inner join request on users.id = request.user_id " +
             "where request.status_id = :id and request.created_date <= :dateTime")
     List<User> findAllAcceptedUsers(LocalDateTime dateTime, Long id);
+
+    @Query(nativeQuery = true, value = "select * from users where users.is_active = ?1")
+    List<User> findByActive(Boolean isActive);
 }

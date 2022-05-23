@@ -37,6 +37,14 @@ public class JWTTokenProvider {
                 .sign(HMAC512(this.jwtEnvironmentBuilder.getSECRET().getBytes()));
     }
 
+    public String generateTokenForCommission(String username, String ipFromClient) {
+        return JWT.create().withIssuer(this.jwtEnvironmentBuilder.getISSUER()).withAudience(this.jwtEnvironmentBuilder.getAUDIENCE())
+                .withIssuedAt(new Date()).withSubject(username)
+                .withClaim(this.jwtEnvironmentBuilder.getCLIENT_IP(), ipFromClient)
+                .withExpiresAt(new Date(System.currentTimeMillis() + this.jwtEnvironmentBuilder.getEXPIRATION_TIME()))
+                .sign(HMAC512(this.jwtEnvironmentBuilder.getSECRET().getBytes()));
+    }
+
     public String getSubject(String token) {
         JWTVerifier verifier = getJWTVerifier();
         return verifier.verify(token).getSubject();
