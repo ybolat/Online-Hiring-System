@@ -1,7 +1,7 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.utils;
 
 import com.sun.mail.smtp.SMTPTransport;
-import kz.edu.astanait.diplomawork.enviroment.EmailEnvironmentBuilder;
+import kz.edu.astanait.diplomawork.environment.EmailEnvironmentBuilder;
 import kz.edu.astanait.diplomawork.model.user.User;
 import kz.edu.astanait.diplomawork.service.serviceInterface.utils.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;

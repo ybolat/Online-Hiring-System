@@ -1,4 +1,4 @@
-package kz.edu.astanait.diplomawork.enviroment;
+package kz.edu.astanait.diplomawork.environment;
 
 import lombok.Data;
 import org.springframework.core.env.Environment;

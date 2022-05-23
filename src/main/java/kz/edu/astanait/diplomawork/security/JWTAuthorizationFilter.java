@@ -1,6 +1,6 @@
 package kz.edu.astanait.diplomawork.security;
 
-import kz.edu.astanait.diplomawork.enviroment.JWTEnvironmentBuilder;
+import kz.edu.astanait.diplomawork.environment.JWTEnvironmentBuilder;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

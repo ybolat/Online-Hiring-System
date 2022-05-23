@@ -6,7 +6,7 @@ import kz.edu.astanait.diplomawork.dto.requestDto.user.UserAuthorizationDtoReque
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserChangePasswordDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.UserRegistrationDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserDtoResponse;
-import kz.edu.astanait.diplomawork.enviroment.JWTEnvironmentBuilder;
+import kz.edu.astanait.diplomawork.environment.JWTEnvironmentBuilder;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
@@ -21,7 +21,6 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.utils.EmailService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.util.Strings;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
@@ -38,10 +37,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

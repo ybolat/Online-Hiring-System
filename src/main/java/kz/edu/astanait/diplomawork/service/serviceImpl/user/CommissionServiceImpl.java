@@ -3,7 +3,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.user;
 import kz.edu.astanait.diplomawork.dto.requestDto.user.CommissionDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.feign.MicrosoftAuthDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.CommissionDtoResponse;
-import kz.edu.astanait.diplomawork.enviroment.JWTEnvironmentBuilder;
+import kz.edu.astanait.diplomawork.environment.JWTEnvironmentBuilder;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.AuthorizationException;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
