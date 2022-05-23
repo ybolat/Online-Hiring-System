@@ -5,7 +5,7 @@ spring:
         ddl-auto: validate
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/hiring
+    url: jdbc:postgresql://localhost:5432/diploma-db
     username: postgres
     password: 123
   servlet:

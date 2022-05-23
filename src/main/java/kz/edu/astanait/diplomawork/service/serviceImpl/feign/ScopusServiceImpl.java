@@ -70,7 +70,6 @@ public class ScopusServiceImpl implements ScopusService {
         List<ArticleDtoRequest> articleDtoRequestList = new ArrayList<>();
 
         result.forEach((k,v) -> {
-            System.out.println(k);
             int idx1 = v.indexOf("$");
             int idx2 = v.indexOf("<");
             int idx3 = v.indexOf(">");
