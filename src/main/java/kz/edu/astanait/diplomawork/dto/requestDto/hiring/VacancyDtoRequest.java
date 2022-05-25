@@ -8,24 +8,24 @@ import java.time.LocalDateTime;
 @Data
 public class VacancyDtoRequest {
 
-    @NotNull(message = "Департамент не был указан.")
+    @NotNull(message = "The department is not specified.")
     private Long departmentId;
 
-    @NotNull(message = "Академическая степень не была указана.")
+    @NotNull(message = "The academic title is not specified.")
     private Long academicTitleId;
 
-    @NotNull(message = "Позиция не была указана.")
+    @NotNull(message = "The position is not specified.")
     private Long positionId;
 
-    @NotNull(message = "Ссылка не была указана.")
+    @NotNull(message = "The link is not specified.")
     private String link_directory;
 
-    @NotNull(message = "Дата начала не была указана.")
+    @NotNull(message = "The start date is not specified.")
     private LocalDateTime start_date;
 
-    @NotNull(message = "Дата окончания не была указана.")
+    @NotNull(message = "The finish date is not specified.")
     private LocalDateTime finish_date;
 
-    @NotNull(message = "Количество не было указано.")
+    @NotNull(message = "The number is not specified.")
     private Long number;
 }

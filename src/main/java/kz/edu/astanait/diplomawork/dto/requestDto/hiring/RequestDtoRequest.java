@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 public class RequestDtoRequest {
 
-    @NotNull(message = "Время создания не была указана.")
+    @NotNull(message = "The create date is not specified.")
     private LocalDateTime createdDate;
 
     private String additional;

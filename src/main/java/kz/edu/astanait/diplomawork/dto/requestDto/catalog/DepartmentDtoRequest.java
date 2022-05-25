@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class DepartmentDtoRequest {
 
-    @NotNull(message = "Название департамента не было указано.")
+    @NotNull(message = "The department name was not specified.")
     private String departmentName;
 }

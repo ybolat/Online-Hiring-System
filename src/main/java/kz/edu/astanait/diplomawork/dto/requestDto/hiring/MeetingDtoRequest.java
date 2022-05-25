@@ -7,18 +7,18 @@ import javax.validation.constraints.NotNull;
 @Data
 public class MeetingDtoRequest {
 
-    @NotNull(message = "Ссылка не была указана.")
+    @NotNull(message = "The meeting link was not specified.")
     private String meetingLink;
 
-    @NotNull(message = "Название не была не указана.")
+    @NotNull(message = "The meeting title was not specified.")
     private String meetingTitle;
 
-    @NotNull(message = "Описание не была указана.")
+    @NotNull(message = "The meeting description was not specified.")
     private String meetingDescription;
 
-    @NotNull(message = "Начала собрания не было указано.")
+    @NotNull(message = "The start time is not specified.")
     private String startDateTime;
 
-    @NotNull(message = "Конец собрания не было указано.")
+    @NotNull(message = "End time not specified.")
     private String endDateTime;
 }

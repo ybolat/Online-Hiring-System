@@ -8,10 +8,10 @@ import java.util.List;
 @Data
 public class UserProfessionalInfoDtoRequest {
 
-    @NotNull(message = "Вакансия не была указана.")
+    @NotNull(message = "The vacancy cannot be empty.")
     private Long vacancyId;
 
-    @NotNull(message =  "Академическая степень не была указано.")
+    @NotNull(message =  "The vacancy was not specified.")
     private Long academicDegreeId;
 
     private Long academicTitleId;

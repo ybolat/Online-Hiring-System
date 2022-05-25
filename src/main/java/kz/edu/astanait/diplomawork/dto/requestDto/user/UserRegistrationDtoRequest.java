@@ -9,22 +9,22 @@ import javax.validation.constraints.Size;
 @Data
 public class UserRegistrationDtoRequest {
 
-    @NotNull(message = "Адрес почты не может быть пустым.")
+    @NotNull(message = "The email address cannot be empty")
     private String email;
 
-    @NotNull(message = "Пароль не может быть пустым.")
-    @Size(min = 8, message = "Длина пароля должна быть не менее 8 символов.")
+    @NotNull(message = "The password cannot be empty.")
+    @Size(min = 8, message = "The password must be at least 8 characters long.")
     private String password;
     
-    @NotNull(message = "Имя не может быть пустым.")
+    @NotNull(message = "The name cannot be empty.")
     private String name;
 
-    @NotNull(message = "Фамилия не может быть пустой.")
+    @NotNull(message = "The lastname cannot be empty.")
     private String lastname;
 
     private String patronymic;
 
-    @NotNull(message = "Номер телефона не может быть пустым.")
+    @NotNull(message = "The phone number cannot be empty.")
     private String phone;
 
 }

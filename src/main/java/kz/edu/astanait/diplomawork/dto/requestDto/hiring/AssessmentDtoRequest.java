@@ -7,9 +7,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AssessmentDtoRequest {
 
-    @NotNull(message = "Запрос не был указан.")
+    @NotNull(message = "The request was not specified.")
     private Long requestId;
 
-    @NotNull(message = "Голос не был указан.")
+    @NotNull(message = "The vote was not specified.")
     private Boolean vote;
 }

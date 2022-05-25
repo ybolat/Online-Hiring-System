@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 @Data
 public class UserChangePasswordDtoRequest {
 
-    @NotNull(message = "Пароль не может быть пустым.")
-    @Size(min = 8, message = "Длина пароля должна быть не менее 8 символов.")
+    @NotNull(message = "The password cannot be empty.")
+    @Size(min = 8, message = "The password must be at least 8 characters long.")
     private String password;
 }

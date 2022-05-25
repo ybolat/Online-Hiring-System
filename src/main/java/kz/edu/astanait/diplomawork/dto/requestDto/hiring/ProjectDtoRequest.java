@@ -8,24 +8,24 @@ import java.time.LocalDate;
 @Data
 public class ProjectDtoRequest {
 
-    @NotNull(message = "Название не была указана.")
+    @NotNull(message = "The project name was not specified.")
     private String projectName;
 
-    @NotNull(message = "Дата начала не была указана.")
+    @NotNull(message = "The start date was not specified.")
     private LocalDate startedDate;
 
-    @NotNull(message = "Дата окончания не была указана.")
+    @NotNull(message = "The finish date is not specified.")
     private LocalDate finishedDate;
 
-    @NotNull(message = "Роль не была указан.")
+    @NotNull(message = "The eole was not specified.")
     private String role;
 
-    @NotNull(message = "Сум не был указан.")
+    @NotNull(message = "The sum was not specified.")
     private Float sum;
 
-    @NotNull(message = "Фунд не был указан.")
+    @NotNull(message = "The fund was not specified.")
     private String fund;
 
-    @NotNull(message = "Тип проекта не был указан.")
+    @NotNull(message = "The project type is not specified.")
     private Long projectTypeId;
 }

@@ -7,15 +7,15 @@ import javax.validation.constraints.NotNull;
 @Data
 public class SyllabusByWeekDtoRequest {
 
-    @NotNull(message = "Силлабус не был указан.")
+    @NotNull(message = "The syllabus is not specified.")
     private Long syllabusId;
 
-    @NotNull(message = "Номер недели не был указан.")
+    @NotNull(message = "The week number is not specified.")
     private Integer weekNumber;
 
-    @NotNull(message = "Название не было указано.")
+    @NotNull(message = "The title is not specified.")
     private String title;
 
-    @NotNull(message = "Описание не было указано.")
+    @NotNull(message = "The description is not specified.")
     private String description;
 }

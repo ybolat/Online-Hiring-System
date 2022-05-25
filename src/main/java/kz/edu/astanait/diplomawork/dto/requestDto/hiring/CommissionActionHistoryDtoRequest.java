@@ -7,12 +7,12 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CommissionActionHistoryDtoRequest {
 
-    @NotNull(message = "Комиссия не была указана.")
+    @NotNull(message = "The commission was not specified.")
     private Long commissionId;
 
-    @NotNull(message = "Запрос не был указан.")
+    @NotNull(message = "The request was not specified.")
     private Long requestId;
 
-    @NotNull(message = "Голос не был указан.")
+    @NotNull(message = "The vote was not specified.")
     private Boolean isVote;
 }

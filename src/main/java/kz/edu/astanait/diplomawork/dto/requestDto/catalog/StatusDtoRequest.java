@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class StatusDtoRequest {
 
-    @NotNull(message = "Название статуса не было указано.")
+    @NotNull(message = "The status name was not specified.")
     private String statusName;
 }

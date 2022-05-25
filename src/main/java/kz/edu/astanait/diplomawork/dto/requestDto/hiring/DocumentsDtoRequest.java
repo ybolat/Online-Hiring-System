@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class DocumentsDtoRequest {
 
-    @NotNull(message = "Документ не был отправлен.")
+    @NotNull(message = "The document was not specified.")
     private MultipartFile document;
 
-    @NotNull(message = "Название документа не было указано.")
+    @NotNull(message = "The document name was not specified.")
     private String documentName;
 }

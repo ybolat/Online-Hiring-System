@@ -9,9 +9,10 @@ public class ArticleDtoRequest {
     @NotNull(message = "The name was not specified.")
     private String title;
 
+    @NotNull(message = "The APA was not specified.")
     private String apa;
 
-    @NotNull(message = "DOI не был указан.")
+    @NotNull(message = "The DOI was not specified.")
     private String doi;
 
     @NotNull(message = "The article type was not specified.")

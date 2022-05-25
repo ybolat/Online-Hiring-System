@@ -7,12 +7,12 @@ import javax.validation.constraints.NotNull;
 @Data
 public class DevelopmentDtoRequest {
 
-    @NotNull(message = "Название не было указано.")
+    @NotNull(message = "The name was not specified.")
     private String name;
 
-    @NotNull(message = "Описание не было указано.")
+    @NotNull(message = "The description was not specified.")
     private String description;
 
-    @NotNull(message = "Тип разработки не был указан.")
+    @NotNull(message = "The development type was not specified.")
     private Long developmentTypeId;
 }

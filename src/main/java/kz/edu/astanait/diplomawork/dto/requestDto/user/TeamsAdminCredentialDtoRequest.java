@@ -6,15 +6,15 @@ import javax.validation.constraints.NotNull;
 @Data
 public class TeamsAdminCredentialDtoRequest {
 
-    @NotNull(message = "asd")
+    @NotNull(message = "The Directory cannot be empty.")
     private String directoryId;
 
-    @NotNull(message = "asd")
+    @NotNull(message = "The Grant type cannot be empty.")
     private String grantType;
 
-    @NotNull(message = "asd")
+    @NotNull(message = "The client id cannot be empty.")
     private String clientId;
 
-    @NotNull(message = "asd")
+    @NotNull(message = "The client secret cannot be empty.")
     private String clientSecret;
 }

@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CertificateDtoRequest {
 
-    @NotNull(message = "Документ не был указан.")
+    @NotNull(message = "The document was not specified.")
     private Long documentsId;
 }

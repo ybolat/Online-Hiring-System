@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class PositionDtoRequest {
 
-    @NotNull(message = "Название позиции не было указано.")
+    @NotNull(message = "The position name was not specified.")
     private String positionName;
 }

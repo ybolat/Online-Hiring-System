@@ -9,12 +9,12 @@ import java.io.Serializable;
 @Data
 public class UserDocumentDtoRequest implements Serializable {
 
-    @NotNull(message = "Резюме не может быть пустым.")
+    @NotNull(message = "The cv cannot be empty.")
     private MultipartFile cv;
 
-    @NotNull(message = "Пасспорт не может быть пустым.")
+    @NotNull(message = "The passport cannot be empty.")
     private MultipartFile passport;
 
-    @NotNull(message = "Фото не может быть пустым.")
+    @NotNull(message = "The photo cannot be empty.")
     private MultipartFile photo;
 }

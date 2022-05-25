@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CommissionAuthorizationDtoRequest {
 
-    @NotNull(message = "Почта не может быть пустым.")
+    @NotNull(message = "Email cannot be empty.")
     private String codeAuthorization;
 }
