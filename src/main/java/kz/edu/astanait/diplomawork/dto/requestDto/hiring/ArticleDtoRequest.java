@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ArticleDtoRequest {
 
-    @NotNull(message = "Название не была указана.")
+    @NotNull(message = "The name was not specified.")
     private String title;
 
     private String apa;
@@ -14,12 +14,12 @@ public class ArticleDtoRequest {
     @NotNull(message = "DOI не был указан.")
     private String doi;
 
-    @NotNull(message = "Тип статьи не был указан.")
+    @NotNull(message = "The article type was not specified.")
     private Long articleTypeId;
 
-    @NotNull(message = "Авторы не были указаны.")
+    @NotNull(message = "The authors were not identified.")
     private String authors;
 
-    @NotNull(message = "Публикация не была указана.")
+    @NotNull(message = "The publication was not specified.")
     private String source;
 }

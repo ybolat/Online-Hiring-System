@@ -53,7 +53,7 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public Certificate create(String fileName, MultipartFile file, Principal principal) {
+    public void create(String fileName, MultipartFile file, Principal principal) {
         Certificate certificate = new Certificate();
 
         User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
@@ -67,8 +67,6 @@ public class CertificateServiceImpl implements CertificateService {
             log.error(e);
             throw new RepositoryException(String.format(ExceptionDescription.RepositoryException, "creating", "certificate"));
         }
-
-        return certificate;
     }
 
     @Override

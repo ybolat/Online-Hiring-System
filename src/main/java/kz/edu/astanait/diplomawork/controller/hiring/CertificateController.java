@@ -42,12 +42,11 @@ public class CertificateController extends ExceptionHandling {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CertificateDtoResponse> create(@RequestParam(name = "file_name") String fileName,
+    public ResponseEntity<HttpStatus> create(@RequestParam(name = "file_name") String fileName,
                                               MultipartFile file,
                                               Principal principal){
-        CertificateDtoResponse certificateDtoResponse = CertificateMapper.certificateToDto(this.certificateService.create(fileName, file, principal));
-        System.out.println(certificateDtoResponse.getDocumentsDtoResponse().getDocument().length());
-        return new ResponseEntity<>(certificateDtoResponse, HttpStatus.CREATED);
+        this.certificateService.create(fileName, file, principal);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/create/all")
