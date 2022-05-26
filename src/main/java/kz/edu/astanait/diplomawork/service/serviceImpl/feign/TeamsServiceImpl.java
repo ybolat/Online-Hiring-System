@@ -104,7 +104,7 @@ public class TeamsServiceImpl implements TeamsService {
         int endSubject = teamsString.indexOf("bodyPreview") - 2;
         String subject = teamsString.substring(startSubject, endSubject);
 
-        int startDescription = teamsString.indexOf("<body>") + 6;
+        int startDescription = teamsString.indexOf("<body>") + 8;
         int endDescription = teamsString.indexOf("<br>");
         String description = teamsString.substring(startDescription, endDescription);
 

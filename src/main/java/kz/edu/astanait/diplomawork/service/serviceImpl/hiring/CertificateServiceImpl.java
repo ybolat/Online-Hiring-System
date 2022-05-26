@@ -78,7 +78,7 @@ public class CertificateServiceImpl implements CertificateService {
         file.forEach((k, v) -> {
             Certificate certificate = new Certificate();
             certificate.setUserProfessionalInfo(this.userProfessionalInfoService.getByUserIdThrowException(user.getId()));
-            certificate.setDocument(this.documentsService.create(k, v));
+            if (Objects.nonNull(v) && Strings.isNotBlank(k)) certificate.setDocument(this.documentsService.create(k, v));
 
             certificateList.add(certificate);
         });
