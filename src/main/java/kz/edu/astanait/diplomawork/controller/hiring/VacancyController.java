@@ -34,6 +34,14 @@ public class VacancyController extends ExceptionHandling {
         return new ResponseEntity<>(vacancyDtoResponseList, HttpStatus.OK);
     }
 
+    @PreAuthorize("permitAll()")
+    @GetMapping("/get-all/valid")
+    public ResponseEntity<List<VacancyDtoResponse>> getAllValid() {
+        List<VacancyDtoResponse> vacancyDtoResponseList = this.vacancyService.getAllValid().stream().
+                map(VacancyMapper::vacancyToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(vacancyDtoResponseList, HttpStatus.OK);
+    }
+
     @GetMapping("/get/id/{id}")
     public ResponseEntity<VacancyDtoResponse> getById(@PathVariable(name = "id") Long id) {
         VacancyDtoResponse vacancyDtoResponse = VacancyMapper.vacancyToDto(this.vacancyService.getByIdThrowException(id));

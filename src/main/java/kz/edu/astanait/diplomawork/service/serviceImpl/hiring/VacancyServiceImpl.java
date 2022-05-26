@@ -15,6 +15,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,6 +42,12 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<Vacancy> getAll() {
         return this.vacancyRepository.findAll();
+    }
+
+    @Override
+    public List<Vacancy> getAllValid() {
+        System.out.println(LocalDateTime.now());
+        return this.vacancyRepository.findAllValid(LocalDateTime.now());
     }
 
     @Override

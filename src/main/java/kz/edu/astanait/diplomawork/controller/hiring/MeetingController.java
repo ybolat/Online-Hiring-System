@@ -31,16 +31,16 @@ public class MeetingController extends ExceptionHandling {
         return new ResponseEntity<>(meetingDtoResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/get-all/by-day/{day}")
+    private ResponseEntity<List<MeetingDtoResponse>> getAllByDay(@PathVariable(name = "day") String day) {
+        List<MeetingDtoResponse> meetingDtoResponses = this.meetingService.getAllByDay(day).stream().map(MeetingMapper::meetingToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(meetingDtoResponses, HttpStatus.OK);
+    }
+
     @GetMapping("/get-all")
     public ResponseEntity<List<MeetingDtoResponse>> getAll() {
         List<MeetingDtoResponse> meetingDtoResponse = this.meetingService.getAll().stream().map(MeetingMapper::meetingToDto).collect(Collectors.toList());
         return new ResponseEntity<>(meetingDtoResponse, HttpStatus.OK);
-    }
-
-    @GetMapping("/get-all/by-day")
-    private ResponseEntity<List<MeetingDtoResponse>> getAllByDay(@RequestParam(name = "day") String day) {
-        List<MeetingDtoResponse> meetingDtoResponses = this.meetingService.getAllByDay(day).stream().map(MeetingMapper::meetingToDto).collect(Collectors.toList());
-        return new ResponseEntity<>(meetingDtoResponses, HttpStatus.OK);
     }
 
 }

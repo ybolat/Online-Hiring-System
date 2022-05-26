@@ -8,6 +8,7 @@ public class SecurityConstant {
             "/api/v1/pin-code/create**",
             "/api/v1/user/forgot-password**",
             "/api/v1/hiring/vacancy/get-all",
+            "/api/v1/hiring/vacancy/get-all/valid",
             "/swagger-ui/**",
             "/api-docs",
             "/api-docs.yaml",

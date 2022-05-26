@@ -2,12 +2,16 @@ package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.VacancyDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Vacancy;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public interface VacancyService {
 
     List<Vacancy> getAll();
+
+    List<Vacancy> getAllValid();
 
     Optional<Vacancy> getById(Long id);
 
