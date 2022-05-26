@@ -40,13 +40,7 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<Vacancy> getAll() {
-        return this.vacancyRepository.findAll();
-    }
-
-    @Override
     public List<Vacancy> getAllValid() {
-        System.out.println(LocalDateTime.now());
         return this.vacancyRepository.findAllValid(LocalDateTime.now());
     }
 

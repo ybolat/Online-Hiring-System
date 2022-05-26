@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface VacancyService {
 
-    List<Vacancy> getAll();
-
     List<Vacancy> getAllValid();
 
     Optional<Vacancy> getById(Long id);

@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface VacancyRepository extends JpaRepository<Vacancy, Long> {
 
-    @Query(nativeQuery = true, value = "select * from vacancy where finish_date>:localDateTime")
+    @Query(nativeQuery = true, value = "select * from vacancy where finish_date>:localDateTime and " +
+            "start_date<:localDateTime")
     List<Vacancy> findAllValid(LocalDateTime localDateTime);
 }
