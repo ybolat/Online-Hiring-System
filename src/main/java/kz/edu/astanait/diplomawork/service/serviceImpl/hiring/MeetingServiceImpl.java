@@ -10,6 +10,7 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.MeetingServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,6 +32,16 @@ public class MeetingServiceImpl implements MeetingService {
     public Meeting getByIdThrowException(Long id) {
         return this.getById(id).orElseThrow(
                 () -> new CustomNotFoundException(String.format(ExceptionDescription.CustomNotFoundException, "meeting", "id", id)));
+    }
+
+    @Override
+    public List<Meeting> getAll() {
+        return this.meetingRepository.findAll();
+    }
+
+    @Override
+    public List<Meeting> getAllByDay(String day) {
+        return this.meetingRepository.findByStartDateTimeLike(day);
     }
 
     @Override

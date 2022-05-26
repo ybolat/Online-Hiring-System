@@ -83,7 +83,8 @@ public class ArticleServiceImpl implements ArticleService {
 
         User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
-        article.setArticleName(articleDtoRequest.getTitle());
+
+       if (Strings.isNotBlank(articleDtoRequest.getTitle())) article.setArticleName(articleDtoRequest.getTitle());
         article.setApa(articleDtoRequest.getApa());
         article.setDoi(articleDtoRequest.getDoi());
         article.setAuthors(articleDtoRequest.getAuthors());

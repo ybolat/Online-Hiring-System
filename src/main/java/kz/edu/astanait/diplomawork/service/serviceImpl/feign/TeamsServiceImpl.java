@@ -2,10 +2,12 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.feign;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.feign.teams.TeamsEventDtoRequest;
 import kz.edu.astanait.diplomawork.dto.requestDto.feign.teams.TeamsLoginDtoRequest;
+import kz.edu.astanait.diplomawork.dto.requestDto.hiring.MeetingDtoRequest;
 import kz.edu.astanait.diplomawork.feignClient.TeamsClient;
 import kz.edu.astanait.diplomawork.feignClient.TeamsLoginClient;
 import kz.edu.astanait.diplomawork.model.user.TeamsAdminCredential;
 import kz.edu.astanait.diplomawork.service.serviceInterface.feign.TeamsService;
+import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.MeetingService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.TeamsAdminCredentialService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,15 +30,18 @@ public class TeamsServiceImpl implements TeamsService {
     private final TeamsLoginClient teamsLoginClient;
     private final TeamsAdminCredentialService teamsAdminCredentialService;
 
+    private final MeetingService meetingService;
+
     @Autowired
-    public TeamsServiceImpl(TeamsClient teamsClient, TeamsLoginClient teamsLoginClient, TeamsAdminCredentialService teamsAdminCredentialService) {
+    public TeamsServiceImpl(TeamsClient teamsClient, TeamsLoginClient teamsLoginClient, TeamsAdminCredentialService teamsAdminCredentialService, MeetingService meetingService) {
         this.teamsClient = teamsClient;
         this.teamsLoginClient = teamsLoginClient;
         this.teamsAdminCredentialService = teamsAdminCredentialService;
+        this.meetingService = meetingService;
     }
 
     @Override
-    public Object create(TeamsEventDtoRequest teamsEventDtoRequest) {
+    public void create(TeamsEventDtoRequest teamsEventDtoRequest) {
 
         JSONObject json = new JSONObject();
 
@@ -87,7 +92,39 @@ public class TeamsServiceImpl implements TeamsService {
 
         String token = this.teamsLogin();
 
-        return this.teamsClient.createEvent(token, userPrincipal, body);
+        Object teams = this.teamsClient.createEvent(token, userPrincipal, body);
+
+        String teamsString = teams.toString();
+
+        int startLink = teamsString.indexOf("joinUrl") + 8;
+        int endLink = teamsString.indexOf("cache-control") - 4;
+        String link = teamsString.substring(startLink, endLink);
+
+        int startSubject = teamsString.indexOf("subject") + 8;
+        int endSubject = teamsString.indexOf("bodyPreview") - 2;
+        String subject = teamsString.substring(startSubject, endSubject);
+
+        int startDescription = teamsString.indexOf("<body>") + 6;
+        int endDescription = teamsString.indexOf("<br>");
+        String description = teamsString.substring(startDescription, endDescription);
+
+        int startSDT = teamsString.indexOf("start={dateTime=") + 16;
+        int endSDT = teamsString.indexOf("end={dateTime=") - 25;
+        String sdt = teamsString.substring(startSDT, endSDT);
+
+        int startEND = teamsString.indexOf("end={dateTime=") + 14;
+        int endEDT = teamsString.indexOf("location={displayName=") - 25;
+        String end = teamsString.substring(startEND, endEDT);
+
+
+        MeetingDtoRequest meetingDtoRequest = new MeetingDtoRequest();
+        meetingDtoRequest.setMeetingLink(link);
+        meetingDtoRequest.setMeetingTitle(subject);
+        meetingDtoRequest.setMeetingDescription(description);
+        meetingDtoRequest.setStartDateTime(sdt);
+        meetingDtoRequest.setEndDateTime(end);
+
+        this.meetingService.create(meetingDtoRequest);
     }
 
     private String teamsLogin() {

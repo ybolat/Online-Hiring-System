@@ -4,5 +4,5 @@ import kz.edu.astanait.diplomawork.dto.requestDto.feign.teams.TeamsEventDtoReque
 
 public interface TeamsService {
 
-    Object create(TeamsEventDtoRequest teamsEventDtoRequest);
+    void create(TeamsEventDtoRequest teamsEventDtoRequest);
 }

@@ -50,7 +50,7 @@ public class CertificateController extends ExceptionHandling {
     }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@ModelAttribute(name = "file")HashMap<String, MultipartFile> file,
+    public ResponseEntity<HttpStatus> createAll(@ModelAttribute(name = "file") HashMap<String, MultipartFile> file,
                                                 Principal principal) {
         this.certificateService.createAll(file, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
