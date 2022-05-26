@@ -27,7 +27,7 @@ public class VacancyController extends ExceptionHandling {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping("/get-all/valid")
+    @GetMapping("/get-all")
     public ResponseEntity<List<VacancyDtoResponse>> getAllValid() {
         List<VacancyDtoResponse> vacancyDtoResponseList = this.vacancyService.getAllValid().stream().
                 map(VacancyMapper::vacancyToDto).collect(Collectors.toList());
