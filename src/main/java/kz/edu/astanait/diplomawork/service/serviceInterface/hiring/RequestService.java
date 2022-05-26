@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.service.serviceInterface.hiring;
 
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.RequestDtoRequest;
 import kz.edu.astanait.diplomawork.model.hiring.Request;
+import org.bouncycastle.cert.ocsp.Req;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -15,6 +16,10 @@ public interface RequestService {
     Optional<Request> getById(Long id);
 
     Request getByIdThrowException(Long id);
+
+    Optional<Request> getByUserId(Long id);
+
+    Request getByUserIdThrowException(Long id);
 
     List<Request> getAllByStatus(Long id);
 

@@ -36,6 +36,12 @@ public class RequestController extends ExceptionHandling {
         return new ResponseEntity<>(requestDtoResponseList, HttpStatus.OK);
     }
 
+    @GetMapping("/get/user/id/{id}")
+    public ResponseEntity<RequestDtoResponse> getByUserId(@PathVariable(name = "id") Long id) {
+        RequestDtoResponse requestDtoResponse = RequestMapper.requestToDto(this.requestService.getByUserIdThrowException(id));
+        return new ResponseEntity<>(requestDtoResponse, HttpStatus.OK);
+    }
+
     @GetMapping("/get/percentage-of-accepted")
     public ResponseEntity<Double> getPercentageOfAcceptedRequestSince(@RequestParam(name = "date") LocalDateTime startedDate,
                                                                       @RequestParam(name = "statusID") Long id) {

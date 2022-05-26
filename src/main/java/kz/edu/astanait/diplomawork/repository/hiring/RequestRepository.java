@@ -7,12 +7,15 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request> findAllByStatusId(Long id);
 
     List<Request> findAllOrderByCreatedDate(LocalDateTime createdDate);
+
+    Optional<Request> findByUserId(Long id);
 
     @Query(nativeQuery = true, value = "select * from request order by created_date desc")
     List<Request> findAllOrderByCreatedDateDesc(LocalDateTime createdDate);

@@ -37,6 +37,8 @@ public class RequestServiceImpl implements kz.edu.astanait.diplomawork.service.s
         this.statusService = statusService;
     }
 
+
+
     @Override
     public List<Request> getAll() {
         return this.requestRepository.findAll();
@@ -51,6 +53,18 @@ public class RequestServiceImpl implements kz.edu.astanait.diplomawork.service.s
     public Request getByIdThrowException(Long id) {
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException
+                        (String.format(ExceptionDescription.CustomNotFoundException, "Request", "id", id)));
+    }
+
+    @Override
+    public Optional<Request> getByUserId(Long id) {
+        return this.requestRepository.findByUserId(id);
+    }
+
+    @Override
+    public Request getByUserIdThrowException(Long id) {
+        return this.getByUserId(id).
+                orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Request", "id", id)));
     }
 
