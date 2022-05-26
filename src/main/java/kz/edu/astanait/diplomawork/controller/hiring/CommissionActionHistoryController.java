@@ -56,7 +56,7 @@ public class CommissionActionHistoryController extends ExceptionHandling {
 //    }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<CommissionActionHistoryDtoRequest> commissionActionHistoryDtoRequestList){
+    public ResponseEntity<HttpStatus> createAll(@RequestBody List<CommissionActionHistoryDtoRequest> commissionActionHistoryDtoRequestList){
         this.commissionActionHistoryService.createAll(commissionActionHistoryDtoRequestList);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

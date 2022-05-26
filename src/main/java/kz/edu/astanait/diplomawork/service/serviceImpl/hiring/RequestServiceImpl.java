@@ -10,6 +10,7 @@ import kz.edu.astanait.diplomawork.repository.hiring.RequestRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.catalog.StatusService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -101,8 +103,8 @@ public class RequestServiceImpl implements kz.edu.astanait.diplomawork.service.s
             Request request = new Request();
 
             request.setUser(user);
-            request.setCreatedDate(requestDtoRequest.getCreatedDate());
-            request.setAdditional(requestDtoRequest.getAdditional());
+            if(Objects.nonNull(requestDtoRequest.getCreatedDate())) request.setCreatedDate(requestDtoRequest.getCreatedDate());
+            if(Strings.isNotBlank(requestDtoRequest.getAdditional())) request.setAdditional(requestDtoRequest.getAdditional());
 
             requestList.add(request);
         }

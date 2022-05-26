@@ -55,7 +55,7 @@ public class ProjectController extends ExceptionHandling {
     }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<ProjectDtoRequest> projectDtoRequestList, Principal principal) {
+    public ResponseEntity<HttpStatus> createAll(@RequestBody List<ProjectDtoRequest> projectDtoRequestList, Principal principal) {
         this.projectService.createAll(projectDtoRequestList, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

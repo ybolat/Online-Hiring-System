@@ -40,7 +40,7 @@ public class AssessmentController extends ExceptionHandling {
     }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<AssessmentDtoRequest> assessmentDtoRequestList) {
+    public ResponseEntity<HttpStatus> createAll(@RequestBody List<AssessmentDtoRequest> assessmentDtoRequestList) {
         this.assessmentService.createAll(assessmentDtoRequestList);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

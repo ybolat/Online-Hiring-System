@@ -20,10 +20,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Log4j2
@@ -120,7 +117,7 @@ public class SyllabusServiceImpl implements SyllabusService {
             Syllabus syllabus = new Syllabus();
 
             syllabus.setUserProfessionalInfo(userProfessionalInfo);
-            syllabus.setSubject(this.subjectService.getByIdThrowException(syllabusDtoRequest.getSubjectId()));
+            if(Objects.nonNull(syllabusDtoRequest.getSubjectId())) syllabus.setSubject(this.subjectService.getByIdThrowException(syllabusDtoRequest.getSubjectId()));
 
             syllabusList.add(syllabus);
 

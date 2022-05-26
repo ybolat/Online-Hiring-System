@@ -111,10 +111,10 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
         for(SyllabusByWeekDtoRequest syllabusByWeekDtoRequest: syllabusByWeekDtoRequestList){
             SyllabusByWeek syllabusByWeek = new SyllabusByWeek();
 
-            syllabusByWeek.setSyllabus(this.syllabusService.getByIdThrowException(syllabusByWeekDtoRequest.getSyllabusId()));
-            syllabusByWeek.setWeekNumber(syllabusByWeekDtoRequest.getWeekNumber());
-            syllabusByWeek.setTitle(syllabusByWeekDtoRequest.getTitle());
-            syllabusByWeek.setDescription(syllabusByWeekDtoRequest.getDescription());
+            if(Objects.nonNull(syllabusByWeekDtoRequest.getSyllabusId())) syllabusByWeek.setSyllabus(this.syllabusService.getByIdThrowException(syllabusByWeekDtoRequest.getSyllabusId()));
+            if(Objects.nonNull(syllabusByWeekDtoRequest.getWeekNumber())) syllabusByWeek.setWeekNumber(syllabusByWeekDtoRequest.getWeekNumber());
+            if(Strings.isNotBlank(syllabusByWeekDtoRequest.getTitle())) syllabusByWeek.setTitle(syllabusByWeekDtoRequest.getTitle());
+            if(Strings.isNotBlank(syllabusByWeekDtoRequest.getDescription())) syllabusByWeek.setDescription(syllabusByWeekDtoRequest.getDescription());
 
             syllabusByWeekList.add(syllabusByWeek);
         }

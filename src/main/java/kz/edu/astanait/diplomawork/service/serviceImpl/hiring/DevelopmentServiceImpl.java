@@ -117,9 +117,9 @@ public class DevelopmentServiceImpl implements DevelopmentService {
             Development development = new Development();
 
             development.setUserProfessionalInfo(userProfessionalInfo);
-            development.setName(developmentDtoRequest.getName());
-            development.setDescription(developmentDtoRequest.getDescription());
-            development.setDevelopmentType(this.developmentTypeService.getByIdThrowException(developmentDtoRequest.getDevelopmentTypeId()));
+           if(Strings.isNotBlank(developmentDtoRequest.getName())) development.setName(developmentDtoRequest.getName());
+           if(Strings.isNotBlank(developmentDtoRequest.getDescription())) development.setDescription(developmentDtoRequest.getDescription());
+           if(Objects.nonNull(developmentDtoRequest.getDevelopmentTypeId())) development.setDevelopmentType(this.developmentTypeService.getByIdThrowException(developmentDtoRequest.getDevelopmentTypeId()));
 
             developmentList.add(development);
 

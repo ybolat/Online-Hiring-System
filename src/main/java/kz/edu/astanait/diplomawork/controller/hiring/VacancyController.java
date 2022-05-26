@@ -64,7 +64,7 @@ public class VacancyController extends ExceptionHandling {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<VacancyDtoRequest> vacancyDtoRequest) {
+    public ResponseEntity<HttpStatus> createAll(@RequestBody List<VacancyDtoRequest> vacancyDtoRequest) {
         this.vacancyService.createAll(vacancyDtoRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

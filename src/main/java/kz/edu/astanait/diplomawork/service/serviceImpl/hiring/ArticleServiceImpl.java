@@ -83,8 +83,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());
 
-
-       if (Strings.isNotBlank(articleDtoRequest.getTitle())) article.setArticleName(articleDtoRequest.getTitle());
+        article.setArticleName(articleDtoRequest.getTitle());
         article.setApa(articleDtoRequest.getApa());
         article.setDoi(articleDtoRequest.getDoi());
         article.setAuthors(articleDtoRequest.getAuthors());
@@ -144,13 +143,13 @@ public class ArticleServiceImpl implements ArticleService {
         for (ArticleDtoRequest articleDtoRequest : articleDtoRequestList) {
             Article article = new Article();
 
-            article.setArticleName(articleDtoRequest.getTitle());
-            article.setApa(articleDtoRequest.getApa());
-            article.setDoi(articleDtoRequest.getDoi());
-            article.setUserProfessionalInfo(userProfessionalInfo);
-            article.setAuthors(articleDtoRequest.getAuthors());
-            article.setSource(articleDtoRequest.getSource());
-            article.setArticleType(this.articleTypeService.getByIdThrowException(articleDtoRequest.getArticleTypeId()));
+            if (Strings.isNotBlank(articleDtoRequest.getTitle())) article.setArticleName(articleDtoRequest.getTitle());
+            if (Strings.isNotBlank(articleDtoRequest.getApa())) article.setApa(articleDtoRequest.getApa());
+            if(Strings.isNotBlank(articleDtoRequest.getDoi())) article.setDoi(articleDtoRequest.getDoi());
+             article.setUserProfessionalInfo(userProfessionalInfo);
+            if(Strings.isNotBlank(articleDtoRequest.getAuthors())) article.setAuthors(articleDtoRequest.getAuthors());
+            if(Strings.isNotBlank(articleDtoRequest.getSource())) article.setSource(articleDtoRequest.getSource());
+            if(Objects.nonNull(articleDtoRequest.getArticleTypeId())) article.setArticleType(this.articleTypeService.getByIdThrowException(articleDtoRequest.getArticleTypeId()));
 
             articleList.add(article);
         }

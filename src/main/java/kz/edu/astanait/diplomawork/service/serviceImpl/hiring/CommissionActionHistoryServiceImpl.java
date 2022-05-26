@@ -10,10 +10,12 @@ import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.CommissionAct
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.CommissionService;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -82,9 +84,9 @@ public class CommissionActionHistoryServiceImpl implements CommissionActionHisto
         for(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest: commissionActionHistoryDtoRequestList){
             CommissionActionHistory commissionActionHistory = new CommissionActionHistory();
 
-            commissionActionHistory.setRequest(this.requestService.getByIdThrowException(commissionActionHistoryDtoRequest.getRequestId()));
-            commissionActionHistory.setCommission(this.commissionService.getByIdThrowException(commissionActionHistoryDtoRequest.getCommissionId()));
-            commissionActionHistory.setIsVote(commissionActionHistoryDtoRequest.getIsVote());
+           if(Objects.nonNull(commissionActionHistoryDtoRequest.getRequestId())) commissionActionHistory.setRequest(this.requestService.getByIdThrowException(commissionActionHistoryDtoRequest.getRequestId()));
+           if(Objects.nonNull(commissionActionHistoryDtoRequest.getCommissionId())) commissionActionHistory.setCommission(this.commissionService.getByIdThrowException(commissionActionHistoryDtoRequest.getCommissionId()));
+           if(Objects.nonNull(commissionActionHistoryDtoRequest.getIsVote())) commissionActionHistory.setIsVote(commissionActionHistoryDtoRequest.getIsVote());
 
             commissionActionHistoryList.add(commissionActionHistory);
         }

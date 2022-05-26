@@ -9,11 +9,13 @@ import kz.edu.astanait.diplomawork.repository.hiring.AssessmentRepository;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.AssessmentService;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -68,8 +70,8 @@ public class AssessmentServiceImpl implements AssessmentService {
         for (AssessmentDtoRequest assessmentDtoRequest: assessmentDtoRequestList) {
             Assessment assessment = new Assessment();
 
-            assessment.setRequest(this.requestService.getByIdThrowException(assessmentDtoRequest.getRequestId()));
-            assessment.setVote(assessmentDtoRequest.getVote());
+            if(Objects.nonNull(assessmentDtoRequest.getRequestId())) assessment.setRequest(this.requestService.getByIdThrowException(assessmentDtoRequest.getRequestId()));
+            if(Objects.nonNull(assessmentDtoRequest.getVote())) assessment.setVote(assessmentDtoRequest.getVote());
 
             assessmentList.add(assessment);
         }

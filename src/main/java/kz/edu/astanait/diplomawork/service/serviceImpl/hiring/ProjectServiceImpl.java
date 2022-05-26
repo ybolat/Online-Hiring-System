@@ -126,14 +126,14 @@ public class ProjectServiceImpl implements ProjectService {
         for(ProjectDtoRequest projectDtoRequest: projectDtoRequestList){
             Project project = new Project();
 
-            project.setProjectName(projectDtoRequest.getProjectName());
+           if(Strings.isNotBlank(projectDtoRequest.getProjectName())) project.setProjectName(projectDtoRequest.getProjectName());
             project.setUserProfessionalInfo(userProfessionalInfo);
-            project.setStartedDate(projectDtoRequest.getStartedDate());
-            project.setFinishedDate(projectDtoRequest.getFinishedDate());
-            project.setRole(projectDtoRequest.getRole());
-            project.setSum(projectDtoRequest.getSum());
-            project.setFund(projectDtoRequest.getFund());
-            project.setProjectType(this.projectTypeService.getByIdThrowException(projectDtoRequest.getProjectTypeId()));
+           if(Objects.nonNull(projectDtoRequest.getStartedDate())) project.setStartedDate(projectDtoRequest.getStartedDate());
+           if(Objects.nonNull(projectDtoRequest.getFinishedDate())) project.setFinishedDate(projectDtoRequest.getFinishedDate());
+           if(Objects.nonNull(projectDtoRequest.getRole())) project.setRole(projectDtoRequest.getRole());
+           if(Objects.nonNull(projectDtoRequest.getSum())) project.setSum(projectDtoRequest.getSum());
+           if(Strings.isNotBlank(projectDtoRequest.getFund())) project.setFund(projectDtoRequest.getFund());
+           if(Objects.nonNull(projectDtoRequest.getProjectTypeId())) project.setProjectType(this.projectTypeService.getByIdThrowException(projectDtoRequest.getProjectTypeId()));
 
             projectList.add(project);
         }

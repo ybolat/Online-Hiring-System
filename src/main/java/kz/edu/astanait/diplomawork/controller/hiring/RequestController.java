@@ -83,7 +83,7 @@ public class RequestController extends ExceptionHandling {
     }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<RequestDtoRequest> requestDtoRequestList,
+    public ResponseEntity<HttpStatus> createAll(@RequestBody List<RequestDtoRequest> requestDtoRequestList,
                                                 Principal principal) {
         this.requestService.createAll(requestDtoRequestList, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);

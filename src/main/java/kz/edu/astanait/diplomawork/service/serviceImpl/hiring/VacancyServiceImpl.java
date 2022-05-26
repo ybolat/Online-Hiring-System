@@ -114,13 +114,13 @@ public class VacancyServiceImpl implements VacancyService {
         for(VacancyDtoRequest vacancyDtoRequest: vacancyDtoRequestList) {
             Vacancy vacancy = new Vacancy();
 
-            vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
-            vacancy.setAcademicTitle(this.academicTitleService.getByIdThrowException(vacancyDtoRequest.getAcademicTitleId()));
-            vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
-            vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
-            vacancy.setStart_date(vacancyDtoRequest.getStart_date());
-            vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
-            vacancy.setNumber(vacancyDtoRequest.getNumber());
+            if(Objects.nonNull(vacancyDtoRequest.getDepartmentId())) vacancy.setDepartment(this.departmentService.getByIdThrowException(vacancyDtoRequest.getDepartmentId()));
+            if(Objects.nonNull(vacancyDtoRequest.getAcademicTitleId())) vacancy.setAcademicTitle(this.academicTitleService.getByIdThrowException(vacancyDtoRequest.getAcademicTitleId()));
+            if(Objects.nonNull(vacancyDtoRequest.getPositionId())) vacancy.setPosition(this.positionService.getByIdThrowException(vacancyDtoRequest.getPositionId()));
+            if(Strings.isNotBlank(vacancyDtoRequest.getLink_directory())) vacancy.setLink_directory(vacancyDtoRequest.getLink_directory());
+            if(Objects.nonNull(vacancyDtoRequest.getStart_date())) vacancy.setStart_date(vacancyDtoRequest.getStart_date());
+            if(Objects.nonNull(vacancyDtoRequest.getFinish_date()))vacancy.setFinish_date(vacancyDtoRequest.getFinish_date());
+            if(Objects.nonNull(vacancyDtoRequest.getNumber())) vacancy.setNumber(vacancyDtoRequest.getNumber());
 
             vacancyList.add(vacancy);
 

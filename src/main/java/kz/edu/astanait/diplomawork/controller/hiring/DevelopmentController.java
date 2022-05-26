@@ -54,7 +54,7 @@ public class DevelopmentController extends ExceptionHandling {
     }
 
     @PostMapping("/create/all")
-    public ResponseEntity<HttpStatus> createAll(@Valid @RequestBody List<DevelopmentDtoRequest> developmentDtoRequestList, Principal principal) {
+    public ResponseEntity<HttpStatus> createAll(@RequestBody List<DevelopmentDtoRequest> developmentDtoRequestList, Principal principal) {
         this.developmentService.createAll(developmentDtoRequestList, principal);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
