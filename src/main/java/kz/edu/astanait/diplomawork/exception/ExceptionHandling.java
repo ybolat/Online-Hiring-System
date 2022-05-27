@@ -1,9 +1,6 @@
 package kz.edu.astanait.diplomawork.exception;
 
-import kz.edu.astanait.diplomawork.exception.domain.AuthorizationException;
-import kz.edu.astanait.diplomawork.exception.domain.CustomException;
-import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
-import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
+import kz.edu.astanait.diplomawork.exception.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -38,6 +35,12 @@ public class ExceptionHandling {
 
     @ExceptionHandler(CustomNotFoundException.class)
     public ResponseEntity<HttpResponseException> CustomNotFoundException(CustomNotFoundException exception) {
+        LOGGER.error(exception.getMessage());
+        return createHttpResponse(BAD_REQUEST, exception.getMessage());
+    }
+
+    @ExceptionHandler(InvalidData.class)
+    public ResponseEntity<HttpResponseException> InvalidData(InvalidData exception) {
         LOGGER.error(exception.getMessage());
         return createHttpResponse(BAD_REQUEST, exception.getMessage());
     }
