@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.VacancyDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.InvalidData;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Vacancy;
 import kz.edu.astanait.diplomawork.repository.hiring.VacancyRepository;
@@ -110,6 +111,8 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public void createAll(List<VacancyDtoRequest> vacancyDtoRequestList){
+        if (vacancyDtoRequestList.size() == 0) throw new InvalidData(ExceptionDescription.InvalidDataException);
+
         List<Vacancy> vacancyList = new ArrayList<>();
 
         for(VacancyDtoRequest vacancyDtoRequest: vacancyDtoRequestList) {

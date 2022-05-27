@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.CommissionActionHistoryDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.InvalidData;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.CommissionActionHistory;
 import kz.edu.astanait.diplomawork.repository.hiring.CommissionActionHistoryRepository;
@@ -79,6 +80,8 @@ public class CommissionActionHistoryServiceImpl implements CommissionActionHisto
 
     @Override
     public void createAll(List<CommissionActionHistoryDtoRequest> commissionActionHistoryDtoRequestList) {
+        if (commissionActionHistoryDtoRequestList.size() == 0) throw new InvalidData(ExceptionDescription.InvalidDataException);
+
         List<CommissionActionHistory> commissionActionHistoryList = new ArrayList<>();
 
         for(CommissionActionHistoryDtoRequest commissionActionHistoryDtoRequest: commissionActionHistoryDtoRequestList){

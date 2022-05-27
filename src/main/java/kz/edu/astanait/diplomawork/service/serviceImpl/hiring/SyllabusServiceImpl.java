@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusByWeekDtoReques
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.InvalidData;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Syllabus;
 import kz.edu.astanait.diplomawork.model.user.User;
@@ -108,6 +109,8 @@ public class SyllabusServiceImpl implements SyllabusService {
 
     @Override
     public void createAll(List<SyllabusDtoRequest> syllabusDtoRequestList, Principal principal){
+        if (syllabusDtoRequestList.size() == 0) throw new InvalidData(ExceptionDescription.InvalidDataException);
+
         List<Syllabus> syllabusList = new ArrayList<>();
 
         User user = this.userService.getByEmailThrowException(principal.getName());

@@ -4,6 +4,7 @@ import antlr.NameSpace;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.DevelopmentDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.InvalidData;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Development;
 import kz.edu.astanait.diplomawork.model.user.User;
@@ -108,6 +109,8 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 
     @Override
     public void createAll(List<DevelopmentDtoRequest> developmentDtoRequestList, Principal principal) {
+        if (developmentDtoRequestList.size() == 0) throw new InvalidData(ExceptionDescription.InvalidDataException);
+
         List<Development> developmentList = new ArrayList<>();
 
         User user = this.userService.getByEmailThrowException(principal.getName());

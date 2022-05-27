@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ProjectDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.InvalidData;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Project;
 import kz.edu.astanait.diplomawork.model.user.User;
@@ -117,6 +118,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void createAll(List<ProjectDtoRequest> projectDtoRequestList, Principal principal){
+        if (projectDtoRequestList.size() == 0) throw new InvalidData(ExceptionDescription.InvalidDataException);
+
         List<Project> projectList = new ArrayList<>();
 
 

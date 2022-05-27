@@ -2,6 +2,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.InvalidData;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.IntelligenceLegalDocument;
 import kz.edu.astanait.diplomawork.model.user.User;
@@ -104,6 +105,8 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
 
     @Override
     public void createAll(HashMap<String, MultipartFile> file, Principal principal){
+        if (file.size() == 0) throw new InvalidData(ExceptionDescription.InvalidDataException);
+
         List<IntelligenceLegalDocument> intelligenceLegalDocumentList = new ArrayList<>();
 
         User user = this.userProfessionalInfoService.getByUserEmailThrowException(principal.getName());

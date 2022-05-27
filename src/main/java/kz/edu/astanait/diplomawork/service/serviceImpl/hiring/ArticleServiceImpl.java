@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.ArticleDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.InvalidData;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.Article;
 import kz.edu.astanait.diplomawork.model.user.User;
@@ -135,6 +136,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void createAll(List<ArticleDtoRequest> articleDtoRequestList, Principal principal) {
+        if (articleDtoRequestList.size() == 0) throw new InvalidData(ExceptionDescription.InvalidDataException);
         List<Article> articleList = new ArrayList<>();
 
         User user = this.userService.getByEmailThrowException(principal.getName());

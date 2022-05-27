@@ -3,6 +3,7 @@ package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.SyllabusByWeekDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
+import kz.edu.astanait.diplomawork.exception.domain.InvalidData;
 import kz.edu.astanait.diplomawork.exception.domain.RepositoryException;
 import kz.edu.astanait.diplomawork.model.hiring.SyllabusByWeek;
 import kz.edu.astanait.diplomawork.repository.hiring.SyllabusByWeekRepository;
@@ -106,6 +107,7 @@ public class SyllabusByWeekServiceImpl implements SyllabusByWeekService {
 
     @Override
     public void createAll(List<SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList){
+        if (syllabusByWeekDtoRequestList.size() == 0) throw new InvalidData(ExceptionDescription.InvalidDataException);
         List<SyllabusByWeek> syllabusByWeekList = new ArrayList<>();
 
         for(SyllabusByWeekDtoRequest syllabusByWeekDtoRequest: syllabusByWeekDtoRequestList){
