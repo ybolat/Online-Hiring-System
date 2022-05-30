@@ -1,6 +1,5 @@
 package kz.edu.astanait.diplomawork.service.serviceImpl.hiring;
 
-import antlr.NameSpace;
 import kz.edu.astanait.diplomawork.dto.requestDto.hiring.DevelopmentDtoRequest;
 import kz.edu.astanait.diplomawork.exception.ExceptionDescription;
 import kz.edu.astanait.diplomawork.exception.domain.CustomNotFoundException;
@@ -58,6 +57,11 @@ public class DevelopmentServiceImpl implements DevelopmentService {
         return this.getById(id)
                 .orElseThrow(() -> new CustomNotFoundException
                         (String.format(ExceptionDescription.CustomNotFoundException, "Development", "id", id)));
+    }
+
+    @Override
+    public List<Development> getMyDevelopment(Principal principal) {
+        return this.developmentRepository.findByUserEmail(principal.getName());
     }
 
     @Override
