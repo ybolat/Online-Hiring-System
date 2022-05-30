@@ -54,6 +54,11 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
+    public List<Certificate> getMyCertificates(Principal principal) {
+        return this.certificateRepository.findByUserEmail(principal.getName());
+    }
+
+    @Override
     public void create(String fileName, MultipartFile file, Principal principal) {
         Certificate certificate = new Certificate();
 

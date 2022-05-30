@@ -61,6 +61,11 @@ public class SyllabusServiceImpl implements SyllabusService {
     }
 
     @Override
+    public List<Syllabus> getMySyllabuses(Principal principal) {
+        return this.syllabusRepository.findByUserEmail(principal.getName());
+    }
+
+    @Override
     public void create(SyllabusDtoRequest syllabusDtoRequest, Principal principal) {
         Syllabus syllabus = new Syllabus();
 

@@ -36,6 +36,14 @@ public class IntelligenceLegalDocumentController extends ExceptionHandling {
         return new ResponseEntity<>(intelligenceLegalDocumentDtoResponseList, HttpStatus.OK);
     }
 
+    @GetMapping("/get/my-ILD")
+    public ResponseEntity<List<IntelligenceLegalDocumentDtoResponse>> getMyILD(Principal principal) {
+        List<IntelligenceLegalDocumentDtoResponse> intelligenceLegalDocumentDtoResponses =
+                this.intelligenceLegalDocumentService.getMyILD(principal).stream().
+                        map(IntelligenceLegalDocumentMapper::intelligenceLegalDocumentToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(intelligenceLegalDocumentDtoResponses, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@RequestParam(name = "file_name") String fileName,
                                              MultipartFile file,

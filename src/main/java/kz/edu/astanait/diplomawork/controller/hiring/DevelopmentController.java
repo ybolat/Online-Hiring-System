@@ -34,6 +34,13 @@ public class DevelopmentController extends ExceptionHandling {
         return new ResponseEntity<>(developmentDtoResponseList, HttpStatus.OK);
     }
 
+    @GetMapping("/get/my-development")
+    public ResponseEntity<List<DevelopmentDtoResponse>> getMyDevelopment(Principal principal) {
+        List<DevelopmentDtoResponse> developmentDtoResponseList = this.developmentService.getMyDevelopment(principal)
+                .stream().map(DevelopmentMapper::developmentToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(developmentDtoResponseList, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody DevelopmentDtoRequest developmentDtoRequest, Principal principal){
         this.developmentService.create(developmentDtoRequest, principal);

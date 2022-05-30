@@ -15,6 +15,8 @@ public interface DevelopmentService {
 
     Development getByIdThrowException(Long id);
 
+    List<Development> getMyDevelopment(Principal principal);
+
     void create(DevelopmentDtoRequest developmentDtoRequest, Principal principal);
 
     void update(DevelopmentDtoRequest developmentDtoRequest, Long id);

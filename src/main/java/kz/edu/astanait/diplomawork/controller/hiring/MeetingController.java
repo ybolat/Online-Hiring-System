@@ -42,5 +42,4 @@ public class MeetingController extends ExceptionHandling {
         List<MeetingDtoResponse> meetingDtoResponse = this.meetingService.getAll().stream().map(MeetingMapper::meetingToDto).collect(Collectors.toList());
         return new ResponseEntity<>(meetingDtoResponse, HttpStatus.OK);
     }
-
 }

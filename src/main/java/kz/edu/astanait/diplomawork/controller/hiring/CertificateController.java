@@ -41,6 +41,13 @@ public class CertificateController extends ExceptionHandling {
         return new ResponseEntity<>(certificateDtoResponseList, HttpStatus.OK);
     }
 
+    @GetMapping("/get/my-certificates")
+    public ResponseEntity<List<CertificateDtoResponse>> getMyCertificates(Principal principal) {
+        List<CertificateDtoResponse> certificateDtoResponseList = this.certificateService.getMyCertificates(principal)
+                .stream().map(CertificateMapper::certificateToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(certificateDtoResponseList, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@RequestParam(name = "file_name") String fileName,
                                               MultipartFile file,

@@ -37,6 +37,13 @@ public class SyllabusController extends ExceptionHandling {
         return new ResponseEntity<>(syllabusDtoResponseList, HttpStatus.OK);
     }
 
+    @GetMapping("/get/my-syllabuses")
+    public ResponseEntity<List<SyllabusDtoResponse>> getMySyllabuses(Principal principal) {
+        List<SyllabusDtoResponse> syllabusDtoResponseList = this.syllabusService.getMySyllabuses(principal)
+                .stream().map(SyllabusMapper::syllabusToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(syllabusDtoResponseList, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@Valid @RequestBody SyllabusDtoRequest syllabusDtoRequest, Principal principal) {
         this.syllabusService.create(syllabusDtoRequest, principal);

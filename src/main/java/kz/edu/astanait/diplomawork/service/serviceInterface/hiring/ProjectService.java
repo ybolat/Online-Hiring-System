@@ -15,6 +15,8 @@ public interface ProjectService {
 
     Project getByIdThrowException(Long id);
 
+    List<Project> getMyProjects(Principal principal);
+
     void create(ProjectDtoRequest projectDtoRequest, Principal principal);
 
     void update(ProjectDtoRequest projectDtoRequest, Long id);

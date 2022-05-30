@@ -16,6 +16,8 @@ public interface IntelligenceLegalDocumentService {
 
     IntelligenceLegalDocument getByIdThrowException(Long id);
 
+    List<IntelligenceLegalDocument> getMyILD(Principal principal);
+
     void create(String fileName, MultipartFile file, Principal principal);
 
     void update(Long id, String fileName, MultipartFile file, Principal principal);

@@ -54,6 +54,11 @@ public class IntelligenceLegalDocumentServiceImpl implements IntelligenceLegalDo
     }
 
     @Override
+    public List<IntelligenceLegalDocument> getMyILD(Principal principal) {
+        return this.intelligenceLegalDocumentRepository.findByUserEmail(principal.getName());
+    }
+
+    @Override
     public void create(String fileName, MultipartFile file, Principal principal) {
         IntelligenceLegalDocument intelligenceLegalDocument = new IntelligenceLegalDocument();
 

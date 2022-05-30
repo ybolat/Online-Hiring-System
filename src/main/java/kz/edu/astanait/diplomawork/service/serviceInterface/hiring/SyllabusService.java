@@ -17,6 +17,8 @@ public interface SyllabusService {
 
     Syllabus getByIdThrowException(Long id);
 
+    List<Syllabus> getMySyllabuses(Principal principal);
+
     void create(SyllabusDtoRequest syllabusDtoRequest, Principal principal);
 
     void update(SyllabusDtoRequest syllabusDtoRequest, Long id, HashMap<Long, SyllabusByWeekDtoRequest> syllabusByWeekDtoRequestList);

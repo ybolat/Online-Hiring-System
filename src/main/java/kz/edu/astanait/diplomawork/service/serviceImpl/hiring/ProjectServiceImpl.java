@@ -59,6 +59,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Project> getMyProjects(Principal principal) {
+        return this.projectRepository.findByUserEmail(principal.getName());
+    }
+
+    @Override
     public void create(ProjectDtoRequest projectDtoRequest, Principal principal) {
         Project project = new Project();
 

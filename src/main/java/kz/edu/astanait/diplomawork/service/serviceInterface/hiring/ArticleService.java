@@ -16,6 +16,8 @@ public interface ArticleService {
 
     Article getByIdThrowException(Long id);
 
+    List<Article> getMyArticles(Principal principal);
+
     List<Article> getAllByUserProfessionalInfoIdOrderByArticleName(Long id);
 
     Integer getAverageNumOfArticles(LocalDateTime dateTime, Long id);

@@ -18,4 +18,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
             "article.user_professional_info_id = user_professional_info.id where user_professional_info.user_id = :id")
     List<Article> findByUserId(Long id);
 
+    @Query(nativeQuery = true, value = "select * from article inner join user_professional_info on " +
+            "article.user_professional_info_id = user_professional_info.id inner join users on user_professional_info.user_id = users.id where users.email=:email")
+    List<Article> findByUserEmail(String email);
+
 }

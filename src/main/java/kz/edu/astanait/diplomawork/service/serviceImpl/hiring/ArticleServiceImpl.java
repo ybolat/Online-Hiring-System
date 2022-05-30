@@ -61,6 +61,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> getMyArticles(Principal principal) {
+        return this.articleRepository.findByUserEmail(principal.getName());
+    }
+
+    @Override
     public List<Article> getAllByUserProfessionalInfoIdOrderByArticleName(Long id) {
         return this.articleRepository.findAllByUserProfessionalInfoIdOrderByArticleName(id);
     }

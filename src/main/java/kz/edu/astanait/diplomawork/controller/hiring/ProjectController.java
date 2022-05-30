@@ -28,10 +28,17 @@ public class ProjectController extends ExceptionHandling {
         this.projectService = projectService;
     }
 
-    @GetMapping("get/user-professional-info/id/{id}")
+    @GetMapping("/get/user-professional-info/id/{id}")
     public ResponseEntity<List<ProjectDtoResponse>> getAllByUserProfessionalInfoId(@PathVariable(name = "id") Long id) {
         List<ProjectDtoResponse> projectDtoResponseList =
                 this.projectService.getAllByUserProfessionalInfoId(id).stream().map(ProjectMapper::projectToDto).collect(Collectors.toList());
+        return new ResponseEntity<>(projectDtoResponseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/my-project")
+    public ResponseEntity<List<ProjectDtoResponse>> getMyProjects(Principal principal) {
+        List<ProjectDtoResponse> projectDtoResponseList = this.projectService.getMyProjects(principal)
+                .stream().map(ProjectMapper::projectToDto).collect(Collectors.toList());
         return new ResponseEntity<>(projectDtoResponseList, HttpStatus.OK);
     }
 
