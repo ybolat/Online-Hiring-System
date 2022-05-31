@@ -39,7 +39,7 @@ public class ArticleController extends ExceptionHandling {
     public ResponseEntity<List<ArticleDtoResponse>> getMyArticles(Principal principal) {
         List<ArticleDtoResponse> articleDtoResponseList = this.articleService.getMyArticles(principal).stream().
                 map(ArticleMapper::articleToDto).collect(Collectors.toList());
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(articleDtoResponseList, HttpStatus.OK);
     }
 
     @GetMapping("/get/average")

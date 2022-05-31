@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.dto.requestDto.user.UserProfessionalInfoDtoRe
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.user.UserProfessionalInfoMapper;
+import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import kz.edu.astanait.diplomawork.service.serviceInterface.user.UserProfessionalInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/user/user-professional-info")
@@ -32,6 +35,13 @@ public class UserProfessionalInfoController extends ExceptionHandling {
         UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse = UserProfessionalInfoMapper.
                 userProfessionalInfoToDto(this.userProfessionalInfoService.getByUserIdThrowException(id));
         return new ResponseEntity<>(userProfessionalInfoDtoResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/is-valid-user/id/{id}")
+    public ResponseEntity<Boolean> isValidUser(@PathVariable(name = "id") Long id) {
+        Optional<UserProfessionalInfo> userProfessionalInfo = this.userProfessionalInfoService.getByUserId(id);
+        if (Objects.nonNull(userProfessionalInfo)) return new ResponseEntity<>(true, HttpStatus.OK);
+        return new ResponseEntity<>(false, HttpStatus.OK);
     }
 
     @PostMapping("/create")
