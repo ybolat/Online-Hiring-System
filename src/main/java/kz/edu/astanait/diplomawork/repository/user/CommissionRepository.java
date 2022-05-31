@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface CommissionRepository extends JpaRepository<Commission, Long> {
 
     Optional<Commission> findByEmail(String email);
+
+    List<Commission> findByRoleId(Long id);
 }

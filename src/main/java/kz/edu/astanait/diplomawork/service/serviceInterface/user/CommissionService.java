@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface CommissionService {
 
-    List<Commission> getAll();
+    List<Commission> getAllССС();
 
     Optional<Commission> getById(Long id);
 

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/user/commission")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasRole('ROLE_SECRETARY')")
 public class CommissionController extends ExceptionHandling {
 
     private final CommissionService commissionService;
@@ -34,15 +35,15 @@ public class CommissionController extends ExceptionHandling {
         CommissionDtoResponse commissionDtoResponse = CommissionMapper.commissionToDto(this.commissionService.getByIdThrowException(id));
         return new ResponseEntity<>(commissionDtoResponse, HttpStatus.OK);
     }
-
+    @PermitAll
     @PostMapping("/authorization")
     public ResponseEntity<CommissionDtoResponse> authorization(@RequestBody CommissionAuthorizationDtoRequest commissionDtoRequest, HttpServletRequest request) {
        return commissionService.authorization(commissionDtoRequest.getCodeAuthorization(), request);
     }
 
-    @GetMapping("/get-all")
-    public ResponseEntity<List<CommissionDtoResponse>> getAll() {
-        List<CommissionDtoResponse> commissionDtoResponseList = this.commissionService.getAll().stream().
+    @GetMapping("/get-all/ссс")
+    public ResponseEntity<List<CommissionDtoResponse>> getAllССС() {
+        List<CommissionDtoResponse> commissionDtoResponseList = this.commissionService.getAllССС().stream().
                 map(CommissionMapper::commissionToDto).collect(Collectors.toList());
         return new ResponseEntity<>(commissionDtoResponseList, HttpStatus.OK);
     }

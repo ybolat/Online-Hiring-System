@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/teams")
-@PreAuthorize("hasRole('ROLE_COMMISSION')")
+@PreAuthorize("hasRole(' ')")
 public class TeamsController {
 
     private final TeamsService teamsService;

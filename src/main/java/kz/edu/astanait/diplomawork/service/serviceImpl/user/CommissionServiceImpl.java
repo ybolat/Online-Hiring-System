@@ -50,8 +50,8 @@ public class CommissionServiceImpl implements CommissionService {
     }
 
     @Override
-    public List<Commission> getAll() {
-        return this.commissionRepository.findAll();
+    public List<Commission> getAllССС() {
+        return this.commissionRepository.findByRoleId(3L);
     }
 
     @Override
