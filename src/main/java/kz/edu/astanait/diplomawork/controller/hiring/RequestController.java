@@ -42,9 +42,11 @@ public class RequestController extends ExceptionHandling {
     @GetMapping("/get/my-request")
     public ResponseEntity<RequestDtoResponse> getMyRequest(Principal principal) {
         Optional<Request> request = this.requestService.getByUserEmail(principal);
-        if (Objects.nonNull(request.get())) {
+        try{
             RequestDtoResponse requestDtoResponse = RequestMapper.requestToDto(request.get());
             return new ResponseEntity<>(requestDtoResponse, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
