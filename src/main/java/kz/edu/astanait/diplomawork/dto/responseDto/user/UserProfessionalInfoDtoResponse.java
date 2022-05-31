@@ -1,8 +1,8 @@
 package kz.edu.astanait.diplomawork.dto.responseDto.user;
 
-import kz.edu.astanait.diplomawork.dto.requestDto.hiring.VacancyDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicDegreeDtoResponse;
 import kz.edu.astanait.diplomawork.dto.responseDto.catalog.AcademicTitleDtoResponse;
+import kz.edu.astanait.diplomawork.dto.responseDto.hiring.VacancyDtoResponse;
 import lombok.Data;
 
 @Data
@@ -12,7 +12,7 @@ public class UserProfessionalInfoDtoResponse {
 
 //    private UserDtoResponse user;
 
-    private VacancyDtoRequest vacancy;
+    private VacancyDtoResponse vacancy;
 
     private AcademicDegreeDtoResponse academicDegree;
 
