@@ -43,9 +43,8 @@ public class UserDocumentController extends ExceptionHandling {
             UserDocumentDtoResponse userDocumentDtoResponse = UserDocumentMapper.userDocumentToDto(userDocument.get());
             return new ResponseEntity<>(userDocumentDtoResponse, HttpStatus.OK);
         }catch (Exception e){
-            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/create")

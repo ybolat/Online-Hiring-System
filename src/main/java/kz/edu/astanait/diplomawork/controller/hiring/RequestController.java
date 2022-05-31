@@ -46,9 +46,8 @@ public class RequestController extends ExceptionHandling {
             RequestDtoResponse requestDtoResponse = RequestMapper.requestToDto(request.get());
             return new ResponseEntity<>(requestDtoResponse, HttpStatus.OK);
         }catch (Exception e){
-            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get/user/id/{id}")
