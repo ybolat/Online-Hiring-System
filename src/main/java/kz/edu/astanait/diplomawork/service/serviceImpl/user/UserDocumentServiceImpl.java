@@ -38,6 +38,11 @@ public class UserDocumentServiceImpl implements UserDocumentService {
     }
 
     @Override
+    public Optional<UserDocument> getByUserEmail(Principal principal) {
+        return this.userDocumentRepository.findByUserEmail(principal.getName());
+    }
+
+    @Override
     public UserDocument getByIdThrowException(Long id) {
         return this.getById(id).
                 orElseThrow(() -> new CustomNotFoundException(String.format(ExceptionDescription.CustomNotFoundException, "user document", "id", id)));

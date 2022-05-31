@@ -10,6 +10,8 @@ public interface UserDocumentService {
 
     Optional<UserDocument> getById(Long id);
 
+    Optional<UserDocument> getByUserEmail(Principal principal);
+
     UserDocument getByIdThrowException(Long id);
 
     Optional<UserDocument> getByUserId(Long id);
