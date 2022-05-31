@@ -23,9 +23,9 @@ public class UserProfessionalInfoMapper {
         if (Strings.isNotBlank(userProfessionalInfo.getResearchLink())) userProfessionalInfoDtoResponse.setResearchLink(userProfessionalInfo.getResearchLink());
         if (Strings.isNotBlank(userProfessionalInfo.getResearch())) userProfessionalInfoDtoResponse.setResearch(userProfessionalInfo.getResearch());
         if (Strings.isNotBlank(userProfessionalInfo.getGoogleScholar())) userProfessionalInfoDtoResponse.setGoogleScholar(userProfessionalInfo.getGoogleScholar());
-        if (Objects.nonNull(userProfessionalInfo.getVacancy())) userProfessionalInfoDtoResponse.setVacancy(VacancyMapper.vacancyToDto(userProfessionalInfo.getVacancy()));
         if (Objects.nonNull(userProfessionalInfo.getGoogleScholarHIndex())) userProfessionalInfoDtoResponse.setGoogleScholarHIndex(userProfessionalInfo.getGoogleScholarHIndex());
         if (Strings.isNotBlank(userProfessionalInfo.getOrcid())) userProfessionalInfoDtoResponse.setOrcid(userProfessionalInfo.getOrcid());
+        if (Objects.nonNull(userProfessionalInfo.getVacancy())) userProfessionalInfoDtoResponse.setVacancy(VacancyMapper.vacancyToDto(userProfessionalInfo.getVacancy()));
         if (Strings.isNotBlank(userProfessionalInfo.getExperience())) userProfessionalInfoDtoResponse.setExperience(userProfessionalInfo.getExperience());
         if (Strings.isNotBlank(userProfessionalInfo.getScientificInterests())) userProfessionalInfoDtoResponse.setScientificInterests(userProfessionalInfo.getScientificInterests());
         if (Strings.isNotBlank(userProfessionalInfo.getEducation())) userProfessionalInfoDtoResponse.setEducation(userProfessionalInfo.getEducation());
