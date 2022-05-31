@@ -3,12 +3,10 @@ package kz.edu.astanait.diplomawork.mapper.user;
 import kz.edu.astanait.diplomawork.dto.responseDto.user.UserProfessionalInfoDtoResponse;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicDegreeMapper;
 import kz.edu.astanait.diplomawork.mapper.catalog.AcademicTitleMapper;
-import kz.edu.astanait.diplomawork.mapper.catalog.SubjectMapper;
 import kz.edu.astanait.diplomawork.model.user.UserProfessionalInfo;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class UserProfessionalInfoMapper {
 
