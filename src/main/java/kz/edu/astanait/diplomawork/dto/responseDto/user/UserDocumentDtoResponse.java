@@ -14,5 +14,5 @@ public class UserDocumentDtoResponse {
 
     private DocumentsDtoResponse photo;
 
-    private UserDtoResponse user;
+//    private UserDtoResponse user;
 }

@@ -4,6 +4,7 @@ import kz.edu.astanait.diplomawork.dto.requestDto.hiring.RequestDtoRequest;
 import kz.edu.astanait.diplomawork.dto.responseDto.hiring.RequestDtoResponse;
 import kz.edu.astanait.diplomawork.exception.ExceptionHandling;
 import kz.edu.astanait.diplomawork.mapper.hiring.RequestMapper;
+import kz.edu.astanait.diplomawork.model.hiring.Request;
 import kz.edu.astanait.diplomawork.service.serviceInterface.hiring.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,6 +37,16 @@ public class RequestController extends ExceptionHandling {
         List<RequestDtoResponse> requestDtoResponseList = this.requestService.getAll()
                 .stream().map(RequestMapper::requestToDto).collect(Collectors.toList());
         return new ResponseEntity<>(requestDtoResponseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/my-request")
+    public ResponseEntity<RequestDtoResponse> getMyRequest(Principal principal) {
+        Optional<Request> request = this.requestService.getByUserEmail(principal);
+        if (Objects.nonNull(request.get())) {
+            RequestDtoResponse requestDtoResponse = RequestMapper.requestToDto(request.get());
+            return new ResponseEntity<>(requestDtoResponse, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get/user/id/{id}")

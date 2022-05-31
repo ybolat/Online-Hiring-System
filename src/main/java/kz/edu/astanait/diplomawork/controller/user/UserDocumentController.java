@@ -39,7 +39,7 @@ public class UserDocumentController extends ExceptionHandling {
     @GetMapping("/get/my-documents")
     public ResponseEntity<UserDocumentDtoResponse> getMyDocument(Principal principal) {
         Optional<UserDocument> userDocument = this.userDocumentService.getByUserEmail(principal);
-        if (Objects.nonNull(userDocument)) {
+        if (Objects.nonNull(userDocument.get())) {
             UserDocumentDtoResponse userDocumentDtoResponse = UserDocumentMapper.userDocumentToDto(userDocument.get());
             return new ResponseEntity<>(userDocumentDtoResponse, HttpStatus.OK);
         }

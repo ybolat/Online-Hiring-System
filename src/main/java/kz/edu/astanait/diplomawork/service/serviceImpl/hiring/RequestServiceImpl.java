@@ -63,6 +63,11 @@ public class RequestServiceImpl implements kz.edu.astanait.diplomawork.service.s
     }
 
     @Override
+    public Optional<Request> getByUserEmail(Principal principal) {
+        return this.requestRepository.findByUserEmail(principal.getName());
+    }
+
+    @Override
     public Request getByUserIdThrowException(Long id) {
         return this.getByUserId(id).
                 orElseThrow(() -> new CustomNotFoundException

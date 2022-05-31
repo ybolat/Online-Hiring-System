@@ -19,6 +19,8 @@ public interface RequestService {
 
     Optional<Request> getByUserId(Long id);
 
+    Optional<Request> getByUserEmail(Principal principal);
+
     Request getByUserIdThrowException(Long id);
 
     List<Request> getAllByStatus(Long id);

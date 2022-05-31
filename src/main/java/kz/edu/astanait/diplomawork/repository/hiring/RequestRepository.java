@@ -25,4 +25,6 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     @Query(nativeQuery = true, value = "select count(id) from request where created_date <= :dateTime")
     Double findNumberOfAllSince(LocalDateTime dateTime);
+
+    Optional<Request> findByUserEmail(String email);
 }
