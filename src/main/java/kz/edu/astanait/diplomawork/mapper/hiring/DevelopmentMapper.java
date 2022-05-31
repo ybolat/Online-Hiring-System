@@ -13,7 +13,7 @@ public class DevelopmentMapper {
     public static DevelopmentDtoResponse developmentToDto(Development development) {
         DevelopmentDtoResponse developmentDtoResponse = new DevelopmentDtoResponse();
         developmentDtoResponse.setId(development.getId());
-        if(Objects.nonNull(development.getUserProfessionalInfo())) developmentDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(development.getUserProfessionalInfo()));
+//        if(Objects.nonNull(development.getUserProfessionalInfo())) developmentDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(development.getUserProfessionalInfo()));
         if(Strings.isNotBlank(development.getName())) developmentDtoResponse.setName(development.getName());
         if(Strings.isNotBlank(development.getDescription())) developmentDtoResponse.setDescription(development.getDescription());
         if(Objects.nonNull(development.getDevelopmentType())) developmentDtoResponse.setDevelopmentTypeDtoResponse(DevelopmentTypeMapper.developmentTypeToDto(development.getDevelopmentType()));

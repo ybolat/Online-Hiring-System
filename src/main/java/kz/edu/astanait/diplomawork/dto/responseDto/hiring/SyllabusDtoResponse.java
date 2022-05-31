@@ -9,7 +9,7 @@ public class SyllabusDtoResponse {
 
     private Long id;
 
-    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
+//    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
 
     private SubjectDtoResponse subject;
 }

@@ -14,7 +14,7 @@ public class ProjectMapper {
     public static ProjectDtoResponse projectToDto(Project project) {
         ProjectDtoResponse projectDtoResponse = new ProjectDtoResponse();
         projectDtoResponse.setId(project.getId());
-        if(Objects.nonNull(project.getUserProfessionalInfo())) projectDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(project.getUserProfessionalInfo()));
+//        if(Objects.nonNull(project.getUserProfessionalInfo())) projectDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(project.getUserProfessionalInfo()));
         if(Objects.nonNull(project.getStartedDate())) projectDtoResponse.setStartedDate(project.getStartedDate());
         if(Objects.nonNull(project.getFinishedDate())) projectDtoResponse.setFinishedDate(project.getFinishedDate());
         if(Strings.isNotBlank(project.getRole())) projectDtoResponse.setRole(project.getRole());

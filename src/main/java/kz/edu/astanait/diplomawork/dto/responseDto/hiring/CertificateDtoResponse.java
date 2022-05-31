@@ -8,7 +8,7 @@ public class CertificateDtoResponse {
 
     private Long id;
 
-    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
+//    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
 
     private DocumentsDtoResponse documentsDtoResponse;
 }

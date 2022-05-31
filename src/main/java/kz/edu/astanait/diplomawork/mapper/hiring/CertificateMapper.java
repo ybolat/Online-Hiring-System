@@ -11,7 +11,7 @@ public class CertificateMapper {
     public static CertificateDtoResponse certificateToDto (Certificate certificate){
         CertificateDtoResponse certificateDtoResponse = new CertificateDtoResponse();
         certificateDtoResponse.setId(certificate.getId());
-        if(Objects.nonNull(certificate.getUserProfessionalInfo())) certificateDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(certificate.getUserProfessionalInfo()));
+//        if(Objects.nonNull(certificate.getUserProfessionalInfo())) certificateDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(certificate.getUserProfessionalInfo()));
         if(Objects.nonNull(certificate.getDocument())) certificateDtoResponse.setDocumentsDtoResponse(DocumentMapper.documentsToDto(certificate.getDocument()));
         return certificateDtoResponse;
     }

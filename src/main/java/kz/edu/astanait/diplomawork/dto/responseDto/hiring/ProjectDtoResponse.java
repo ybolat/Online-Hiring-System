@@ -12,7 +12,7 @@ public class ProjectDtoResponse {
 
     private String projectName;
 
-    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
+//    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
 
     private LocalDate startedDate;
 

@@ -9,7 +9,7 @@ public class DevelopmentDtoResponse {
 
     private Long id;
 
-    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
+//    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
 
     private String name;
 

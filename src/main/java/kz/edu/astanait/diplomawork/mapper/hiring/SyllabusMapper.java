@@ -13,7 +13,7 @@ public class SyllabusMapper {
     public static SyllabusDtoResponse syllabusToDto(Syllabus syllabus) {
         SyllabusDtoResponse syllabusDtoResponse = new SyllabusDtoResponse();
         syllabusDtoResponse.setId(syllabus.getId());
-        if(Objects.nonNull(syllabus.getUserProfessionalInfo())) syllabusDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(syllabus.getUserProfessionalInfo()));
+//        if(Objects.nonNull(syllabus.getUserProfessionalInfo())) syllabusDtoResponse.setUserProfessionalInfoDtoResponse(UserProfessionalInfoMapper.userProfessionalInfoToDto(syllabus.getUserProfessionalInfo()));
         if(Objects.nonNull(syllabus.getSubject())) syllabusDtoResponse.setSubject(SubjectMapper.subjectToDto(syllabus.getSubject()));
         return syllabusDtoResponse;
     }

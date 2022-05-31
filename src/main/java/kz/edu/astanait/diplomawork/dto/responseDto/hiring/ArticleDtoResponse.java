@@ -13,7 +13,7 @@ public class ArticleDtoResponse {
 
     private String doi;
 
-    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
+//    private UserProfessionalInfoDtoResponse userProfessionalInfoDtoResponse;
 
     private ArticleTypeDtoResponse articleType;
 
